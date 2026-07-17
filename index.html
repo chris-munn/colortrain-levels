@@ -86,7 +86,7 @@
   <button id="bCopy">Copy JSON</button>
   <button id="bExport" class="primary">⬇ Export JSON</button>
   <button id="bPublish" class="primary">☁ Publish</button>
-  <span id="ver" style="margin-left:auto;opacity:.55;font-size:12px">v12</span>
+  <span id="ver" style="margin-left:auto;opacity:.55;font-size:12px">v14</span>
 </div>
 <div id="wrap">
   <div id="tools">
@@ -1395,6 +1395,13 @@ async function ghManifest(){
   return { file: f, man: JSON.parse(b64d(f.content)) };
 }
 
+// Play order follows the manifest list — keep it sorted by map number so
+// Map # = filename = play order, always.
+function sortStageMaps(stage){
+  const num = m => { const x = /_(\d+)\.json$/.exec(m.file || ""); return x ? +x[1] : 9999; };
+  (stage.maps || []).sort((a, b) => num(a) - num(b));
+}
+
 document.getElementById("bPublish").onclick = async () => {
   if (!validate()) { ghStatus("Fix the validation issues first.", "bad"); return; }
   if (!gh.user || !gh.repo || !gh.token) { ghStatus("Fill in user, repo and token (bottom of the panel).", "bad"); return; }
@@ -1418,6 +1425,7 @@ document.getElementById("bPublish").onclick = async () => {
     let entry = stage.maps.find(m => m.file === ref);
     if (!entry) { entry = { file: ref, name: map.name }; stage.maps.push(entry); }
     entry.name = map.name;
+    sortStageMaps(stage);
     man.updated = new Date().toISOString().slice(0, 10);
     await ghPut("levels/manifest.json", b64e(JSON.stringify(man, null, 2)), "Update manifest for " + fname, manFile.sha);
 
@@ -1438,6 +1446,7 @@ async function listRepoLevels(){
     const { man } = await ghManifest();
     box.textContent = "";
     for (const s of man.stages || []) {
+      sortStageMaps(s); // display in play order (map number) regardless of manifest state
       const h = document.createElement("div");
       h.textContent = (s.displayName || s.id) + " · " + (s.maps || []).length + " map(s)";
       h.style.cssText = "font-weight:bold;margin-top:6px";
