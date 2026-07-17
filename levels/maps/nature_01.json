@@ -8,20 +8,20 @@
   "theme": "nature",
   "levels": [
     {
-      "trainSpeed": 3,
-      "spawnIntervalSeconds": 3
+      "trainSpeed": 2,
+      "spawnIntervalSeconds": 4
     },
     {
-      "trainSpeed": 3,
-      "spawnIntervalSeconds": 3
+      "trainSpeed": 2,
+      "spawnIntervalSeconds": 4
     },
     {
-      "trainSpeed": 3,
-      "spawnIntervalSeconds": 3
+      "trainSpeed": 2,
+      "spawnIntervalSeconds": 4
     },
     {
-      "trainSpeed": 3,
-      "spawnIntervalSeconds": 3
+      "trainSpeed": 2,
+      "spawnIntervalSeconds": 4
     }
   ],
   "camera": {
