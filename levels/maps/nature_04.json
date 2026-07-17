@@ -1,0 +1,894 @@
+{
+  "schemaVersion": 2,
+  "id": "3s1y5x0j",
+  "stage": "nature",
+  "mapNumber": 4,
+  "name": "Foxglove Flats",
+  "theme": "nature",
+  "levels": [
+    {
+      "trainSpeed": 3,
+      "spawnIntervalSeconds": 3
+    },
+    {
+      "trainSpeed": 3,
+      "spawnIntervalSeconds": 3
+    },
+    {
+      "trainSpeed": 3,
+      "spawnIntervalSeconds": 3
+    },
+    {
+      "trainSpeed": 3,
+      "spawnIntervalSeconds": 3
+    },
+    {
+      "trainSpeed": 3,
+      "spawnIntervalSeconds": 3
+    },
+    {
+      "trainSpeed": 3,
+      "spawnIntervalSeconds": 3
+    },
+    {
+      "trainSpeed": 3,
+      "spawnIntervalSeconds": 3
+    },
+    {
+      "trainSpeed": 3,
+      "spawnIntervalSeconds": 3
+    },
+    {
+      "trainSpeed": 3,
+      "spawnIntervalSeconds": 3
+    },
+    {
+      "trainSpeed": 3,
+      "spawnIntervalSeconds": 3
+    }
+  ],
+  "camera": {
+    "auto": true
+  },
+  "spawn": {
+    "gx": 0,
+    "gz": 0,
+    "dir": "S"
+  },
+  "track": [
+    {
+      "kind": "straight",
+      "gx": 0,
+      "gz": -1,
+      "dir": "S"
+    },
+    {
+      "kind": "straight",
+      "gx": 0,
+      "gz": -2,
+      "dir": "S"
+    },
+    {
+      "kind": "straight",
+      "gx": 0,
+      "gz": -3,
+      "dir": "S"
+    },
+    {
+      "kind": "curve",
+      "gx": 0,
+      "gz": -4,
+      "from": "S",
+      "to": "E"
+    },
+    {
+      "kind": "straight",
+      "gx": 1,
+      "gz": -4,
+      "dir": "E"
+    },
+    {
+      "kind": "curve",
+      "gx": 2,
+      "gz": -4,
+      "from": "E",
+      "to": "S"
+    },
+    {
+      "kind": "curve",
+      "gx": 2,
+      "gz": -5,
+      "from": "S",
+      "to": "W"
+    },
+    {
+      "kind": "straight",
+      "gx": 1,
+      "gz": -5,
+      "dir": "W"
+    },
+    {
+      "kind": "curve",
+      "gx": 0,
+      "gz": -5,
+      "from": "W",
+      "to": "S"
+    },
+    {
+      "kind": "straight",
+      "gx": 0,
+      "gz": -6,
+      "dir": "S"
+    },
+    {
+      "kind": "curve",
+      "gx": 0,
+      "gz": -7,
+      "from": "S",
+      "to": "W"
+    },
+    {
+      "kind": "junction",
+      "gx": -1,
+      "gz": -7,
+      "dir": "W",
+      "exits": [
+        {
+          "dir": "W"
+        },
+        {
+          "dir": "N"
+        }
+      ],
+      "initialExit": 0
+    },
+    {
+      "kind": "straight",
+      "gx": -1,
+      "gz": -6,
+      "dir": "N"
+    },
+    {
+      "kind": "curve",
+      "gx": -1,
+      "gz": -5,
+      "from": "N",
+      "to": "W"
+    },
+    {
+      "kind": "station",
+      "gx": -2,
+      "gz": -5,
+      "dir": "W",
+      "order": 1,
+      "colorIndex": 0,
+      "dot": false
+    },
+    {
+      "kind": "straight",
+      "gx": -2,
+      "gz": -7,
+      "dir": "W"
+    },
+    {
+      "kind": "straight",
+      "gx": -3,
+      "gz": -7,
+      "dir": "W"
+    },
+    {
+      "kind": "curve",
+      "gx": -4,
+      "gz": -7,
+      "from": "W",
+      "to": "N"
+    },
+    {
+      "kind": "straight",
+      "gx": -4,
+      "gz": -6,
+      "dir": "N"
+    },
+    {
+      "kind": "junction",
+      "gx": -4,
+      "gz": -5,
+      "dir": "N",
+      "exits": [
+        {
+          "dir": "N"
+        },
+        {
+          "dir": "W"
+        }
+      ],
+      "initialExit": 1
+    },
+    {
+      "kind": "straight",
+      "gx": -5,
+      "gz": -5,
+      "dir": "W"
+    },
+    {
+      "kind": "straight",
+      "gx": -6,
+      "gz": -5,
+      "dir": "W"
+    },
+    {
+      "kind": "station",
+      "gx": -7,
+      "gz": -5,
+      "dir": "W",
+      "order": 2,
+      "colorIndex": 1,
+      "dot": false
+    },
+    {
+      "kind": "straight",
+      "gx": -4,
+      "gz": -4,
+      "dir": "N"
+    },
+    {
+      "kind": "straight",
+      "gx": -4,
+      "gz": -3,
+      "dir": "N"
+    },
+    {
+      "kind": "junction",
+      "gx": -4,
+      "gz": -2,
+      "dir": "N",
+      "exits": [
+        {
+          "dir": "N"
+        },
+        {
+          "dir": "E"
+        }
+      ],
+      "initialExit": 1
+    },
+    {
+      "kind": "straight",
+      "gx": -3,
+      "gz": -2,
+      "dir": "E"
+    },
+    {
+      "kind": "station",
+      "gx": -2,
+      "gz": -2,
+      "dir": "E",
+      "order": 3,
+      "colorIndex": 2,
+      "dot": false
+    },
+    {
+      "kind": "straight",
+      "gx": -4,
+      "gz": -1,
+      "dir": "N"
+    },
+    {
+      "kind": "straight",
+      "gx": -4,
+      "gz": 0,
+      "dir": "N"
+    },
+    {
+      "kind": "junction",
+      "gx": -4,
+      "gz": 1,
+      "dir": "N",
+      "exits": [
+        {
+          "dir": "N"
+        },
+        {
+          "dir": "W"
+        }
+      ],
+      "initialExit": 1
+    },
+    {
+      "kind": "straight",
+      "gx": -5,
+      "gz": 1,
+      "dir": "W"
+    },
+    {
+      "kind": "straight",
+      "gx": -6,
+      "gz": 1,
+      "dir": "W"
+    },
+    {
+      "kind": "station",
+      "gx": -7,
+      "gz": 1,
+      "dir": "W",
+      "order": 4,
+      "colorIndex": 3,
+      "dot": false
+    },
+    {
+      "kind": "curve",
+      "gx": -4,
+      "gz": 2,
+      "from": "N",
+      "to": "W"
+    },
+    {
+      "kind": "curve",
+      "gx": -5,
+      "gz": 2,
+      "from": "W",
+      "to": "N"
+    },
+    {
+      "kind": "straight",
+      "gx": -5,
+      "gz": 3,
+      "dir": "N"
+    },
+    {
+      "kind": "curve",
+      "gx": -5,
+      "gz": 4,
+      "from": "N",
+      "to": "E"
+    },
+    {
+      "kind": "straight",
+      "gx": -4,
+      "gz": 4,
+      "dir": "E"
+    },
+    {
+      "kind": "junction",
+      "gx": -3,
+      "gz": 4,
+      "dir": "E",
+      "exits": [
+        {
+          "dir": "E"
+        },
+        {
+          "dir": "N"
+        }
+      ],
+      "initialExit": 0
+    },
+    {
+      "kind": "straight",
+      "gx": -3,
+      "gz": 5,
+      "dir": "N"
+    },
+    {
+      "kind": "curve",
+      "gx": -3,
+      "gz": 6,
+      "from": "N",
+      "to": "W"
+    },
+    {
+      "kind": "station",
+      "gx": -4,
+      "gz": 6,
+      "dir": "W",
+      "order": 5,
+      "colorIndex": 4,
+      "dot": false
+    },
+    {
+      "kind": "straight",
+      "gx": -2,
+      "gz": 4,
+      "dir": "E"
+    },
+    {
+      "kind": "straight",
+      "gx": -1,
+      "gz": 4,
+      "dir": "E"
+    },
+    {
+      "kind": "straight",
+      "gx": 0,
+      "gz": 4,
+      "dir": "E"
+    },
+    {
+      "kind": "junction",
+      "gx": 1,
+      "gz": 4,
+      "dir": "E",
+      "exits": [
+        {
+          "dir": "E"
+        },
+        {
+          "dir": "N"
+        }
+      ],
+      "initialExit": 1
+    },
+    {
+      "kind": "straight",
+      "gx": 1,
+      "gz": 5,
+      "dir": "N"
+    },
+    {
+      "kind": "straight",
+      "gx": 1,
+      "gz": 6,
+      "dir": "N"
+    },
+    {
+      "kind": "station",
+      "gx": 1,
+      "gz": 7,
+      "dir": "N",
+      "order": 6,
+      "colorIndex": 5,
+      "dot": false
+    },
+    {
+      "kind": "straight",
+      "gx": 2,
+      "gz": 4,
+      "dir": "E"
+    },
+    {
+      "kind": "curve",
+      "gx": 3,
+      "gz": 4,
+      "from": "E",
+      "to": "S"
+    },
+    {
+      "kind": "straight",
+      "gx": 3,
+      "gz": 3,
+      "dir": "S"
+    },
+    {
+      "kind": "junction",
+      "gx": 3,
+      "gz": 2,
+      "dir": "S",
+      "exits": [
+        {
+          "dir": "S"
+        },
+        {
+          "dir": "E"
+        }
+      ],
+      "initialExit": 1
+    },
+    {
+      "kind": "straight",
+      "gx": 4,
+      "gz": 2,
+      "dir": "E"
+    },
+    {
+      "kind": "curve",
+      "gx": 5,
+      "gz": 2,
+      "from": "E",
+      "to": "N"
+    },
+    {
+      "kind": "station",
+      "gx": 5,
+      "gz": 3,
+      "dir": "N",
+      "order": 7,
+      "colorIndex": 6,
+      "dot": false
+    },
+    {
+      "kind": "curve",
+      "gx": 3,
+      "gz": 1,
+      "from": "S",
+      "to": "W"
+    },
+    {
+      "kind": "curve",
+      "gx": 2,
+      "gz": 1,
+      "from": "W",
+      "to": "S"
+    },
+    {
+      "kind": "curve",
+      "gx": 2,
+      "gz": 0,
+      "from": "S",
+      "to": "E"
+    },
+    {
+      "kind": "junction",
+      "gx": 3,
+      "gz": 0,
+      "dir": "E",
+      "exits": [
+        {
+          "dir": "E"
+        },
+        {
+          "dir": "S"
+        }
+      ],
+      "initialExit": 1
+    },
+    {
+      "kind": "straight",
+      "gx": 3,
+      "gz": -1,
+      "dir": "S"
+    },
+    {
+      "kind": "station",
+      "gx": 3,
+      "gz": -2,
+      "dir": "S",
+      "order": 8,
+      "colorIndex": 7,
+      "dot": false
+    },
+    {
+      "kind": "straight",
+      "gx": 4,
+      "gz": 0,
+      "dir": "E"
+    },
+    {
+      "kind": "curve",
+      "gx": 5,
+      "gz": 0,
+      "from": "E",
+      "to": "S"
+    },
+    {
+      "kind": "junction",
+      "gx": 5,
+      "gz": -1,
+      "dir": "S",
+      "exits": [
+        {
+          "dir": "S"
+        },
+        {
+          "dir": "E"
+        }
+      ],
+      "initialExit": 0
+    },
+    {
+      "kind": "straight",
+      "gx": 6,
+      "gz": -1,
+      "dir": "E"
+    },
+    {
+      "kind": "straight",
+      "gx": 7,
+      "gz": -1,
+      "dir": "E"
+    },
+    {
+      "kind": "station",
+      "gx": 8,
+      "gz": -1,
+      "dir": "E",
+      "order": 9,
+      "colorIndex": 8,
+      "dot": false
+    },
+    {
+      "kind": "curve",
+      "gx": 5,
+      "gz": -2,
+      "from": "S",
+      "to": "E"
+    },
+    {
+      "kind": "curve",
+      "gx": 6,
+      "gz": -2,
+      "from": "E",
+      "to": "S"
+    },
+    {
+      "kind": "straight",
+      "gx": 6,
+      "gz": -3,
+      "dir": "S"
+    },
+    {
+      "kind": "station",
+      "gx": 6,
+      "gz": -4,
+      "dir": "S",
+      "order": 10,
+      "colorIndex": 9,
+      "dot": false
+    }
+  ],
+  "scenery": [
+    {
+      "model": "tree_pineRoundA",
+      "x": 14.9,
+      "y": 0,
+      "z": 6.6,
+      "rotY": 169,
+      "scale": 1.2
+    },
+    {
+      "model": "cliff_large_rock",
+      "x": 12,
+      "y": 0,
+      "z": -18.7,
+      "rotY": 239,
+      "scale": 0.85
+    },
+    {
+      "model": "tree_pineDefaultA",
+      "x": -3.9,
+      "y": 0,
+      "z": 14.4,
+      "rotY": 49,
+      "scale": 1.25
+    },
+    {
+      "model": "tree_detailed",
+      "x": -6.1,
+      "y": 0,
+      "z": -18,
+      "rotY": 83,
+      "scale": 0.9
+    },
+    {
+      "model": "rock_largeA",
+      "x": 22,
+      "y": 0,
+      "z": 7.4,
+      "rotY": 8,
+      "scale": 1.25
+    },
+    {
+      "model": "grass_large",
+      "x": -4.5,
+      "y": 0,
+      "z": 0.4,
+      "rotY": 180,
+      "scale": 0.9
+    },
+    {
+      "model": "plant_bushLarge",
+      "x": -6.8,
+      "y": 0,
+      "z": 16.5,
+      "rotY": 311,
+      "scale": 1.1
+    },
+    {
+      "model": "tree_pineTallA",
+      "x": -18.8,
+      "y": 0,
+      "z": 12,
+      "rotY": 106,
+      "scale": 1.05
+    },
+    {
+      "model": "plant_bushLarge",
+      "x": -16.1,
+      "y": 0,
+      "z": -7.2,
+      "rotY": 117,
+      "scale": 1.1
+    },
+    {
+      "model": "tree_pineDefaultB",
+      "x": 17.9,
+      "y": 0,
+      "z": -13.9,
+      "rotY": 131,
+      "scale": 1
+    },
+    {
+      "model": "tree_detailed",
+      "x": 6.3,
+      "y": 0,
+      "z": -14.1,
+      "rotY": 94,
+      "scale": 0.9
+    },
+    {
+      "model": "flower_redA",
+      "x": 5,
+      "y": 0,
+      "z": -13.1,
+      "rotY": 232,
+      "scale": 1.05
+    },
+    {
+      "model": "tree_default",
+      "x": 10.6,
+      "y": 0,
+      "z": 11.3,
+      "rotY": 156,
+      "scale": 1.3
+    },
+    {
+      "model": "tree_oak",
+      "x": -17.6,
+      "y": 0,
+      "z": -3.2,
+      "rotY": 36,
+      "scale": 0.9
+    },
+    {
+      "model": "tree_pineDefaultB",
+      "x": -15.2,
+      "y": 0,
+      "z": -7.1,
+      "rotY": 308,
+      "scale": 1.05
+    },
+    {
+      "model": "tree_oak",
+      "x": -10.4,
+      "y": 0,
+      "z": 10.6,
+      "rotY": 185,
+      "scale": 1.15
+    },
+    {
+      "model": "tree_pineTallB",
+      "x": 7.7,
+      "y": 0,
+      "z": -8.9,
+      "rotY": 257,
+      "scale": 1.1
+    },
+    {
+      "model": "plant_bushDetailed",
+      "x": 20.8,
+      "y": 0,
+      "z": -13.9,
+      "rotY": 256,
+      "scale": 0.9
+    },
+    {
+      "model": "grass_large",
+      "x": -19.1,
+      "y": 0,
+      "z": -14.9,
+      "rotY": 44,
+      "scale": 1.2
+    },
+    {
+      "model": "grass_large",
+      "x": 5,
+      "y": 0,
+      "z": 13.5,
+      "rotY": 49,
+      "scale": 1
+    },
+    {
+      "model": "flower_yellowA",
+      "x": 21.3,
+      "y": 0,
+      "z": 11.1,
+      "rotY": 244,
+      "scale": 1
+    },
+    {
+      "model": "tree_detailed",
+      "x": 9.1,
+      "y": 0,
+      "z": -9.8,
+      "rotY": 254,
+      "scale": 1.1
+    },
+    {
+      "model": "tree_plateau",
+      "x": 19.7,
+      "y": 0,
+      "z": -1.3,
+      "rotY": 74,
+      "scale": 1
+    },
+    {
+      "model": "grass_large",
+      "x": 1.3,
+      "y": 0,
+      "z": 16.9,
+      "rotY": 268,
+      "scale": 1.2
+    },
+    {
+      "model": "plant_bushLarge",
+      "x": -14.6,
+      "y": 0,
+      "z": 11.9,
+      "rotY": 231,
+      "scale": 1.15
+    },
+    {
+      "model": "tree_pineTallB",
+      "x": 17.1,
+      "y": 0,
+      "z": 1.2,
+      "rotY": 65,
+      "scale": 0.9
+    },
+    {
+      "model": "tree_pineDefaultB",
+      "x": -12,
+      "y": 0,
+      "z": 18.1,
+      "rotY": 300,
+      "scale": 0.9
+    },
+    {
+      "model": "flower_redA",
+      "x": 8.8,
+      "y": 0,
+      "z": 17.3,
+      "rotY": 297,
+      "scale": 1
+    },
+    {
+      "model": "stone_largeB",
+      "x": 11.2,
+      "y": 0,
+      "z": 14.9,
+      "rotY": 203,
+      "scale": 1.05
+    },
+    {
+      "model": "tree_pineTallA",
+      "x": -16.5,
+      "y": 0,
+      "z": 13,
+      "rotY": 152,
+      "scale": 1.2
+    },
+    {
+      "model": "tree_default",
+      "x": -4.9,
+      "y": 0,
+      "z": 5.4,
+      "rotY": 67,
+      "scale": 1.25
+    },
+    {
+      "model": "stone_largeA",
+      "x": 8.1,
+      "y": 0,
+      "z": 18.5,
+      "rotY": 108,
+      "scale": 1
+    },
+    {
+      "model": "tree_pineDefaultA",
+      "x": -10.8,
+      "y": 0,
+      "z": -13.8,
+      "rotY": 35,
+      "scale": 1.25
+    }
+  ]
+}
