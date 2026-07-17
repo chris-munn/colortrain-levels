@@ -1,0 +1,1429 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<title>Color Train — Map Editor</title>
+<!--
+  Color Train map editor (schema v2). Single responsive file, no dependencies.
+  Desktop: click to place · R rotate · T flip turn/branch · I junction start ·
+           Delete removes · left-drag empty space / right-drag / Space pans · wheel zooms.
+  Touch:   tap to place · one-finger drag pans (drag a selected item to move it) ·
+           pinch zooms · on-screen R / T / I / Delete buttons · properties in the
+           pull-up sheet at the bottom.
+  Exported JSON drops straight into levels/maps/ and the game loads it.
+-->
+<style>
+  * { box-sizing: border-box; margin: 0; }
+  html, body { height: 100%; }
+  body { font: 13px/1.4 -apple-system, "Segoe UI", sans-serif; background: #1c2430; color: #e8eef5;
+         display: flex; flex-direction: column; overflow: hidden; overscroll-behavior: none;
+         -webkit-tap-highlight-color: transparent; user-select: none; }
+  #top { display: flex; gap: 8px; align-items: center; padding: 8px 10px; background: #141a23; flex-wrap: wrap; flex-shrink: 0; }
+  #top b { color: #ffd23f; margin-right: 6px; }
+  input, select, button { font: inherit; background: #2a3442; color: #e8eef5; border: 1px solid #3d4a5c; border-radius: 6px; padding: 4px 8px; }
+  input[type=number] { width: 58px; }
+  button { cursor: pointer; }
+  button:hover { background: #35424f; }
+  button.primary { background: #39a13a; border-color: #2c7d2c; font-weight: 700; }
+  button.tool.on { background: #ffd23f; color: #4a3000; border-color: #d98c00; font-weight: 700; }
+  #wrap { flex: 1; display: flex; min-height: 0; }
+  #tools { width: 172px; flex-shrink: 0; padding: 10px; background: #141a23; display: flex; flex-direction: column; gap: 6px; overflow-y: auto; }
+  #tools h4, #props h4 { font-size: 11px; letter-spacing: 1px; color: #8fa3b8; margin: 8px 0 2px; text-transform: uppercase; }
+  #cv { flex: 1; min-width: 0; display: block; background: #6da75a; cursor: crosshair; touch-action: none; }
+  #props { width: 320px; flex-shrink: 0; padding: 10px; background: #141a23; overflow-y: auto; }
+  #sheetHandle { display: none; }
+  .row { display: flex; gap: 6px; align-items: center; margin: 4px 0; }
+  .row label { flex: 1; color: #b7c5d3; }
+  .sw { width: 22px; height: 22px; border-radius: 5px; border: 2px solid transparent; cursor: pointer; display: inline-block; }
+  .sw.on { border-color: #fff; }
+  #issues { white-space: pre-wrap; color: #ff9a8a; font-size: 12px; }
+  #issues.ok { color: #8fe08a; }
+  table { width: 100%; border-collapse: collapse; font-size: 12px; }
+  td, th { padding: 2px 3px; text-align: center; }
+  th { color: #8fa3b8; }
+  td input { width: 52px; padding: 3px 4px; }
+  .hint { color: #8fa3b8; font-size: 11px; }
+
+  /* ------------- narrow / touch layout ------------- */
+  @media (max-width: 900px) {
+    #top { padding: 6px; gap: 6px; font-size: 12px; }
+    #top input[type=number] { width: 46px; }
+    #top input { padding: 6px; }
+    #wrap { flex-direction: column; }
+    #cv { order: 1; }
+    #tools { order: 2; width: 100%; height: auto; max-height: 118px; flex-direction: row; flex-wrap: nowrap;
+             align-items: center; gap: 6px; overflow-x: auto; overflow-y: hidden; padding: 8px;
+             margin-bottom: 44px; /* keep clear of the fixed bottom-sheet peek */ }
+    #tools h4, #tools .hint { display: none; }
+    #tools button, #tools select { min-height: 44px; flex-shrink: 0; }
+    #tools .row { flex-shrink: 0; margin: 0; }
+    #tools #placeOpts, #tools #stationOpts, #tools #sceneryOpts { display: flex; gap: 6px; align-items: center; flex-shrink: 0; }
+    #tools #placeOpts[hidden], #tools #stationOpts[hidden], #tools #sceneryOpts[hidden] { display: none; }
+    button, select { min-height: 40px; }
+    .sw { width: 30px; height: 30px; }
+    #props { position: fixed; left: 0; right: 0; bottom: 0; width: 100%; max-height: 46vh;
+             transform: translateY(calc(100% - 44px)); transition: transform .22s ease; z-index: 9;
+             border-top: 2px solid #3d4a5c; border-radius: 14px 14px 0 0; padding-top: 0; }
+    #props.open { transform: none; }
+    #sheetHandle { display: block; width: 100%; min-height: 40px; margin: 4px 0 6px;
+                   background: #202a38; font-weight: 700; }
+  }
+</style>
+</head>
+<body>
+<div id="top">
+  <b>COLOR TRAIN · MAP EDITOR</b>
+  Name <input id="mName" value="New Map" style="width:130px">
+  Stage <input id="mStage" value="nature" style="width:80px">
+  Map # <input id="mNum" type="number" value="1" min="1">
+  Theme <input id="mTheme" value="nature" style="width:80px">
+  <button id="bNew">New</button>
+  <button id="bRandom">🎲 Randomise</button>
+  <button id="bImport">Import</button>
+  <input type="file" id="fileIn" accept=".json" style="display:none">
+  <button id="bValidate">Validate</button>
+  <button id="bCopy">Copy JSON</button>
+  <button id="bExport" class="primary">⬇ Export JSON</button>
+  <button id="bPublish" class="primary">☁ Publish</button>
+</div>
+<div id="wrap">
+  <div id="tools">
+    <h4>Tools</h4>
+    <button class="tool on" data-t="select">✥ Select</button>
+    <button class="tool" data-t="straight">━ Straight</button>
+    <button class="tool" data-t="curve">◟ Curve</button>
+    <button class="tool" data-t="junction">⑂ Junction</button>
+    <button class="tool" data-t="station">▣ Station</button>
+    <button class="tool" data-t="spawn">◐ Spawn</button>
+    <button class="tool" data-t="scenery">🌲 Scenery</button>
+    <button class="tool" data-t="erase">✕ Erase</button>
+    <div id="placeOpts">
+      <h4>Placement</h4>
+      <div class="row"><label>Dir <b id="dirLbl">E</b></label><button id="bRot">R ⟳</button></div>
+      <div class="row"><label>Turn <b id="turnLbl">left</b></label><button id="bTurn">T ⇄</button></div>
+    </div>
+    <div id="stationOpts">
+      <h4>Station</h4>
+      <div class="row" id="nextStation"></div>
+    </div>
+    <div id="sceneryOpts">
+      <h4>Model</h4>
+      <select id="modelSel" style="width:100%"></select>
+    </div>
+    <div class="hint" id="hint">Tap to place · drag to pan · pinch to zoom. Select anything for its handles.</div>
+  </div>
+  <canvas id="cv"></canvas>
+  <div id="props">
+    <button id="sheetHandle">▲ Details & Validation</button>
+    <h4>Selection</h4>
+    <div id="selBox" class="hint">Nothing selected.</div>
+    <h4>Level rules <span class="hint">(blank = auto)</span></h4>
+    <div id="rules"></div>
+    <h4>Validation</h4>
+    <div id="issues" class="hint">Not run yet.</div>
+    <h4>Publish · GitHub Pages</h4>
+    <style>#ghStatus.ok{color:#2f9e44}#ghStatus.bad{color:#e4362c}</style>
+    <div class="row"><label>User</label><input id="ghUser" placeholder="github username" style="width:150px"></div>
+    <div class="row"><label>Repo</label><input id="ghRepo" placeholder="colortrain-levels" style="width:150px"></div>
+    <div class="row"><label>Branch</label><input id="ghBranch" placeholder="main" style="width:150px"></div>
+    <div class="row"><label>Token</label><input id="ghToken" type="password" placeholder="fine-grained PAT" style="width:150px"></div>
+    <div id="ghStatus" class="hint">☁ Publish commits this map + manifest to your repo; Pages serves it to the game. Token needs Contents read/write on that repo only — it stays in this browser.</div>
+  </div>
+</div>
+<script>
+"use strict";
+const TILE = 2;
+const DIRS = ["E","N","W","S"];
+const DV = { E:[1,0], N:[0,1], W:[-1,0], S:[0,-1] };
+const OPP = { E:"W", N:"S", W:"E", S:"N" };
+const LEFT = { E:"N", N:"W", W:"S", S:"E" };
+const RIGHT = { E:"S", S:"W", W:"N", N:"E" };
+const COLORS = ["#e12929","#2e6bf2","#29b847","#face14","#9e3dd9","#ff8419","#1ad9e6","#ff73bf","#9ee633","#f2f2f2"];
+const COLOR_NAMES = ["red","blue","green","yellow","purple","orange","cyan","pink","lime","white"];
+const NATURE_MODELS = ["tree_pineDefaultA","tree_pineDefaultB","tree_pineTallA","tree_pineTallB","tree_pineRoundA","tree_default","tree_oak","tree_detailed","tree_plateau","tree_autumn","rock_largeA","rock_largeB","rock_largeC","rock_smallA","rock_smallB","stone_largeA","stone_largeB","plant_bushLarge","plant_bushDetailed","flower_redA","flower_yellowA","grass_large","cliff_large_rock","cliff_block_rock","cliff_slope_rock","cliff_top_rock","bridge_wood","lily_large","lily_small","fence_simple","campfire_logs","tent","grass_block","grass_block_tall","grass_slope"];
+
+let map = newMap();
+function newMap() {
+  return { schemaVersion:2, stage:"nature", mapNumber:1, name:"New Map", theme:"nature",
+    levels:[], camera:{auto:true}, spawn:{gx:-2,gz:0,dir:"E"}, track:[], scenery:[] };
+}
+
+let tool = "select", curDir = "E", curTurn = "L";
+let sel = null;            // {type:'track'|'scenery'|'spawn', i}
+let view = { x:0, z:2, s:44 };
+let hover = { active:false, sx:0, sy:0, wx:0, wz:0 };
+let spaceHeld = false;
+
+const cv = document.getElementById("cv");
+const ctx = cv.getContext("2d");
+
+// ---------- coords ----------
+function w2sx(wx){ return cv.width/2 + (wx - view.x) * view.s; }
+function w2sy(wz){ return cv.height/2 - (wz - view.z) * view.s; }
+function s2wx(sx){ return (sx - cv.width/2) / view.s + view.x; }
+function s2wz(sy){ return view.z - (sy - cv.height/2) / view.s; }
+function tileAt(wx, wz){ return [Math.round(wx / TILE), Math.round(wz / TILE)]; }
+
+// ---------- model ----------
+function pieceAt(gx, gz){ return map.track.findIndex(t => t.gx === gx && t.gz === gz); }
+function stations(){ return map.track.filter(t => t.kind === "station"); }
+function syncLevels(){
+  const n = stations().length;
+  while (map.levels.length < n) map.levels.push({ trainSpeed: 3, spawnIntervalSeconds: 3 });
+  map.levels.length = n;
+}
+
+// colour is DERIVED from unlock order: red = 1, blue = 2, … dot variants = 11-20
+function colourForOrder(o){
+  return { ci: (o - 1) % 10, dot: o > 10 };
+}
+
+// ---------- reserved zones (no-build areas) ----------
+const PLATFORM_SIDE = { E:[0,-1], N:[1,0], W:[0,1], S:[-1,0] }; // where a station's platform sits
+
+function stationPlatformRect(t){
+  const cx = t.gx * TILE, cz = t.gz * TILE;
+  const s = PLATFORM_SIDE[t.dir];
+  const pcx = cx + s[0] * 1.65, pcz = cz + s[1] * 1.65;
+  const alongX = s[0] === 0; // platform's long axis follows the travel axis
+  const hw = alongX ? 1.7 : 0.65, hd = alongX ? 0.65 : 1.7;
+  return { x0: pcx - hw, z0: pcz - hd, x1: pcx + hw, z1: pcz + hd };
+}
+
+function spawnMoundRect(s){
+  const cx = s.gx * TILE, cz = s.gz * TILE, d = DV[s.dir];
+  const mx = cx - d[0] * 3.4, mz = cz - d[1] * 3.4;
+  return { x0: mx - 2.7, z0: mz - 2.7, x1: mx + 2.7, z1: mz + 2.7 };
+}
+
+function junctionZoneRect(t){
+  const c = 1.9;
+  return { x0: t.gx * TILE - c, z0: t.gz * TILE - c, x1: t.gx * TILE + c, z1: t.gz * TILE + c };
+}
+
+function tileRect(gx, gz, m){
+  m = m === undefined ? 1.0 : m;
+  return { x0: gx * TILE - m, z0: gz * TILE - m, x1: gx * TILE + m, z1: gz * TILE + m };
+}
+
+function rectsIntersect(a, b){
+  return a.x0 < b.x1 && a.x1 > b.x0 && a.z0 < b.z1 && a.z1 > b.z0;
+}
+
+function pointInRect(x, z, r, m){
+  m = m || 0;
+  return x > r.x0 - m && x < r.x1 + m && z > r.z0 - m && z < r.z1 + m;
+}
+
+// hard rects block BOTH track and scenery (platforms, spawn mound)
+function hardRects(exceptTrackIdx){
+  const rects = [];
+  map.track.forEach((t, i) => {
+    if (t.kind === "station" && i !== exceptTrackIdx) rects.push(stationPlatformRect(t));
+  });
+  rects.push(spawnMoundRect(map.spawn));
+  return rects;
+}
+
+let rejectFlash = null; // {rects:[...], t:timestamp}
+function flashReject(rects){
+  rejectFlash = { rects, t: performance.now() };
+  const fade = () => {
+    draw();
+    if (rejectFlash && performance.now() - rejectFlash.t < 650) requestAnimationFrame(fade);
+    else { rejectFlash = null; draw(); }
+  };
+  requestAnimationFrame(fade);
+}
+
+// can a track piece (or spawn) sit on this tile?
+function canPlaceTrackAt(gx, gz, kind, dir, exceptIdx){
+  const tr = tileRect(gx, gz, 1.0);
+  const bad = [];
+  for (const r of hardRects(exceptIdx === undefined ? -1 : exceptIdx))
+    if (rectsIntersect(tr, r)) bad.push(r);
+  if (kind === "station") {
+    const pr = stationPlatformRect({ gx, gz, dir });
+    map.track.forEach((t, i) => {
+      if (i === exceptIdx) return;
+      if (rectsIntersect(pr, tileRect(t.gx, t.gz, 1.0))) bad.push(pr);
+    });
+    if (rectsIntersect(pr, tileRect(map.spawn.gx, map.spawn.gz, 1.0))) bad.push(pr);
+    for (const r of hardRects(exceptIdx === undefined ? -1 : exceptIdx))
+      if (rectsIntersect(pr, r)) bad.push(pr);
+  }
+  return bad;
+}
+
+function canPlaceSpawnAt(gx, gz){
+  const mr = spawnMoundRect({ gx, gz, dir: curDir });
+  const bad = [];
+  map.track.forEach(t => {
+    if (rectsIntersect(mr, tileRect(t.gx, t.gz, 1.0))) bad.push(mr);
+    if (t.kind === "station" && rectsIntersect(mr, stationPlatformRect(t))) bad.push(mr);
+  });
+  return bad;
+}
+
+// can a scenery item sit at this world point?
+function canPlaceSceneryAt(wx, wz){
+  const bad = [];
+  map.track.forEach(t => {
+    if (pointInRect(wx, wz, tileRect(t.gx, t.gz, 1.15))) bad.push(tileRect(t.gx, t.gz, 1.15));
+    if (t.kind === "junction" && pointInRect(wx, wz, junctionZoneRect(t))) bad.push(junctionZoneRect(t));
+    if (t.kind === "station" && pointInRect(wx, wz, stationPlatformRect(t), 0.3)) bad.push(stationPlatformRect(t));
+  });
+  if (pointInRect(wx, wz, tileRect(map.spawn.gx, map.spawn.gz, 1.15))) bad.push(tileRect(map.spawn.gx, map.spawn.gz, 1.15));
+  if (pointInRect(wx, wz, spawnMoundRect(map.spawn), 0.3)) bad.push(spawnMoundRect(map.spawn));
+  return bad;
+}
+
+// keep station orders a clean 1..N sequence and their colours in lockstep
+function renumberStations(){
+  const sts = stations().slice().sort((a, b) => a.order - b.order);
+  sts.forEach((s, i) => {
+    s.order = i + 1;
+    const m = colourForOrder(s.order);
+    s.colorIndex = m.ci;
+    s.dot = m.dot;
+  });
+}
+
+function setStationOrder(st, newOrder){
+  const sts = stations().slice().sort((a, b) => a.order - b.order);
+  const from = sts.indexOf(st);
+  if (from < 0) return;
+  sts.splice(from, 1);
+  sts.splice(Math.max(0, Math.min(sts.length, newOrder - 1)), 0, st);
+  sts.forEach((s, i) => {
+    s.order = i + 1;
+    const m = colourForOrder(s.order);
+    s.colorIndex = m.ci;
+    s.dot = m.dot;
+  });
+}
+
+function placeTrack(gx, gz){
+  if (map.spawn.gx === gx && map.spawn.gz === gz) return;
+  const kind = tool === "station" ? "station" : tool;
+  const blocked = canPlaceTrackAt(gx, gz, kind, curDir, -1);
+  if (blocked.length) { flashReject(blocked); return; }
+  const ex = pieceAt(gx, gz);
+  if (ex >= 0) map.track.splice(ex, 1);
+  if (tool === "straight") map.track.push({ kind:"straight", gx, gz, dir:curDir });
+  else if (tool === "curve") map.track.push({ kind:"curve", gx, gz, from:curDir, to:(curTurn==="L"?LEFT:RIGHT)[curDir] });
+  else if (tool === "junction") map.track.push({ kind:"junction", gx, gz, dir:curDir,
+    exits:[{dir:curDir},{dir:(curTurn==="L"?LEFT:RIGHT)[curDir]}], initialExit:0 });
+  else if (tool === "station") {
+    const order = stations().length + 1;
+    if (order > 20) { alert("20 stations is the maximum (10 colours × dot)."); return; }
+    const m = colourForOrder(order);
+    map.track.push({ kind:"station", gx, gz, dir:curDir, order, colorIndex:m.ci, dot:m.dot });
+  }
+  syncLevels(); touch();
+}
+
+function eraseAt(wx, wz){
+  const si = nearestScenery(wx, wz, 0.8);
+  if (si >= 0) { map.scenery.splice(si, 1); touch(); return; }
+  const [gx, gz] = tileAt(wx, wz);
+  const i = pieceAt(gx, gz);
+  if (i >= 0) {
+    const wasStation = map.track[i].kind === "station";
+    map.track.splice(i, 1);
+    if (wasStation) renumberStations();
+    syncLevels(); touch();
+  }
+}
+
+function nearestScenery(wx, wz, maxD){
+  let best = -1, bd = maxD;
+  map.scenery.forEach((s, i) => {
+    const d = Math.hypot(s.x - wx, s.z - wz);
+    if (d < bd) { bd = d; best = i; }
+  });
+  return best;
+}
+
+function hitTest(wx, wz){
+  const si = nearestScenery(wx, wz, 0.8);
+  if (si >= 0) return { type:"scenery", i:si };
+  const [gx, gz] = tileAt(wx, wz);
+  if (map.spawn.gx === gx && map.spawn.gz === gz) return { type:"spawn" };
+  const ti = pieceAt(gx, gz);
+  return ti >= 0 ? { type:"track", i:ti } : null;
+}
+
+// What a tap on an existing item means while a PLACEMENT tool is active:
+// track tools only notice track/spawn, the scenery tool only notices scenery —
+// so you can still place right next to the other kind.
+function tapHit(wx, wz){
+  if (tool === "scenery") {
+    const si = nearestScenery(wx, wz, 0.8);
+    return si >= 0 ? { type:"scenery", i:si } : null;
+  }
+  const [gx, gz] = tileAt(wx, wz);
+  if (map.spawn.gx === gx && map.spawn.gz === gz) return { type:"spawn" };
+  const ti = pieceAt(gx, gz);
+  return ti >= 0 ? { type:"track", i:ti } : null;
+}
+
+function deleteSel(){
+  if (!sel) return;
+  if (sel.type === "scenery") map.scenery.splice(sel.i, 1);
+  else if (sel.type === "track") {
+    const wasStation = map.track[sel.i].kind === "station";
+    map.track.splice(sel.i, 1);
+    if (wasStation) renumberStations();
+    syncLevels();
+  }
+  sel = null; touch(); showSel();
+}
+
+function flipInitial(){
+  if (sel && sel.type === "track" && map.track[sel.i].kind === "junction") {
+    map.track[sel.i].initialExit = 1 - map.track[sel.i].initialExit;
+    touch(); showSel();
+  }
+}
+
+// ---------- on-canvas handles for the selection ----------
+let handles = []; // screen-space: {x, y, r, icon, action}
+
+function selTurnSide(t){ // is a curve/junction currently turning left of its travel dir?
+  const from = t.kind === "curve" ? t.from : t.dir;
+  const to = t.kind === "curve" ? t.to : t.exits[1].dir;
+  return LEFT[from] === to ? "L" : "R";
+}
+
+function rotateSel(){
+  if (!sel) return;
+  if (sel.type === "spawn") { map.spawn.dir = DIRS[(DIRS.indexOf(map.spawn.dir) + 3) % 4]; }
+  else if (sel.type === "track") {
+    const t = map.track[sel.i];
+    if (t.kind === "straight" || t.kind === "station") t.dir = DIRS[(DIRS.indexOf(t.dir) + 3) % 4];
+    else if (t.kind === "curve") {
+      const side = selTurnSide(t);
+      t.from = DIRS[(DIRS.indexOf(t.from) + 3) % 4];
+      t.to = (side === "L" ? LEFT : RIGHT)[t.from];
+    }
+    else if (t.kind === "junction") {
+      const side = selTurnSide(t);
+      t.dir = DIRS[(DIRS.indexOf(t.dir) + 3) % 4];
+      t.exits = [{ dir: t.dir }, { dir: (side === "L" ? LEFT : RIGHT)[t.dir] }];
+    }
+  }
+  else if (sel.type === "scenery") { const s = map.scenery[sel.i]; s.rotY = ((s.rotY || 0) + 45) % 360; }
+  touch(); showSel();
+}
+
+function flipSel(){
+  if (!sel) return;
+  if (sel.type === "spawn") map.spawn.dir = OPP[map.spawn.dir];
+  else if (sel.type === "track") {
+    const t = map.track[sel.i];
+    if (t.kind === "straight" || t.kind === "station") t.dir = OPP[t.dir];
+    else if (t.kind === "curve") t.to = (selTurnSide(t) === "L" ? RIGHT : LEFT)[t.from];
+    else if (t.kind === "junction") t.exits[1].dir = (selTurnSide(t) === "L" ? RIGHT : LEFT)[t.dir];
+  }
+  else if (sel.type === "scenery") { const s = map.scenery[sel.i]; s.rotY = ((s.rotY || 0) + 180) % 360; }
+  touch(); showSel();
+}
+
+function scaleSel(d){
+  if (!sel || sel.type !== "scenery") return;
+  const s = map.scenery[sel.i];
+  s.scale = Math.min(2.5, Math.max(0.4, Math.round(((s.scale || 1) + d) * 20) / 20));
+  touch(); showSel();
+}
+
+function buildHandles(){
+  handles = [];
+  if (!sel) return;
+  const hr = 21 * devicePixelRatio;
+  function add(x, y, icon, action){ handles.push({ x, y, r: hr, icon, action }); }
+
+  if (sel.type === "track" || sel.type === "spawn") {
+    const t = sel.type === "spawn" ? map.spawn : map.track[sel.i];
+    const cx = w2sx(t.gx * TILE), cy = w2sy(t.gz * TILE);
+    const off = view.s * 1.05 + hr;
+    add(cx + off, cy - off * 0.55, "⟳", rotateSel);
+    add(cx + off, cy + off * 0.55, "⇄", flipSel);
+    if (sel.type === "track" && t.kind === "junction") add(cx, cy - off * 1.15, "⇅", flipInitial);
+  }
+  else if (sel.type === "scenery") {
+    const s = map.scenery[sel.i];
+    const cx = w2sx(s.x), cy = w2sy(s.z);
+    const off = Math.max(0.45 * (s.scale || 1) * view.s, 14 * devicePixelRatio) + hr * 1.3;
+    add(cx + off, cy - off * 0.6, "＋", () => scaleSel(+0.1));
+    add(cx + off, cy + off * 0.6, "－", () => scaleSel(-0.1));
+    add(cx - off, cy - off * 0.6, "⟳", rotateSel);
+    add(cx - off, cy + off * 0.6, "⇄", flipSel);
+  }
+}
+
+function drawHandles(){
+  handles.forEach(h => {
+    ctx.fillStyle = "rgba(20,26,35,.92)";
+    ctx.beginPath(); ctx.arc(h.x, h.y, h.r, 0, 7); ctx.fill();
+    ctx.strokeStyle = "#ffd23f"; ctx.lineWidth = 2.5;
+    ctx.beginPath(); ctx.arc(h.x, h.y, h.r, 0, 7); ctx.stroke();
+    ctx.fillStyle = "#ffd23f";
+    ctx.font = "bold " + Math.round(h.r * 1.05) + "px sans-serif";
+    ctx.textAlign = "center"; ctx.textBaseline = "middle";
+    ctx.fillText(h.icon, h.x, h.y + 1);
+  });
+}
+
+// ---------- render ----------
+function draw(){
+  const W = cv.width, H = cv.height;
+  ctx.clearRect(0, 0, W, H);
+  ctx.fillStyle = "#6da75a"; ctx.fillRect(0, 0, W, H);
+
+  ctx.strokeStyle = "rgba(255,255,255,.10)"; ctx.lineWidth = 1;
+  const x0 = s2wx(0), x1 = s2wx(W), z0 = s2wz(H), z1 = s2wz(0);
+  for (let x = Math.floor(x0/TILE)*TILE - 1; x < x1; x += TILE) line(w2sx(x), 0, w2sx(x), H);
+  for (let z = Math.floor(z0/TILE)*TILE - 1; z < z1; z += TILE) line(0, w2sy(z), W, w2sy(z));
+
+  map.scenery.forEach((s, i) => {
+    const r = 0.45 * (s.scale || 1) * view.s;
+    ctx.fillStyle = s.model.startsWith("tree") ? "rgba(24,98,44,.85)"
+      : s.model.startsWith("rock") || s.model.startsWith("stone") || s.model.startsWith("cliff") ? "rgba(120,110,100,.9)"
+      : "rgba(60,140,70,.8)";
+    ctx.beginPath(); ctx.arc(w2sx(s.x), w2sy(s.z), Math.max(4, r), 0, 7); ctx.fill();
+    const a = (s.rotY || 0) * Math.PI / 180;
+    ctx.strokeStyle = "rgba(255,255,255,.6)"; ctx.lineWidth = 2;
+    line(w2sx(s.x), w2sy(s.z), w2sx(s.x + Math.sin(a)*0.4), w2sy(s.z + Math.cos(a)*0.4));
+    if (view.s > 26) {
+      ctx.fillStyle = "rgba(255,255,255,.75)"; ctx.font = "10px sans-serif"; ctx.textAlign = "center";
+      ctx.fillText(s.model, w2sx(s.x), w2sy(s.z) - Math.max(4, r) - 3);
+    }
+    if (sel && sel.type === "scenery" && sel.i === i) ring(w2sx(s.x), w2sy(s.z), Math.max(6, r) + 4);
+  });
+
+  // reserved zones while placing (red floor areas)
+  const placing = ["straight","curve","junction","station","spawn","scenery"].includes(tool);
+  if (placing) {
+    const rects = [];
+    if (tool === "scenery") {
+      map.track.forEach(t => {
+        rects.push(tileRect(t.gx, t.gz, 1.15));
+        if (t.kind === "junction") rects.push(junctionZoneRect(t));
+        if (t.kind === "station") rects.push(stationPlatformRect(t));
+      });
+      rects.push(tileRect(map.spawn.gx, map.spawn.gz, 1.15));
+      rects.push(spawnMoundRect(map.spawn));
+    } else {
+      for (const r of hardRects(-1)) rects.push(r);
+    }
+    ctx.fillStyle = "rgba(228,54,44,.13)";
+    ctx.strokeStyle = "rgba(228,54,44,.30)";
+    ctx.lineWidth = 1.5;
+    rects.forEach(r => {
+      const x = w2sx(r.x0), y = w2sy(r.z1);
+      ctx.fillRect(x, y, (r.x1 - r.x0) * view.s, (r.z1 - r.z0) * view.s);
+      ctx.strokeRect(x, y, (r.x1 - r.x0) * view.s, (r.z1 - r.z0) * view.s);
+    });
+  }
+
+  map.track.forEach((t, i) => drawPiece(t, sel && sel.type === "track" && sel.i === i));
+  drawSpawn(sel && sel.type === "spawn");
+
+  // rejected placement flash
+  if (rejectFlash) {
+    const age = (performance.now() - rejectFlash.t) / 650;
+    const a = Math.max(0, 0.4 * (1 - age));
+    ctx.fillStyle = "rgba(255,40,30," + a + ")";
+    rejectFlash.rects.forEach(r => {
+      ctx.fillRect(w2sx(r.x0), w2sy(r.z1), (r.x1 - r.x0) * view.s, (r.z1 - r.z0) * view.s);
+    });
+  }
+
+  if (hover.active) {
+    if (["straight","curve","junction","station"].includes(tool)) {
+      const [gx, gz] = tileAt(hover.wx, hover.wz);
+      ctx.globalAlpha = 0.45;
+      const nextM = colourForOrder(stations().length + 1);
+      const ghost = tool === "straight" ? { kind:"straight", gx, gz, dir:curDir }
+        : tool === "curve" ? { kind:"curve", gx, gz, from:curDir, to:(curTurn==="L"?LEFT:RIGHT)[curDir] }
+        : tool === "junction" ? { kind:"junction", gx, gz, dir:curDir, exits:[{dir:curDir},{dir:(curTurn==="L"?LEFT:RIGHT)[curDir]}], initialExit:0 }
+        : { kind:"station", gx, gz, dir:curDir, order:stations().length+1, colorIndex:nextM.ci, dot:nextM.dot };
+      drawPiece(ghost, false);
+      ctx.globalAlpha = 1;
+    } else if (tool === "scenery") {
+      ctx.globalAlpha = 0.5;
+      ctx.fillStyle = "rgba(24,98,44,.85)";
+      ctx.beginPath(); ctx.arc(hover.sx, hover.sy, 0.45 * view.s, 0, 7); ctx.fill();
+      ctx.globalAlpha = 1;
+    }
+  }
+
+  buildHandles();
+  drawHandles();
+}
+function line(a,b,c,d){ ctx.beginPath(); ctx.moveTo(a,b); ctx.lineTo(c,d); ctx.stroke(); }
+function ring(x,y,r){ ctx.strokeStyle = "#ffd23f"; ctx.lineWidth = 3; ctx.beginPath(); ctx.arc(x,y,r,0,7); ctx.stroke(); }
+function trackStroke(w){ ctx.strokeStyle = "#3b2f23"; ctx.lineWidth = w; ctx.lineCap = "round"; }
+
+function drawPiece(t, isSel){
+  const cx = t.gx * TILE, cz = t.gz * TILE, h = TILE/2;
+  const px = w2sx(cx), py = w2sy(cz);
+  const w = Math.max(3, view.s * 0.22);
+
+  if (t.kind === "straight") {
+    const d = DV[t.dir];
+    trackStroke(w);
+    line(w2sx(cx - d[0]*h), w2sy(cz - d[1]*h), w2sx(cx + d[0]*h), w2sy(cz + d[1]*h));
+    arrow(cx + d[0]*h*0.45, cz + d[1]*h*0.45, t.dir);
+  }
+  else if (t.kind === "curve") {
+    drawArc(cx, cz, OPP[t.from], t.to, w);
+    arrow(cx + DV[t.to][0]*h*0.55, cz + DV[t.to][1]*h*0.55, t.to);
+  }
+  else if (t.kind === "junction") {
+    const thru = t.exits[0].dir, br = t.exits[1].dir, d = DV[thru];
+    trackStroke(w);
+    line(w2sx(cx - d[0]*h), w2sy(cz - d[1]*h), w2sx(cx + d[0]*h), w2sy(cz + d[1]*h));
+    drawArc(cx, cz, OPP[t.dir], br, w);
+    dot(cx + d[0]*h*0.8, cz + d[1]*h*0.8, t.initialExit === 0 ? "#39d13a" : "#e13a2c");
+    dot(cx + DV[br][0]*h*0.8, cz + DV[br][1]*h*0.8, t.initialExit === 1 ? "#39d13a" : "#e13a2c");
+    ctx.fillStyle = "rgba(255,255,255,.16)";
+    ctx.beginPath(); ctx.arc(px, py, view.s * 1.1, 0, 7); ctx.fill();
+  }
+  else if (t.kind === "station") {
+    const d = DV[t.dir];
+    trackStroke(w);
+    line(w2sx(cx - d[0]*h), w2sy(cz - d[1]*h), px, py);
+    const s = view.s * 0.78;
+    ctx.fillStyle = COLORS[t.colorIndex] || "#fff";
+    ctx.strokeStyle = "#fff"; ctx.lineWidth = 2.5;
+    roundRect(px - s/2, py - s/2, s, s, 6); ctx.fill(); ctx.stroke();
+    ctx.fillStyle = t.colorIndex === 9 ? "#333" : "#fff";
+    ctx.font = "bold " + Math.max(10, view.s*0.4) + "px sans-serif";
+    ctx.textAlign = "center"; ctx.textBaseline = "middle";
+    ctx.fillText(t.order, px, py + 1);
+    if (t.dot) dot(cx + 0.55, cz + 0.55, "#fff");
+  }
+  if (isSel) ring(px, py, view.s * 0.95);
+}
+
+function drawArc(cx, cz, entryEdge, exitEdge, w){
+  const e = DV[entryEdge], x = DV[exitEdge], h = TILE/2;
+  const ax = cx + e[0]*h, az = cz + e[1]*h;
+  const bx = cx + x[0]*h, bz = cz + x[1]*h;
+  const ox = cx + (e[0]+x[0])*h, oz = cz + (e[1]+x[1])*h;
+  trackStroke(w);
+  ctx.beginPath();
+  const steps = 14;
+  for (let i = 0; i <= steps; i++) {
+    const t = (i/steps) * Math.PI/2;
+    const px2 = ox + (ax-ox)*Math.cos(t) + (bx-ox)*Math.sin(t);
+    const pz2 = oz + (az-oz)*Math.cos(t) + (bz-oz)*Math.sin(t);
+    i === 0 ? ctx.moveTo(w2sx(px2), w2sy(pz2)) : ctx.lineTo(w2sx(px2), w2sy(pz2));
+  }
+  ctx.stroke();
+}
+
+function arrow(wx, wz, dir){
+  const d = DV[dir], p = 0.28;
+  const l = LEFT[dir], r = RIGHT[dir];
+  ctx.strokeStyle = "#f7f2e8"; ctx.lineWidth = Math.max(2, view.s*0.07);
+  line(w2sx(wx - (d[0]+DV[l][0])*p*0.6), w2sy(wz - (d[1]+DV[l][1])*p*0.6), w2sx(wx), w2sy(wz));
+  line(w2sx(wx - (d[0]+DV[r][0])*p*0.6), w2sy(wz - (d[1]+DV[r][1])*p*0.6), w2sx(wx), w2sy(wz));
+}
+
+function dot(wx, wz, col){
+  ctx.fillStyle = col;
+  ctx.beginPath(); ctx.arc(w2sx(wx), w2sy(wz), Math.max(3, view.s*0.1), 0, 7); ctx.fill();
+}
+
+function roundRect(x, y, w2, h2, r){
+  ctx.beginPath();
+  ctx.moveTo(x+r, y); ctx.arcTo(x+w2, y, x+w2, y+h2, r); ctx.arcTo(x+w2, y+h2, x, y+h2, r);
+  ctx.arcTo(x, y+h2, x, y, r); ctx.arcTo(x, y, x+w2, y, r); ctx.closePath();
+}
+
+function drawSpawn(isSel){
+  const t = map.spawn, cx = t.gx*TILE, cz = t.gz*TILE, d = DV[t.dir], h = TILE/2;
+  trackStroke(Math.max(3, view.s*0.22));
+  line(w2sx(cx - d[0]*h), w2sy(cz - d[1]*h), w2sx(cx + d[0]*h), w2sy(cz + d[1]*h));
+  const s = view.s * 0.8;
+  ctx.fillStyle = "#2a2a30"; ctx.strokeStyle = "#888"; ctx.lineWidth = 2;
+  roundRect(w2sx(cx) - s/2, w2sy(cz) - s/2, s, s, s*0.4); ctx.fill(); ctx.stroke();
+  ctx.fillStyle = "#111";
+  ctx.beginPath(); ctx.arc(w2sx(cx), w2sy(cz), s*0.26, 0, 7); ctx.fill();
+  arrow(cx + d[0]*h*0.5, cz + d[1]*h*0.5, t.dir);
+  if (isSel) ring(w2sx(cx), w2sy(cz), view.s*0.95);
+}
+
+// ---------- unified pointer input (mouse + touch) ----------
+const pointers = new Map();
+let gesture = null; // 'pending' | 'pan' | 'dragSel' | 'pinch'
+let downPt = null;  // {sx, sy, wx, wz}
+let pinch0 = null;  // {d0, s0, wx, wz}
+const TAP_SLOP = 9 * devicePixelRatio;
+
+function evPos(e){
+  const rect = cv.getBoundingClientRect();
+  return { sx: (e.clientX - rect.left) * devicePixelRatio, sy: (e.clientY - rect.top) * devicePixelRatio };
+}
+
+cv.addEventListener("pointerdown", e => {
+  e.preventDefault();
+  cv.setPointerCapture(e.pointerId);
+  const p = evPos(e);
+
+  // selection handles eat the tap before anything else
+  if (pointers.size === 0 && e.button !== 2 && !spaceHeld) {
+    const hp = handles.find(h => Math.hypot(p.sx - h.x, p.sy - h.y) <= h.r + 6 * devicePixelRatio);
+    if (hp) { hp.action(); draw(); return; }
+  }
+
+  pointers.set(e.pointerId, p);
+
+  if (pointers.size === 2) {
+    const [a, b] = [...pointers.values()];
+    const mx = (a.sx + b.sx) / 2, my = (a.sy + b.sy) / 2;
+    pinch0 = { d0: Math.max(20, Math.hypot(a.sx - b.sx, a.sy - b.sy)), s0: view.s, wx: s2wx(mx), wz: s2wz(my), mode: "zoom" };
+    // pinch starting on the selected scenery item resizes it instead of zooming
+    if (sel && sel.type === "scenery") {
+      const s = map.scenery[sel.i];
+      const reach = Math.max(1.6, 0.6 * (s.scale || 1));
+      if (Math.hypot(pinch0.wx - s.x, pinch0.wz - s.z) < reach) {
+        pinch0.mode = "scaleSel";
+        pinch0.scale0 = s.scale || 1;
+      }
+    }
+    gesture = "pinch";
+    return;
+  }
+
+  downPt = { ...p, wx: s2wx(p.sx), wz: s2wz(p.sy) };
+
+  if (e.button === 2 || spaceHeld) { gesture = "pan"; return; }
+
+  if (tool === "select") {
+    const hit = hitTest(downPt.wx, downPt.wz);
+    if (hit) { sel = hit; gesture = "dragSel"; showSel(); draw(); }
+    else gesture = "pan";
+  } else {
+    gesture = "pending"; // tap places on release; drag pans
+  }
+});
+
+cv.addEventListener("pointermove", e => {
+  const p = evPos(e);
+  hover.active = e.pointerType === "mouse" && pointers.size === 0;
+  hover.sx = p.sx; hover.sy = p.sy;
+  hover.wx = s2wx(p.sx); hover.wz = s2wz(p.sy);
+
+  if (!pointers.has(e.pointerId)) { draw(); return; }
+  const prev = pointers.get(e.pointerId);
+  pointers.set(e.pointerId, p);
+
+  if (gesture === "pinch" && pointers.size === 2) {
+    const [a, b] = [...pointers.values()];
+    const d = Math.max(20, Math.hypot(a.sx - b.sx, a.sy - b.sy));
+    if (pinch0.mode === "scaleSel" && sel && sel.type === "scenery") {
+      const s = map.scenery[sel.i];
+      s.scale = Math.min(2.5, Math.max(0.4, Math.round(pinch0.scale0 * (d / pinch0.d0) * 20) / 20));
+      save();
+    } else {
+      const mx = (a.sx + b.sx) / 2, my = (a.sy + b.sy) / 2;
+      view.s = Math.min(120, Math.max(12, pinch0.s0 * d / pinch0.d0));
+      view.x = pinch0.wx - (mx - cv.width/2) / view.s;
+      view.z = pinch0.wz + (my - cv.height/2) / view.s;
+    }
+    draw();
+    return;
+  }
+
+  if (gesture === "pending" && downPt &&
+      Math.hypot(p.sx - downPt.sx, p.sy - downPt.sy) > TAP_SLOP) {
+    gesture = "pan";
+  }
+
+  if (gesture === "pan") {
+    view.x -= (p.sx - prev.sx) / view.s;
+    view.z += (p.sy - prev.sy) / view.s;
+  }
+  else if (gesture === "dragSel" && sel) {
+    const wx = s2wx(p.sx), wz = s2wz(p.sy);
+    if (sel.type === "scenery") {
+      if (canPlaceSceneryAt(wx, wz).length === 0) {
+        map.scenery[sel.i].x = +wx.toFixed(1);
+        map.scenery[sel.i].z = +wz.toFixed(1);
+      }
+    } else {
+      const [gx, gz] = tileAt(wx, wz);
+      if (sel.type === "spawn") {
+        if (pieceAt(gx, gz) < 0 && canPlaceSpawnAt(gx, gz).length === 0) {
+          map.spawn.gx = gx; map.spawn.gz = gz;
+        }
+      }
+      else if (pieceAt(gx, gz) < 0 || pieceAt(gx, gz) === sel.i) {
+        const t = map.track[sel.i];
+        if (canPlaceTrackAt(gx, gz, t.kind, t.dir || t.from, sel.i).length === 0) {
+          t.gx = gx; t.gz = gz;
+        }
+      }
+    }
+    save(); showSel();
+  }
+  draw();
+});
+
+function endPointer(e){
+  if (!pointers.has(e.pointerId)) return;
+  const p = evPos(e);
+  pointers.delete(e.pointerId);
+
+  if (gesture === "pinch") {
+    if (pinch0 && pinch0.mode === "scaleSel") showSel();
+    if (pointers.size === 1) gesture = "pan";
+    else if (pointers.size === 0) { gesture = null; pinch0 = null; }
+    draw();
+    return;
+  }
+
+  if (gesture === "pending" && downPt) {
+    // a tap: commit the active tool at the press point
+    const wx = downPt.wx, wz = downPt.wz;
+
+    // tapping an existing item auto-switches to Select with it in hand
+    if (tool !== "erase") {
+      const hit = tapHit(wx, wz);
+      if (hit) {
+        setTool("select");
+        sel = hit;
+        showSel();
+        gesture = pointers.size ? gesture : null;
+        downPt = null;
+        draw();
+        return;
+      }
+    }
+
+    if (tool === "erase") eraseAt(wx, wz);
+    else if (tool === "scenery") {
+      const blocked = canPlaceSceneryAt(wx, wz);
+      if (blocked.length) { flashReject(blocked); }
+      else {
+        map.scenery.push({ model: document.getElementById("modelSel").value,
+          x: +wx.toFixed(1), y: 0, z: +wz.toFixed(1), rotY: 0, scale: 1 });
+        touch();
+      }
+    }
+    else if (tool === "spawn") {
+      const [gx, gz] = tileAt(wx, wz);
+      if (pieceAt(gx, gz) >= 0) return;
+      const blocked = canPlaceSpawnAt(gx, gz);
+      if (blocked.length) { flashReject(blocked); return; }
+      map.spawn = { gx, gz, dir: curDir };
+      touch();
+    }
+    else {
+      const [gx, gz] = tileAt(wx, wz);
+      placeTrack(gx, gz);
+    }
+  }
+  else if (gesture === "pan" && tool === "select" && downPt &&
+           Math.hypot(p.sx - downPt.sx, p.sy - downPt.sy) <= TAP_SLOP) {
+    sel = null; showSel(); // tap on empty space deselects
+  }
+
+  gesture = pointers.size ? gesture : null;
+  downPt = null;
+  draw();
+}
+cv.addEventListener("pointerup", endPointer);
+cv.addEventListener("pointercancel", endPointer);
+cv.addEventListener("pointerleave", e => { if (e.pointerType === "mouse" && pointers.size === 0) { hover.active = false; draw(); } });
+
+cv.addEventListener("contextmenu", e => e.preventDefault());
+cv.addEventListener("wheel", e => {
+  e.preventDefault();
+  const p = evPos(e);
+  const wx = s2wx(p.sx), wz = s2wz(p.sy);
+  const f = e.deltaY < 0 ? 1.12 : 1/1.12;
+  view.s = Math.min(120, Math.max(12, view.s * f));
+  view.x = wx - (p.sx - cv.width/2) / view.s;
+  view.z = wz + (p.sy - cv.height/2) / view.s;
+  draw();
+}, { passive:false });
+
+window.addEventListener("keydown", e => {
+  if (e.target.tagName === "INPUT" || e.target.tagName === "SELECT") return;
+  if (e.code === "Space") { spaceHeld = true; e.preventDefault(); }
+  if (e.key === "r" || e.key === "R") rotate();
+  if (e.key === "t" || e.key === "T") flipTurn();
+  if (e.key === "i" || e.key === "I") flipInitial();
+  if (e.key === "Delete" || e.key === "Backspace") deleteSel();
+});
+window.addEventListener("keyup", e => { if (e.code === "Space") spaceHeld = false; });
+
+function rotate(){
+  if (sel) { rotateSel(); draw(); return; }
+  curDir = DIRS[(DIRS.indexOf(curDir) + 3) % 4];
+  document.getElementById("dirLbl").textContent = curDir;
+  draw();
+}
+
+function flipTurn(){
+  if (sel) { flipSel(); draw(); return; }
+  curTurn = curTurn === "L" ? "R" : "L";
+  document.getElementById("turnLbl").textContent = curTurn === "L" ? "left" : "right";
+  draw();
+}
+
+// ---------- selection panel ----------
+function showSel(){
+  const box = document.getElementById("selBox");
+  if (!sel) { box.innerHTML = '<span class="hint">Nothing selected.</span>'; return; }
+  const delBtn = '<div class="row"><button id="pDel" style="flex:1">🗑 Delete</button></div>';
+  if (sel.type === "spawn") {
+    box.innerHTML = "Spawn tunnel — dir <b>" + map.spawn.dir + "</b> (R rotates)";
+    return;
+  }
+  if (sel.type === "scenery") {
+    const s = map.scenery[sel.i];
+    box.innerHTML = "<b>" + s.model + "</b><br>x " + s.x + " · z " + s.z +
+      '<div class="row"><label>rotY</label><input id="pRot" type="number" value="' + (s.rotY||0) + '"></div>' +
+      '<div class="row"><label>scale</label><input id="pScl" type="number" step="0.05" value="' + (s.scale||1) + '"></div>' + delBtn;
+    pBind("pRot", v => { s.rotY = +v; });
+    pBind("pScl", v => { s.scale = +v; });
+    bindDel();
+    return;
+  }
+  const t = map.track[sel.i];
+  let html = "<b>" + t.kind + "</b> @ (" + t.gx + ", " + t.gz + ")<br>";
+  if (t.kind === "straight") html += "dir <b>" + t.dir + "</b>";
+  if (t.kind === "curve") html += "from <b>" + t.from + "</b> to <b>" + t.to + "</b>";
+  if (t.kind === "junction") html += "through <b>" + t.exits[0].dir + "</b>, branch <b>" + t.exits[1].dir +
+    "</b><br>starts open: <b>" + (t.initialExit === 0 ? "through" : "branch") + "</b>" +
+    '<div class="row"><button id="pInit" style="flex:1">⇅ Flip start</button></div>';
+  if (t.kind === "station") {
+    html += 'entry <b>' + t.dir + '</b> · colour <b style="color:' + COLORS[t.colorIndex] + '">' +
+      COLOR_NAMES[t.colorIndex] + (t.dot ? " + dot" : "") + '</b>' +
+      '<div class="hint">colour follows unlock order (red = 1, blue = 2…)</div>' +
+      '<div class="row"><label>order</label><input id="pOrd" type="number" min="1" value="' + t.order + '"></div>';
+  }
+  box.innerHTML = html + delBtn;
+  if (t.kind === "station") {
+    pBind("pOrd", v => { setStationOrder(t, Math.max(1, +v)); });
+  }
+  const pi = document.getElementById("pInit");
+  if (pi) pi.onclick = flipInitial;
+  bindDel();
+}
+
+function bindDel(){
+  const b = document.getElementById("pDel");
+  if (b) b.onclick = deleteSel;
+}
+
+function pBind(id, fn){
+  const el = document.getElementById(id);
+  if (el) el.onchange = () => { fn(el.value); touch(); };
+}
+
+// ---------- rules table ----------
+function renderRules(){
+  syncLevels();
+  const n = map.levels.length;
+  let html = "<table><tr><th>Lv</th><th>win</th><th>♥</th><th>spd</th><th>int</th><th>fast</th></tr>";
+  for (let i = 0; i < n; i++) {
+    const r = map.levels[i];
+    html += "<tr><td>" + (i+1) + "</td>" +
+      ruleCell(i, "trainsToWin", r.trainsToWin, (i+1)*2) +
+      ruleCell(i, "lives", r.lives, 3) +
+      ruleCell(i, "trainSpeed", r.trainSpeed, "·") +
+      ruleCell(i, "spawnIntervalSeconds", r.spawnIntervalSeconds, "·") +
+      ruleCell(i, "fastTrains", r.fastTrains, 0) + "</tr>";
+  }
+  document.getElementById("rules").innerHTML = html + "</table>";
+  document.querySelectorAll("#rules input").forEach(inp => {
+    inp.onchange = () => {
+      const { lv, field } = inp.dataset;
+      map.levels[+lv][field] = inp.value === "" ? 0 : Math.max(0, +inp.value);
+      save();
+    };
+  });
+}
+function ruleCell(lv, field, val, ph){
+  return '<td><input data-lv="' + lv + '" data-field="' + field + '" type="number" min="0" placeholder="' + ph + '" value="' + (val ? val : "") + '"></td>';
+}
+
+// ---------- validation ----------
+function validate(){
+  const issues = [];
+  const tiles = {};
+  const key = (gx, gz) => gx + "," + gz;
+  tiles[key(map.spawn.gx, map.spawn.gz)] = { kind:"straight", dir:map.spawn.dir, gx:map.spawn.gx, gz:map.spawn.gz };
+  map.track.forEach(t => {
+    if (tiles[key(t.gx, t.gz)]) issues.push("Two pieces on tile (" + t.gx + "," + t.gz + ")");
+    tiles[key(t.gx, t.gz)] = t;
+  });
+
+  const sts = stations();
+  const orders = sts.map(s => s.order).sort((a,b) => a-b);
+  orders.forEach((o, i) => { if (o !== i+1 && !issues.includes("Station orders must be 1..N (found " + orders.join(",") + ")"))
+    issues.push("Station orders must be 1..N (found " + orders.join(",") + ")"); });
+  const combos = new Set();
+  sts.forEach(s => {
+    const c = s.colorIndex + (s.dot ? "d" : "");
+    if (combos.has(c)) issues.push("Duplicate colour " + COLOR_NAMES[s.colorIndex] + (s.dot ? "+dot" : ""));
+    combos.add(c);
+    const m = colourForOrder(s.order);
+    if (s.colorIndex !== m.ci || !!s.dot !== m.dot)
+      issues.push("Station #" + s.order + " should be " + COLOR_NAMES[m.ci] + (m.dot ? "+dot" : "") + " (colour follows order)");
+  });
+
+  map.track.forEach(t => {
+    if (t.kind === "curve" && LEFT[t.from] !== t.to && RIGHT[t.from] !== t.to)
+      issues.push("Curve at (" + t.gx + "," + t.gz + ") from/to not perpendicular");
+    if (t.kind === "junction") {
+      if (t.exits[0].dir !== t.dir) issues.push("Junction (" + t.gx + "," + t.gz + ") exits[0] must equal dir");
+      if (t.exits[0].dir === t.exits[1].dir) issues.push("Junction (" + t.gx + "," + t.gz + ") exits identical");
+    }
+  });
+
+  const entry = t => t.kind === "curve" ? OPP[t.from] : OPP[t.dir];
+  const exits = t => t.kind === "straight" ? [t.dir] : t.kind === "curve" ? [t.to]
+    : t.kind === "junction" ? t.exits.map(e => e.dir) : [];
+  const seen = new Set();
+  const q = [tiles[key(map.spawn.gx, map.spawn.gz)]];
+  seen.add(key(map.spawn.gx, map.spawn.gz));
+  while (q.length) {
+    const t = q.shift();
+    for (const d of exits(t)) {
+      const nk = key(t.gx + DV[d][0], t.gz + DV[d][1]);
+      const n = tiles[nk];
+      if (!n || seen.has(nk)) continue;
+      if (entry(n) !== OPP[d]) { issues.push("Mismatched joint at " + nk + " (runs off — intended?)"); continue; }
+      seen.add(nk); q.push(n);
+    }
+  }
+  map.track.forEach(t => {
+    if (!seen.has(key(t.gx, t.gz))) issues.push(t.kind + " at (" + t.gx + "," + t.gz + ") unreachable from spawn");
+  });
+  if (sts.length === 0) issues.push("No stations yet");
+
+  const el = document.getElementById("issues");
+  el.className = issues.length ? "" : "ok";
+  el.textContent = issues.length ? issues.join("\n") : "✓ Map is valid — " + sts.length + " stations, " +
+    map.track.length + " pieces, " + map.scenery.length + " scenery items.";
+  document.getElementById("props").classList.add("open");
+  return issues.length === 0;
+}
+
+// ---------- random map generator ----------
+const GEN_TREES = ["tree_pineDefaultA","tree_pineDefaultB","tree_pineTallA","tree_pineTallB","tree_pineRoundA","tree_default","tree_oak","tree_detailed","tree_plateau","tree_autumn"];
+const GEN_ROCKS = ["rock_largeA","rock_largeB","rock_largeC","rock_smallA","rock_smallB","stone_largeA","stone_largeB"];
+const GEN_SMALLS = ["plant_bushLarge","plant_bushDetailed","flower_redA","flower_yellowA","grass_large"];
+const GEN_CLIFFS = ["cliff_large_rock","cliff_block_rock","cliff_slope_rock","cliff_top_rock"];
+const GEN_NAMES = ["Green Valley","Twisty Pines","Sheep Meadow","Rolling Hills","Willow Bend","Foxglove Flats","Badger Crossing","Bluebell Loop","Heron Marsh","Tumble Downs"];
+
+function randomise(){
+  for (let attempt = 0; attempt < 300; attempt++) {
+    const result = tryGenerate();
+    if (result) {
+      map.track = result.track;
+      map.spawn = result.spawn;
+      map.scenery = result.scenery;
+      map.levels = Array.from({ length: 10 }, () => ({ trainSpeed: 3, spawnIntervalSeconds: 3 }));
+      map.name = GEN_NAMES[(Math.random() * GEN_NAMES.length) | 0];
+      document.getElementById("mName").value = map.name;
+      sel = null;
+      syncAll();
+      validate();
+      return;
+    }
+  }
+  alert("Couldn't find a layout this time — press Randomise again.");
+}
+
+function tryGenerate(){
+  const BX = 12, BZ = 9;
+  const occ = new Set();
+  const K = (x, z) => x + "," + z;
+  const free = (x, z) => !occ.has(K(x, z));
+  const out = (x, z) => Math.abs(x) > BX || Math.abs(z) > BZ;
+  const track = [];
+  const colors = [0,1,2,3,4,5,6,7,8,9]; // colour is locked to order: red=1, blue=2, …
+
+  const spawn = { gx: 0, gz: 0, dir: "E" };
+  occ.add(K(0, 0));
+  let px = 0, pz = 0, d = "E";
+
+  const step = (x, z, dd, n = 1) => [x + DV[dd][0] * n, z + DV[dd][1] * n];
+
+  // reserve the spawn-mound area (behind the tunnel) so track can't loop into it
+  const moundR = spawnMoundRect(spawn);
+  for (let gx = -4; gx <= 0; gx++)
+    for (let gz = -2; gz <= 2; gz++)
+      if (rectsIntersect(tileRect(gx, gz, 1.0), moundR)) occ.add(K(gx, gz));
+
+  const platRects = []; // station platform reserves accumulated during generation
+  function stationFits(st){
+    const pr = stationPlatformRect(st);
+    for (const k of occ) {
+      const [x, z] = k.split(",").map(Number);
+      if (rectsIntersect(pr, tileRect(x, z, 1.0))) return false;
+    }
+    for (const r of platRects) if (rectsIntersect(pr, r)) return false;
+    if (rectsIntersect(pr, moundR)) return false;
+    return true;
+  }
+  function tileClearOfPlatforms(x, z){
+    const tr = tileRect(x, z, 0.9); // slight tolerance keeps corridors usable
+    for (const r of platRects) if (rectsIntersect(tr, r)) return false;
+    return true;
+  }
+
+  function pushStraight(){
+    const [x, z] = step(px, pz, d);
+    if (!free(x, z) || out(x, z) || !tileClearOfPlatforms(x, z)) return false;
+    track.push({ kind: "straight", gx: x, gz: z, dir: d });
+    occ.add(K(x, z)); px = x; pz = z;
+    return true;
+  }
+
+  function pushCurve(nd){
+    const [x, z] = step(px, pz, d);
+    if (!free(x, z) || out(x, z) || !tileClearOfPlatforms(x, z)) return false;
+    const [ax, az] = step(x, z, nd);
+    if (!free(ax, az) || out(ax, az)) return false; // must be able to continue
+    track.push({ kind: "curve", gx: x, gz: z, from: d, to: nd });
+    occ.add(K(x, z)); px = x; pz = z; d = nd;
+    return true;
+  }
+
+  function stepWander(){
+    const [nx, nz] = step(px, pz, d);
+    const straightOK = free(nx, nz) && !out(nx, nz);
+    const wantTurn = Math.random() < 0.38;
+    if (!wantTurn && straightOK) return pushStraight();
+
+    // candidate turns, preferring directions that head back toward the middle
+    const cands = [LEFT[d], RIGHT[d]].filter(nd => {
+      const [x, z] = step(px, pz, d);
+      if (!free(x, z) || out(x, z) || !tileClearOfPlatforms(x, z)) return false;
+      const [ax, az] = step(x, z, nd);
+      return free(ax, az) && !out(ax, az);
+    });
+    cands.sort((a, b) =>
+      (DV[b][0] * -px + DV[b][1] * -pz) - (DV[a][0] * -px + DV[a][1] * -pz) + (Math.random() - 0.5));
+    if (cands.length && pushCurve(cands[0])) return true;
+    if (straightOK) return pushStraight();
+    return false;
+  }
+
+  // branch = 1-2 straights (optionally with a bend) ending in a station
+  function fitBranch(jx, jz, bdir, order, color){
+    const pats = [];
+    { // straight, station
+      const [x1, z1] = step(jx, jz, bdir), [x2, z2] = step(x1, z1, bdir);
+      pats.push({ tiles: [[x1, z1], [x2, z2]], pieces: [
+        { kind: "straight", gx: x1, gz: z1, dir: bdir },
+        { kind: "station", gx: x2, gz: z2, dir: bdir, order, colorIndex: color, dot: false }] });
+    }
+    { // straight, straight, station
+      const [x1, z1] = step(jx, jz, bdir), [x2, z2] = step(x1, z1, bdir), [x3, z3] = step(x2, z2, bdir);
+      pats.push({ tiles: [[x1, z1], [x2, z2], [x3, z3]], pieces: [
+        { kind: "straight", gx: x1, gz: z1, dir: bdir },
+        { kind: "straight", gx: x2, gz: z2, dir: bdir },
+        { kind: "station", gx: x3, gz: z3, dir: bdir, order, colorIndex: color, dot: false }] });
+    }
+    for (const cd of Math.random() < 0.5 ? [LEFT[bdir], RIGHT[bdir]] : [RIGHT[bdir], LEFT[bdir]]) {
+      // straight, curve, station (bent branch)
+      const [x1, z1] = step(jx, jz, bdir), [x2, z2] = step(x1, z1, bdir), [x3, z3] = step(x2, z2, cd);
+      pats.push({ tiles: [[x1, z1], [x2, z2], [x3, z3]], pieces: [
+        { kind: "straight", gx: x1, gz: z1, dir: bdir },
+        { kind: "curve", gx: x2, gz: z2, from: bdir, to: cd },
+        { kind: "station", gx: x3, gz: z3, dir: cd, order, colorIndex: color, dot: false }] });
+    }
+    pats.sort(() => Math.random() - 0.5);
+    for (const p of pats) {
+      if (!p.tiles.every(([x, z]) => free(x, z) && !out(x, z) && tileClearOfPlatforms(x, z))) continue;
+      const st = p.pieces[p.pieces.length - 1];
+      if (!stationFits(st)) continue;
+      // the new platform must also clear the branch's own tiles and the junction tile
+      const pr = stationPlatformRect(st);
+      const ownTiles = p.tiles.filter(([x, z]) => !(x === st.gx && z === st.gz)).concat([[jx, jz]]);
+      if (ownTiles.some(([x, z]) => rectsIntersect(pr, tileRect(x, z, 1.0)))) continue;
+      return p;
+    }
+    return null;
+  }
+
+  function pushJunction(order, color){
+    const [x, z] = step(px, pz, d);
+    if (!free(x, z) || out(x, z) || !tileClearOfPlatforms(x, z)) return false;
+    const sides = Math.random() < 0.5 ? [LEFT[d], RIGHT[d]] : [RIGHT[d], LEFT[d]];
+    for (const side of sides) {
+      const br = fitBranch(x, z, side, order, color);
+      if (!br) continue;
+      track.push({ kind: "junction", gx: x, gz: z, dir: d,
+        exits: [{ dir: d }, { dir: side }], initialExit: Math.random() < 0.5 ? 0 : 1 });
+      occ.add(K(x, z));
+      br.pieces.forEach(pc => {
+        track.push(pc);
+        occ.add(K(pc.gx, pc.gz));
+        if (pc.kind === "station") platRects.push(stationPlatformRect(pc));
+      });
+      px = x; pz = z;
+      return true;
+    }
+    return false;
+  }
+
+  // runway, then nine junction+branch drops separated by wandering
+  for (let i = 0; i < 3; i++) if (!pushStraight()) return null;
+  for (let j = 0; j < 9; j++) {
+    const steps = 1 + ((Math.random() * 3) | 0);
+    for (let s = 0; s < steps; s++) if (!stepWander()) return null;
+    let placedJ = false;
+    for (let tries = 0; tries < 4 && !placedJ; tries++) {
+      if (pushJunction(j + 1, colors[j])) placedJ = true;
+      else if (!stepWander()) break;
+    }
+    if (!placedJ) return null;
+  }
+  // tail + terminus (station 10)
+  const tail = 1 + ((Math.random() * 2) | 0);
+  for (let s = 0; s < tail; s++) if (!stepWander()) return null;
+  let placed = false;
+  for (let tries = 0; tries < 8 && !placed; tries++) {
+    const [x, z] = step(px, pz, d);
+    const cand = { kind: "station", gx: x, gz: z, dir: d, order: 10, colorIndex: colors[9], dot: false };
+    if (free(x, z) && !out(x, z) && tileClearOfPlatforms(x, z) && stationFits(cand)) {
+      track.push(cand);
+      occ.add(K(x, z));
+      platRects.push(stationPlatformRect(cand));
+      placed = true;
+    } else if (!stepWander()) return null;
+  }
+  if (!placed) return null;
+
+  // scenery scatter with track keep-out
+  let minX = 0, maxX = 0, minZ = 0, maxZ = 0;
+  occ.forEach(k => {
+    const [x, z] = k.split(",").map(Number);
+    minX = Math.min(minX, x); maxX = Math.max(maxX, x);
+    minZ = Math.min(minZ, z); maxZ = Math.max(maxZ, z);
+  });
+  const w0 = minX * 2 - 6, w1 = maxX * 2 + 6, v0 = minZ * 2 - 5, v1 = maxZ * 2 + 5;
+  const tiles = [...occ].map(k => k.split(",").map(Number));
+  const scenery = [];
+  const count = 30 + ((Math.random() * 12) | 0);
+  for (let i = 0; i < count; i++) {
+    let ok = false, wx = 0, wz = 0;
+    for (let a = 0; a < 14 && !ok; a++) {
+      wx = w0 + Math.random() * (w1 - w0);
+      wz = v0 + Math.random() * (v1 - v0);
+      ok = tiles.every(([gx, gz]) => Math.hypot(wx - gx * 2, wz - gz * 2) > 2.4)
+        && platRects.every(r => !pointInRect(wx, wz, r, 0.4))
+        && !pointInRect(wx, wz, moundR, 0.4);
+    }
+    if (!ok) continue;
+    const onEdge = wx < minX * 2 - 4 || wx > maxX * 2 + 4 || wz < minZ * 2 - 4 || wz > maxZ * 2 + 4;
+    const r = Math.random();
+    const pool = onEdge && r < 0.18 ? GEN_CLIFFS
+      : r < 0.55 ? GEN_TREES : r < 0.75 ? GEN_ROCKS : GEN_SMALLS;
+    scenery.push({
+      model: pool[(Math.random() * pool.length) | 0],
+      x: +wx.toFixed(1), y: 0, z: +wz.toFixed(1),
+      rotY: (Math.random() * 360) | 0,
+      scale: Math.round((0.85 + Math.random() * 0.45) * 20) / 20
+    });
+  }
+
+  return { track, spawn, scenery };
+}
+
+// ---------- io ----------
+function currentJson(){
+  map.name = document.getElementById("mName").value;
+  map.stage = document.getElementById("mStage").value;
+  map.mapNumber = +document.getElementById("mNum").value;
+  map.theme = document.getElementById("mTheme").value;
+  syncLevels();
+  const clean = JSON.parse(JSON.stringify(map));
+  clean.levels = clean.levels.map(r => {
+    const o = {};
+    for (const k of ["trainsToWin","lives","trainSpeed","spawnIntervalSeconds","fastTrains"])
+      if (r[k]) o[k] = r[k];
+    return o;
+  });
+  return JSON.stringify(clean, null, 2);
+}
+
+document.getElementById("bExport").onclick = () => {
+  validate();
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(new Blob([currentJson()], { type:"application/json" }));
+  a.download = map.stage + "_" + String(map.mapNumber).padStart(2, "0") + ".json";
+  a.click();
+};
+document.getElementById("bCopy").onclick = () => navigator.clipboard.writeText(currentJson());
+
+// ---------- publish to GitHub Pages ----------
+const ghDefaults = { user:"", repo:"colortrain-levels", branch:"main", token:"" };
+let gh = Object.assign({}, ghDefaults, JSON.parse(localStorage.getItem("ctGhCfg") || "{}"));
+const ghFields = { user:"ghUser", repo:"ghRepo", branch:"ghBranch", token:"ghToken" };
+for (const k in ghFields) {
+  const el = document.getElementById(ghFields[k]);
+  el.value = gh[k];
+  el.oninput = () => { gh[k] = el.value.trim(); localStorage.setItem("ctGhCfg", JSON.stringify(gh)); };
+}
+function ghStatus(msg, cls){
+  const el = document.getElementById("ghStatus");
+  el.textContent = msg;
+  el.className = cls || "hint";
+  document.getElementById("props").classList.add("open");
+}
+const b64e = s => btoa(unescape(encodeURIComponent(s)));
+const b64d = s => decodeURIComponent(escape(atob(s.replace(/\n/g, ""))));
+
+async function ghApi(path, method, bodyObj){
+  const res = await fetch("https://api.github.com/repos/" + gh.user + "/" + gh.repo + "/" + path, {
+    method: method || "GET",
+    headers: { "Authorization": "Bearer " + gh.token, "Accept": "application/vnd.github+json" },
+    body: bodyObj ? JSON.stringify(bodyObj) : undefined
+  });
+  if (res.status === 404 && (!method || method === "GET")) return null;
+  const data = await res.json().catch(() => ({}));
+  if (!res.ok) throw new Error(res.status + (data.message ? " — " + data.message : ""));
+  return data;
+}
+const ghGet = path => ghApi("contents/" + path + "?ref=" + (gh.branch || "main"));
+function ghPut(path, b64, message, sha){
+  const body = { message, content: b64, branch: gh.branch || "main" };
+  if (sha) body.sha = sha;
+  return ghApi("contents/" + path, "PUT", body);
+}
+
+document.getElementById("bPublish").onclick = async () => {
+  if (!validate()) { ghStatus("Fix the validation issues first.", "bad"); return; }
+  if (!gh.user || !gh.repo || !gh.token) { ghStatus("Fill in user, repo and token (bottom of the panel).", "bad"); return; }
+  const btn = document.getElementById("bPublish");
+  btn.disabled = true;
+  try {
+    const json = currentJson();
+    const fname = map.stage + "_" + String(map.mapNumber).padStart(2, "0") + ".json";
+    const mapPath = "levels/maps/" + fname;
+
+    ghStatus("Uploading " + fname + "…");
+    const existing = await ghGet(mapPath);
+    await ghPut(mapPath, b64e(json), "Publish map " + fname, existing && existing.sha);
+
+    ghStatus("Updating manifest…");
+    const manFile = await ghGet("levels/manifest.json");
+    if (!manFile) throw new Error("levels/manifest.json not found in the repo — upload the levels folder first");
+    const man = JSON.parse(b64d(manFile.content));
+    man.stages = man.stages || [];
+    let stage = man.stages.find(s => s.id === map.stage);
+    if (!stage) { stage = { id: map.stage, displayName: map.stage, theme: map.theme, maps: [] }; man.stages.push(stage); }
+    const ref = "maps/" + fname;
+    let entry = stage.maps.find(m => m.file === ref);
+    if (!entry) { entry = { file: ref, name: map.name }; stage.maps.push(entry); }
+    entry.name = map.name;
+    man.updated = new Date().toISOString().slice(0, 10);
+    await ghPut("levels/manifest.json", b64e(JSON.stringify(man, null, 2)), "Update manifest for " + fname, manFile.sha);
+
+    ghStatus("✓ Published " + fname + ". Pages redeploys in ~1 min — then relaunch the game and it pulls \"" + map.name + "\".", "ok");
+  } catch (err) {
+    ghStatus("✗ " + err.message, "bad");
+  }
+  btn.disabled = false;
+};
+document.getElementById("bValidate").onclick = validate;
+document.getElementById("bNew").onclick = () => { if (confirm("Start a new map?")) { map = newMap(); sel = null; syncAll(); } };
+document.getElementById("bRandom").onclick = () => { if (confirm("Replace the current map with a random one?")) randomise(); };
+document.getElementById("bImport").onclick = () => document.getElementById("fileIn").click();
+document.getElementById("fileIn").onchange = e => {
+  const f = e.target.files[0];
+  if (!f) return;
+  f.text().then(txt => {
+    try { map = Object.assign(newMap(), JSON.parse(txt)); sel = null; syncAll(); }
+    catch { alert("Not valid JSON"); }
+  });
+};
+
+function save(){ localStorage.setItem("ctMapEditor", JSON.stringify(map)); }
+function touch(){ save(); renderRules(); updateNextStation(); draw(); }
+function syncAll(){
+  document.getElementById("mName").value = map.name || "New Map";
+  document.getElementById("mStage").value = map.stage || "nature";
+  document.getElementById("mNum").value = map.mapNumber || 1;
+  document.getElementById("mTheme").value = map.theme || "nature";
+  renderRules(); showSel(); draw(); save();
+}
+
+// ---------- setup ----------
+function resize(){
+  cv.width = cv.clientWidth * devicePixelRatio;
+  cv.height = cv.clientHeight * devicePixelRatio;
+  ctx.setTransform(1,0,0,1,0,0);
+  draw();
+}
+new ResizeObserver(resize).observe(cv);
+
+function updateToolUI(){
+  const placeTools = ["straight","curve","junction","station","spawn"];
+  document.getElementById("placeOpts").hidden = !placeTools.includes(tool);
+  document.getElementById("stationOpts").hidden = tool !== "station";
+  document.getElementById("sceneryOpts").hidden = tool !== "scenery";
+}
+
+function setTool(name){
+  tool = name;
+  document.querySelectorAll(".tool").forEach(x => x.classList.toggle("on", x.dataset.t === name));
+  updateToolUI();
+}
+
+document.querySelectorAll(".tool").forEach(b => {
+  b.onclick = () => {
+    setTool(b.dataset.t);
+    sel = null; showSel(); draw();
+  };
+});
+document.getElementById("bRot").onclick = rotate;
+document.getElementById("bTurn").onclick = flipTurn;
+updateToolUI();
+document.getElementById("sheetHandle").onclick = () => {
+  const p = document.getElementById("props");
+  p.classList.toggle("open");
+  document.getElementById("sheetHandle").textContent =
+    p.classList.contains("open") ? "▼ Details & Validation" : "▲ Details & Validation";
+};
+
+function updateNextStation(){
+  const el = document.getElementById("nextStation");
+  if (!el) return;
+  const o = stations().length + 1;
+  if (o > 20) { el.innerHTML = '<span class="hint">All 20 stations placed.</span>'; return; }
+  const m = colourForOrder(o);
+  el.innerHTML = 'Next: <span class="sw" style="background:' + COLORS[m.ci] +
+    ';vertical-align:middle"></span> <b>' + COLOR_NAMES[m.ci] + (m.dot ? " + dot" : "") +
+    '</b> <span class="hint">(#' + o + ')</span>';
+}
+
+const msel = document.getElementById("modelSel");
+NATURE_MODELS.forEach(m => {
+  const o = document.createElement("option");
+  o.value = o.textContent = m;
+  msel.appendChild(o);
+});
+
+const saved = localStorage.getItem("ctMapEditor");
+if (saved) { try { map = Object.assign(newMap(), JSON.parse(saved)); } catch {} }
+syncAll();
+updateNextStation();
+resize();
+</script>
+</body>
+</html>

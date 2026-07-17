@@ -1,0 +1,47 @@
+{
+  "schemaVersion": 2,
+  "stage": "nature",
+  "mapNumber": 1,
+  "name": "Green Valley",
+  "theme": "nature",
+
+  "levels": [
+    { "trainsToWin": 2 },
+    { "trainsToWin": 4 }
+  ],
+
+  "camera": { "auto": true },
+  "spawn": { "gx": -6, "gz": 0, "dir": "E" },
+
+  "track": [
+    { "kind": "straight", "gx": -5, "gz": 0, "dir": "E" },
+    { "kind": "straight", "gx": -4, "gz": 0, "dir": "E" },
+    { "kind": "straight", "gx": -3, "gz": 0, "dir": "E" },
+    { "kind": "junction", "gx": -2, "gz": 0, "dir": "E",
+      "exits": [ { "dir": "E" }, { "dir": "N" } ], "initialExit": 0 },
+    { "kind": "straight", "gx": -2, "gz": 1, "dir": "N" },
+    { "kind": "station",  "gx": -2, "gz": 2, "dir": "N", "order": 1, "colorIndex": 0, "dot": false },
+    { "kind": "straight", "gx": -1, "gz": 0, "dir": "E" },
+    { "kind": "straight", "gx": 0,  "gz": 0, "dir": "E" },
+    { "kind": "junction", "gx": 1,  "gz": 0, "dir": "E",
+      "exits": [ { "dir": "E" }, { "dir": "S" } ], "initialExit": 0 },
+    { "kind": "straight", "gx": 1,  "gz": -1, "dir": "S" },
+    { "kind": "station",  "gx": 1,  "gz": -2, "dir": "S", "order": 2, "colorIndex": 1, "dot": false },
+    { "kind": "straight", "gx": 2,  "gz": 0, "dir": "E" }
+  ],
+
+  "scenery": [
+    { "model": "tree_pineDefaultA", "x": -14.5, "y": 0, "z": 3.6,  "rotY": 40,  "scale": 1.1 },
+    { "model": "tree_oak",          "x": -9.0,  "y": 0, "z": -3.6, "rotY": 160, "scale": 1.0 },
+    { "model": "tree_pineTallA",    "x": -1.6,  "y": 0, "z": 6.4,  "rotY": 220, "scale": 1.0 },
+    { "model": "tree_autumn",       "x": 7.2,   "y": 0, "z": 2.6,  "rotY": 75,  "scale": 0.95 },
+    { "model": "tree_pineRoundA",   "x": -13.0, "y": 0, "z": -4.2, "rotY": 300, "scale": 1.05 },
+    { "model": "rock_largeA",       "x": -12.0, "y": 0, "z": 2.4,  "rotY": 15,  "scale": 1.0 },
+    { "model": "rock_smallB",       "x": 5.6,   "y": 0, "z": -2.0, "rotY": 240, "scale": 0.9 },
+    { "model": "plant_bushLarge",   "x": -6.4,  "y": 0, "z": 3.0,  "rotY": 0,   "scale": 1.0 },
+    { "model": "flower_yellowA",    "x": -4.6,  "y": 0, "z": -2.8, "rotY": 90,  "scale": 1.0 },
+    { "model": "fence_simple",      "x": -10.5, "y": 0, "z": -1.4, "rotY": 0,   "scale": 1.0 },
+    { "model": "fence_simple",      "x": -8.9,  "y": 0, "z": -1.4, "rotY": 0,   "scale": 1.0 },
+    { "model": "grass_large",       "x": 4.4,   "y": 0, "z": 4.0,  "rotY": 130, "scale": 1.0 }
+  ]
+}
