@@ -6,7 +6,12 @@
       "id": "nature",
       "displayName": "Countryside",
       "theme": "nature",
-      "maps": []
+      "maps": [
+        {
+          "file": "maps/nature_02.json",
+          "name": "Tumble Downs"
+        }
+      ]
     }
   ]
 }
