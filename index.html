@@ -146,7 +146,7 @@ const COLOR_NAMES = ["red","blue","green","yellow","purple","orange","cyan","pin
 const NATURE_MODELS = ["tree_pineDefaultA","tree_pineDefaultB","tree_pineTallA","tree_pineTallB","tree_pineRoundA","tree_default","tree_oak","tree_detailed","tree_plateau","tree_autumn","rock_largeA","rock_largeB","rock_largeC","rock_smallA","rock_smallB","stone_largeA","stone_largeB","plant_bushLarge","plant_bushDetailed","flower_redA","flower_yellowA","grass_large","cliff_large_rock","cliff_block_rock","cliff_slope_rock","cliff_top_rock","bridge_wood","lily_large","lily_small","fence_simple","campfire_logs","tent","grass_block","grass_block_tall","grass_slope"];
 
 let map = newMap();
-const rndId = () => Math.random().toString(36).slice(2, 10);
+function rndId(){ return Math.random().toString(36).slice(2, 10); }
 function newMap() {
   return { schemaVersion:2, id: rndId(), stage:"nature", mapNumber:1, name:"New Map", theme:"nature",
     levels:[], camera:{auto:true}, spawn:{gx:-2,gz:0,dir:"E"}, track:[], scenery:[] };
