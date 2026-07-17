@@ -78,6 +78,7 @@
   Stage <input id="mStage" value="nature" style="width:80px">
   Map # <input id="mNum" type="number" value="1" min="1">
   Theme <input id="mTheme" value="nature" style="width:80px">
+  Grass <input id="mColor" type="color" value="#73A457" style="width:34px;height:26px;padding:1px;border:none;background:none">
   <button id="bNew">New</button>
   <button id="bRandom">🎲 Randomise</button>
   <button id="bImport">Import</button>
@@ -86,7 +87,7 @@
   <button id="bCopy">Copy JSON</button>
   <button id="bExport" class="primary">⬇ Export JSON</button>
   <button id="bPublish" class="primary">☁ Publish</button>
-  <span id="ver" style="margin-left:auto;opacity:.55;font-size:12px">v14</span>
+  <span id="ver" style="margin-left:auto;opacity:.55;font-size:12px">v15</span>
 </div>
 <div id="wrap">
   <div id="tools">
@@ -149,7 +150,7 @@ const NATURE_MODELS = ["tree_pineDefaultA","tree_pineDefaultB","tree_pineTallA",
 let map = newMap();
 function rndId(){ return Math.random().toString(36).slice(2, 10); }
 function newMap() {
-  return { schemaVersion:2, id: rndId(), stage:"nature", mapNumber:1, name:"New Map", theme:"nature",
+  return { schemaVersion:2, id: rndId(), groundColor:"#73A457", stage:"nature", mapNumber:1, name:"New Map", theme:"nature",
     levels:[], camera:{auto:true}, spawn:{gx:-2,gz:0,dir:"E"}, track:[], scenery:[] };
 }
 
@@ -1326,6 +1327,7 @@ function currentJson(){
   map.stage = document.getElementById("mStage").value;
   map.mapNumber = +document.getElementById("mNum").value;
   map.theme = document.getElementById("mTheme").value;
+  map.groundColor = document.getElementById("mColor").value;
   syncLevels();
   const clean = JSON.parse(JSON.stringify(map));
   clean.levels = clean.levels.map(r => {
@@ -1519,6 +1521,7 @@ function syncAll(){
   document.getElementById("mStage").value = map.stage || "nature";
   document.getElementById("mNum").value = map.mapNumber || 1;
   document.getElementById("mTheme").value = map.theme || "nature";
+  document.getElementById("mColor").value = map.groundColor || "#73A457";
   renderRules(); showSel(); draw(); save();
 }
 
