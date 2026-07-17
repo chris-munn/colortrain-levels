@@ -86,6 +86,7 @@
   <button id="bCopy">Copy JSON</button>
   <button id="bExport" class="primary">⬇ Export JSON</button>
   <button id="bPublish" class="primary">☁ Publish</button>
+  <span id="ver" style="margin-left:auto;opacity:.55;font-size:12px">v12</span>
 </div>
 <div id="wrap">
   <div id="tools">
@@ -1036,7 +1037,7 @@ const GEN_CLIFFS = ["cliff_large_rock","cliff_block_rock","cliff_slope_rock","cl
 const GEN_NAMES = ["Green Valley","Twisty Pines","Sheep Meadow","Rolling Hills","Willow Bend","Foxglove Flats","Badger Crossing","Bluebell Loop","Heron Marsh","Tumble Downs"];
 
 function randomise(){
-  for (let attempt = 0; attempt < 300; attempt++) {
+  for (let attempt = 0; attempt < 900; attempt++) {
     const result = tryGenerate();
     if (result) {
       map.track = result.track;
@@ -1064,16 +1065,16 @@ function tryGenerate(){
   const track = [];
   const colors = [0,1,2,3,4,5,6,7,8,9]; // colour is locked to order: red=1, blue=2, …
 
-  const spawn = { gx: 0, gz: 0, dir: "E" };
+  const spawn = { gx: 0, gz: 0, dir: ["E","N","W","S"][(Math.random() * 4) | 0] };
   occ.add(K(0, 0));
-  let px = 0, pz = 0, d = "E";
+  let px = 0, pz = 0, d = spawn.dir;
 
   const step = (x, z, dd, n = 1) => [x + DV[dd][0] * n, z + DV[dd][1] * n];
 
   // reserve the spawn-mound area (behind the tunnel) so track can't loop into it
   const moundR = spawnMoundRect(spawn);
-  for (let gx = -4; gx <= 0; gx++)
-    for (let gz = -2; gz <= 2; gz++)
+  for (let gx = -4; gx <= 4; gx++)
+    for (let gz = -4; gz <= 4; gz++)
       if (rectsIntersect(tileRect(gx, gz, 1.0), moundR)) occ.add(K(gx, gz));
 
   const platRects = []; // station platform reserves accumulated during generation
@@ -1131,6 +1132,51 @@ function tryGenerate(){
     return false;
   }
 
+  // Serpentine policy: sweep across the field, U-turn near the edges onto the
+  // next "row", with occasional wiggle detours — Neil-style spaghetti instead
+  // of one long wandering line.
+  const rowDir = Math.random() < 0.5 ? LEFT[spawn.dir] : RIGHT[spawn.dir];
+  let sweepSide = rowDir, sweepLen = 0;
+  function clearTile(x, z){ return free(x, z) && !out(x, z) && tileClearOfPlatforms(x, z); }
+  function edgeAhead(n){
+    const [x, z] = step(px, pz, d, n);
+    return out(x, z) || !free(x, z);
+  }
+  function probeU(ud, gap){ // check the whole U-shape fits BEFORE committing
+    let [x, z] = step(px, pz, d);
+    if (!clearTile(x, z)) return false;
+    for (let i = 0; i <= gap; i++){ [x, z] = step(x, z, ud); if (!clearTile(x, z)) return false; }
+    const [ex, ez] = step(x, z, OPP[d]);
+    return free(ex, ez) && !out(ex, ez);
+  }
+  function uTurn(){
+    const gap = 2 + ((Math.random() * 2) | 0); // row spacing 3-4 tiles
+    let ud = null;
+    if (probeU(sweepSide, gap)) ud = sweepSide;
+    else if (probeU(OPP[sweepSide], gap)) { ud = OPP[sweepSide]; sweepSide = ud; }
+    if (!ud) return false;
+    const back = OPP[d];
+    if (!pushCurve(ud)) return false;
+    for (let i = 0; i < gap; i++) if (!pushStraight()) return false;
+    return pushCurve(back);
+  }
+  function advance(){
+    sweepLen++;
+    if (d !== rowDir && d !== OPP[rowDir] && sweepLen > 3 && edgeAhead(3) && uTurn()) {
+      sweepLen = 0;
+      return true;
+    }
+    if (Math.random() < 0.12) { // wiggle: kink out one tile and carry on
+      const nd = Math.random() < 0.5 ? rowDir : OPP[rowDir];
+      const keep = d;
+      if (pushCurve(nd)) {
+        if (Math.random() < 0.5) pushStraight();
+        if (pushCurve(keep)) return true;
+      }
+    }
+    return stepWander();
+  }
+
   // branch = 1-2 straights (optionally with a bend) ending in a station
   function fitBranch(jx, jz, bdir, order, color){
     const pats = [];
@@ -1148,12 +1194,32 @@ function tryGenerate(){
         { kind: "station", gx: x3, gz: z3, dir: bdir, order, colorIndex: color, dot: false }] });
     }
     for (const cd of Math.random() < 0.5 ? [LEFT[bdir], RIGHT[bdir]] : [RIGHT[bdir], LEFT[bdir]]) {
-      // straight, curve, station (bent branch)
-      const [x1, z1] = step(jx, jz, bdir), [x2, z2] = step(x1, z1, bdir), [x3, z3] = step(x2, z2, cd);
-      pats.push({ tiles: [[x1, z1], [x2, z2], [x3, z3]], pieces: [
-        { kind: "straight", gx: x1, gz: z1, dir: bdir },
-        { kind: "curve", gx: x2, gz: z2, from: bdir, to: cd },
-        { kind: "station", gx: x3, gz: z3, dir: cd, order, colorIndex: color, dot: false }] });
+      { // straight, curve, station (bent branch)
+        const [x1, z1] = step(jx, jz, bdir), [x2, z2] = step(x1, z1, bdir), [x3, z3] = step(x2, z2, cd);
+        pats.push({ tiles: [[x1, z1], [x2, z2], [x3, z3]], pieces: [
+          { kind: "straight", gx: x1, gz: z1, dir: bdir },
+          { kind: "curve", gx: x2, gz: z2, from: bdir, to: cd },
+          { kind: "station", gx: x3, gz: z3, dir: cd, order, colorIndex: color, dot: false }] });
+      }
+      { // straight, curve, straight, station (curl)
+        const [x1, z1] = step(jx, jz, bdir), [x2, z2] = step(x1, z1, bdir),
+              [x3, z3] = step(x2, z2, cd), [x4, z4] = step(x3, z3, cd);
+        pats.push({ tiles: [[x1, z1], [x2, z2], [x3, z3], [x4, z4]], pieces: [
+          { kind: "straight", gx: x1, gz: z1, dir: bdir },
+          { kind: "curve", gx: x2, gz: z2, from: bdir, to: cd },
+          { kind: "straight", gx: x3, gz: z3, dir: cd },
+          { kind: "station", gx: x4, gz: z4, dir: cd, order, colorIndex: color, dot: false }] });
+      }
+      { // straight, straight, curve, straight, station (long curl)
+        const [x1, z1] = step(jx, jz, bdir), [x2, z2] = step(x1, z1, bdir), [x3, z3] = step(x2, z2, bdir),
+              [x4, z4] = step(x3, z3, cd), [x5, z5] = step(x4, z4, cd);
+        pats.push({ tiles: [[x1, z1], [x2, z2], [x3, z3], [x4, z4], [x5, z5]], pieces: [
+          { kind: "straight", gx: x1, gz: z1, dir: bdir },
+          { kind: "straight", gx: x2, gz: z2, dir: bdir },
+          { kind: "curve", gx: x3, gz: z3, from: bdir, to: cd },
+          { kind: "straight", gx: x4, gz: z4, dir: cd },
+          { kind: "station", gx: x5, gz: z5, dir: cd, order, colorIndex: color, dot: false }] });
+      }
     }
     pats.sort(() => Math.random() - 0.5);
     for (const p of pats) {
@@ -1190,21 +1256,21 @@ function tryGenerate(){
     return false;
   }
 
-  // runway, then nine junction+branch drops separated by wandering
+  // runway, then nine junction+branch drops along a serpentine sweep
   for (let i = 0; i < 3; i++) if (!pushStraight()) return null;
   for (let j = 0; j < 9; j++) {
-    const steps = 1 + ((Math.random() * 3) | 0);
-    for (let s = 0; s < steps; s++) if (!stepWander()) return null;
+    const steps = 2 + ((Math.random() * 3) | 0);
+    for (let s = 0; s < steps; s++) if (!advance()) return null;
     let placedJ = false;
-    for (let tries = 0; tries < 4 && !placedJ; tries++) {
+    for (let tries = 0; tries < 5 && !placedJ; tries++) {
       if (pushJunction(j + 1, colors[j])) placedJ = true;
-      else if (!stepWander()) break;
+      else if (!advance()) break;
     }
     if (!placedJ) return null;
   }
   // tail + terminus (station 10)
   const tail = 1 + ((Math.random() * 2) | 0);
-  for (let s = 0; s < tail; s++) if (!stepWander()) return null;
+  for (let s = 0; s < tail; s++) if (!advance()) return null;
   let placed = false;
   for (let tries = 0; tries < 8 && !placed; tries++) {
     const [x, z] = step(px, pz, d);
