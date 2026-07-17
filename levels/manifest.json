@@ -7,14 +7,8 @@
       "displayName": "Countryside",
       "theme": "nature",
       "maps": [
-        {
-          "file": "maps/nature_01.json",
-          "name": "Badger Crossing"
-        },
-        {
-          "file": "maps/nature_02.json",
-          "name": "Twisty Pines"
-        }
+        { "file": "maps/nature_01.json", "name": "Green Valley" },
+        { "file": "maps/nature_02.json", "name": "Willow Bend" }
       ]
     }
   ]

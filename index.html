@@ -146,8 +146,9 @@ const COLOR_NAMES = ["red","blue","green","yellow","purple","orange","cyan","pin
 const NATURE_MODELS = ["tree_pineDefaultA","tree_pineDefaultB","tree_pineTallA","tree_pineTallB","tree_pineRoundA","tree_default","tree_oak","tree_detailed","tree_plateau","tree_autumn","rock_largeA","rock_largeB","rock_largeC","rock_smallA","rock_smallB","stone_largeA","stone_largeB","plant_bushLarge","plant_bushDetailed","flower_redA","flower_yellowA","grass_large","cliff_large_rock","cliff_block_rock","cliff_slope_rock","cliff_top_rock","bridge_wood","lily_large","lily_small","fence_simple","campfire_logs","tent","grass_block","grass_block_tall","grass_slope"];
 
 let map = newMap();
+const rndId = () => Math.random().toString(36).slice(2, 10);
 function newMap() {
-  return { schemaVersion:2, stage:"nature", mapNumber:1, name:"New Map", theme:"nature",
+  return { schemaVersion:2, id: rndId(), stage:"nature", mapNumber:1, name:"New Map", theme:"nature",
     levels:[], camera:{auto:true}, spawn:{gx:-2,gz:0,dir:"E"}, track:[], scenery:[] };
 }
 
@@ -505,23 +506,29 @@ function draw(){
     if (sel && sel.type === "scenery" && sel.i === i) ring(w2sx(s.x), w2sy(s.z), Math.max(6, r) + 4);
   });
 
-  // reserved zones while placing (red floor areas)
-  const placing = ["straight","curve","junction","station","spawn","scenery"].includes(tool);
-  if (placing) {
+  // reserved zones (red floor areas) — ALWAYS visible, brighter while placing.
+  // Idle/select: platforms + mound + junction circles (softer). Scenery tool
+  // adds the track-tile margins. Track tools show only the hard no-go rects
+  // (junction circles stay hidden there — track must pass through junctions).
+  {
+    const placing = ["straight","curve","junction","station","spawn","scenery"].includes(tool);
     const rects = [];
-    if (tool === "scenery") {
+    if (placing && tool !== "scenery") {
+      for (const r of hardRects(-1)) rects.push(r);
+    } else {
       map.track.forEach(t => {
-        rects.push(tileRect(t.gx, t.gz, 1.15));
         if (t.kind === "junction") rects.push(junctionZoneRect(t));
         if (t.kind === "station") rects.push(stationPlatformRect(t));
       });
-      rects.push(tileRect(map.spawn.gx, map.spawn.gz, 1.15));
       rects.push(spawnMoundRect(map.spawn));
-    } else {
-      for (const r of hardRects(-1)) rects.push(r);
+      if (tool === "scenery") {
+        map.track.forEach(t => rects.push(tileRect(t.gx, t.gz, 1.15)));
+        rects.push(tileRect(map.spawn.gx, map.spawn.gz, 1.15));
+      }
     }
-    ctx.fillStyle = "rgba(228,54,44,.13)";
-    ctx.strokeStyle = "rgba(228,54,44,.30)";
+    const k = placing ? 1 : 0.55;
+    ctx.fillStyle = "rgba(228,54,44," + (0.13 * k).toFixed(3) + ")";
+    ctx.strokeStyle = "rgba(228,54,44," + (0.30 * k).toFixed(3) + ")";
     ctx.lineWidth = 1.5;
     rects.forEach(r => {
       const x = w2sx(r.x0), y = w2sy(r.z1);
@@ -1036,6 +1043,7 @@ function randomise(){
       map.spawn = result.spawn;
       map.scenery = result.scenery;
       map.levels = Array.from({ length: 10 }, () => ({ trainSpeed: 3, spawnIntervalSeconds: 3 }));
+      map.id = rndId(); // a randomised map is a NEW map — fresh save progress
       map.name = GEN_NAMES[(Math.random() * GEN_NAMES.length) | 0];
       document.getElementById("mName").value = map.name;
       sel = null;
@@ -1394,6 +1402,7 @@ async function loadRepoLevel(file){
     const f = await ghGet("levels/" + file);
     if (!f) throw new Error(file + " not found in the repo");
     map = Object.assign(newMap(), JSON.parse(b64d(f.content)));
+    if (!map.id) map.id = rndId(); // older files gain an identity on first load
     sel = null; syncAll();
     ghStatus("✓ Loaded " + file + " into the editor.", "ok");
   } catch (err) { ghStatus("✗ " + err.message, "bad"); }
@@ -1423,7 +1432,7 @@ document.getElementById("fileIn").onchange = e => {
   const f = e.target.files[0];
   if (!f) return;
   f.text().then(txt => {
-    try { map = Object.assign(newMap(), JSON.parse(txt)); sel = null; syncAll(); }
+    try { map = Object.assign(newMap(), JSON.parse(txt)); if (!map.id) map.id = rndId(); sel = null; syncAll(); }
     catch { alert("Not valid JSON"); }
   });
 };
