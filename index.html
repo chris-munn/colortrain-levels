@@ -129,6 +129,8 @@
     <div class="row"><label>Branch</label><input id="ghBranch" placeholder="main" style="width:150px"></div>
     <div class="row"><label>Token</label><input id="ghToken" type="password" placeholder="fine-grained PAT" style="width:150px"></div>
     <div id="ghStatus" class="hint">☁ Publish commits this map + manifest to your repo; Pages serves it to the game. Token needs Contents read/write on that repo only — it stays in this browser.</div>
+    <div class="row"><button id="bGhList">↻ Levels in repo</button></div>
+    <div id="ghLevels" class="hint"></div>
   </div>
 </div>
 <script>
@@ -1291,6 +1293,7 @@ const b64d = s => decodeURIComponent(escape(atob(s.replace(/\n/g, ""))));
 async function ghApi(path, method, bodyObj){
   const res = await fetch("https://api.github.com/repos/" + gh.user + "/" + gh.repo + "/" + path, {
     method: method || "GET",
+    cache: "no-store", // GitHub sends max-age=60 — a cached read means a stale sha and a 409 on write
     headers: { "Authorization": "Bearer " + gh.token, "Accept": "application/vnd.github+json" },
     body: bodyObj ? JSON.stringify(bodyObj) : undefined
   });
@@ -1300,10 +1303,22 @@ async function ghApi(path, method, bodyObj){
   return data;
 }
 const ghGet = path => ghApi("contents/" + path + "?ref=" + (gh.branch || "main"));
-function ghPut(path, b64, message, sha){
+async function ghPut(path, b64, message, sha){
   const body = { message, content: b64, branch: gh.branch || "main" };
   if (sha) body.sha = sha;
-  return ghApi("contents/" + path, "PUT", body);
+  try { return await ghApi("contents/" + path, "PUT", body); }
+  catch (err) {
+    if (!String(err.message).startsWith("409")) throw err;
+    const fresh = await ghGet(path); // stale sha — refetch and retry once
+    if (fresh) body.sha = fresh.sha; else delete body.sha;
+    return ghApi("contents/" + path, "PUT", body);
+  }
+}
+
+async function ghManifest(){
+  const f = await ghGet("levels/manifest.json");
+  if (!f) throw new Error("levels/manifest.json not found in the repo");
+  return { file: f, man: JSON.parse(b64d(f.content)) };
 }
 
 document.getElementById("bPublish").onclick = async () => {
@@ -1321,9 +1336,7 @@ document.getElementById("bPublish").onclick = async () => {
     await ghPut(mapPath, b64e(json), "Publish map " + fname, existing && existing.sha);
 
     ghStatus("Updating manifest…");
-    const manFile = await ghGet("levels/manifest.json");
-    if (!manFile) throw new Error("levels/manifest.json not found in the repo — upload the levels folder first");
-    const man = JSON.parse(b64d(manFile.content));
+    const { file: manFile, man } = await ghManifest();
     man.stages = man.stages || [];
     let stage = man.stages.find(s => s.id === map.stage);
     if (!stage) { stage = { id: map.stage, displayName: map.stage, theme: map.theme, maps: [] }; man.stages.push(stage); }
@@ -1335,11 +1348,73 @@ document.getElementById("bPublish").onclick = async () => {
     await ghPut("levels/manifest.json", b64e(JSON.stringify(man, null, 2)), "Update manifest for " + fname, manFile.sha);
 
     ghStatus("✓ Published " + fname + ". Pages redeploys in ~1 min — then relaunch the game and it pulls \"" + map.name + "\".", "ok");
+    if (document.getElementById("ghLevels").childElementCount) listRepoLevels();
   } catch (err) {
     ghStatus("✗ " + err.message, "bad");
   }
   btn.disabled = false;
 };
+
+document.getElementById("bGhList").onclick = listRepoLevels;
+async function listRepoLevels(){
+  const box = document.getElementById("ghLevels");
+  if (!gh.user || !gh.repo || !gh.token) { box.textContent = "Fill in user, repo and token first."; return; }
+  box.textContent = "Loading…";
+  try {
+    const { man } = await ghManifest();
+    box.textContent = "";
+    for (const s of man.stages || []) {
+      const h = document.createElement("div");
+      h.textContent = (s.displayName || s.id) + " · " + (s.maps || []).length + " map(s)";
+      h.style.cssText = "font-weight:bold;margin-top:6px";
+      box.appendChild(h);
+      for (const m of s.maps || []) {
+        const row = document.createElement("div");
+        row.className = "row";
+        const lbl = document.createElement("span");
+        lbl.textContent = m.name + " — " + m.file.replace("maps/", "");
+        lbl.style.cssText = "flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap";
+        const bL = document.createElement("button");
+        bL.textContent = "Load";
+        bL.onclick = () => loadRepoLevel(m.file);
+        const bD = document.createElement("button");
+        bD.textContent = "🗑";
+        bD.onclick = () => deleteRepoLevel(s.id, m);
+        row.append(lbl, bL, bD);
+        box.appendChild(row);
+      }
+    }
+    if (!box.childElementCount) box.textContent = "Manifest has no stages yet.";
+  } catch (err) { box.textContent = "✗ " + err.message; }
+}
+
+async function loadRepoLevel(file){
+  try {
+    ghStatus("Loading " + file + "…");
+    const f = await ghGet("levels/" + file);
+    if (!f) throw new Error(file + " not found in the repo");
+    map = Object.assign(newMap(), JSON.parse(b64d(f.content)));
+    sel = null; syncAll();
+    ghStatus("✓ Loaded " + file + " into the editor.", "ok");
+  } catch (err) { ghStatus("✗ " + err.message, "bad"); }
+}
+
+async function deleteRepoLevel(stageId, mapRef){
+  if (!confirm('Delete "' + mapRef.name + '" (' + mapRef.file + ") from the repo?\nThe game will stop offering it after the next Pages deploy.")) return;
+  try {
+    ghStatus("Deleting " + mapRef.file + "…");
+    const f = await ghGet("levels/" + mapRef.file);
+    if (f) await ghApi("contents/levels/" + mapRef.file, "DELETE",
+      { message: "Delete " + mapRef.file, sha: f.sha, branch: gh.branch || "main" });
+    const { file: manFile, man } = await ghManifest();
+    const st = (man.stages || []).find(s => s.id === stageId);
+    if (st) st.maps = (st.maps || []).filter(m => m.file !== mapRef.file);
+    man.updated = new Date().toISOString().slice(0, 10);
+    await ghPut("levels/manifest.json", b64e(JSON.stringify(man, null, 2)), "Remove " + mapRef.file + " from manifest", manFile.sha);
+    ghStatus("✓ Deleted " + mapRef.file + ".", "ok");
+    listRepoLevels();
+  } catch (err) { ghStatus("✗ " + err.message, "bad"); }
+}
 document.getElementById("bValidate").onclick = validate;
 document.getElementById("bNew").onclick = () => { if (confirm("Start a new map?")) { map = newMap(); sel = null; syncAll(); } };
 document.getElementById("bRandom").onclick = () => { if (confirm("Replace the current map with a random one?")) randomise(); };
