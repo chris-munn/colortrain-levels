@@ -6,12 +6,7 @@
       "id": "nature",
       "displayName": "Countryside",
       "theme": "nature",
-      "maps": [
-        {
-          "file": "maps/nature_03.json",
-          "name": "Green Valley"
-        }
-      ]
+      "maps": []
     }
   ]
 }
