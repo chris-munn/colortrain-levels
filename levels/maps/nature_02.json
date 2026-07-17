@@ -1,0 +1,934 @@
+{
+  "schemaVersion": 2,
+  "id": "o2nvtiu1",
+  "stage": "nature",
+  "mapNumber": 2,
+  "name": "Tumble Downs",
+  "theme": "nature",
+  "levels": [
+    {
+      "trainSpeed": 3,
+      "spawnIntervalSeconds": 3
+    },
+    {
+      "trainSpeed": 3,
+      "spawnIntervalSeconds": 3
+    },
+    {
+      "trainSpeed": 3,
+      "spawnIntervalSeconds": 3
+    },
+    {
+      "trainSpeed": 3,
+      "spawnIntervalSeconds": 3
+    },
+    {
+      "trainSpeed": 3,
+      "spawnIntervalSeconds": 3
+    },
+    {
+      "trainSpeed": 3,
+      "spawnIntervalSeconds": 3
+    },
+    {
+      "trainSpeed": 3,
+      "spawnIntervalSeconds": 3
+    },
+    {
+      "trainSpeed": 3,
+      "spawnIntervalSeconds": 3
+    },
+    {
+      "trainSpeed": 3,
+      "spawnIntervalSeconds": 3
+    },
+    {
+      "trainSpeed": 3,
+      "spawnIntervalSeconds": 3
+    }
+  ],
+  "camera": {
+    "auto": true
+  },
+  "spawn": {
+    "gx": 0,
+    "gz": 0,
+    "dir": "S"
+  },
+  "track": [
+    {
+      "kind": "straight",
+      "gx": 0,
+      "gz": -1,
+      "dir": "S"
+    },
+    {
+      "kind": "straight",
+      "gx": 0,
+      "gz": -2,
+      "dir": "S"
+    },
+    {
+      "kind": "straight",
+      "gx": 0,
+      "gz": -3,
+      "dir": "S"
+    },
+    {
+      "kind": "straight",
+      "gx": 0,
+      "gz": -4,
+      "dir": "S"
+    },
+    {
+      "kind": "straight",
+      "gx": 0,
+      "gz": -5,
+      "dir": "S"
+    },
+    {
+      "kind": "straight",
+      "gx": 0,
+      "gz": -6,
+      "dir": "S"
+    },
+    {
+      "kind": "junction",
+      "gx": 0,
+      "gz": -7,
+      "dir": "S",
+      "exits": [
+        {
+          "dir": "S"
+        },
+        {
+          "dir": "E"
+        }
+      ],
+      "initialExit": 1
+    },
+    {
+      "kind": "straight",
+      "gx": 1,
+      "gz": -7,
+      "dir": "E"
+    },
+    {
+      "kind": "straight",
+      "gx": 2,
+      "gz": -7,
+      "dir": "E"
+    },
+    {
+      "kind": "curve",
+      "gx": 3,
+      "gz": -7,
+      "from": "E",
+      "to": "S"
+    },
+    {
+      "kind": "straight",
+      "gx": 3,
+      "gz": -8,
+      "dir": "S"
+    },
+    {
+      "kind": "station",
+      "gx": 3,
+      "gz": -9,
+      "dir": "S",
+      "order": 1,
+      "colorIndex": 0,
+      "dot": false
+    },
+    {
+      "kind": "curve",
+      "gx": 0,
+      "gz": -8,
+      "from": "S",
+      "to": "W"
+    },
+    {
+      "kind": "straight",
+      "gx": -1,
+      "gz": -8,
+      "dir": "W"
+    },
+    {
+      "kind": "straight",
+      "gx": -2,
+      "gz": -8,
+      "dir": "W"
+    },
+    {
+      "kind": "curve",
+      "gx": -3,
+      "gz": -8,
+      "from": "W",
+      "to": "N"
+    },
+    {
+      "kind": "straight",
+      "gx": -3,
+      "gz": -7,
+      "dir": "N"
+    },
+    {
+      "kind": "straight",
+      "gx": -3,
+      "gz": -6,
+      "dir": "N"
+    },
+    {
+      "kind": "junction",
+      "gx": -3,
+      "gz": -5,
+      "dir": "N",
+      "exits": [
+        {
+          "dir": "N"
+        },
+        {
+          "dir": "W"
+        }
+      ],
+      "initialExit": 1
+    },
+    {
+      "kind": "straight",
+      "gx": -4,
+      "gz": -5,
+      "dir": "W"
+    },
+    {
+      "kind": "curve",
+      "gx": -5,
+      "gz": -5,
+      "from": "W",
+      "to": "S"
+    },
+    {
+      "kind": "straight",
+      "gx": -5,
+      "gz": -6,
+      "dir": "S"
+    },
+    {
+      "kind": "station",
+      "gx": -5,
+      "gz": -7,
+      "dir": "S",
+      "order": 2,
+      "colorIndex": 1,
+      "dot": false
+    },
+    {
+      "kind": "straight",
+      "gx": -3,
+      "gz": -4,
+      "dir": "N"
+    },
+    {
+      "kind": "straight",
+      "gx": -3,
+      "gz": -3,
+      "dir": "N"
+    },
+    {
+      "kind": "junction",
+      "gx": -3,
+      "gz": -2,
+      "dir": "N",
+      "exits": [
+        {
+          "dir": "N"
+        },
+        {
+          "dir": "W"
+        }
+      ],
+      "initialExit": 1
+    },
+    {
+      "kind": "straight",
+      "gx": -4,
+      "gz": -2,
+      "dir": "W"
+    },
+    {
+      "kind": "curve",
+      "gx": -5,
+      "gz": -2,
+      "from": "W",
+      "to": "N"
+    },
+    {
+      "kind": "straight",
+      "gx": -5,
+      "gz": -1,
+      "dir": "N"
+    },
+    {
+      "kind": "station",
+      "gx": -5,
+      "gz": 0,
+      "dir": "N",
+      "order": 3,
+      "colorIndex": 2,
+      "dot": false
+    },
+    {
+      "kind": "curve",
+      "gx": -3,
+      "gz": -1,
+      "from": "N",
+      "to": "E"
+    },
+    {
+      "kind": "curve",
+      "gx": -2,
+      "gz": -1,
+      "from": "E",
+      "to": "N"
+    },
+    {
+      "kind": "curve",
+      "gx": -2,
+      "gz": 0,
+      "from": "N",
+      "to": "W"
+    },
+    {
+      "kind": "curve",
+      "gx": -3,
+      "gz": 0,
+      "from": "W",
+      "to": "N"
+    },
+    {
+      "kind": "straight",
+      "gx": -3,
+      "gz": 1,
+      "dir": "N"
+    },
+    {
+      "kind": "junction",
+      "gx": -3,
+      "gz": 2,
+      "dir": "N",
+      "exits": [
+        {
+          "dir": "N"
+        },
+        {
+          "dir": "W"
+        }
+      ],
+      "initialExit": 0
+    },
+    {
+      "kind": "straight",
+      "gx": -4,
+      "gz": 2,
+      "dir": "W"
+    },
+    {
+      "kind": "straight",
+      "gx": -5,
+      "gz": 2,
+      "dir": "W"
+    },
+    {
+      "kind": "station",
+      "gx": -6,
+      "gz": 2,
+      "dir": "W",
+      "order": 4,
+      "colorIndex": 3,
+      "dot": false
+    },
+    {
+      "kind": "straight",
+      "gx": -3,
+      "gz": 3,
+      "dir": "N"
+    },
+    {
+      "kind": "curve",
+      "gx": -3,
+      "gz": 4,
+      "from": "N",
+      "to": "E"
+    },
+    {
+      "kind": "straight",
+      "gx": -2,
+      "gz": 4,
+      "dir": "E"
+    },
+    {
+      "kind": "junction",
+      "gx": -1,
+      "gz": 4,
+      "dir": "E",
+      "exits": [
+        {
+          "dir": "E"
+        },
+        {
+          "dir": "N"
+        }
+      ],
+      "initialExit": 1
+    },
+    {
+      "kind": "straight",
+      "gx": -1,
+      "gz": 5,
+      "dir": "N"
+    },
+    {
+      "kind": "station",
+      "gx": -1,
+      "gz": 6,
+      "dir": "N",
+      "order": 5,
+      "colorIndex": 4,
+      "dot": false
+    },
+    {
+      "kind": "straight",
+      "gx": 0,
+      "gz": 4,
+      "dir": "E"
+    },
+    {
+      "kind": "straight",
+      "gx": 1,
+      "gz": 4,
+      "dir": "E"
+    },
+    {
+      "kind": "straight",
+      "gx": 2,
+      "gz": 4,
+      "dir": "E"
+    },
+    {
+      "kind": "junction",
+      "gx": 3,
+      "gz": 4,
+      "dir": "E",
+      "exits": [
+        {
+          "dir": "E"
+        },
+        {
+          "dir": "S"
+        }
+      ],
+      "initialExit": 1
+    },
+    {
+      "kind": "straight",
+      "gx": 3,
+      "gz": 3,
+      "dir": "S"
+    },
+    {
+      "kind": "straight",
+      "gx": 3,
+      "gz": 2,
+      "dir": "S"
+    },
+    {
+      "kind": "station",
+      "gx": 3,
+      "gz": 1,
+      "dir": "S",
+      "order": 6,
+      "colorIndex": 5,
+      "dot": false
+    },
+    {
+      "kind": "straight",
+      "gx": 4,
+      "gz": 4,
+      "dir": "E"
+    },
+    {
+      "kind": "curve",
+      "gx": 5,
+      "gz": 4,
+      "from": "E",
+      "to": "S"
+    },
+    {
+      "kind": "straight",
+      "gx": 5,
+      "gz": 3,
+      "dir": "S"
+    },
+    {
+      "kind": "straight",
+      "gx": 5,
+      "gz": 2,
+      "dir": "S"
+    },
+    {
+      "kind": "junction",
+      "gx": 5,
+      "gz": 1,
+      "dir": "S",
+      "exits": [
+        {
+          "dir": "S"
+        },
+        {
+          "dir": "E"
+        }
+      ],
+      "initialExit": 0
+    },
+    {
+      "kind": "straight",
+      "gx": 6,
+      "gz": 1,
+      "dir": "E"
+    },
+    {
+      "kind": "straight",
+      "gx": 7,
+      "gz": 1,
+      "dir": "E"
+    },
+    {
+      "kind": "curve",
+      "gx": 8,
+      "gz": 1,
+      "from": "E",
+      "to": "N"
+    },
+    {
+      "kind": "straight",
+      "gx": 8,
+      "gz": 2,
+      "dir": "N"
+    },
+    {
+      "kind": "station",
+      "gx": 8,
+      "gz": 3,
+      "dir": "N",
+      "order": 7,
+      "colorIndex": 6,
+      "dot": false
+    },
+    {
+      "kind": "straight",
+      "gx": 5,
+      "gz": 0,
+      "dir": "S"
+    },
+    {
+      "kind": "straight",
+      "gx": 5,
+      "gz": -1,
+      "dir": "S"
+    },
+    {
+      "kind": "junction",
+      "gx": 5,
+      "gz": -2,
+      "dir": "S",
+      "exits": [
+        {
+          "dir": "S"
+        },
+        {
+          "dir": "W"
+        }
+      ],
+      "initialExit": 1
+    },
+    {
+      "kind": "straight",
+      "gx": 4,
+      "gz": -2,
+      "dir": "W"
+    },
+    {
+      "kind": "curve",
+      "gx": 3,
+      "gz": -2,
+      "from": "W",
+      "to": "S"
+    },
+    {
+      "kind": "straight",
+      "gx": 3,
+      "gz": -3,
+      "dir": "S"
+    },
+    {
+      "kind": "station",
+      "gx": 3,
+      "gz": -4,
+      "dir": "S",
+      "order": 8,
+      "colorIndex": 7,
+      "dot": false
+    },
+    {
+      "kind": "straight",
+      "gx": 5,
+      "gz": -3,
+      "dir": "S"
+    },
+    {
+      "kind": "straight",
+      "gx": 5,
+      "gz": -4,
+      "dir": "S"
+    },
+    {
+      "kind": "curve",
+      "gx": 5,
+      "gz": -5,
+      "from": "S",
+      "to": "W"
+    },
+    {
+      "kind": "straight",
+      "gx": 4,
+      "gz": -5,
+      "dir": "W"
+    },
+    {
+      "kind": "curve",
+      "gx": 3,
+      "gz": -5,
+      "from": "W",
+      "to": "S"
+    },
+    {
+      "kind": "curve",
+      "gx": 3,
+      "gz": -6,
+      "from": "S",
+      "to": "E"
+    },
+    {
+      "kind": "straight",
+      "gx": 4,
+      "gz": -6,
+      "dir": "E"
+    },
+    {
+      "kind": "straight",
+      "gx": 5,
+      "gz": -6,
+      "dir": "E"
+    },
+    {
+      "kind": "curve",
+      "gx": 6,
+      "gz": -6,
+      "from": "E",
+      "to": "N"
+    },
+    {
+      "kind": "junction",
+      "gx": 6,
+      "gz": -5,
+      "dir": "N",
+      "exits": [
+        {
+          "dir": "N"
+        },
+        {
+          "dir": "E"
+        }
+      ],
+      "initialExit": 1
+    },
+    {
+      "kind": "straight",
+      "gx": 7,
+      "gz": -5,
+      "dir": "E"
+    },
+    {
+      "kind": "straight",
+      "gx": 8,
+      "gz": -5,
+      "dir": "E"
+    },
+    {
+      "kind": "station",
+      "gx": 9,
+      "gz": -5,
+      "dir": "E",
+      "order": 9,
+      "colorIndex": 8,
+      "dot": false
+    },
+    {
+      "kind": "straight",
+      "gx": 6,
+      "gz": -4,
+      "dir": "N"
+    },
+    {
+      "kind": "station",
+      "gx": 6,
+      "gz": -3,
+      "dir": "N",
+      "order": 10,
+      "colorIndex": 9,
+      "dot": false
+    }
+  ],
+  "scenery": [
+    {
+      "model": "stone_largeA",
+      "x": 17.3,
+      "y": 0,
+      "z": -21.4,
+      "rotY": 315,
+      "scale": 1.15
+    },
+    {
+      "model": "tree_pineDefaultB",
+      "x": 4.9,
+      "y": 0,
+      "z": -1.3,
+      "rotY": 182,
+      "scale": 0.95
+    },
+    {
+      "model": "tree_pineTallA",
+      "x": -15.3,
+      "y": 0,
+      "z": -12.6,
+      "rotY": 83,
+      "scale": 1.25
+    },
+    {
+      "model": "rock_largeA",
+      "x": -16.5,
+      "y": 0,
+      "z": -21.5,
+      "rotY": 224,
+      "scale": 1.3
+    },
+    {
+      "model": "tree_plateau",
+      "x": 21.6,
+      "y": 0,
+      "z": -6.1,
+      "rotY": 138,
+      "scale": 1.2
+    },
+    {
+      "model": "tree_pineDefaultA",
+      "x": 23.3,
+      "y": 0,
+      "z": -12.3,
+      "rotY": 249,
+      "scale": 1.1
+    },
+    {
+      "model": "tree_pineTallB",
+      "x": 19.8,
+      "y": 0,
+      "z": -18.4,
+      "rotY": 24,
+      "scale": 1.3
+    },
+    {
+      "model": "tree_pineDefaultB",
+      "x": -11.1,
+      "y": 0,
+      "z": -18.4,
+      "rotY": 14,
+      "scale": 0.85
+    },
+    {
+      "model": "tree_pineTallA",
+      "x": 18.1,
+      "y": 0,
+      "z": -6.7,
+      "rotY": 168,
+      "scale": 1
+    },
+    {
+      "model": "tree_plateau",
+      "x": -12.5,
+      "y": 0,
+      "z": -1.8,
+      "rotY": 336,
+      "scale": 0.85
+    },
+    {
+      "model": "tree_detailed",
+      "x": 8.9,
+      "y": 0,
+      "z": -14.9,
+      "rotY": 163,
+      "scale": 1.25
+    },
+    {
+      "model": "flower_redA",
+      "x": 18.4,
+      "y": 0,
+      "z": -1.7,
+      "rotY": 224,
+      "scale": 1.2
+    },
+    {
+      "model": "tree_pineDefaultB",
+      "x": 18.9,
+      "y": 0,
+      "z": 0.8,
+      "rotY": 337,
+      "scale": 0.95
+    },
+    {
+      "model": "cliff_top_rock",
+      "x": 9.3,
+      "y": 0,
+      "z": 16.7,
+      "rotY": 142,
+      "scale": 1.2
+    },
+    {
+      "model": "flower_redA",
+      "x": 20.6,
+      "y": 0,
+      "z": 0.4,
+      "rotY": 52,
+      "scale": 1.05
+    },
+    {
+      "model": "tree_default",
+      "x": -12,
+      "y": 0,
+      "z": 15.2,
+      "rotY": 173,
+      "scale": 0.85
+    },
+    {
+      "model": "plant_bushDetailed",
+      "x": -13.6,
+      "y": 0,
+      "z": 13.6,
+      "rotY": 280,
+      "scale": 1.15
+    },
+    {
+      "model": "cliff_slope_rock",
+      "x": -16.7,
+      "y": 0,
+      "z": -21.7,
+      "rotY": 122,
+      "scale": 1.1
+    },
+    {
+      "model": "rock_smallA",
+      "x": 24,
+      "y": 0,
+      "z": 7.2,
+      "rotY": 145,
+      "scale": 1.05
+    },
+    {
+      "model": "tree_pineTallB",
+      "x": -15.1,
+      "y": 0,
+      "z": 10.1,
+      "rotY": 312,
+      "scale": 1
+    },
+    {
+      "model": "plant_bushDetailed",
+      "x": -16.4,
+      "y": 0,
+      "z": -22.3,
+      "rotY": 354,
+      "scale": 1.25
+    },
+    {
+      "model": "tree_pineRoundA",
+      "x": -14.8,
+      "y": 0,
+      "z": 0.9,
+      "rotY": 251,
+      "scale": 1.05
+    },
+    {
+      "model": "flower_redA",
+      "x": -15.4,
+      "y": 0,
+      "z": -9.3,
+      "rotY": 256,
+      "scale": 1.1
+    },
+    {
+      "model": "tree_pineRoundA",
+      "x": -14.3,
+      "y": 0,
+      "z": -6.7,
+      "rotY": 274,
+      "scale": 1.2
+    },
+    {
+      "model": "tree_oak",
+      "x": -14.5,
+      "y": 0,
+      "z": 8.7,
+      "rotY": 110,
+      "scale": 1.05
+    },
+    {
+      "model": "tree_autumn",
+      "x": -4.8,
+      "y": 0,
+      "z": 13.3,
+      "rotY": 41,
+      "scale": 0.85
+    },
+    {
+      "model": "tree_autumn",
+      "x": 19,
+      "y": 0,
+      "z": 0.5,
+      "rotY": 149,
+      "scale": 1.3
+    },
+    {
+      "model": "tree_autumn",
+      "x": 16.5,
+      "y": 0,
+      "z": -7.2,
+      "rotY": 95,
+      "scale": 1.25
+    },
+    {
+      "model": "tree_autumn",
+      "x": -13.7,
+      "y": 0,
+      "z": 11,
+      "rotY": 203,
+      "scale": 1.1
+    },
+    {
+      "model": "flower_redA",
+      "x": 10.6,
+      "y": 0,
+      "z": 11.2,
+      "rotY": 272,
+      "scale": 1.3
+    }
+  ]
+}
