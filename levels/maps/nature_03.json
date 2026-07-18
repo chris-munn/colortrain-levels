@@ -143,29 +143,15 @@
     },
     {
       "kind": "curve",
-      "gx": 0,
-      "gz": -3,
-      "from": "W",
-      "to": "N"
-    },
-    {
-      "kind": "curve",
-      "gx": 0,
-      "gz": -2,
-      "from": "N",
-      "to": "W"
-    },
-    {
-      "kind": "curve",
       "gx": -1,
-      "gz": -2,
+      "gz": -3,
       "from": "W",
       "to": "S"
     },
     {
       "kind": "junction",
       "gx": -1,
-      "gz": -3,
+      "gz": -4,
       "dir": "S",
       "exits": [
         {
@@ -180,36 +166,30 @@
     {
       "kind": "straight",
       "gx": -2,
-      "gz": -3,
+      "gz": -4,
       "dir": "W"
     },
     {
       "kind": "curve",
       "gx": -3,
-      "gz": -3,
+      "gz": -4,
       "from": "W",
       "to": "S"
     },
     {
       "kind": "straight",
       "gx": -3,
-      "gz": -4,
+      "gz": -5,
       "dir": "S"
     },
     {
       "kind": "station",
       "gx": -3,
-      "gz": -5,
+      "gz": -6,
       "dir": "S",
       "order": 2,
       "colorIndex": 1,
       "dot": false
-    },
-    {
-      "kind": "straight",
-      "gx": -1,
-      "gz": -4,
-      "dir": "S"
     },
     {
       "kind": "straight",
@@ -226,7 +206,7 @@
     {
       "kind": "junction",
       "gx": -1,
-      "gz": -7,
+      "gz": -8,
       "dir": "S",
       "exits": [
         {
@@ -241,13 +221,13 @@
     {
       "kind": "straight",
       "gx": -2,
-      "gz": -7,
+      "gz": -8,
       "dir": "W"
     },
     {
       "kind": "station",
       "gx": -3,
-      "gz": -7,
+      "gz": -8,
       "dir": "W",
       "order": 3,
       "colorIndex": 2,
@@ -256,7 +236,7 @@
     {
       "kind": "straight",
       "gx": -1,
-      "gz": -8,
+      "gz": -7,
       "dir": "S"
     },
     {
@@ -471,54 +451,54 @@
     },
     {
       "kind": "straight",
-      "gx": 8,
-      "gz": -3,
+      "gx": 5,
+      "gz": -2,
       "dir": "N"
     },
     {
       "kind": "junction",
       "gx": 8,
-      "gz": -2,
+      "gz": -3,
       "dir": "N",
       "exits": [
         {
           "dir": "N"
         },
         {
-          "dir": "E"
+          "dir": "W"
         }
       ],
       "initialExit": 1
     },
     {
       "kind": "straight",
-      "gx": 9,
-      "gz": -2,
-      "dir": "E"
+      "gx": 7,
+      "gz": -3,
+      "dir": "W"
     },
     {
       "kind": "straight",
-      "gx": 10,
-      "gz": -2,
-      "dir": "E"
+      "gx": 6,
+      "gz": -3,
+      "dir": "W"
     },
     {
       "kind": "curve",
-      "gx": 11,
-      "gz": -2,
-      "from": "E",
+      "gx": 5,
+      "gz": -3,
+      "from": "W",
       "to": "N"
     },
     {
       "kind": "straight",
-      "gx": 11,
-      "gz": -1,
+      "gx": 8,
+      "gz": -2,
       "dir": "N"
     },
     {
       "kind": "station",
-      "gx": 11,
-      "gz": 0,
+      "gx": 5,
+      "gz": -1,
       "dir": "N",
       "order": 7,
       "colorIndex": 6,
@@ -603,6 +583,12 @@
       "gx": 8,
       "gz": 3,
       "dir": "N"
+    },
+    {
+      "kind": "straight",
+      "gx": 0,
+      "gz": -3,
+      "dir": "W"
     }
   ],
   "scenery": [
