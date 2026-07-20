@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "updated": "2026-07-18",
+  "updated": "2026-07-20",
   "stages": [
     {
       "id": "nature",
@@ -9,7 +9,7 @@
       "maps": [
         {
           "file": "maps/nature_01.json",
-          "name": "Willow Bend"
+          "name": "Bluebell Loop"
         },
         {
           "file": "maps/nature_02.json",
