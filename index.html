@@ -75,20 +75,20 @@
 <div id="top">
   <b>COLOR TRAIN · MAP EDITOR</b>
   Name <input id="mName" value="New Map" style="width:130px">
-  Stage <input id="mStage" value="nature" style="width:80px">
+  World <select id="mWorld" style="width:92px"><option value="nature">Nature</option><option value="city">City</option></select>
   Map # <input id="mNum" type="number" value="1" min="1">
   Theme <input id="mTheme" value="nature" style="width:80px">
-  Grass <input id="mColor" type="color" value="#73A457" style="width:34px;height:26px;padding:1px;border:none;background:none">
+  Floor <input id="mColor" type="color" value="#73A457" style="width:34px;height:26px;padding:1px;border:none;background:none">
   <button id="bNew">New</button>
   <button id="bRandom">🎲 Randomise</button>
-  <button id="bCity">🏙 City</button>
+  <button id="bCity" hidden>🏙 Re-roll city</button>
   <button id="bImport">Import</button>
   <input type="file" id="fileIn" accept=".json" style="display:none">
   <button id="bValidate">Validate</button>
   <button id="bCopy">Copy JSON</button>
   <button id="bExport" class="primary">⬇ Export JSON</button>
   <button id="bPublish" class="primary">☁ Publish</button>
-  <span id="ver" style="margin-left:auto;opacity:.55;font-size:12px">v17 · city</span>
+  <span id="ver" style="margin-left:auto;opacity:.55;font-size:12px">v18 · worlds</span>
 </div>
 <div id="wrap">
   <div id="tools">
@@ -492,7 +492,7 @@ function drawHandles(){
 function draw(){
   const W = cv.width, H = cv.height;
   ctx.clearRect(0, 0, W, H);
-  ctx.fillStyle = isCity() ? "#8a8f96" : "#6da75a"; ctx.fillRect(0, 0, W, H);
+  ctx.fillStyle = isCity() ? (map.groundColor || "#8a8f96") : "#6da75a"; ctx.fillRect(0, 0, W, H);
 
   ctx.strokeStyle = "rgba(255,255,255,.10)"; ctx.lineWidth = 1;
   const x0 = s2wx(0), x1 = s2wx(W), z0 = s2wz(H), z1 = s2wz(0);
@@ -1458,7 +1458,7 @@ function tryGenerate(){
 // ---------- io ----------
 function currentJson(){
   map.name = document.getElementById("mName").value;
-  map.stage = document.getElementById("mStage").value;
+  map.stage = document.getElementById("mWorld").value;
   map.mapNumber = +document.getElementById("mNum").value;
   map.theme = document.getElementById("mTheme").value;
   map.groundColor = document.getElementById("mColor").value;
@@ -1638,14 +1638,21 @@ async function deleteRepoLevel(stageId, mapRef){
 document.getElementById("bValidate").onclick = validate;
 document.getElementById("bNew").onclick = () => { if (confirm("Start a new map?")) { map = newMap(); sel = null; syncAll(); } };
 document.getElementById("bRandom").onclick = () => { if (confirm("Replace the current map with a random one?")) randomise(); };
-document.getElementById("bCity").onclick = () => {
-  if (map.stage !== "city") {
-    if (!confirm("Set this map to the CITY stage and randomise its city?")) return;
-    map.stage = "city"; map.theme = "nature";
-    document.getElementById("mStage").value = "city"; document.getElementById("mTheme").value = "nature";
-  }
-  generateCity(); touch();
-};
+const WORLD_FLOOR = { nature: "#73A457", city: "#767b82" };
+function setWorld(w){
+  map.stage = w;
+  map.theme = "nature";                        // both worlds use the nature theme pack for now
+  map.groundColor = WORLD_FLOOR[w] || map.groundColor;
+  document.getElementById("mColor").value = map.groundColor;
+  document.getElementById("mTheme").value = map.theme;
+  if (w === "city") generateCity();            // fill the city from the current track
+  else { map.roads = []; map.buildings = []; map.parks = []; map.trees = []; }
+  document.getElementById("bCity").hidden = (w !== "city");
+  touch();
+}
+document.getElementById("mWorld").onchange = e => setWorld(e.target.value);
+document.getElementById("mColor").oninput = e => { map.groundColor = e.target.value; draw(); };
+document.getElementById("bCity").onclick = () => { generateCity(); touch(); };   // re-roll the city on the current track
 document.getElementById("bImport").onclick = () => document.getElementById("fileIn").click();
 document.getElementById("fileIn").onchange = e => {
   const f = e.target.files[0];
@@ -1660,7 +1667,8 @@ function save(){ localStorage.setItem("ctMapEditor", JSON.stringify(map)); }
 function touch(){ save(); renderRules(); updateNextStation(); draw(); }
 function syncAll(){
   document.getElementById("mName").value = map.name || "New Map";
-  document.getElementById("mStage").value = map.stage || "nature";
+  document.getElementById("mWorld").value = map.stage || "nature";
+  document.getElementById("bCity").hidden = (map.stage !== "city");
   document.getElementById("mNum").value = map.mapNumber || 1;
   document.getElementById("mTheme").value = map.theme || "nature";
   document.getElementById("mColor").value = map.groundColor || "#73A457";
