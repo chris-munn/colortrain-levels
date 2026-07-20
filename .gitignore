@@ -1,0 +1,5 @@
+# GitHub Pages content — only ignore OS clutter (build files must stay committed).
+.DS_Store
+._*
+Thumbs.db
+Desktop.ini
