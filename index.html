@@ -81,13 +81,14 @@
   Grass <input id="mColor" type="color" value="#73A457" style="width:34px;height:26px;padding:1px;border:none;background:none">
   <button id="bNew">New</button>
   <button id="bRandom">🎲 Randomise</button>
+  <button id="bCity">🏙 City</button>
   <button id="bImport">Import</button>
   <input type="file" id="fileIn" accept=".json" style="display:none">
   <button id="bValidate">Validate</button>
   <button id="bCopy">Copy JSON</button>
   <button id="bExport" class="primary">⬇ Export JSON</button>
   <button id="bPublish" class="primary">☁ Publish</button>
-  <span id="ver" style="margin-left:auto;opacity:.55;font-size:12px">v16</span>
+  <span id="ver" style="margin-left:auto;opacity:.55;font-size:12px">v17 · city</span>
 </div>
 <div id="wrap">
   <div id="tools">
@@ -147,11 +148,17 @@ const COLORS = ["#e12929","#2e6bf2","#29b847","#face14","#9e3dd9","#ff8419","#1a
 const COLOR_NAMES = ["red","blue","green","yellow","purple","orange","cyan","pink","lime","white"];
 const NATURE_MODELS = ["tree_pineDefaultA","tree_pineDefaultB","tree_pineTallA","tree_pineTallB","tree_pineRoundA","tree_default","tree_oak","tree_detailed","tree_plateau","tree_autumn","rock_largeA","rock_largeB","rock_largeC","rock_smallA","rock_smallB","stone_largeA","stone_largeB","plant_bushLarge","plant_bushDetailed","flower_redA","flower_yellowA","grass_large","cliff_large_rock","cliff_block_rock","cliff_slope_rock","cliff_top_rock","bridge_wood","lily_large","lily_small","fence_simple","campfire_logs","tent","grass_block","grass_block_tall","grass_slope"];
 
+const CITY_BUILDINGS = ["building-a","building-b","building-c","building-d","building-e","building-f","building-g","building-h","building-i","building-j","building-k","building-l","building-m","building-n"];
+const CITY_TOWERS = ["building-skyscraper-a","building-skyscraper-b","building-skyscraper-c","building-skyscraper-d","building-skyscraper-e"];
+const CITY_TREES = ["tree_oak","tree_default","tree_pineRoundA","tree_detailed","plant_bushLarge"];
+const CITY_BLOCK = 4;
+const cmod = (a,b)=>{ let m=a%b; return m<0?m+b:m; };
+
 let map = newMap();
 function rndId(){ return Math.random().toString(36).slice(2, 10); }
 function newMap() {
   return { schemaVersion:2, id: rndId(), groundColor:"#73A457", stage:"nature", mapNumber:1, name:"New Map", theme:"nature",
-    levels:[], camera:{auto:true}, spawn:{gx:-2,gz:0,dir:"E"}, track:[], scenery:[] };
+    levels:[], camera:{auto:true}, spawn:{gx:-2,gz:0,dir:"E"}, track:[], scenery:[], roads:[], buildings:[], parks:[], trees:[] };
 }
 
 let tool = "select", curDir = "E", curTurn = "L";
@@ -485,12 +492,14 @@ function drawHandles(){
 function draw(){
   const W = cv.width, H = cv.height;
   ctx.clearRect(0, 0, W, H);
-  ctx.fillStyle = "#6da75a"; ctx.fillRect(0, 0, W, H);
+  ctx.fillStyle = isCity() ? "#8a8f96" : "#6da75a"; ctx.fillRect(0, 0, W, H);
 
   ctx.strokeStyle = "rgba(255,255,255,.10)"; ctx.lineWidth = 1;
   const x0 = s2wx(0), x1 = s2wx(W), z0 = s2wz(H), z1 = s2wz(0);
   for (let x = Math.floor(x0/TILE)*TILE - 1; x < x1; x += TILE) line(w2sx(x), 0, w2sx(x), H);
   for (let z = Math.floor(z0/TILE)*TILE - 1; z < z1; z += TILE) line(0, w2sy(z), W, w2sy(z));
+
+  if (isCity()) drawCity();
 
   map.scenery.forEach((s, i) => {
     const r = 0.45 * (s.scale || 1) * view.s;
@@ -577,6 +586,19 @@ function draw(){
 function line(a,b,c,d){ ctx.beginPath(); ctx.moveTo(a,b); ctx.lineTo(c,d); ctx.stroke(); }
 function ring(x,y,r){ ctx.strokeStyle = "#ffd23f"; ctx.lineWidth = 3; ctx.beginPath(); ctx.arc(x,y,r,0,7); ctx.stroke(); }
 function trackStroke(w){ ctx.strokeStyle = "#3b2f23"; ctx.lineWidth = w; ctx.lineCap = "round"; }
+
+function isCity(){ return map.stage === "city"; }
+function drawCity(){
+  (map.parks||[]).forEach(p=>{ ctx.fillStyle="rgba(96,168,96,.92)";
+    ctx.fillRect(w2sx(p.x-p.w/2), w2sy(p.z+p.d/2), p.w*view.s, p.d*view.s); });
+  (map.roads||[]).forEach(r=>{ const x=w2sx(r.gx*TILE-TILE/2), y=w2sy(r.gz*TILE+TILE/2);
+    ctx.fillStyle="rgba(64,66,72,.96)"; ctx.fillRect(x,y,TILE*view.s,TILE*view.s); });
+  (map.buildings||[]).forEach(b=>{ const f=b.foot||TILE*0.94; const x=w2sx(b.x-f/2), y=w2sy(b.z+f/2);
+    ctx.fillStyle="rgba(212,216,224,.96)"; ctx.fillRect(x,y,f*view.s,f*view.s);
+    ctx.strokeStyle="rgba(70,76,92,.7)"; ctx.lineWidth=1; ctx.strokeRect(x,y,f*view.s,f*view.s); });
+  (map.trees||[]).forEach(t=>{ ctx.fillStyle="rgba(24,98,44,.9)";
+    ctx.beginPath(); ctx.arc(w2sx(t.x),w2sy(t.z),Math.max(3,0.38*view.s),0,7); ctx.fill(); });
+}
 
 function drawPiece(t, isSel){
   const cx = t.gx * TILE, cz = t.gz * TILE, h = TILE/2;
@@ -1037,6 +1059,117 @@ const GEN_SMALLS = ["plant_bushLarge","plant_bushDetailed","flower_redA","flower
 const GEN_CLIFFS = ["cliff_large_rock","cliff_block_rock","cliff_slope_rock","cliff_top_rock"];
 const GEN_NAMES = ["Green Valley","Twisty Pines","Sheep Meadow","Rolling Hills","Willow Bend","Foxglove Flats","Badger Crossing","Bluebell Loop","Heron Marsh","Tumble Downs"];
 
+function nearTrack(track, cx, cz){ const K=(x,z)=>x+","+z; for(let dx=-1;dx<=1;dx++)for(let dz=-1;dz<=1;dz++) if(track.has(K(cx+dx,cz+dz))) return true; return false; }
+
+// Generate the city layout (roads/buildings/parks/trees) from the current track and
+// save it into the map. Mirrors the game's old renderer — the game now just renders this.
+function generateCity(){
+  const K=(x,z)=>x+","+z;
+  const track=new Set(); track.add(K(map.spawn.gx, map.spawn.gz));
+  map.track.forEach(t=>track.add(K(t.gx,t.gz)));
+  map.roads=[]; map.buildings=[]; map.parks=[]; map.trees=[];
+  if(track.size===0) return;
+
+  const reserved=new Set();
+  map.track.filter(t=>t.kind==="station").forEach(t=>{
+    for(let dx=-1;dx<=1;dx++)for(let dz=-1;dz<=1;dz++) reserved.add(K(t.gx+dx,t.gz+dz)); });
+  const dv=DV[map.spawn.dir]||[1,0];
+  for(let k=0;k<=2;k++){ const bx=map.spawn.gx-dv[0]*k, bz=map.spawn.gz-dv[1]*k;
+    for(let dx=-1;dx<=1;dx++)for(let dz=-1;dz<=1;dz++) reserved.add(K(bx+dx,bz+dz)); }
+
+  let minX=1e9,maxX=-1e9,minZ=1e9,maxZ=-1e9;
+  track.forEach(s=>{const a=s.split(",");const x=+a[0],z=+a[1];minX=Math.min(minX,x);maxX=Math.max(maxX,x);minZ=Math.min(minZ,z);maxZ=Math.max(maxZ,z);});
+  const ccx=(minX+maxX)/2, ccz=(minZ+maxZ)/2;
+  const pad=6; minX-=pad;maxX+=pad;minZ-=pad;maxZ+=pad;
+  const ox=(Math.random()*CITY_BLOCK)|0, oz=(Math.random()*CITY_BLOCK)|0;
+
+  // 1) street cells, dropping parallel-track overlaps (roads only cross perpendicular)
+  let road=new Set();
+  for(let cx=minX;cx<=maxX;cx++)for(let cz=minZ;cz<=maxZ;cz++){
+    const c=K(cx,cz); if(reserved.has(c))continue;
+    const sv=cmod(cx-ox,CITY_BLOCK)===0, sh=cmod(cz-oz,CITY_BLOCK)===0;
+    if(!sv&&!sh)continue;
+    if(track.has(c)){
+      const tH=track.has(K(cx+1,cz))||track.has(K(cx-1,cz));
+      const tV=track.has(K(cx,cz+1))||track.has(K(cx,cz-1));
+      const perp=(!tH&&!tV)||(sv&&tH&&!tV)||(sh&&tV&&!tH);
+      if(!perp)continue;
+    }
+    road.add(c);
+  }
+  // 2) trim dangling ends
+  const full=new Set(road); let changed=true;
+  while(changed){ changed=false; const rm=[];
+    road.forEach(c=>{const a=c.split(",");const x=+a[0],z=+a[1];
+      const deg=(road.has(K(x,z+1))?1:0)+(road.has(K(x,z-1))?1:0)+(road.has(K(x+1,z))?1:0)+(road.has(K(x-1,z))?1:0);
+      if(deg<2)rm.push(c);});
+    rm.forEach(c=>{road.delete(c);changed=true;});
+  }
+  if(road.size===0)road=full;
+  // 3) autotile
+  road.forEach(c=>{const a=c.split(",");const x=+a[0],z=+a[1];
+    const n=road.has(K(x,z+1)),s=road.has(K(x,z-1)),e=road.has(K(x+1,z)),w=road.has(K(x-1,z));
+    const deg=(n?1:0)+(s?1:0)+(e?1:0)+(w?1:0);
+    let piece,yaw;
+    if(track.has(c)){ piece="crossing"; const vL=n||s,hL=e||w; yaw=(vL&&!hL)?90:((hL&&!vL)?0:90); }
+    else if(deg>=4){piece="cross";yaw=0;}
+    else if(deg===3){piece="tee";yaw=!s?0:(!w?90:(!n?180:270));}
+    else if(deg===2&&n&&s){piece="straight";yaw=90;}
+    else if(deg===2&&e&&w){piece="straight";yaw=0;}
+    else if(deg===2){piece="bend";yaw=(n&&w)?0:((n&&e)?90:((e&&s)?180:270));}
+    else {piece="end";yaw=e?0:(s?90:(w?180:270));}
+    map.roads.push({gx:x,gz:z,piece:piece,yaw:yaw});
+  });
+  // 4) buildable cells
+  const build=new Set();
+  for(let cx=minX;cx<=maxX;cx++)for(let cz=minZ;cz<=maxZ;cz++){
+    const c=K(cx,cz);
+    if(road.has(c)||reserved.has(c))continue;
+    if(track.has(c)||nearTrack(track,cx,cz))continue;
+    build.add(c);
+  }
+  // 4a) parks (1-2) + trees
+  const buildList=[...build];
+  const parkCount=1+(Math.random()<0.5?1:0);
+  for(let pi=0;pi<parkCount&&buildList.length>0;pi++){
+    const an=buildList[(Math.random()*buildList.length)|0].split(","); const ax=+an[0],az=+an[1];
+    const patch=[];
+    for(let dx=0;dx<=1;dx++)for(let dz=0;dz<=1;dz++){const pc=K(ax+dx,az+dz); if(build.has(pc))patch.push([ax+dx,az+dz]);}
+    if(patch.length===0)continue;
+    patch.forEach(pc=>build.delete(K(pc[0],pc[1])));
+    let pmnx=1e9,pmxx=-1e9,pmnz=1e9,pmxz=-1e9;
+    patch.forEach(pc=>{pmnx=Math.min(pmnx,pc[0]);pmxx=Math.max(pmxx,pc[0]);pmnz=Math.min(pmnz,pc[1]);pmxz=Math.max(pmxz,pc[1]);});
+    const w=(pmxx-pmnx+1)*TILE, d=(pmxz-pmnz+1)*TILE;
+    const px=(pmnx+pmxx)/2*TILE, pz=(pmnz+pmxz)/2*TILE;
+    map.parks.push({x:px,z:pz,w:w,d:d});
+    const nT=3+((Math.random()*4)|0);
+    for(let i=0;i<nT;i++){
+      const rx=px+(Math.random()-0.5)*Math.max(0.5,w-0.9);
+      const rz=pz+(Math.random()-0.5)*Math.max(0.5,d-0.9);
+      const m=CITY_TREES[(Math.random()*CITY_TREES.length)|0];
+      map.trees.push({x:rx,z:rz,model:"NatureKit/"+m,scale:0.7+Math.random()*0.7,yaw:(Math.random()*360)|0});
+    }
+  }
+  // 4b) buildings — flush, occasional 2x2, towers zoned toward the centre
+  const used=new Set(); const downtown=7;
+  for(let cx=minX;cx<=maxX;cx++)for(let cz=minZ;cz<=maxZ;cz++){
+    const c=K(cx,cz); if(!build.has(c)||used.has(c))continue;
+    const dd=Math.hypot(cx-ccx,cz-ccz);
+    const central=Math.max(0,Math.min(1,1-dd/downtown));
+    const towerChance=0.05+0.55*central;
+    const quad=[[cx,cz],[cx+1,cz],[cx,cz+1],[cx+1,cz+1]];
+    const canQuad=quad.every(q=>build.has(K(q[0],q[1]))&&!used.has(K(q[0],q[1])));
+    const big=canQuad&&Math.random()<(0.10+0.35*central);
+    const tall=Math.random()<towerChance;
+    const model="CityKit/"+(tall?CITY_TOWERS[(Math.random()*CITY_TOWERS.length)|0]:CITY_BUILDINGS[(Math.random()*CITY_BUILDINGS.length)|0]);
+    const yaw=90*((Math.random()*4)|0);
+    if(big){ map.buildings.push({x:(cx+0.5)*TILE,z:(cz+0.5)*TILE,model:model,yaw:yaw,foot:TILE*1.9});
+      quad.forEach(q=>used.add(K(q[0],q[1]))); }
+    else { used.add(c); if(Math.random()<0.05)continue;
+      map.buildings.push({x:cx*TILE,z:cz*TILE,model:model,yaw:yaw,foot:TILE*0.94}); }
+  }
+}
+
 function randomise(){
   for (let attempt = 0; attempt < 900; attempt++) {
     const result = tryGenerate();
@@ -1044,6 +1177,7 @@ function randomise(){
       map.track = result.track;
       map.spawn = result.spawn;
       map.scenery = result.scenery;
+      if (isCity()) generateCity();   // city map: regenerate its roads/buildings to match the new track
       map.levels = Array.from({ length: 10 }, () => ({ trainSpeed: 3, spawnIntervalSeconds: 3 }));
       map.id = rndId(); // a randomised map is a NEW map — fresh save progress
       map.name = GEN_NAMES[(Math.random() * GEN_NAMES.length) | 0];
@@ -1504,6 +1638,14 @@ async function deleteRepoLevel(stageId, mapRef){
 document.getElementById("bValidate").onclick = validate;
 document.getElementById("bNew").onclick = () => { if (confirm("Start a new map?")) { map = newMap(); sel = null; syncAll(); } };
 document.getElementById("bRandom").onclick = () => { if (confirm("Replace the current map with a random one?")) randomise(); };
+document.getElementById("bCity").onclick = () => {
+  if (map.stage !== "city") {
+    if (!confirm("Set this map to the CITY stage and randomise its city?")) return;
+    map.stage = "city"; map.theme = "nature";
+    document.getElementById("mStage").value = "city"; document.getElementById("mTheme").value = "nature";
+  }
+  generateCity(); touch();
+};
 document.getElementById("bImport").onclick = () => document.getElementById("fileIn").click();
 document.getElementById("fileIn").onchange = e => {
   const f = e.target.files[0];
