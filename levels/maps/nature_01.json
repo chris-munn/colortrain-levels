@@ -29,15 +29,15 @@
   },
   "spawn": {
     "gx": 0,
-    "gz": 0,
+    "gz": 2,
     "dir": "W"
   },
   "track": [
     {
       "kind": "straight",
       "gx": -1,
-      "gz": 0,
-      "dir": "W"
+      "gz": 1,
+      "dir": "S"
     },
     {
       "kind": "straight",
@@ -306,22 +306,36 @@
       "order": 4,
       "colorIndex": 3,
       "dot": false
+    },
+    {
+      "kind": "curve",
+      "gx": -1,
+      "gz": 2,
+      "from": "W",
+      "to": "S"
+    },
+    {
+      "kind": "curve",
+      "gx": -1,
+      "gz": 0,
+      "from": "S",
+      "to": "W"
     }
   ],
   "scenery": [
     {
       "model": "grass_large",
-      "x": -1.6,
+      "x": 4.3,
       "y": 0,
-      "z": 4.2,
+      "z": -0.4,
       "rotY": 206,
       "scale": 1.3
     },
     {
       "model": "tree_pineTallB",
-      "x": 1.4,
+      "x": 0.4,
       "y": 0,
-      "z": 4.2,
+      "z": 9,
       "rotY": 286,
       "scale": 1.1
     },
@@ -407,17 +421,17 @@
     },
     {
       "model": "tree_pineDefaultA",
-      "x": -3.2,
+      "x": -5.5,
       "y": 0,
-      "z": 3,
+      "z": 3.8,
       "rotY": 209,
       "scale": 1.1
     },
     {
       "model": "rock_largeB",
-      "x": 2.1,
+      "x": 2.4,
       "y": 0,
-      "z": 7.6,
+      "z": 8.9,
       "rotY": 209,
       "scale": 1.15
     },
@@ -551,9 +565,9 @@
     },
     {
       "model": "tree_detailed",
-      "x": -4.5,
+      "x": -9.1,
       "y": 0,
-      "z": 1.7,
+      "z": 2,
       "rotY": 304,
       "scale": 1.05
     },
@@ -591,9 +605,9 @@
     },
     {
       "model": "tree_pineDefaultA",
-      "x": -1.2,
+      "x": 1.3,
       "y": 0,
-      "z": 5.9,
+      "z": -0.2,
       "rotY": 245,
       "scale": 1.2
     },
@@ -783,9 +797,9 @@
     },
     {
       "model": "tree_default",
-      "x": 3.4,
+      "x": 4.4,
       "y": 0,
-      "z": 5.3,
+      "z": 10,
       "rotY": 254,
       "scale": 1.15
     },
@@ -831,9 +845,9 @@
     },
     {
       "model": "stone_largeB",
-      "x": 0.7,
+      "x": -1.3,
       "y": 0,
-      "z": 6.7,
+      "z": 8.9,
       "rotY": 231,
       "scale": 1.2
     },
@@ -881,7 +895,7 @@
       "model": "rock_largeB",
       "x": 2.6,
       "y": 0,
-      "z": 8,
+      "z": 9.4,
       "rotY": 338,
       "scale": 1
     },
@@ -951,9 +965,9 @@
     },
     {
       "model": "tree_default",
-      "x": 5.8,
+      "x": 8.1,
       "y": 0,
-      "z": 4.4,
+      "z": 4.1,
       "rotY": 341,
       "scale": 1.15
     },
@@ -991,17 +1005,17 @@
     },
     {
       "model": "stone_largeB",
-      "x": 6.6,
+      "x": 7.5,
       "y": 0,
-      "z": 6.5,
+      "z": 7.5,
       "rotY": 158,
       "scale": 1.55
     },
     {
       "model": "tree_pineRoundA",
-      "x": -1.3,
+      "x": -0.8,
       "y": 0,
-      "z": 2.1,
+      "z": -0.9,
       "rotY": 42,
       "scale": 1
     },
@@ -1079,9 +1093,9 @@
     },
     {
       "model": "stone_largeA",
-      "x": -5.8,
+      "x": -6.6,
       "y": 0,
-      "z": 4.2,
+      "z": 6.1,
       "rotY": 114,
       "scale": 2.5
     },
