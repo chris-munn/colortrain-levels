@@ -24,6 +24,17 @@
           "name": "Foxglove Flats"
         }
       ]
+    },
+    {
+      "id": "city",
+      "displayName": "city",
+      "theme": "nature",
+      "maps": [
+        {
+          "file": "maps/city_01.json",
+          "name": "Mega City"
+        }
+      ]
     }
   ]
 }
