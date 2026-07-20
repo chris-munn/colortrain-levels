@@ -87,7 +87,7 @@
   <button id="bCopy">Copy JSON</button>
   <button id="bExport" class="primary">⬇ Export JSON</button>
   <button id="bPublish" class="primary">☁ Publish</button>
-  <span id="ver" style="margin-left:auto;opacity:.55;font-size:12px">v15</span>
+  <span id="ver" style="margin-left:auto;opacity:.55;font-size:12px">v16</span>
 </div>
 <div id="wrap">
   <div id="tools">
@@ -1295,7 +1295,7 @@ function tryGenerate(){
   const w0 = minX * 2 - 6, w1 = maxX * 2 + 6, v0 = minZ * 2 - 5, v1 = maxZ * 2 + 5;
   const tiles = [...occ].map(k => k.split(",").map(Number));
   const scenery = [];
-  const count = 30 + ((Math.random() * 12) | 0);
+  const count = 90 + ((Math.random() * 36) | 0);
   for (let i = 0; i < count; i++) {
     let ok = false, wx = 0, wz = 0;
     for (let a = 0; a < 14 && !ok; a++) {
