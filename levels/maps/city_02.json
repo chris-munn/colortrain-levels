@@ -1,0 +1,3933 @@
+{
+  "schemaVersion": 2,
+  "id": "b0jylnix",
+  "groundColor": "#7c7979",
+  "stage": "city",
+  "mapNumber": 2,
+  "name": "Crazy City",
+  "theme": "city",
+  "levels": [
+    {
+      "trainSpeed": 3,
+      "spawnIntervalSeconds": 4
+    },
+    {
+      "trainSpeed": 3,
+      "spawnIntervalSeconds": 4
+    },
+    {
+      "trainSpeed": 3,
+      "spawnIntervalSeconds": 4
+    },
+    {
+      "trainSpeed": 3,
+      "spawnIntervalSeconds": 4
+    },
+    {
+      "trainSpeed": 3,
+      "spawnIntervalSeconds": 5
+    },
+    {
+      "trainSpeed": 3,
+      "spawnIntervalSeconds": 5
+    }
+  ],
+  "camera": {
+    "auto": true
+  },
+  "spawn": {
+    "gx": 0,
+    "gz": 0,
+    "dir": "W"
+  },
+  "track": [
+    {
+      "kind": "straight",
+      "gx": -1,
+      "gz": 0,
+      "dir": "W"
+    },
+    {
+      "kind": "straight",
+      "gx": -2,
+      "gz": 0,
+      "dir": "W"
+    },
+    {
+      "kind": "straight",
+      "gx": -3,
+      "gz": 0,
+      "dir": "W"
+    },
+    {
+      "kind": "curve",
+      "gx": -4,
+      "gz": 0,
+      "from": "W",
+      "to": "S"
+    },
+    {
+      "kind": "straight",
+      "gx": -4,
+      "gz": -1,
+      "dir": "S"
+    },
+    {
+      "kind": "junction",
+      "gx": -4,
+      "gz": -2,
+      "dir": "S",
+      "exits": [
+        {
+          "dir": "S"
+        },
+        {
+          "dir": "E"
+        }
+      ],
+      "initialExit": 0
+    },
+    {
+      "kind": "straight",
+      "gx": -3,
+      "gz": -2,
+      "dir": "E"
+    },
+    {
+      "kind": "curve",
+      "gx": -2,
+      "gz": -2,
+      "from": "E",
+      "to": "S"
+    },
+    {
+      "kind": "straight",
+      "gx": -2,
+      "gz": -3,
+      "dir": "S"
+    },
+    {
+      "kind": "station",
+      "gx": -2,
+      "gz": -4,
+      "dir": "S",
+      "order": 1,
+      "colorIndex": 0,
+      "dot": false
+    },
+    {
+      "kind": "straight",
+      "gx": -4,
+      "gz": -3,
+      "dir": "S"
+    },
+    {
+      "kind": "straight",
+      "gx": -4,
+      "gz": -4,
+      "dir": "S"
+    },
+    {
+      "kind": "straight",
+      "gx": -4,
+      "gz": -5,
+      "dir": "S"
+    },
+    {
+      "kind": "junction",
+      "gx": -4,
+      "gz": -6,
+      "dir": "S",
+      "exits": [
+        {
+          "dir": "S"
+        },
+        {
+          "dir": "E"
+        }
+      ],
+      "initialExit": 1
+    },
+    {
+      "kind": "straight",
+      "gx": -3,
+      "gz": -6,
+      "dir": "E"
+    },
+    {
+      "kind": "straight",
+      "gx": -2,
+      "gz": -6,
+      "dir": "E"
+    },
+    {
+      "kind": "curve",
+      "gx": -1,
+      "gz": -6,
+      "from": "E",
+      "to": "N"
+    },
+    {
+      "kind": "straight",
+      "gx": -1,
+      "gz": -5,
+      "dir": "N"
+    },
+    {
+      "kind": "station",
+      "gx": -1,
+      "gz": -4,
+      "dir": "N",
+      "order": 2,
+      "colorIndex": 1,
+      "dot": false
+    },
+    {
+      "kind": "curve",
+      "gx": -4,
+      "gz": -7,
+      "from": "S",
+      "to": "E"
+    },
+    {
+      "kind": "straight",
+      "gx": -3,
+      "gz": -7,
+      "dir": "E"
+    },
+    {
+      "kind": "junction",
+      "gx": -2,
+      "gz": -7,
+      "dir": "E",
+      "exits": [
+        {
+          "dir": "E"
+        },
+        {
+          "dir": "S"
+        }
+      ],
+      "initialExit": 1
+    },
+    {
+      "kind": "straight",
+      "gx": -2,
+      "gz": -8,
+      "dir": "S"
+    },
+    {
+      "kind": "curve",
+      "gx": -2,
+      "gz": -9,
+      "from": "S",
+      "to": "E"
+    },
+    {
+      "kind": "station",
+      "gx": -1,
+      "gz": -9,
+      "dir": "E",
+      "order": 3,
+      "colorIndex": 2,
+      "dot": false
+    },
+    {
+      "kind": "curve",
+      "gx": -1,
+      "gz": -7,
+      "from": "E",
+      "to": "S"
+    },
+    {
+      "kind": "curve",
+      "gx": -1,
+      "gz": -8,
+      "from": "S",
+      "to": "E"
+    },
+    {
+      "kind": "straight",
+      "gx": 0,
+      "gz": -8,
+      "dir": "E"
+    },
+    {
+      "kind": "curve",
+      "gx": 1,
+      "gz": -8,
+      "from": "E",
+      "to": "N"
+    },
+    {
+      "kind": "straight",
+      "gx": 1,
+      "gz": -7,
+      "dir": "N"
+    },
+    {
+      "kind": "curve",
+      "gx": 1,
+      "gz": -6,
+      "from": "N",
+      "to": "E"
+    },
+    {
+      "kind": "junction",
+      "gx": 2,
+      "gz": -6,
+      "dir": "E",
+      "exits": [
+        {
+          "dir": "E"
+        },
+        {
+          "dir": "S"
+        }
+      ],
+      "initialExit": 0
+    },
+    {
+      "kind": "straight",
+      "gx": 2,
+      "gz": -7,
+      "dir": "S"
+    },
+    {
+      "kind": "curve",
+      "gx": 2,
+      "gz": -8,
+      "from": "S",
+      "to": "E"
+    },
+    {
+      "kind": "station",
+      "gx": 3,
+      "gz": -8,
+      "dir": "E",
+      "order": 4,
+      "colorIndex": 3,
+      "dot": false
+    },
+    {
+      "kind": "straight",
+      "gx": 3,
+      "gz": -6,
+      "dir": "E"
+    },
+    {
+      "kind": "straight",
+      "gx": 4,
+      "gz": -6,
+      "dir": "E"
+    },
+    {
+      "kind": "straight",
+      "gx": 5,
+      "gz": -6,
+      "dir": "E"
+    },
+    {
+      "kind": "straight",
+      "gx": 6,
+      "gz": -6,
+      "dir": "E"
+    },
+    {
+      "kind": "junction",
+      "gx": 7,
+      "gz": -6,
+      "dir": "E",
+      "exits": [
+        {
+          "dir": "E"
+        },
+        {
+          "dir": "S"
+        }
+      ],
+      "initialExit": 1
+    },
+    {
+      "kind": "straight",
+      "gx": 7,
+      "gz": -7,
+      "dir": "S"
+    },
+    {
+      "kind": "curve",
+      "gx": 7,
+      "gz": -8,
+      "from": "S",
+      "to": "E"
+    },
+    {
+      "kind": "straight",
+      "gx": 8,
+      "gz": -8,
+      "dir": "E"
+    },
+    {
+      "kind": "station",
+      "gx": 9,
+      "gz": -8,
+      "dir": "E",
+      "order": 5,
+      "colorIndex": 4,
+      "dot": false
+    },
+    {
+      "kind": "straight",
+      "gx": 8,
+      "gz": -6,
+      "dir": "E"
+    },
+    {
+      "kind": "station",
+      "gx": 9,
+      "gz": -6,
+      "dir": "E",
+      "order": 6,
+      "colorIndex": 5,
+      "dot": false
+    }
+  ],
+  "scenery": [
+    {
+      "model": "stone_largeA",
+      "x": -8.4,
+      "y": 0,
+      "z": -17.1,
+      "rotY": 310,
+      "scale": 1.15
+    },
+    {
+      "model": "tree_autumn",
+      "x": -10.7,
+      "y": 0,
+      "z": -13.4,
+      "rotY": 42,
+      "scale": 0.95
+    },
+    {
+      "model": "stone_largeA",
+      "x": 3.2,
+      "y": 0,
+      "z": -4.3,
+      "rotY": 108,
+      "scale": 0.9
+    },
+    {
+      "model": "tree_pineRoundA",
+      "x": 10.8,
+      "y": 0,
+      "z": -20.8,
+      "rotY": 270,
+      "scale": 1.2
+    },
+    {
+      "model": "tree_pineTallA",
+      "x": 12.9,
+      "y": 0,
+      "z": -1.6,
+      "rotY": 215,
+      "scale": 1.05
+    },
+    {
+      "model": "cliff_large_rock",
+      "x": 23.6,
+      "y": 0,
+      "z": -18.2,
+      "rotY": 337,
+      "scale": 1.25
+    },
+    {
+      "model": "stone_largeA",
+      "x": -3,
+      "y": 0,
+      "z": -21,
+      "rotY": 251,
+      "scale": 1.05
+    },
+    {
+      "model": "tree_oak",
+      "x": 7.7,
+      "y": 0,
+      "z": -21.4,
+      "rotY": 133,
+      "scale": 1.1
+    },
+    {
+      "model": "tree_pineDefaultA",
+      "x": -12,
+      "y": 0,
+      "z": 5.8,
+      "rotY": 136,
+      "scale": 1.25
+    },
+    {
+      "model": "tree_pineDefaultB",
+      "x": -10.1,
+      "y": 0,
+      "z": -15.8,
+      "rotY": 22,
+      "scale": 1.2
+    },
+    {
+      "model": "tree_plateau",
+      "x": -10.5,
+      "y": 0,
+      "z": -8,
+      "rotY": 43,
+      "scale": 0.95
+    },
+    {
+      "model": "tree_default",
+      "x": 23.2,
+      "y": 0,
+      "z": -16,
+      "rotY": 0,
+      "scale": 0.95
+    },
+    {
+      "model": "rock_largeA",
+      "x": 19,
+      "y": 0,
+      "z": 1.2,
+      "rotY": 222,
+      "scale": 0.95
+    },
+    {
+      "model": "tree_default",
+      "x": 6.3,
+      "y": 0,
+      "z": -19.1,
+      "rotY": 56,
+      "scale": 1
+    },
+    {
+      "model": "tree_autumn",
+      "x": 21.7,
+      "y": 0,
+      "z": -6.9,
+      "rotY": 53,
+      "scale": 1.1
+    },
+    {
+      "model": "tree_autumn",
+      "x": 22,
+      "y": 0,
+      "z": -2.4,
+      "rotY": 60,
+      "scale": 0.95
+    },
+    {
+      "model": "flower_redA",
+      "x": -7.9,
+      "y": 0,
+      "z": -21.6,
+      "rotY": 120,
+      "scale": 1
+    },
+    {
+      "model": "flower_redA",
+      "x": -9.9,
+      "y": 0,
+      "z": -20.4,
+      "rotY": 49,
+      "scale": 1.25
+    },
+    {
+      "model": "flower_yellowA",
+      "x": 9.5,
+      "y": 0,
+      "z": -8.3,
+      "rotY": 248,
+      "scale": 1.2
+    },
+    {
+      "model": "rock_smallA",
+      "x": 12.9,
+      "y": 0,
+      "z": -4.9,
+      "rotY": 135,
+      "scale": 0.85
+    },
+    {
+      "model": "tree_pineRoundA",
+      "x": 12.7,
+      "y": 0,
+      "z": -0.2,
+      "rotY": 326,
+      "scale": 1.05
+    },
+    {
+      "model": "rock_largeB",
+      "x": 18.4,
+      "y": 0,
+      "z": -6.5,
+      "rotY": 23,
+      "scale": 1.05
+    },
+    {
+      "model": "tree_pineTallB",
+      "x": 6.7,
+      "y": 0,
+      "z": 4.4,
+      "rotY": 262,
+      "scale": 1.15
+    },
+    {
+      "model": "stone_largeA",
+      "x": 17.7,
+      "y": 0,
+      "z": -22,
+      "rotY": 27,
+      "scale": 1.15
+    },
+    {
+      "model": "tree_pineRoundA",
+      "x": 23,
+      "y": 0,
+      "z": -10.5,
+      "rotY": 346,
+      "scale": 0.85
+    },
+    {
+      "model": "cliff_large_rock",
+      "x": 21.6,
+      "y": 0,
+      "z": 6.2,
+      "rotY": 289,
+      "scale": 0.95
+    },
+    {
+      "model": "tree_pineRoundA",
+      "x": 16.7,
+      "y": 0,
+      "z": -6,
+      "rotY": 191,
+      "scale": 1.1
+    },
+    {
+      "model": "cliff_block_rock",
+      "x": -8.3,
+      "y": 0,
+      "z": 6.8,
+      "rotY": 4,
+      "scale": 1.3
+    },
+    {
+      "model": "tree_detailed",
+      "x": 1.6,
+      "y": 0,
+      "z": -7.1,
+      "rotY": 286,
+      "scale": 1.2
+    },
+    {
+      "model": "rock_largeB",
+      "x": 8.2,
+      "y": 0,
+      "z": -6.3,
+      "rotY": 71,
+      "scale": 1.05
+    },
+    {
+      "model": "plant_bushLarge",
+      "x": 22.1,
+      "y": 0,
+      "z": 0.7,
+      "rotY": 246,
+      "scale": 0.95
+    },
+    {
+      "model": "stone_largeA",
+      "x": -6.6,
+      "y": 0,
+      "z": 6.6,
+      "rotY": 113,
+      "scale": 1.05
+    },
+    {
+      "model": "cliff_top_rock",
+      "x": 22.8,
+      "y": 0,
+      "z": -1.3,
+      "rotY": 277,
+      "scale": 0.85
+    },
+    {
+      "model": "rock_largeA",
+      "x": -11.8,
+      "y": 0,
+      "z": 4.5,
+      "rotY": 90,
+      "scale": 1.2
+    },
+    {
+      "model": "tree_pineDefaultA",
+      "x": 11.5,
+      "y": 0,
+      "z": -9.1,
+      "rotY": 273,
+      "scale": 1.1
+    },
+    {
+      "model": "cliff_slope_rock",
+      "x": 22.1,
+      "y": 0,
+      "z": 1,
+      "rotY": 79,
+      "scale": 1.05
+    },
+    {
+      "model": "tree_pineDefaultA",
+      "x": -8.4,
+      "y": 0,
+      "z": 6.8,
+      "rotY": 83,
+      "scale": 0.95
+    },
+    {
+      "model": "tree_autumn",
+      "x": 14.3,
+      "y": 0,
+      "z": 1,
+      "rotY": 95,
+      "scale": 1
+    },
+    {
+      "model": "plant_bushDetailed",
+      "x": -4.8,
+      "y": 0,
+      "z": 2.9,
+      "rotY": 81,
+      "scale": 1.1
+    },
+    {
+      "model": "tree_detailed",
+      "x": 12,
+      "y": 0,
+      "z": 2.9,
+      "rotY": 209,
+      "scale": 1.25
+    },
+    {
+      "model": "tree_pineTallA",
+      "x": 22.7,
+      "y": 0,
+      "z": -2,
+      "rotY": 79,
+      "scale": 1.25
+    },
+    {
+      "model": "tree_pineDefaultA",
+      "x": 17.1,
+      "y": 0,
+      "z": -21.2,
+      "rotY": 212,
+      "scale": 1
+    },
+    {
+      "model": "tree_pineRoundA",
+      "x": -9.2,
+      "y": 0,
+      "z": -20.9,
+      "rotY": 33,
+      "scale": 1.25
+    },
+    {
+      "model": "rock_smallB",
+      "x": -13.2,
+      "y": 0,
+      "z": -20.4,
+      "rotY": 235,
+      "scale": 1.1
+    },
+    {
+      "model": "flower_redA",
+      "x": 21.4,
+      "y": 0,
+      "z": -12.9,
+      "rotY": 186,
+      "scale": 0.95
+    },
+    {
+      "model": "tree_oak",
+      "x": 9.3,
+      "y": 0,
+      "z": -6.5,
+      "rotY": 109,
+      "scale": 1.05
+    },
+    {
+      "model": "rock_smallA",
+      "x": 18.6,
+      "y": 0,
+      "z": 4.3,
+      "rotY": 238,
+      "scale": 0.95
+    },
+    {
+      "model": "flower_yellowA",
+      "x": 18.6,
+      "y": 0,
+      "z": -20.1,
+      "rotY": 294,
+      "scale": 1.2
+    },
+    {
+      "model": "plant_bushDetailed",
+      "x": 21.6,
+      "y": 0,
+      "z": -3.1,
+      "rotY": 89,
+      "scale": 0.9
+    },
+    {
+      "model": "rock_smallA",
+      "x": 18.3,
+      "y": 0,
+      "z": 3.8,
+      "rotY": 215,
+      "scale": 0.9
+    },
+    {
+      "model": "tree_default",
+      "x": -2.5,
+      "y": 0,
+      "z": -21.5,
+      "rotY": 252,
+      "scale": 0.9
+    },
+    {
+      "model": "tree_plateau",
+      "x": 15.9,
+      "y": 0,
+      "z": -0.5,
+      "rotY": 282,
+      "scale": 0.95
+    },
+    {
+      "model": "tree_pineTallB",
+      "x": -9.6,
+      "y": 0,
+      "z": 5.7,
+      "rotY": 155,
+      "scale": 1.2
+    },
+    {
+      "model": "tree_plateau",
+      "x": 15.4,
+      "y": 0,
+      "z": -3.3,
+      "rotY": 3,
+      "scale": 1.25
+    },
+    {
+      "model": "tree_oak",
+      "x": 17.7,
+      "y": 0,
+      "z": -21.8,
+      "rotY": 88,
+      "scale": 1.15
+    },
+    {
+      "model": "tree_pineDefaultA",
+      "x": 9.7,
+      "y": 0,
+      "z": 6.9,
+      "rotY": 351,
+      "scale": 1.05
+    },
+    {
+      "model": "cliff_block_rock",
+      "x": -12.2,
+      "y": 0,
+      "z": -15.7,
+      "rotY": 1,
+      "scale": 1.1
+    },
+    {
+      "model": "rock_largeA",
+      "x": 8.9,
+      "y": 0,
+      "z": -22.6,
+      "rotY": 259,
+      "scale": 0.9
+    },
+    {
+      "model": "flower_yellowA",
+      "x": 8.4,
+      "y": 0,
+      "z": -9,
+      "rotY": 169,
+      "scale": 1.1
+    },
+    {
+      "model": "stone_largeB",
+      "x": -9.6,
+      "y": 0,
+      "z": -22.6,
+      "rotY": 39,
+      "scale": 1.05
+    },
+    {
+      "model": "tree_default",
+      "x": 13.9,
+      "y": 0,
+      "z": -3.8,
+      "rotY": 304,
+      "scale": 0.9
+    },
+    {
+      "model": "rock_largeC",
+      "x": 20.7,
+      "y": 0,
+      "z": 0.4,
+      "rotY": 244,
+      "scale": 0.85
+    },
+    {
+      "model": "grass_large",
+      "x": -13.3,
+      "y": 0,
+      "z": -20.8,
+      "rotY": 77,
+      "scale": 1.1
+    },
+    {
+      "model": "tree_pineRoundA",
+      "x": 14.6,
+      "y": 0,
+      "z": -4.2,
+      "rotY": 48,
+      "scale": 1.2
+    },
+    {
+      "model": "plant_bushLarge",
+      "x": 17.6,
+      "y": 0,
+      "z": -1.9,
+      "rotY": 60,
+      "scale": 1.2
+    },
+    {
+      "model": "plant_bushDetailed",
+      "x": -12,
+      "y": 0,
+      "z": 6.9,
+      "rotY": 4,
+      "scale": 0.9
+    },
+    {
+      "model": "plant_bushDetailed",
+      "x": 23.4,
+      "y": 0,
+      "z": 4.6,
+      "rotY": 256,
+      "scale": 0.9
+    },
+    {
+      "model": "flower_yellowA",
+      "x": -12.9,
+      "y": 0,
+      "z": -4.9,
+      "rotY": 174,
+      "scale": 1.05
+    },
+    {
+      "model": "tree_pineTallA",
+      "x": 4.5,
+      "y": 0,
+      "z": -21.1,
+      "rotY": 140,
+      "scale": 0.95
+    },
+    {
+      "model": "tree_pineRoundA",
+      "x": -8.5,
+      "y": 0,
+      "z": 5.3,
+      "rotY": 270,
+      "scale": 0.85
+    },
+    {
+      "model": "tree_plateau",
+      "x": 8.8,
+      "y": 0,
+      "z": 3.9,
+      "rotY": 255,
+      "scale": 1.2
+    },
+    {
+      "model": "plant_bushDetailed",
+      "x": -9.4,
+      "y": 0,
+      "z": -22.9,
+      "rotY": 260,
+      "scale": 0.9
+    },
+    {
+      "model": "tree_oak",
+      "x": -7.1,
+      "y": 0,
+      "z": -20.3,
+      "rotY": 220,
+      "scale": 1
+    },
+    {
+      "model": "flower_redA",
+      "x": 9.2,
+      "y": 0,
+      "z": 6.6,
+      "rotY": 130,
+      "scale": 0.95
+    },
+    {
+      "model": "tree_autumn",
+      "x": -6.7,
+      "y": 0,
+      "z": -21,
+      "rotY": 17,
+      "scale": 1.15
+    },
+    {
+      "model": "cliff_large_rock",
+      "x": -13.9,
+      "y": 0,
+      "z": 1,
+      "rotY": 36,
+      "scale": 1.3
+    },
+    {
+      "model": "plant_bushDetailed",
+      "x": -4.7,
+      "y": 0,
+      "z": 3.8,
+      "rotY": 76,
+      "scale": 1.1
+    },
+    {
+      "model": "tree_plateau",
+      "x": 20.8,
+      "y": 0,
+      "z": -11.7,
+      "rotY": 24,
+      "scale": 1
+    },
+    {
+      "model": "cliff_top_rock",
+      "x": 3.8,
+      "y": 0,
+      "z": -22.9,
+      "rotY": 197,
+      "scale": 0.95
+    },
+    {
+      "model": "flower_yellowA",
+      "x": 23.5,
+      "y": 0,
+      "z": -4.7,
+      "rotY": 200,
+      "scale": 0.9
+    },
+    {
+      "model": "stone_largeB",
+      "x": 9.5,
+      "y": 0,
+      "z": -17.2,
+      "rotY": 238,
+      "scale": 1.2
+    },
+    {
+      "model": "stone_largeB",
+      "x": -9.9,
+      "y": 0,
+      "z": 4.1,
+      "rotY": 203,
+      "scale": 1.1
+    },
+    {
+      "model": "flower_redA",
+      "x": -7.1,
+      "y": 0,
+      "z": 5,
+      "rotY": 324,
+      "scale": 0.95
+    },
+    {
+      "model": "flower_yellowA",
+      "x": 18.3,
+      "y": 0,
+      "z": -3.4,
+      "rotY": 163,
+      "scale": 1.15
+    },
+    {
+      "model": "tree_default",
+      "x": 8.5,
+      "y": 0,
+      "z": -21.9,
+      "rotY": 259,
+      "scale": 1.05
+    },
+    {
+      "model": "tree_plateau",
+      "x": 20.1,
+      "y": 0,
+      "z": 4.5,
+      "rotY": 160,
+      "scale": 0.95
+    },
+    {
+      "model": "stone_largeB",
+      "x": 17.7,
+      "y": 0,
+      "z": 2.8,
+      "rotY": 341,
+      "scale": 1.15
+    },
+    {
+      "model": "tree_autumn",
+      "x": 12.2,
+      "y": 0,
+      "z": -18.9,
+      "rotY": 255,
+      "scale": 0.95
+    },
+    {
+      "model": "tree_default",
+      "x": 23.5,
+      "y": 0,
+      "z": -5.7,
+      "rotY": 224,
+      "scale": 1.25
+    },
+    {
+      "model": "cliff_top_rock",
+      "x": 22.7,
+      "y": 0,
+      "z": 5.5,
+      "rotY": 41,
+      "scale": 1.3
+    },
+    {
+      "model": "rock_smallB",
+      "x": -13.5,
+      "y": 0,
+      "z": -12.8,
+      "rotY": 251,
+      "scale": 0.9
+    },
+    {
+      "model": "tree_pineTallA",
+      "x": 11,
+      "y": 0,
+      "z": -5.6,
+      "rotY": 241,
+      "scale": 1.05
+    },
+    {
+      "model": "tree_plateau",
+      "x": -13.6,
+      "y": 0,
+      "z": 4.1,
+      "rotY": 27,
+      "scale": 1
+    },
+    {
+      "model": "tree_autumn",
+      "x": 22.5,
+      "y": 0,
+      "z": 6.6,
+      "rotY": 332,
+      "scale": 1.2
+    },
+    {
+      "model": "grass_large",
+      "x": 23.8,
+      "y": 0,
+      "z": -9.7,
+      "rotY": 274,
+      "scale": 0.9
+    },
+    {
+      "model": "tree_pineDefaultB",
+      "x": -12.8,
+      "y": 0,
+      "z": 2.6,
+      "rotY": 337,
+      "scale": 0.9
+    },
+    {
+      "model": "stone_largeA",
+      "x": 8.8,
+      "y": 0,
+      "z": -16.9,
+      "rotY": 107,
+      "scale": 0.9
+    },
+    {
+      "model": "flower_redA",
+      "x": 15.4,
+      "y": 0,
+      "z": 0.7,
+      "rotY": 337,
+      "scale": 1.1
+    },
+    {
+      "model": "tree_pineDefaultA",
+      "x": 1,
+      "y": 0,
+      "z": -5.7,
+      "rotY": 37,
+      "scale": 1.25
+    },
+    {
+      "model": "flower_redA",
+      "x": -13.2,
+      "y": 0,
+      "z": -10.4,
+      "rotY": 67,
+      "scale": 0.9
+    },
+    {
+      "model": "tree_pineTallB",
+      "x": 21.8,
+      "y": 0,
+      "z": -13.6,
+      "rotY": 4,
+      "scale": 1.25
+    },
+    {
+      "model": "grass_large",
+      "x": -1.3,
+      "y": 0,
+      "z": 6.4,
+      "rotY": 273,
+      "scale": 1.05
+    }
+  ],
+  "roads": [
+    {
+      "gx": -9,
+      "gz": -12,
+      "piece": "bend",
+      "yaw": 90
+    },
+    {
+      "gx": -9,
+      "gz": -11,
+      "piece": "straight",
+      "yaw": 90
+    },
+    {
+      "gx": -9,
+      "gz": -10,
+      "piece": "straight",
+      "yaw": 90
+    },
+    {
+      "gx": -9,
+      "gz": -9,
+      "piece": "straight",
+      "yaw": 90
+    },
+    {
+      "gx": -9,
+      "gz": -8,
+      "piece": "tee",
+      "yaw": 90
+    },
+    {
+      "gx": -9,
+      "gz": -7,
+      "piece": "straight",
+      "yaw": 90
+    },
+    {
+      "gx": -9,
+      "gz": -6,
+      "piece": "straight",
+      "yaw": 90
+    },
+    {
+      "gx": -9,
+      "gz": -5,
+      "piece": "straight",
+      "yaw": 90
+    },
+    {
+      "gx": -9,
+      "gz": -4,
+      "piece": "tee",
+      "yaw": 90
+    },
+    {
+      "gx": -9,
+      "gz": -3,
+      "piece": "straight",
+      "yaw": 90
+    },
+    {
+      "gx": -9,
+      "gz": -2,
+      "piece": "straight",
+      "yaw": 90
+    },
+    {
+      "gx": -9,
+      "gz": -1,
+      "piece": "straight",
+      "yaw": 90
+    },
+    {
+      "gx": -9,
+      "gz": 0,
+      "piece": "tee",
+      "yaw": 90
+    },
+    {
+      "gx": -9,
+      "gz": 1,
+      "piece": "straight",
+      "yaw": 90
+    },
+    {
+      "gx": -9,
+      "gz": 2,
+      "piece": "straight",
+      "yaw": 90
+    },
+    {
+      "gx": -9,
+      "gz": 3,
+      "piece": "straight",
+      "yaw": 90
+    },
+    {
+      "gx": -9,
+      "gz": 4,
+      "piece": "bend",
+      "yaw": 180
+    },
+    {
+      "gx": -8,
+      "gz": -12,
+      "piece": "straight",
+      "yaw": 0
+    },
+    {
+      "gx": -8,
+      "gz": -8,
+      "piece": "straight",
+      "yaw": 0
+    },
+    {
+      "gx": -8,
+      "gz": -4,
+      "piece": "straight",
+      "yaw": 0
+    },
+    {
+      "gx": -8,
+      "gz": 0,
+      "piece": "straight",
+      "yaw": 0
+    },
+    {
+      "gx": -8,
+      "gz": 4,
+      "piece": "straight",
+      "yaw": 0
+    },
+    {
+      "gx": -7,
+      "gz": -12,
+      "piece": "straight",
+      "yaw": 0
+    },
+    {
+      "gx": -7,
+      "gz": -8,
+      "piece": "straight",
+      "yaw": 0
+    },
+    {
+      "gx": -7,
+      "gz": -4,
+      "piece": "straight",
+      "yaw": 0
+    },
+    {
+      "gx": -7,
+      "gz": 0,
+      "piece": "straight",
+      "yaw": 0
+    },
+    {
+      "gx": -7,
+      "gz": 4,
+      "piece": "straight",
+      "yaw": 0
+    },
+    {
+      "gx": -6,
+      "gz": -12,
+      "piece": "straight",
+      "yaw": 0
+    },
+    {
+      "gx": -6,
+      "gz": -8,
+      "piece": "straight",
+      "yaw": 0
+    },
+    {
+      "gx": -6,
+      "gz": -4,
+      "piece": "straight",
+      "yaw": 0
+    },
+    {
+      "gx": -6,
+      "gz": 0,
+      "piece": "straight",
+      "yaw": 0
+    },
+    {
+      "gx": -6,
+      "gz": 4,
+      "piece": "straight",
+      "yaw": 0
+    },
+    {
+      "gx": -5,
+      "gz": -12,
+      "piece": "tee",
+      "yaw": 0
+    },
+    {
+      "gx": -5,
+      "gz": -11,
+      "piece": "straight",
+      "yaw": 90
+    },
+    {
+      "gx": -5,
+      "gz": -10,
+      "piece": "straight",
+      "yaw": 90
+    },
+    {
+      "gx": -5,
+      "gz": -9,
+      "piece": "straight",
+      "yaw": 90
+    },
+    {
+      "gx": -5,
+      "gz": -8,
+      "piece": "tee",
+      "yaw": 270
+    },
+    {
+      "gx": -5,
+      "gz": -7,
+      "piece": "straight",
+      "yaw": 90
+    },
+    {
+      "gx": -5,
+      "gz": -6,
+      "piece": "straight",
+      "yaw": 90
+    },
+    {
+      "gx": -5,
+      "gz": -5,
+      "piece": "straight",
+      "yaw": 90
+    },
+    {
+      "gx": -5,
+      "gz": -4,
+      "piece": "tee",
+      "yaw": 270
+    },
+    {
+      "gx": -5,
+      "gz": -3,
+      "piece": "straight",
+      "yaw": 90
+    },
+    {
+      "gx": -5,
+      "gz": -2,
+      "piece": "straight",
+      "yaw": 90
+    },
+    {
+      "gx": -5,
+      "gz": -1,
+      "piece": "straight",
+      "yaw": 90
+    },
+    {
+      "gx": -5,
+      "gz": 0,
+      "piece": "tee",
+      "yaw": 270
+    },
+    {
+      "gx": -5,
+      "gz": 1,
+      "piece": "straight",
+      "yaw": 90
+    },
+    {
+      "gx": -5,
+      "gz": 2,
+      "piece": "straight",
+      "yaw": 90
+    },
+    {
+      "gx": -5,
+      "gz": 3,
+      "piece": "straight",
+      "yaw": 90
+    },
+    {
+      "gx": -5,
+      "gz": 4,
+      "piece": "tee",
+      "yaw": 180
+    },
+    {
+      "gx": -4,
+      "gz": -12,
+      "piece": "straight",
+      "yaw": 0
+    },
+    {
+      "gx": -4,
+      "gz": 4,
+      "piece": "straight",
+      "yaw": 0
+    },
+    {
+      "gx": -3,
+      "gz": -12,
+      "piece": "straight",
+      "yaw": 0
+    },
+    {
+      "gx": -3,
+      "gz": 4,
+      "piece": "straight",
+      "yaw": 0
+    },
+    {
+      "gx": -2,
+      "gz": -12,
+      "piece": "straight",
+      "yaw": 0
+    },
+    {
+      "gx": -2,
+      "gz": 4,
+      "piece": "straight",
+      "yaw": 0
+    },
+    {
+      "gx": -1,
+      "gz": -12,
+      "piece": "straight",
+      "yaw": 0
+    },
+    {
+      "gx": -1,
+      "gz": 4,
+      "piece": "straight",
+      "yaw": 0
+    },
+    {
+      "gx": 0,
+      "gz": -12,
+      "piece": "straight",
+      "yaw": 0
+    },
+    {
+      "gx": 0,
+      "gz": 4,
+      "piece": "straight",
+      "yaw": 0
+    },
+    {
+      "gx": 1,
+      "gz": -12,
+      "piece": "straight",
+      "yaw": 0
+    },
+    {
+      "gx": 1,
+      "gz": 4,
+      "piece": "straight",
+      "yaw": 0
+    },
+    {
+      "gx": 2,
+      "gz": -12,
+      "piece": "straight",
+      "yaw": 0
+    },
+    {
+      "gx": 2,
+      "gz": 4,
+      "piece": "straight",
+      "yaw": 0
+    },
+    {
+      "gx": 3,
+      "gz": -12,
+      "piece": "straight",
+      "yaw": 0
+    },
+    {
+      "gx": 3,
+      "gz": 4,
+      "piece": "straight",
+      "yaw": 0
+    },
+    {
+      "gx": 4,
+      "gz": -12,
+      "piece": "straight",
+      "yaw": 0
+    },
+    {
+      "gx": 4,
+      "gz": 4,
+      "piece": "straight",
+      "yaw": 0
+    },
+    {
+      "gx": 5,
+      "gz": -12,
+      "piece": "straight",
+      "yaw": 0
+    },
+    {
+      "gx": 5,
+      "gz": 4,
+      "piece": "straight",
+      "yaw": 0
+    },
+    {
+      "gx": 6,
+      "gz": -12,
+      "piece": "straight",
+      "yaw": 0
+    },
+    {
+      "gx": 6,
+      "gz": 4,
+      "piece": "straight",
+      "yaw": 0
+    },
+    {
+      "gx": 7,
+      "gz": -12,
+      "piece": "straight",
+      "yaw": 0
+    },
+    {
+      "gx": 7,
+      "gz": -4,
+      "piece": "bend",
+      "yaw": 90
+    },
+    {
+      "gx": 7,
+      "gz": -3,
+      "piece": "straight",
+      "yaw": 90
+    },
+    {
+      "gx": 7,
+      "gz": -2,
+      "piece": "straight",
+      "yaw": 90
+    },
+    {
+      "gx": 7,
+      "gz": -1,
+      "piece": "straight",
+      "yaw": 90
+    },
+    {
+      "gx": 7,
+      "gz": 0,
+      "piece": "tee",
+      "yaw": 90
+    },
+    {
+      "gx": 7,
+      "gz": 1,
+      "piece": "straight",
+      "yaw": 90
+    },
+    {
+      "gx": 7,
+      "gz": 2,
+      "piece": "straight",
+      "yaw": 90
+    },
+    {
+      "gx": 7,
+      "gz": 3,
+      "piece": "straight",
+      "yaw": 90
+    },
+    {
+      "gx": 7,
+      "gz": 4,
+      "piece": "tee",
+      "yaw": 180
+    },
+    {
+      "gx": 8,
+      "gz": -12,
+      "piece": "straight",
+      "yaw": 0
+    },
+    {
+      "gx": 8,
+      "gz": -4,
+      "piece": "straight",
+      "yaw": 0
+    },
+    {
+      "gx": 8,
+      "gz": 0,
+      "piece": "straight",
+      "yaw": 0
+    },
+    {
+      "gx": 8,
+      "gz": 4,
+      "piece": "straight",
+      "yaw": 0
+    },
+    {
+      "gx": 9,
+      "gz": -12,
+      "piece": "straight",
+      "yaw": 0
+    },
+    {
+      "gx": 9,
+      "gz": -4,
+      "piece": "straight",
+      "yaw": 0
+    },
+    {
+      "gx": 9,
+      "gz": 0,
+      "piece": "straight",
+      "yaw": 0
+    },
+    {
+      "gx": 9,
+      "gz": 4,
+      "piece": "straight",
+      "yaw": 0
+    },
+    {
+      "gx": 10,
+      "gz": -12,
+      "piece": "straight",
+      "yaw": 0
+    },
+    {
+      "gx": 10,
+      "gz": -4,
+      "piece": "straight",
+      "yaw": 0
+    },
+    {
+      "gx": 10,
+      "gz": 0,
+      "piece": "straight",
+      "yaw": 0
+    },
+    {
+      "gx": 10,
+      "gz": 4,
+      "piece": "straight",
+      "yaw": 0
+    },
+    {
+      "gx": 11,
+      "gz": -12,
+      "piece": "tee",
+      "yaw": 0
+    },
+    {
+      "gx": 11,
+      "gz": -11,
+      "piece": "straight",
+      "yaw": 90
+    },
+    {
+      "gx": 11,
+      "gz": -10,
+      "piece": "straight",
+      "yaw": 90
+    },
+    {
+      "gx": 11,
+      "gz": -9,
+      "piece": "straight",
+      "yaw": 90
+    },
+    {
+      "gx": 11,
+      "gz": -8,
+      "piece": "tee",
+      "yaw": 90
+    },
+    {
+      "gx": 11,
+      "gz": -7,
+      "piece": "straight",
+      "yaw": 90
+    },
+    {
+      "gx": 11,
+      "gz": -6,
+      "piece": "straight",
+      "yaw": 90
+    },
+    {
+      "gx": 11,
+      "gz": -5,
+      "piece": "straight",
+      "yaw": 90
+    },
+    {
+      "gx": 11,
+      "gz": -4,
+      "piece": "cross",
+      "yaw": 0
+    },
+    {
+      "gx": 11,
+      "gz": -3,
+      "piece": "straight",
+      "yaw": 90
+    },
+    {
+      "gx": 11,
+      "gz": -2,
+      "piece": "straight",
+      "yaw": 90
+    },
+    {
+      "gx": 11,
+      "gz": -1,
+      "piece": "straight",
+      "yaw": 90
+    },
+    {
+      "gx": 11,
+      "gz": 0,
+      "piece": "cross",
+      "yaw": 0
+    },
+    {
+      "gx": 11,
+      "gz": 1,
+      "piece": "straight",
+      "yaw": 90
+    },
+    {
+      "gx": 11,
+      "gz": 2,
+      "piece": "straight",
+      "yaw": 90
+    },
+    {
+      "gx": 11,
+      "gz": 3,
+      "piece": "straight",
+      "yaw": 90
+    },
+    {
+      "gx": 11,
+      "gz": 4,
+      "piece": "tee",
+      "yaw": 180
+    },
+    {
+      "gx": 12,
+      "gz": -12,
+      "piece": "straight",
+      "yaw": 0
+    },
+    {
+      "gx": 12,
+      "gz": -8,
+      "piece": "straight",
+      "yaw": 0
+    },
+    {
+      "gx": 12,
+      "gz": -4,
+      "piece": "straight",
+      "yaw": 0
+    },
+    {
+      "gx": 12,
+      "gz": 0,
+      "piece": "straight",
+      "yaw": 0
+    },
+    {
+      "gx": 12,
+      "gz": 4,
+      "piece": "straight",
+      "yaw": 0
+    },
+    {
+      "gx": 13,
+      "gz": -12,
+      "piece": "straight",
+      "yaw": 0
+    },
+    {
+      "gx": 13,
+      "gz": -8,
+      "piece": "straight",
+      "yaw": 0
+    },
+    {
+      "gx": 13,
+      "gz": -4,
+      "piece": "straight",
+      "yaw": 0
+    },
+    {
+      "gx": 13,
+      "gz": 0,
+      "piece": "straight",
+      "yaw": 0
+    },
+    {
+      "gx": 13,
+      "gz": 4,
+      "piece": "straight",
+      "yaw": 0
+    },
+    {
+      "gx": 14,
+      "gz": -12,
+      "piece": "straight",
+      "yaw": 0
+    },
+    {
+      "gx": 14,
+      "gz": -8,
+      "piece": "straight",
+      "yaw": 0
+    },
+    {
+      "gx": 14,
+      "gz": -4,
+      "piece": "straight",
+      "yaw": 0
+    },
+    {
+      "gx": 14,
+      "gz": 0,
+      "piece": "straight",
+      "yaw": 0
+    },
+    {
+      "gx": 14,
+      "gz": 4,
+      "piece": "straight",
+      "yaw": 0
+    },
+    {
+      "gx": 15,
+      "gz": -12,
+      "piece": "bend",
+      "yaw": 0
+    },
+    {
+      "gx": 15,
+      "gz": -11,
+      "piece": "straight",
+      "yaw": 90
+    },
+    {
+      "gx": 15,
+      "gz": -10,
+      "piece": "straight",
+      "yaw": 90
+    },
+    {
+      "gx": 15,
+      "gz": -9,
+      "piece": "straight",
+      "yaw": 90
+    },
+    {
+      "gx": 15,
+      "gz": -8,
+      "piece": "tee",
+      "yaw": 270
+    },
+    {
+      "gx": 15,
+      "gz": -7,
+      "piece": "straight",
+      "yaw": 90
+    },
+    {
+      "gx": 15,
+      "gz": -6,
+      "piece": "straight",
+      "yaw": 90
+    },
+    {
+      "gx": 15,
+      "gz": -5,
+      "piece": "straight",
+      "yaw": 90
+    },
+    {
+      "gx": 15,
+      "gz": -4,
+      "piece": "tee",
+      "yaw": 270
+    },
+    {
+      "gx": 15,
+      "gz": -3,
+      "piece": "straight",
+      "yaw": 90
+    },
+    {
+      "gx": 15,
+      "gz": -2,
+      "piece": "straight",
+      "yaw": 90
+    },
+    {
+      "gx": 15,
+      "gz": -1,
+      "piece": "straight",
+      "yaw": 90
+    },
+    {
+      "gx": 15,
+      "gz": 0,
+      "piece": "tee",
+      "yaw": 270
+    },
+    {
+      "gx": 15,
+      "gz": 1,
+      "piece": "straight",
+      "yaw": 90
+    },
+    {
+      "gx": 15,
+      "gz": 2,
+      "piece": "straight",
+      "yaw": 90
+    },
+    {
+      "gx": 15,
+      "gz": 3,
+      "piece": "straight",
+      "yaw": 90
+    },
+    {
+      "gx": 15,
+      "gz": 4,
+      "piece": "bend",
+      "yaw": 270
+    }
+  ],
+  "buildings": [
+    {
+      "x": -20,
+      "z": -30,
+      "model": "CityKit/building-skyscraper-e",
+      "yaw": 0,
+      "foot": 1.88
+    },
+    {
+      "x": -20,
+      "z": -28,
+      "model": "CityKit/building-c",
+      "yaw": 0,
+      "foot": 1.88
+    },
+    {
+      "x": -20,
+      "z": -26,
+      "model": "CityKit/building-h",
+      "yaw": 0,
+      "foot": 1.88
+    },
+    {
+      "x": -20,
+      "z": -24,
+      "model": "CityKit/building-c",
+      "yaw": 90,
+      "foot": 1.88
+    },
+    {
+      "x": -20,
+      "z": -22,
+      "model": "CityKit/building-e",
+      "yaw": 180,
+      "foot": 1.88
+    },
+    {
+      "x": -20,
+      "z": -20,
+      "model": "CityKit/building-c",
+      "yaw": 270,
+      "foot": 1.88
+    },
+    {
+      "x": -20,
+      "z": -18,
+      "model": "CityKit/building-n",
+      "yaw": 0,
+      "foot": 1.88
+    },
+    {
+      "x": -20,
+      "z": -16,
+      "model": "CityKit/building-a",
+      "yaw": 180,
+      "foot": 1.88
+    },
+    {
+      "x": -20,
+      "z": -14,
+      "model": "CityKit/building-i",
+      "yaw": 180,
+      "foot": 1.88
+    },
+    {
+      "x": -20,
+      "z": -12,
+      "model": "CityKit/building-f",
+      "yaw": 180,
+      "foot": 1.88
+    },
+    {
+      "x": -20,
+      "z": -10,
+      "model": "CityKit/building-a",
+      "yaw": 90,
+      "foot": 1.88
+    },
+    {
+      "x": -20,
+      "z": -8,
+      "model": "CityKit/building-n",
+      "yaw": 90,
+      "foot": 1.88
+    },
+    {
+      "x": -20,
+      "z": -6,
+      "model": "CityKit/building-h",
+      "yaw": 270,
+      "foot": 1.88
+    },
+    {
+      "x": -20,
+      "z": -4,
+      "model": "CityKit/building-skyscraper-c",
+      "yaw": 0,
+      "foot": 1.88
+    },
+    {
+      "x": -20,
+      "z": -2,
+      "model": "CityKit/building-b",
+      "yaw": 90,
+      "foot": 1.88
+    },
+    {
+      "x": -20,
+      "z": 0,
+      "model": "CityKit/building-k",
+      "yaw": 180,
+      "foot": 1.88
+    },
+    {
+      "x": -20,
+      "z": 2,
+      "model": "CityKit/building-skyscraper-c",
+      "yaw": 90,
+      "foot": 1.88
+    },
+    {
+      "x": -20,
+      "z": 4,
+      "model": "CityKit/building-n",
+      "yaw": 180,
+      "foot": 1.88
+    },
+    {
+      "x": -20,
+      "z": 6,
+      "model": "CityKit/building-d",
+      "yaw": 90,
+      "foot": 1.88
+    },
+    {
+      "x": -20,
+      "z": 8,
+      "model": "CityKit/building-l",
+      "yaw": 180,
+      "foot": 1.88
+    },
+    {
+      "x": -20,
+      "z": 10,
+      "model": "CityKit/building-a",
+      "yaw": 90,
+      "foot": 1.88
+    },
+    {
+      "x": -20,
+      "z": 12,
+      "model": "CityKit/building-e",
+      "yaw": 270,
+      "foot": 1.88
+    },
+    {
+      "x": -18,
+      "z": -30,
+      "model": "CityKit/building-f",
+      "yaw": 90,
+      "foot": 1.88
+    },
+    {
+      "x": -18,
+      "z": -28,
+      "model": "CityKit/building-j",
+      "yaw": 270,
+      "foot": 1.88
+    },
+    {
+      "x": -18,
+      "z": -26,
+      "model": "CityKit/building-g",
+      "yaw": 180,
+      "foot": 1.88
+    },
+    {
+      "x": -18,
+      "z": 10,
+      "model": "CityKit/building-e",
+      "yaw": 0,
+      "foot": 1.88
+    },
+    {
+      "x": -18,
+      "z": 12,
+      "model": "CityKit/building-c",
+      "yaw": 180,
+      "foot": 1.88
+    },
+    {
+      "x": -16,
+      "z": -30,
+      "model": "CityKit/building-c",
+      "yaw": 0,
+      "foot": 1.88
+    },
+    {
+      "x": -16,
+      "z": -28,
+      "model": "CityKit/building-c",
+      "yaw": 270,
+      "foot": 1.88
+    },
+    {
+      "x": -16,
+      "z": -26,
+      "model": "CityKit/building-e",
+      "yaw": 0,
+      "foot": 1.88
+    },
+    {
+      "x": -16,
+      "z": -22,
+      "model": "CityKit/building-i",
+      "yaw": 270,
+      "foot": 1.88
+    },
+    {
+      "x": -15,
+      "z": -19,
+      "model": "CityKit/building-skyscraper-a",
+      "yaw": 90,
+      "foot": 3.8
+    },
+    {
+      "x": -16,
+      "z": -14,
+      "model": "CityKit/building-l",
+      "yaw": 180,
+      "foot": 1.88
+    },
+    {
+      "x": -16,
+      "z": -12,
+      "model": "CityKit/building-b",
+      "yaw": 270,
+      "foot": 1.88
+    },
+    {
+      "x": -16,
+      "z": -10,
+      "model": "CityKit/building-j",
+      "yaw": 90,
+      "foot": 1.88
+    },
+    {
+      "x": -16,
+      "z": -6,
+      "model": "CityKit/building-d",
+      "yaw": 180,
+      "foot": 1.88
+    },
+    {
+      "x": -16,
+      "z": -4,
+      "model": "CityKit/building-f",
+      "yaw": 0,
+      "foot": 1.88
+    },
+    {
+      "x": -16,
+      "z": -2,
+      "model": "CityKit/building-e",
+      "yaw": 90,
+      "foot": 1.88
+    },
+    {
+      "x": -16,
+      "z": 2,
+      "model": "CityKit/building-i",
+      "yaw": 180,
+      "foot": 1.88
+    },
+    {
+      "x": -15,
+      "z": 5,
+      "model": "CityKit/building-skyscraper-d",
+      "yaw": 0,
+      "foot": 3.8
+    },
+    {
+      "x": -15,
+      "z": 11,
+      "model": "CityKit/building-m",
+      "yaw": 180,
+      "foot": 3.8
+    },
+    {
+      "x": -14,
+      "z": -30,
+      "model": "CityKit/building-h",
+      "yaw": 0,
+      "foot": 1.88
+    },
+    {
+      "x": -14,
+      "z": -28,
+      "model": "CityKit/building-c",
+      "yaw": 0,
+      "foot": 1.88
+    },
+    {
+      "x": -14,
+      "z": -26,
+      "model": "CityKit/building-a",
+      "yaw": 90,
+      "foot": 1.88
+    },
+    {
+      "x": -14,
+      "z": -22,
+      "model": "CityKit/building-d",
+      "yaw": 180,
+      "foot": 1.88
+    },
+    {
+      "x": -14,
+      "z": -14,
+      "model": "CityKit/building-j",
+      "yaw": 0,
+      "foot": 1.88
+    },
+    {
+      "x": -14,
+      "z": -12,
+      "model": "CityKit/building-l",
+      "yaw": 0,
+      "foot": 1.88
+    },
+    {
+      "x": -14,
+      "z": -10,
+      "model": "CityKit/building-b",
+      "yaw": 180,
+      "foot": 1.88
+    },
+    {
+      "x": -14,
+      "z": -6,
+      "model": "CityKit/building-n",
+      "yaw": 90,
+      "foot": 1.88
+    },
+    {
+      "x": -14,
+      "z": -4,
+      "model": "CityKit/building-c",
+      "yaw": 90,
+      "foot": 1.88
+    },
+    {
+      "x": -14,
+      "z": -2,
+      "model": "CityKit/building-e",
+      "yaw": 270,
+      "foot": 1.88
+    },
+    {
+      "x": -14,
+      "z": 2,
+      "model": "CityKit/building-n",
+      "yaw": 0,
+      "foot": 1.88
+    },
+    {
+      "x": -12,
+      "z": -30,
+      "model": "CityKit/building-g",
+      "yaw": 0,
+      "foot": 1.88
+    },
+    {
+      "x": -12,
+      "z": -28,
+      "model": "CityKit/building-d",
+      "yaw": 270,
+      "foot": 1.88
+    },
+    {
+      "x": -12,
+      "z": -26,
+      "model": "CityKit/building-b",
+      "yaw": 0,
+      "foot": 1.88
+    },
+    {
+      "x": -12,
+      "z": -22,
+      "model": "CityKit/building-c",
+      "yaw": 270,
+      "foot": 1.88
+    },
+    {
+      "x": -12,
+      "z": -14,
+      "model": "CityKit/building-l",
+      "yaw": 180,
+      "foot": 1.88
+    },
+    {
+      "x": -12,
+      "z": -12,
+      "model": "CityKit/building-l",
+      "yaw": 180,
+      "foot": 1.88
+    },
+    {
+      "x": -12,
+      "z": -10,
+      "model": "CityKit/building-n",
+      "yaw": 0,
+      "foot": 1.88
+    },
+    {
+      "x": -12,
+      "z": -6,
+      "model": "CityKit/building-b",
+      "yaw": 270,
+      "foot": 1.88
+    },
+    {
+      "x": -12,
+      "z": -4,
+      "model": "CityKit/building-h",
+      "yaw": 90,
+      "foot": 1.88
+    },
+    {
+      "x": -12,
+      "z": -2,
+      "model": "CityKit/building-n",
+      "yaw": 90,
+      "foot": 1.88
+    },
+    {
+      "x": -12,
+      "z": 2,
+      "model": "CityKit/building-d",
+      "yaw": 180,
+      "foot": 1.88
+    },
+    {
+      "x": -12,
+      "z": 4,
+      "model": "CityKit/building-h",
+      "yaw": 90,
+      "foot": 1.88
+    },
+    {
+      "x": -12,
+      "z": 6,
+      "model": "CityKit/building-c",
+      "yaw": 0,
+      "foot": 1.88
+    },
+    {
+      "x": -12,
+      "z": 12,
+      "model": "CityKit/building-c",
+      "yaw": 90,
+      "foot": 1.88
+    },
+    {
+      "x": -10,
+      "z": -30,
+      "model": "CityKit/building-g",
+      "yaw": 0,
+      "foot": 1.88
+    },
+    {
+      "x": -10,
+      "z": -26,
+      "model": "CityKit/building-b",
+      "yaw": 180,
+      "foot": 1.88
+    },
+    {
+      "x": -10,
+      "z": 10,
+      "model": "CityKit/building-j",
+      "yaw": 270,
+      "foot": 1.88
+    },
+    {
+      "x": -10,
+      "z": 12,
+      "model": "CityKit/building-f",
+      "yaw": 180,
+      "foot": 1.88
+    },
+    {
+      "x": -8,
+      "z": -30,
+      "model": "CityKit/building-b",
+      "yaw": 90,
+      "foot": 1.88
+    },
+    {
+      "x": -8,
+      "z": -28,
+      "model": "CityKit/building-f",
+      "yaw": 90,
+      "foot": 1.88
+    },
+    {
+      "x": -8,
+      "z": -26,
+      "model": "CityKit/building-b",
+      "yaw": 180,
+      "foot": 1.88
+    },
+    {
+      "x": -8,
+      "z": -22,
+      "model": "CityKit/building-d",
+      "yaw": 90,
+      "foot": 1.88
+    },
+    {
+      "x": -8,
+      "z": -20,
+      "model": "CityKit/building-i",
+      "yaw": 0,
+      "foot": 1.88
+    },
+    {
+      "x": -8,
+      "z": -18,
+      "model": "CityKit/building-m",
+      "yaw": 90,
+      "foot": 1.88
+    },
+    {
+      "x": -7,
+      "z": 5,
+      "model": "CityKit/building-b",
+      "yaw": 0,
+      "foot": 3.8
+    },
+    {
+      "x": -8,
+      "z": 10,
+      "model": "CityKit/building-i",
+      "yaw": 0,
+      "foot": 1.88
+    },
+    {
+      "x": -8,
+      "z": 12,
+      "model": "CityKit/building-n",
+      "yaw": 180,
+      "foot": 1.88
+    },
+    {
+      "x": -5,
+      "z": -29,
+      "model": "CityKit/building-b",
+      "yaw": 180,
+      "foot": 3.8
+    },
+    {
+      "x": -6,
+      "z": -26,
+      "model": "CityKit/building-f",
+      "yaw": 0,
+      "foot": 1.88
+    },
+    {
+      "x": -6,
+      "z": -22,
+      "model": "CityKit/building-e",
+      "yaw": 180,
+      "foot": 1.88
+    },
+    {
+      "x": -6,
+      "z": 10,
+      "model": "CityKit/building-c",
+      "yaw": 0,
+      "foot": 1.88
+    },
+    {
+      "x": -4,
+      "z": -26,
+      "model": "CityKit/building-a",
+      "yaw": 0,
+      "foot": 1.88
+    },
+    {
+      "x": -4,
+      "z": -22,
+      "model": "CityKit/building-h",
+      "yaw": 270,
+      "foot": 1.88
+    },
+    {
+      "x": -4,
+      "z": 4,
+      "model": "CityKit/building-f",
+      "yaw": 90,
+      "foot": 1.88
+    },
+    {
+      "x": -4,
+      "z": 6,
+      "model": "CityKit/building-g",
+      "yaw": 0,
+      "foot": 1.88
+    },
+    {
+      "x": -4,
+      "z": 10,
+      "model": "CityKit/building-f",
+      "yaw": 270,
+      "foot": 1.88
+    },
+    {
+      "x": -4,
+      "z": 12,
+      "model": "CityKit/building-a",
+      "yaw": 270,
+      "foot": 1.88
+    },
+    {
+      "x": -2,
+      "z": -30,
+      "model": "CityKit/building-n",
+      "yaw": 90,
+      "foot": 1.88
+    },
+    {
+      "x": -2,
+      "z": -28,
+      "model": "CityKit/building-a",
+      "yaw": 0,
+      "foot": 1.88
+    },
+    {
+      "x": -2,
+      "z": -26,
+      "model": "CityKit/building-h",
+      "yaw": 270,
+      "foot": 1.88
+    },
+    {
+      "x": -2,
+      "z": -22,
+      "model": "CityKit/building-h",
+      "yaw": 270,
+      "foot": 1.88
+    },
+    {
+      "x": -2,
+      "z": 4,
+      "model": "CityKit/building-e",
+      "yaw": 180,
+      "foot": 1.88
+    },
+    {
+      "x": -2,
+      "z": 6,
+      "model": "CityKit/building-a",
+      "yaw": 180,
+      "foot": 1.88
+    },
+    {
+      "x": -2,
+      "z": 10,
+      "model": "CityKit/building-skyscraper-d",
+      "yaw": 90,
+      "foot": 1.88
+    },
+    {
+      "x": -2,
+      "z": 12,
+      "model": "CityKit/building-a",
+      "yaw": 0,
+      "foot": 1.88
+    },
+    {
+      "x": 0,
+      "z": -30,
+      "model": "CityKit/building-l",
+      "yaw": 0,
+      "foot": 1.88
+    },
+    {
+      "x": 0,
+      "z": -28,
+      "model": "CityKit/building-e",
+      "yaw": 270,
+      "foot": 1.88
+    },
+    {
+      "x": 0,
+      "z": -4,
+      "model": "CityKit/building-h",
+      "yaw": 270,
+      "foot": 1.88
+    },
+    {
+      "x": 0,
+      "z": 4,
+      "model": "CityKit/building-f",
+      "yaw": 90,
+      "foot": 1.88
+    },
+    {
+      "x": 0,
+      "z": 6,
+      "model": "CityKit/building-l",
+      "yaw": 90,
+      "foot": 1.88
+    },
+    {
+      "x": 0,
+      "z": 10,
+      "model": "CityKit/building-b",
+      "yaw": 270,
+      "foot": 1.88
+    },
+    {
+      "x": 0,
+      "z": 12,
+      "model": "CityKit/building-n",
+      "yaw": 90,
+      "foot": 1.88
+    },
+    {
+      "x": 2,
+      "z": -30,
+      "model": "CityKit/building-f",
+      "yaw": 0,
+      "foot": 1.88
+    },
+    {
+      "x": 2,
+      "z": -28,
+      "model": "CityKit/building-m",
+      "yaw": 270,
+      "foot": 1.88
+    },
+    {
+      "x": 2,
+      "z": -26,
+      "model": "CityKit/building-k",
+      "yaw": 0,
+      "foot": 1.88
+    },
+    {
+      "x": 2,
+      "z": -22,
+      "model": "CityKit/building-f",
+      "yaw": 180,
+      "foot": 1.88
+    },
+    {
+      "x": 2,
+      "z": -20,
+      "model": "CityKit/building-h",
+      "yaw": 270,
+      "foot": 1.88
+    },
+    {
+      "x": 2,
+      "z": -8,
+      "model": "CityKit/building-l",
+      "yaw": 180,
+      "foot": 1.88
+    },
+    {
+      "x": 3,
+      "z": -5,
+      "model": "CityKit/building-skyscraper-a",
+      "yaw": 90,
+      "foot": 3.8
+    },
+    {
+      "x": 2,
+      "z": 4,
+      "model": "CityKit/building-d",
+      "yaw": 180,
+      "foot": 1.88
+    },
+    {
+      "x": 2,
+      "z": 6,
+      "model": "CityKit/building-j",
+      "yaw": 0,
+      "foot": 1.88
+    },
+    {
+      "x": 2,
+      "z": 10,
+      "model": "CityKit/building-a",
+      "yaw": 90,
+      "foot": 1.88
+    },
+    {
+      "x": 2,
+      "z": 12,
+      "model": "CityKit/building-h",
+      "yaw": 0,
+      "foot": 1.88
+    },
+    {
+      "x": 4,
+      "z": -30,
+      "model": "CityKit/building-i",
+      "yaw": 0,
+      "foot": 1.88
+    },
+    {
+      "x": 4,
+      "z": -28,
+      "model": "CityKit/building-d",
+      "yaw": 0,
+      "foot": 1.88
+    },
+    {
+      "x": 4,
+      "z": -22,
+      "model": "CityKit/building-a",
+      "yaw": 90,
+      "foot": 1.88
+    },
+    {
+      "x": 4,
+      "z": -20,
+      "model": "CityKit/building-i",
+      "yaw": 270,
+      "foot": 1.88
+    },
+    {
+      "x": 4,
+      "z": -8,
+      "model": "CityKit/building-skyscraper-d",
+      "yaw": 90,
+      "foot": 1.88
+    },
+    {
+      "x": 4,
+      "z": 4,
+      "model": "CityKit/building-a",
+      "yaw": 270,
+      "foot": 1.88
+    },
+    {
+      "x": 4,
+      "z": 6,
+      "model": "CityKit/building-h",
+      "yaw": 180,
+      "foot": 1.88
+    },
+    {
+      "x": 4,
+      "z": 10,
+      "model": "CityKit/building-l",
+      "yaw": 0,
+      "foot": 1.88
+    },
+    {
+      "x": 4,
+      "z": 12,
+      "model": "CityKit/building-skyscraper-a",
+      "yaw": 180,
+      "foot": 1.88
+    },
+    {
+      "x": 6,
+      "z": -30,
+      "model": "CityKit/building-skyscraper-d",
+      "yaw": 180,
+      "foot": 1.88
+    },
+    {
+      "x": 6,
+      "z": -22,
+      "model": "CityKit/building-skyscraper-c",
+      "yaw": 0,
+      "foot": 1.88
+    },
+    {
+      "x": 6,
+      "z": -20,
+      "model": "CityKit/building-l",
+      "yaw": 180,
+      "foot": 1.88
+    },
+    {
+      "x": 6,
+      "z": -8,
+      "model": "CityKit/building-e",
+      "yaw": 0,
+      "foot": 1.88
+    },
+    {
+      "x": 6,
+      "z": -6,
+      "model": "CityKit/building-skyscraper-d",
+      "yaw": 90,
+      "foot": 1.88
+    },
+    {
+      "x": 6,
+      "z": -4,
+      "model": "CityKit/building-skyscraper-e",
+      "yaw": 180,
+      "foot": 1.88
+    },
+    {
+      "x": 6,
+      "z": 4,
+      "model": "CityKit/building-d",
+      "yaw": 90,
+      "foot": 1.88
+    },
+    {
+      "x": 6,
+      "z": 6,
+      "model": "CityKit/building-l",
+      "yaw": 90,
+      "foot": 1.88
+    },
+    {
+      "x": 6,
+      "z": 10,
+      "model": "CityKit/building-m",
+      "yaw": 270,
+      "foot": 1.88
+    },
+    {
+      "x": 6,
+      "z": 12,
+      "model": "CityKit/building-l",
+      "yaw": 270,
+      "foot": 1.88
+    },
+    {
+      "x": 8,
+      "z": -30,
+      "model": "CityKit/building-j",
+      "yaw": 180,
+      "foot": 1.88
+    },
+    {
+      "x": 8,
+      "z": -22,
+      "model": "CityKit/building-b",
+      "yaw": 90,
+      "foot": 1.88
+    },
+    {
+      "x": 8,
+      "z": -20,
+      "model": "CityKit/building-skyscraper-a",
+      "yaw": 90,
+      "foot": 1.88
+    },
+    {
+      "x": 9,
+      "z": -7,
+      "model": "CityKit/building-i",
+      "yaw": 180,
+      "foot": 3.8
+    },
+    {
+      "x": 8,
+      "z": -4,
+      "model": "CityKit/building-m",
+      "yaw": 270,
+      "foot": 1.88
+    },
+    {
+      "x": 8,
+      "z": -2,
+      "model": "CityKit/building-skyscraper-e",
+      "yaw": 90,
+      "foot": 1.88
+    },
+    {
+      "x": 9,
+      "z": 1,
+      "model": "CityKit/building-j",
+      "yaw": 90,
+      "foot": 3.8
+    },
+    {
+      "x": 8,
+      "z": 4,
+      "model": "CityKit/building-h",
+      "yaw": 270,
+      "foot": 1.88
+    },
+    {
+      "x": 8,
+      "z": 10,
+      "model": "CityKit/building-b",
+      "yaw": 0,
+      "foot": 1.88
+    },
+    {
+      "x": 8,
+      "z": 12,
+      "model": "CityKit/building-g",
+      "yaw": 270,
+      "foot": 1.88
+    },
+    {
+      "x": 10,
+      "z": -30,
+      "model": "CityKit/building-f",
+      "yaw": 180,
+      "foot": 1.88
+    },
+    {
+      "x": 11,
+      "z": -27,
+      "model": "CityKit/building-e",
+      "yaw": 0,
+      "foot": 3.8
+    },
+    {
+      "x": 10,
+      "z": -22,
+      "model": "CityKit/building-h",
+      "yaw": 270,
+      "foot": 1.88
+    },
+    {
+      "x": 10,
+      "z": -20,
+      "model": "CityKit/building-b",
+      "yaw": 0,
+      "foot": 1.88
+    },
+    {
+      "x": 10,
+      "z": -18,
+      "model": "CityKit/building-skyscraper-a",
+      "yaw": 270,
+      "foot": 1.88
+    },
+    {
+      "x": 10,
+      "z": -16,
+      "model": "CityKit/building-m",
+      "yaw": 0,
+      "foot": 1.88
+    },
+    {
+      "x": 10,
+      "z": -4,
+      "model": "CityKit/building-skyscraper-e",
+      "yaw": 90,
+      "foot": 1.88
+    },
+    {
+      "x": 10,
+      "z": -2,
+      "model": "CityKit/building-g",
+      "yaw": 0,
+      "foot": 1.88
+    },
+    {
+      "x": 11,
+      "z": 5,
+      "model": "CityKit/building-m",
+      "yaw": 90,
+      "foot": 3.8
+    },
+    {
+      "x": 10,
+      "z": 10,
+      "model": "CityKit/building-k",
+      "yaw": 0,
+      "foot": 1.88
+    },
+    {
+      "x": 10,
+      "z": 12,
+      "model": "CityKit/building-l",
+      "yaw": 270,
+      "foot": 1.88
+    },
+    {
+      "x": 12,
+      "z": -30,
+      "model": "CityKit/building-f",
+      "yaw": 0,
+      "foot": 1.88
+    },
+    {
+      "x": 12,
+      "z": -22,
+      "model": "CityKit/building-l",
+      "yaw": 0,
+      "foot": 1.88
+    },
+    {
+      "x": 12,
+      "z": -20,
+      "model": "CityKit/building-g",
+      "yaw": 270,
+      "foot": 1.88
+    },
+    {
+      "x": 12,
+      "z": -8,
+      "model": "CityKit/building-g",
+      "yaw": 0,
+      "foot": 1.88
+    },
+    {
+      "x": 12,
+      "z": -6,
+      "model": "CityKit/building-skyscraper-b",
+      "yaw": 90,
+      "foot": 1.88
+    },
+    {
+      "x": 12,
+      "z": 0,
+      "model": "CityKit/building-k",
+      "yaw": 180,
+      "foot": 1.88
+    },
+    {
+      "x": 12,
+      "z": 2,
+      "model": "CityKit/building-b",
+      "yaw": 180,
+      "foot": 1.88
+    },
+    {
+      "x": 13,
+      "z": 11,
+      "model": "CityKit/building-h",
+      "yaw": 180,
+      "foot": 3.8
+    },
+    {
+      "x": 14,
+      "z": -30,
+      "model": "CityKit/building-m",
+      "yaw": 0,
+      "foot": 1.88
+    },
+    {
+      "x": 14,
+      "z": -28,
+      "model": "CityKit/building-n",
+      "yaw": 270,
+      "foot": 1.88
+    },
+    {
+      "x": 14,
+      "z": -26,
+      "model": "CityKit/building-k",
+      "yaw": 180,
+      "foot": 1.88
+    },
+    {
+      "x": 14,
+      "z": -22,
+      "model": "CityKit/building-h",
+      "yaw": 180,
+      "foot": 1.88
+    },
+    {
+      "x": 14,
+      "z": -20,
+      "model": "CityKit/building-g",
+      "yaw": 180,
+      "foot": 1.88
+    },
+    {
+      "x": 16,
+      "z": -28,
+      "model": "CityKit/building-b",
+      "yaw": 90,
+      "foot": 1.88
+    },
+    {
+      "x": 16,
+      "z": -26,
+      "model": "CityKit/building-n",
+      "yaw": 90,
+      "foot": 1.88
+    },
+    {
+      "x": 16,
+      "z": -22,
+      "model": "CityKit/building-j",
+      "yaw": 90,
+      "foot": 1.88
+    },
+    {
+      "x": 16,
+      "z": -20,
+      "model": "CityKit/building-a",
+      "yaw": 270,
+      "foot": 1.88
+    },
+    {
+      "x": 16,
+      "z": -6,
+      "model": "CityKit/building-l",
+      "yaw": 270,
+      "foot": 1.88
+    },
+    {
+      "x": 16,
+      "z": -4,
+      "model": "CityKit/building-a",
+      "yaw": 0,
+      "foot": 1.88
+    },
+    {
+      "x": 16,
+      "z": -2,
+      "model": "CityKit/building-d",
+      "yaw": 90,
+      "foot": 1.88
+    },
+    {
+      "x": 16,
+      "z": 2,
+      "model": "CityKit/building-j",
+      "yaw": 180,
+      "foot": 1.88
+    },
+    {
+      "x": 16,
+      "z": 4,
+      "model": "CityKit/building-a",
+      "yaw": 180,
+      "foot": 1.88
+    },
+    {
+      "x": 16,
+      "z": 6,
+      "model": "CityKit/building-f",
+      "yaw": 90,
+      "foot": 1.88
+    },
+    {
+      "x": 16,
+      "z": 10,
+      "model": "CityKit/building-e",
+      "yaw": 270,
+      "foot": 1.88
+    },
+    {
+      "x": 16,
+      "z": 12,
+      "model": "CityKit/building-f",
+      "yaw": 270,
+      "foot": 1.88
+    },
+    {
+      "x": 18,
+      "z": -30,
+      "model": "CityKit/building-m",
+      "yaw": 180,
+      "foot": 1.88
+    },
+    {
+      "x": 18,
+      "z": -28,
+      "model": "CityKit/building-f",
+      "yaw": 90,
+      "foot": 1.88
+    },
+    {
+      "x": 18,
+      "z": -26,
+      "model": "CityKit/building-d",
+      "yaw": 90,
+      "foot": 1.88
+    },
+    {
+      "x": 18,
+      "z": -22,
+      "model": "CityKit/building-a",
+      "yaw": 0,
+      "foot": 1.88
+    },
+    {
+      "x": 18,
+      "z": -20,
+      "model": "CityKit/building-e",
+      "yaw": 270,
+      "foot": 1.88
+    },
+    {
+      "x": 18,
+      "z": -6,
+      "model": "CityKit/building-c",
+      "yaw": 180,
+      "foot": 1.88
+    },
+    {
+      "x": 18,
+      "z": -4,
+      "model": "CityKit/building-g",
+      "yaw": 270,
+      "foot": 1.88
+    },
+    {
+      "x": 18,
+      "z": -2,
+      "model": "CityKit/building-d",
+      "yaw": 270,
+      "foot": 1.88
+    },
+    {
+      "x": 18,
+      "z": 2,
+      "model": "CityKit/building-k",
+      "yaw": 90,
+      "foot": 1.88
+    },
+    {
+      "x": 18,
+      "z": 4,
+      "model": "CityKit/building-f",
+      "yaw": 180,
+      "foot": 1.88
+    },
+    {
+      "x": 18,
+      "z": 6,
+      "model": "CityKit/building-a",
+      "yaw": 0,
+      "foot": 1.88
+    },
+    {
+      "x": 18,
+      "z": 10,
+      "model": "CityKit/building-b",
+      "yaw": 90,
+      "foot": 1.88
+    },
+    {
+      "x": 18,
+      "z": 12,
+      "model": "CityKit/building-f",
+      "yaw": 180,
+      "foot": 1.88
+    },
+    {
+      "x": 21,
+      "z": -29,
+      "model": "CityKit/building-m",
+      "yaw": 90,
+      "foot": 3.8
+    },
+    {
+      "x": 20,
+      "z": -26,
+      "model": "CityKit/building-f",
+      "yaw": 0,
+      "foot": 1.88
+    },
+    {
+      "x": 20,
+      "z": -22,
+      "model": "CityKit/building-j",
+      "yaw": 180,
+      "foot": 1.88
+    },
+    {
+      "x": 20,
+      "z": -20,
+      "model": "CityKit/building-e",
+      "yaw": 270,
+      "foot": 1.88
+    },
+    {
+      "x": 20,
+      "z": -6,
+      "model": "CityKit/building-d",
+      "yaw": 90,
+      "foot": 1.88
+    },
+    {
+      "x": 20,
+      "z": -4,
+      "model": "CityKit/building-l",
+      "yaw": 0,
+      "foot": 1.88
+    },
+    {
+      "x": 20,
+      "z": -2,
+      "model": "CityKit/building-l",
+      "yaw": 0,
+      "foot": 1.88
+    },
+    {
+      "x": 20,
+      "z": 2,
+      "model": "CityKit/building-d",
+      "yaw": 90,
+      "foot": 1.88
+    },
+    {
+      "x": 20,
+      "z": 4,
+      "model": "CityKit/building-i",
+      "yaw": 270,
+      "foot": 1.88
+    },
+    {
+      "x": 20,
+      "z": 6,
+      "model": "CityKit/building-c",
+      "yaw": 270,
+      "foot": 1.88
+    },
+    {
+      "x": 20,
+      "z": 10,
+      "model": "CityKit/building-h",
+      "yaw": 180,
+      "foot": 1.88
+    },
+    {
+      "x": 20,
+      "z": 12,
+      "model": "CityKit/building-e",
+      "yaw": 0,
+      "foot": 1.88
+    },
+    {
+      "x": 22,
+      "z": -26,
+      "model": "CityKit/building-c",
+      "yaw": 270,
+      "foot": 1.88
+    },
+    {
+      "x": 22,
+      "z": 10,
+      "model": "CityKit/building-h",
+      "yaw": 180,
+      "foot": 1.88
+    },
+    {
+      "x": 22,
+      "z": 12,
+      "model": "CityKit/building-n",
+      "yaw": 90,
+      "foot": 1.88
+    },
+    {
+      "x": 24,
+      "z": -30,
+      "model": "CityKit/building-a",
+      "yaw": 270,
+      "foot": 1.88
+    },
+    {
+      "x": 24,
+      "z": -28,
+      "model": "CityKit/building-j",
+      "yaw": 180,
+      "foot": 1.88
+    },
+    {
+      "x": 24,
+      "z": -26,
+      "model": "CityKit/building-k",
+      "yaw": 270,
+      "foot": 1.88
+    },
+    {
+      "x": 24,
+      "z": -22,
+      "model": "CityKit/building-f",
+      "yaw": 90,
+      "foot": 1.88
+    },
+    {
+      "x": 24,
+      "z": -20,
+      "model": "CityKit/building-i",
+      "yaw": 180,
+      "foot": 1.88
+    },
+    {
+      "x": 24,
+      "z": -18,
+      "model": "CityKit/building-f",
+      "yaw": 90,
+      "foot": 1.88
+    },
+    {
+      "x": 24,
+      "z": -14,
+      "model": "CityKit/building-h",
+      "yaw": 180,
+      "foot": 1.88
+    },
+    {
+      "x": 25,
+      "z": -11,
+      "model": "CityKit/building-g",
+      "yaw": 270,
+      "foot": 3.8
+    },
+    {
+      "x": 24,
+      "z": -6,
+      "model": "CityKit/building-h",
+      "yaw": 270,
+      "foot": 1.88
+    },
+    {
+      "x": 24,
+      "z": -4,
+      "model": "CityKit/building-e",
+      "yaw": 180,
+      "foot": 1.88
+    },
+    {
+      "x": 24,
+      "z": -2,
+      "model": "CityKit/building-f",
+      "yaw": 270,
+      "foot": 1.88
+    },
+    {
+      "x": 24,
+      "z": 2,
+      "model": "CityKit/building-d",
+      "yaw": 270,
+      "foot": 1.88
+    },
+    {
+      "x": 25,
+      "z": 5,
+      "model": "CityKit/building-b",
+      "yaw": 90,
+      "foot": 3.8
+    },
+    {
+      "x": 24,
+      "z": 10,
+      "model": "CityKit/building-m",
+      "yaw": 180,
+      "foot": 1.88
+    },
+    {
+      "x": 26,
+      "z": -30,
+      "model": "CityKit/building-i",
+      "yaw": 90,
+      "foot": 1.88
+    },
+    {
+      "x": 26,
+      "z": -28,
+      "model": "CityKit/building-l",
+      "yaw": 90,
+      "foot": 1.88
+    },
+    {
+      "x": 26,
+      "z": -26,
+      "model": "CityKit/building-g",
+      "yaw": 270,
+      "foot": 1.88
+    },
+    {
+      "x": 26,
+      "z": -22,
+      "model": "CityKit/building-i",
+      "yaw": 0,
+      "foot": 1.88
+    },
+    {
+      "x": 26,
+      "z": -20,
+      "model": "CityKit/building-a",
+      "yaw": 180,
+      "foot": 1.88
+    },
+    {
+      "x": 26,
+      "z": -18,
+      "model": "CityKit/building-j",
+      "yaw": 0,
+      "foot": 1.88
+    },
+    {
+      "x": 26,
+      "z": -14,
+      "model": "CityKit/building-l",
+      "yaw": 0,
+      "foot": 1.88
+    },
+    {
+      "x": 26,
+      "z": -6,
+      "model": "CityKit/building-m",
+      "yaw": 270,
+      "foot": 1.88
+    },
+    {
+      "x": 26,
+      "z": -4,
+      "model": "CityKit/building-h",
+      "yaw": 270,
+      "foot": 1.88
+    },
+    {
+      "x": 26,
+      "z": -2,
+      "model": "CityKit/building-h",
+      "yaw": 0,
+      "foot": 1.88
+    },
+    {
+      "x": 26,
+      "z": 2,
+      "model": "CityKit/building-n",
+      "yaw": 90,
+      "foot": 1.88
+    },
+    {
+      "x": 26,
+      "z": 10,
+      "model": "CityKit/building-g",
+      "yaw": 0,
+      "foot": 1.88
+    },
+    {
+      "x": 26,
+      "z": 12,
+      "model": "CityKit/building-c",
+      "yaw": 0,
+      "foot": 1.88
+    },
+    {
+      "x": 28,
+      "z": -30,
+      "model": "CityKit/building-skyscraper-d",
+      "yaw": 270,
+      "foot": 1.88
+    },
+    {
+      "x": 28,
+      "z": -28,
+      "model": "CityKit/building-k",
+      "yaw": 270,
+      "foot": 1.88
+    },
+    {
+      "x": 28,
+      "z": -26,
+      "model": "CityKit/building-b",
+      "yaw": 180,
+      "foot": 1.88
+    },
+    {
+      "x": 28,
+      "z": -22,
+      "model": "CityKit/building-h",
+      "yaw": 0,
+      "foot": 1.88
+    },
+    {
+      "x": 28,
+      "z": -20,
+      "model": "CityKit/building-g",
+      "yaw": 180,
+      "foot": 1.88
+    },
+    {
+      "x": 28,
+      "z": -18,
+      "model": "CityKit/building-h",
+      "yaw": 270,
+      "foot": 1.88
+    },
+    {
+      "x": 28,
+      "z": -14,
+      "model": "CityKit/building-d",
+      "yaw": 0,
+      "foot": 1.88
+    },
+    {
+      "x": 28,
+      "z": -12,
+      "model": "CityKit/building-d",
+      "yaw": 90,
+      "foot": 1.88
+    },
+    {
+      "x": 28,
+      "z": -10,
+      "model": "CityKit/building-c",
+      "yaw": 0,
+      "foot": 1.88
+    },
+    {
+      "x": 28,
+      "z": -6,
+      "model": "CityKit/building-g",
+      "yaw": 0,
+      "foot": 1.88
+    },
+    {
+      "x": 28,
+      "z": -4,
+      "model": "CityKit/building-b",
+      "yaw": 180,
+      "foot": 1.88
+    },
+    {
+      "x": 28,
+      "z": -2,
+      "model": "CityKit/building-n",
+      "yaw": 180,
+      "foot": 1.88
+    },
+    {
+      "x": 28,
+      "z": 2,
+      "model": "CityKit/building-c",
+      "yaw": 270,
+      "foot": 1.88
+    },
+    {
+      "x": 28,
+      "z": 4,
+      "model": "CityKit/building-j",
+      "yaw": 0,
+      "foot": 1.88
+    },
+    {
+      "x": 28,
+      "z": 6,
+      "model": "CityKit/building-b",
+      "yaw": 270,
+      "foot": 1.88
+    },
+    {
+      "x": 28,
+      "z": 10,
+      "model": "CityKit/building-l",
+      "yaw": 270,
+      "foot": 1.88
+    },
+    {
+      "x": 28,
+      "z": 12,
+      "model": "CityKit/building-m",
+      "yaw": 180,
+      "foot": 1.88
+    },
+    {
+      "x": 30,
+      "z": -30,
+      "model": "CityKit/building-n",
+      "yaw": 180,
+      "foot": 1.88
+    },
+    {
+      "x": 30,
+      "z": -28,
+      "model": "CityKit/building-a",
+      "yaw": 90,
+      "foot": 1.88
+    },
+    {
+      "x": 30,
+      "z": -26,
+      "model": "CityKit/building-k",
+      "yaw": 270,
+      "foot": 1.88
+    },
+    {
+      "x": 30,
+      "z": 10,
+      "model": "CityKit/building-g",
+      "yaw": 180,
+      "foot": 1.88
+    },
+    {
+      "x": 30,
+      "z": 12,
+      "model": "CityKit/building-e",
+      "yaw": 90,
+      "foot": 1.88
+    }
+  ],
+  "parks": [
+    {
+      "x": -12,
+      "z": -19,
+      "w": 2,
+      "d": 4
+    },
+    {
+      "x": 7,
+      "z": -27,
+      "w": 4,
+      "d": 4
+    }
+  ],
+  "trees": [
+    {
+      "x": -11.547046850979033,
+      "z": -17.85444419682747,
+      "model": "NatureKit/plant_bushLarge",
+      "scale": 0.8616679494482582,
+      "yaw": 218
+    },
+    {
+      "x": -11.718632845592774,
+      "z": -17.533075070347007,
+      "model": "NatureKit/tree_default",
+      "scale": 1.3605809883422149,
+      "yaw": 199
+    },
+    {
+      "x": -11.465124038764715,
+      "z": -18.09471354793244,
+      "model": "NatureKit/tree_detailed",
+      "scale": 1.044305821433235,
+      "yaw": 246
+    },
+    {
+      "x": -11.834665001587592,
+      "z": -19.098002511655896,
+      "model": "NatureKit/plant_bushLarge",
+      "scale": 0.9476126193307766,
+      "yaw": 178
+    },
+    {
+      "x": 7.9197915284119835,
+      "z": -27.51121341585449,
+      "model": "NatureKit/tree_detailed",
+      "scale": 1.2873737891222339,
+      "yaw": 71
+    },
+    {
+      "x": 5.4581889510336765,
+      "z": -27.60841395831405,
+      "model": "NatureKit/tree_default",
+      "scale": 1.2758236861485446,
+      "yaw": 18
+    },
+    {
+      "x": 6.565069187532201,
+      "z": -27.645098495812466,
+      "model": "NatureKit/tree_detailed",
+      "scale": 0.7692080676903398,
+      "yaw": 281
+    }
+  ]
+}
