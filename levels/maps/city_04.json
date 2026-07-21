@@ -9,43 +9,43 @@
   "levels": [
     {
       "trainSpeed": 3,
-      "spawnIntervalSeconds": 3
+      "spawnIntervalSeconds": 4
     },
     {
       "trainSpeed": 3,
-      "spawnIntervalSeconds": 3
+      "spawnIntervalSeconds": 4
     },
     {
       "trainSpeed": 3,
-      "spawnIntervalSeconds": 3
+      "spawnIntervalSeconds": 4
     },
     {
       "trainSpeed": 3,
-      "spawnIntervalSeconds": 3
+      "spawnIntervalSeconds": 4
     },
     {
       "trainSpeed": 3,
-      "spawnIntervalSeconds": 3
+      "spawnIntervalSeconds": 5
     },
     {
       "trainSpeed": 3,
-      "spawnIntervalSeconds": 3
+      "spawnIntervalSeconds": 5
     },
     {
       "trainSpeed": 3,
-      "spawnIntervalSeconds": 3
+      "spawnIntervalSeconds": 5
     },
     {
       "trainSpeed": 3,
-      "spawnIntervalSeconds": 3
+      "spawnIntervalSeconds": 5
     },
     {
       "trainSpeed": 3,
-      "spawnIntervalSeconds": 3
+      "spawnIntervalSeconds": 6
     },
     {
       "trainSpeed": 3,
-      "spawnIntervalSeconds": 3
+      "spawnIntervalSeconds": 6
     }
   ],
   "camera": {
