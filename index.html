@@ -77,7 +77,6 @@
   Name <input id="mName" value="New Map" style="width:130px">
   World <select id="mWorld" style="width:92px"><option value="nature">Nature</option><option value="city">City</option></select>
   Map # <input id="mNum" type="number" value="1" min="1">
-  Theme <input id="mTheme" value="nature" style="width:80px">
   Floor <input id="mColor" type="color" value="#73A457" style="width:34px;height:26px;padding:1px;border:none;background:none">
   <button id="bNew">New</button>
   <button id="bRandom">🎲 Randomise</button>
@@ -88,7 +87,7 @@
   <button id="bCopy">Copy JSON</button>
   <button id="bExport" class="primary">⬇ Export JSON</button>
   <button id="bPublish" class="primary">☁ Publish</button>
-  <span id="ver" style="margin-left:auto;opacity:.55;font-size:12px">v18 · worlds</span>
+  <span id="ver" style="margin-left:auto;opacity:.55;font-size:12px">v19 · worlds</span>
 </div>
 <div id="wrap">
   <div id="tools">
@@ -1460,7 +1459,7 @@ function currentJson(){
   map.name = document.getElementById("mName").value;
   map.stage = document.getElementById("mWorld").value;
   map.mapNumber = +document.getElementById("mNum").value;
-  map.theme = document.getElementById("mTheme").value;
+  map.theme = map.stage;   // world drives both
   map.groundColor = document.getElementById("mColor").value;
   syncLevels();
   const clean = JSON.parse(JSON.stringify(map));
@@ -1641,10 +1640,9 @@ document.getElementById("bRandom").onclick = () => { if (confirm("Replace the cu
 const WORLD_FLOOR = { nature: "#73A457", city: "#767b82" };
 function setWorld(w){
   map.stage = w;
-  map.theme = "nature";                        // both worlds use the nature theme pack for now
+  map.theme = w;                               // one control sets both; game falls back to nature models if a theme pack is missing
   map.groundColor = WORLD_FLOOR[w] || map.groundColor;
   document.getElementById("mColor").value = map.groundColor;
-  document.getElementById("mTheme").value = map.theme;
   if (w === "city") generateCity();            // fill the city from the current track
   else { map.roads = []; map.buildings = []; map.parks = []; map.trees = []; }
   document.getElementById("bCity").hidden = (w !== "city");
@@ -1670,7 +1668,6 @@ function syncAll(){
   document.getElementById("mWorld").value = map.stage || "nature";
   document.getElementById("bCity").hidden = (map.stage !== "city");
   document.getElementById("mNum").value = map.mapNumber || 1;
-  document.getElementById("mTheme").value = map.theme || "nature";
   document.getElementById("mColor").value = map.groundColor || "#73A457";
   renderRules(); showSel(); draw(); save();
 }
