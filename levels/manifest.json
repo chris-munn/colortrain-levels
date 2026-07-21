@@ -35,10 +35,6 @@
           "name": "Mega City"
         },
         {
-          "file": "maps/city_02.json",
-          "name": "Crazy City"
-        },
-        {
           "file": "maps/city_03.json",
           "name": "Capital City"
         },
