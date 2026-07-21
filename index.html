@@ -87,7 +87,7 @@
   <button id="bCopy">Copy JSON</button>
   <button id="bExport" class="primary">⬇ Export JSON</button>
   <button id="bPublish" class="primary">☁ Publish</button>
-  <span id="ver" style="margin-left:auto;opacity:.55;font-size:12px">v20 · worlds</span>
+  <span id="ver" style="margin-left:auto;opacity:.55;font-size:12px">v21 · worlds</span>
 </div>
 <div id="wrap">
   <div id="tools">
@@ -1067,7 +1067,11 @@ const GEN_TREES = ["tree_pineDefaultA","tree_pineDefaultB","tree_pineTallA","tre
 const GEN_ROCKS = ["rock_largeA","rock_largeB","rock_largeC","rock_smallA","rock_smallB","stone_largeA","stone_largeB"];
 const GEN_SMALLS = ["plant_bushLarge","plant_bushDetailed","flower_redA","flower_yellowA","grass_large"];
 const GEN_CLIFFS = ["cliff_large_rock","cliff_block_rock","cliff_slope_rock","cliff_top_rock"];
-const GEN_NAMES = ["Green Valley","Twisty Pines","Sheep Meadow","Rolling Hills","Willow Bend","Foxglove Flats","Badger Crossing","Bluebell Loop","Heron Marsh","Tumble Downs"];
+const GEN_NAMES = {
+  nature: ["Green Valley","Twisty Pines","Sheep Meadow","Rolling Hills","Willow Bend","Foxglove Flats","Badger Crossing","Bluebell Loop","Heron Marsh","Tumble Downs"],
+  city:   ["Mega City","Metro Central","Downtown","Skyline City","Grid City","Uptown","Iron Heights","Neon District","Capital City","Central Loop","Steel Harbour","Crazy City"]
+};
+function suggestName(){ const pool = GEN_NAMES[map.stage] || GEN_NAMES.nature; return pool[(Math.random() * pool.length) | 0]; }
 
 function nearTrack(track, cx, cz){ const K=(x,z)=>x+","+z; for(let dx=-1;dx<=1;dx++)for(let dz=-1;dz<=1;dz++) if(track.has(K(cx+dx,cz+dz))) return true; return false; }
 
@@ -1189,8 +1193,10 @@ function randomise(){
       map.scenery = result.scenery;
       if (isCity()) generateCity();   // city map: regenerate its roads/buildings to match the new track
       map.levels = Array.from({ length: 10 }, () => ({ trainSpeed: 3, spawnIntervalSeconds: 3 }));
-      map.id = rndId(); // a randomised map is a NEW map — fresh save progress
-      map.name = GEN_NAMES[(Math.random() * GEN_NAMES.length) | 0];
+      map.id = rndId(); // a randomised layout is a NEW map — fresh save progress
+      map.mapNumber = +document.getElementById("mNum").value || map.mapNumber || 1;   // keep the user's Map #
+      const typed = (document.getElementById("mName").value || "").trim();
+      map.name = (typed && typed !== "New Map") ? typed : suggestName();               // suggest a name only if still unnamed
       document.getElementById("mName").value = map.name;
       sel = null;
       syncAll();
@@ -1560,6 +1566,18 @@ document.getElementById("bPublish").onclick = async () => {
 
     ghStatus("Uploading " + fname + "…");
     const existing = await ghGet(mapPath);
+    // guard: refuse to overwrite a DIFFERENT map already sitting in this world's slot
+    if (existing && existing.content) {
+      let exId = null;
+      try { exId = JSON.parse(b64d(existing.content)).id; } catch (e) {}
+      if (exId && exId !== map.id) {
+        const worldName = map.stage.charAt(0).toUpperCase() + map.stage.slice(1);
+        alert("Map " + map.mapNumber + " already exists in " + worldName + ".\n\nDelete it first (↻ Levels in repo → 🗑), or change the Map # before publishing.");
+        ghStatus("Map " + map.mapNumber + " already exists in " + worldName + " — delete it or change the Map #.", "bad");
+        btn.disabled = false;
+        return;
+      }
+    }
     await ghPut(mapPath, b64e(json), "Publish map " + fname, existing && existing.sha);
 
     // make sure this world's theme pack is in the repo (nature already is)
