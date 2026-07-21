@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "updated": "2026-07-20",
+  "updated": "2026-07-21",
   "stages": [
     {
       "id": "nature",
@@ -37,6 +37,10 @@
         {
           "file": "maps/city_02.json",
           "name": "Crazy City"
+        },
+        {
+          "file": "maps/city_03.json",
+          "name": "Capital City"
         }
       ]
     }
