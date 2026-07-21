@@ -39,10 +39,6 @@
           "name": "Crazy City"
         },
         {
-          "file": "maps/city_03.json",
-          "name": "Capital City"
-        },
-        {
           "file": "maps/city_04.json",
           "name": "Heron City"
         }
