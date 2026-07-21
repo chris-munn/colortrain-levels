@@ -1107,5 +1107,9 @@
       "rotY": 302,
       "scale": 1.25
     }
-  ]
+  ],
+  "roads": [],
+  "buildings": [],
+  "parks": [],
+  "trees": []
 }
