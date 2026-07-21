@@ -28,7 +28,7 @@
     {
       "id": "city",
       "displayName": "city",
-      "theme": "nature",
+      "theme": "city",
       "maps": [
         {
           "file": "maps/city_01.json",
