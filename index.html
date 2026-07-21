@@ -87,7 +87,7 @@
   <button id="bCopy">Copy JSON</button>
   <button id="bExport" class="primary">⬇ Export JSON</button>
   <button id="bPublish" class="primary">☁ Publish</button>
-  <span id="ver" style="margin-left:auto;opacity:.55;font-size:12px">v21 · worlds</span>
+  <span id="ver" style="margin-left:auto;opacity:.55;font-size:12px">v22 · worlds</span>
 </div>
 <div id="wrap">
   <div id="tools">
@@ -1592,6 +1592,7 @@ document.getElementById("bPublish").onclick = async () => {
     man.stages = man.stages || [];
     let stage = man.stages.find(s => s.id === map.stage);
     if (!stage) { stage = { id: map.stage, displayName: map.stage.charAt(0).toUpperCase() + map.stage.slice(1), theme: map.theme, maps: [] }; man.stages.push(stage); }
+    else stage.theme = map.theme;   // keep an existing stage's theme in sync (older city stages were saved as "nature")
     const ref = "maps/" + fname;
     let entry = stage.maps.find(m => m.file === ref);
     if (!entry) { entry = { file: ref, name: map.name }; stage.maps.push(entry); }
