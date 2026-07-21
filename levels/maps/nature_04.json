@@ -8,44 +8,44 @@
   "theme": "nature",
   "levels": [
     {
-      "trainSpeed": 3,
-      "spawnIntervalSeconds": 3
+      "trainSpeed": 2,
+      "spawnIntervalSeconds": 4
     },
     {
-      "trainSpeed": 3,
-      "spawnIntervalSeconds": 3
+      "trainSpeed": 2,
+      "spawnIntervalSeconds": 4
     },
     {
-      "trainSpeed": 3,
-      "spawnIntervalSeconds": 3
+      "trainSpeed": 2,
+      "spawnIntervalSeconds": 4
     },
     {
-      "trainSpeed": 3,
-      "spawnIntervalSeconds": 3
+      "trainSpeed": 2,
+      "spawnIntervalSeconds": 4
     },
     {
-      "trainSpeed": 3,
-      "spawnIntervalSeconds": 3
+      "trainSpeed": 2,
+      "spawnIntervalSeconds": 5
     },
     {
-      "trainSpeed": 3,
-      "spawnIntervalSeconds": 3
+      "trainSpeed": 2,
+      "spawnIntervalSeconds": 5
     },
     {
-      "trainSpeed": 3,
-      "spawnIntervalSeconds": 3
+      "trainSpeed": 2,
+      "spawnIntervalSeconds": 5
     },
     {
-      "trainSpeed": 3,
-      "spawnIntervalSeconds": 3
+      "trainSpeed": 2,
+      "spawnIntervalSeconds": 5
     },
     {
-      "trainSpeed": 3,
-      "spawnIntervalSeconds": 3
+      "trainSpeed": 2,
+      "spawnIntervalSeconds": 6
     },
     {
-      "trainSpeed": 3,
-      "spawnIntervalSeconds": 3
+      "trainSpeed": 2,
+      "spawnIntervalSeconds": 6
     }
   ],
   "camera": {
@@ -891,5 +891,9 @@
       "rotY": 35,
       "scale": 1.25
     }
-  ]
+  ],
+  "roads": [],
+  "buildings": [],
+  "parks": [],
+  "trees": []
 }
