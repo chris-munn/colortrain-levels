@@ -1,0 +1,3123 @@
+{
+  "schemaVersion": 2,
+  "id": "yr69tf4y",
+  "groundColor": "#d1d1d1",
+  "stage": "city",
+  "mapNumber": 1,
+  "name": "Mega City",
+  "theme": "city",
+  "levels": [
+    {
+      "trainSpeed": 3,
+      "spawnIntervalSeconds": 4
+    },
+    {
+      "trainSpeed": 3,
+      "spawnIntervalSeconds": 4
+    },
+    {
+      "trainSpeed": 3,
+      "spawnIntervalSeconds": 4
+    },
+    {
+      "trainSpeed": 3,
+      "spawnIntervalSeconds": 4
+    }
+  ],
+  "camera": {
+    "auto": true
+  },
+  "spawn": {
+    "gx": 0,
+    "gz": 0,
+    "dir": "N"
+  },
+  "track": [
+    {
+      "kind": "straight",
+      "gx": 0,
+      "gz": 1,
+      "dir": "N"
+    },
+    {
+      "kind": "straight",
+      "gx": 0,
+      "gz": 2,
+      "dir": "N"
+    },
+    {
+      "kind": "straight",
+      "gx": 0,
+      "gz": 3,
+      "dir": "N"
+    },
+    {
+      "kind": "curve",
+      "gx": 0,
+      "gz": 4,
+      "from": "N",
+      "to": "W"
+    },
+    {
+      "kind": "straight",
+      "gx": -1,
+      "gz": 4,
+      "dir": "W"
+    },
+    {
+      "kind": "curve",
+      "gx": -2,
+      "gz": 4,
+      "from": "W",
+      "to": "S"
+    },
+    {
+      "kind": "straight",
+      "gx": -2,
+      "gz": 3,
+      "dir": "S"
+    },
+    {
+      "kind": "junction",
+      "gx": -2,
+      "gz": 2,
+      "dir": "S",
+      "exits": [
+        {
+          "dir": "S"
+        },
+        {
+          "dir": "W"
+        }
+      ],
+      "initialExit": 0
+    },
+    {
+      "kind": "straight",
+      "gx": -3,
+      "gz": 2,
+      "dir": "W"
+    },
+    {
+      "kind": "curve",
+      "gx": -4,
+      "gz": 2,
+      "from": "W",
+      "to": "N"
+    },
+    {
+      "kind": "straight",
+      "gx": -4,
+      "gz": 3,
+      "dir": "N"
+    },
+    {
+      "kind": "station",
+      "gx": -4,
+      "gz": 4,
+      "dir": "N",
+      "order": 1,
+      "colorIndex": 0,
+      "dot": false
+    },
+    {
+      "kind": "straight",
+      "gx": -2,
+      "gz": 1,
+      "dir": "S"
+    },
+    {
+      "kind": "straight",
+      "gx": -2,
+      "gz": 0,
+      "dir": "S"
+    },
+    {
+      "kind": "straight",
+      "gx": -2,
+      "gz": -1,
+      "dir": "S"
+    },
+    {
+      "kind": "curve",
+      "gx": -2,
+      "gz": -2,
+      "from": "S",
+      "to": "W"
+    },
+    {
+      "kind": "junction",
+      "gx": -3,
+      "gz": -2,
+      "dir": "W",
+      "exits": [
+        {
+          "dir": "W"
+        },
+        {
+          "dir": "S"
+        }
+      ],
+      "initialExit": 0
+    },
+    {
+      "kind": "straight",
+      "gx": -3,
+      "gz": -3,
+      "dir": "S"
+    },
+    {
+      "kind": "straight",
+      "gx": -3,
+      "gz": -4,
+      "dir": "S"
+    },
+    {
+      "kind": "station",
+      "gx": -3,
+      "gz": -5,
+      "dir": "S",
+      "order": 2,
+      "colorIndex": 1,
+      "dot": false
+    },
+    {
+      "kind": "straight",
+      "gx": -4,
+      "gz": -2,
+      "dir": "W"
+    },
+    {
+      "kind": "straight",
+      "gx": -5,
+      "gz": -2,
+      "dir": "W"
+    },
+    {
+      "kind": "curve",
+      "gx": -6,
+      "gz": -2,
+      "from": "W",
+      "to": "N"
+    },
+    {
+      "kind": "junction",
+      "gx": -6,
+      "gz": -1,
+      "dir": "N",
+      "exits": [
+        {
+          "dir": "N"
+        },
+        {
+          "dir": "E"
+        }
+      ],
+      "initialExit": 1
+    },
+    {
+      "kind": "straight",
+      "gx": -5,
+      "gz": -1,
+      "dir": "E"
+    },
+    {
+      "kind": "curve",
+      "gx": -4,
+      "gz": -1,
+      "from": "E",
+      "to": "N"
+    },
+    {
+      "kind": "station",
+      "gx": -4,
+      "gz": 0,
+      "dir": "N",
+      "order": 3,
+      "colorIndex": 2,
+      "dot": false
+    },
+    {
+      "kind": "straight",
+      "gx": -6,
+      "gz": 0,
+      "dir": "N"
+    },
+    {
+      "kind": "station",
+      "gx": -6,
+      "gz": 1,
+      "dir": "N",
+      "order": 4,
+      "colorIndex": 3,
+      "dot": false
+    }
+  ],
+  "scenery": [
+    {
+      "model": "plant_bushLarge",
+      "x": 7.3,
+      "y": 0,
+      "z": 4.4,
+      "rotY": 90,
+      "scale": 1.2
+    },
+    {
+      "model": "tree_oak",
+      "x": 7,
+      "y": 0,
+      "z": -0.3,
+      "rotY": 226,
+      "scale": 0.95
+    },
+    {
+      "model": "tree_detailed",
+      "x": -7.7,
+      "y": 0,
+      "z": 10.8,
+      "rotY": 238,
+      "scale": 1.1
+    },
+    {
+      "model": "tree_pineTallB",
+      "x": -10.8,
+      "y": 0,
+      "z": -7.7,
+      "rotY": 51,
+      "scale": 1
+    },
+    {
+      "model": "tree_autumn",
+      "x": 5.8,
+      "y": 0,
+      "z": 1,
+      "rotY": 330,
+      "scale": 1.1
+    },
+    {
+      "model": "tree_plateau",
+      "x": 7.5,
+      "y": 0,
+      "z": -13.3,
+      "rotY": 131,
+      "scale": 0.9
+    },
+    {
+      "model": "tree_pineDefaultA",
+      "x": 5.8,
+      "y": 0,
+      "z": -2,
+      "rotY": 336,
+      "scale": 1.2
+    },
+    {
+      "model": "tree_oak",
+      "x": -14.1,
+      "y": 0,
+      "z": -11.1,
+      "rotY": 256,
+      "scale": 0.95
+    },
+    {
+      "model": "tree_pineDefaultB",
+      "x": 7.8,
+      "y": 0,
+      "z": 6.5,
+      "rotY": 289,
+      "scale": 1
+    },
+    {
+      "model": "rock_largeA",
+      "x": 5.2,
+      "y": 0,
+      "z": -12.4,
+      "rotY": 359,
+      "scale": 1.15
+    },
+    {
+      "model": "tree_default",
+      "x": -15.6,
+      "y": 0,
+      "z": -0.8,
+      "rotY": 295,
+      "scale": 1.25
+    },
+    {
+      "model": "rock_smallA",
+      "x": -10.3,
+      "y": 0,
+      "z": -13.8,
+      "rotY": 357,
+      "scale": 1.05
+    },
+    {
+      "model": "tree_pineDefaultB",
+      "x": 7,
+      "y": 0,
+      "z": 4.2,
+      "rotY": 308,
+      "scale": 1.15
+    },
+    {
+      "model": "grass_large",
+      "x": -14.3,
+      "y": 0,
+      "z": 12.3,
+      "rotY": 304,
+      "scale": 0.95
+    },
+    {
+      "model": "grass_large",
+      "x": 4.6,
+      "y": 0,
+      "z": 12.7,
+      "rotY": 309,
+      "scale": 0.9
+    },
+    {
+      "model": "plant_bushDetailed",
+      "x": -5.2,
+      "y": 0,
+      "z": -13.7,
+      "rotY": 204,
+      "scale": 0.95
+    },
+    {
+      "model": "tree_plateau",
+      "x": 4.7,
+      "y": 0,
+      "z": -3.1,
+      "rotY": 30,
+      "scale": 1.1
+    },
+    {
+      "model": "tree_pineDefaultA",
+      "x": -16.6,
+      "y": 0,
+      "z": -11.9,
+      "rotY": 2,
+      "scale": 0.9
+    },
+    {
+      "model": "cliff_top_rock",
+      "x": -8.5,
+      "y": 0,
+      "z": -14.1,
+      "rotY": 91,
+      "scale": 0.95
+    },
+    {
+      "model": "rock_largeC",
+      "x": -12.8,
+      "y": 0,
+      "z": -7.1,
+      "rotY": 14,
+      "scale": 0.85
+    },
+    {
+      "model": "tree_default",
+      "x": -14.1,
+      "y": 0,
+      "z": 7.3,
+      "rotY": 311,
+      "scale": 1.15
+    },
+    {
+      "model": "tree_autumn",
+      "x": -1.4,
+      "y": 0,
+      "z": -10.2,
+      "rotY": 164,
+      "scale": 1.05
+    },
+    {
+      "model": "tree_pineTallB",
+      "x": -14.6,
+      "y": 0,
+      "z": 2.6,
+      "rotY": 178,
+      "scale": 1.1
+    },
+    {
+      "model": "tree_pineDefaultB",
+      "x": 8,
+      "y": 0,
+      "z": 11.9,
+      "rotY": 33,
+      "scale": 0.9
+    },
+    {
+      "model": "plant_bushLarge",
+      "x": 5.8,
+      "y": 0,
+      "z": 12.9,
+      "rotY": 145,
+      "scale": 0.9
+    },
+    {
+      "model": "rock_smallB",
+      "x": -2.4,
+      "y": 0,
+      "z": 11.4,
+      "rotY": 151,
+      "scale": 1.05
+    },
+    {
+      "model": "tree_oak",
+      "x": -12,
+      "y": 0,
+      "z": -9.6,
+      "rotY": 287,
+      "scale": 1.05
+    },
+    {
+      "model": "tree_pineTallA",
+      "x": -13.5,
+      "y": 0,
+      "z": -10.3,
+      "rotY": 311,
+      "scale": 1.15
+    },
+    {
+      "model": "flower_yellowA",
+      "x": 0.7,
+      "y": 0,
+      "z": 10.8,
+      "rotY": 101,
+      "scale": 1.05
+    },
+    {
+      "model": "flower_yellowA",
+      "x": -15.6,
+      "y": 0,
+      "z": 5.1,
+      "rotY": 258,
+      "scale": 1.3
+    },
+    {
+      "model": "cliff_slope_rock",
+      "x": -17.5,
+      "y": 0,
+      "z": -13.8,
+      "rotY": 282,
+      "scale": 0.9
+    },
+    {
+      "model": "tree_pineDefaultB",
+      "x": -11.9,
+      "y": 0,
+      "z": -8.3,
+      "rotY": 310,
+      "scale": 0.95
+    },
+    {
+      "model": "tree_pineDefaultA",
+      "x": -14.4,
+      "y": 0,
+      "z": -12.1,
+      "rotY": 174,
+      "scale": 0.95
+    },
+    {
+      "model": "tree_pineRoundA",
+      "x": -17,
+      "y": 0,
+      "z": 3.6,
+      "rotY": 20,
+      "scale": 1.2
+    },
+    {
+      "model": "tree_pineRoundA",
+      "x": 5.8,
+      "y": 0,
+      "z": 5.9,
+      "rotY": 174,
+      "scale": 1
+    },
+    {
+      "model": "flower_redA",
+      "x": -8.2,
+      "y": 0,
+      "z": 12.4,
+      "rotY": 127,
+      "scale": 1.15
+    },
+    {
+      "model": "tree_pineDefaultB",
+      "x": -2.8,
+      "y": 0,
+      "z": 12.4,
+      "rotY": 50,
+      "scale": 1.2
+    },
+    {
+      "model": "cliff_block_rock",
+      "x": -16.4,
+      "y": 0,
+      "z": 6.6,
+      "rotY": 6,
+      "scale": 1.25
+    },
+    {
+      "model": "tree_pineRoundA",
+      "x": 7.5,
+      "y": 0,
+      "z": -6.1,
+      "rotY": 149,
+      "scale": 0.85
+    },
+    {
+      "model": "tree_pineTallA",
+      "x": -0.5,
+      "y": 0,
+      "z": -13.8,
+      "rotY": 317,
+      "scale": 1
+    },
+    {
+      "model": "plant_bushLarge",
+      "x": -8.8,
+      "y": 0,
+      "z": 11.1,
+      "rotY": 38,
+      "scale": 0.95
+    },
+    {
+      "model": "stone_largeA",
+      "x": -10.7,
+      "y": 0,
+      "z": 12.5,
+      "rotY": 217,
+      "scale": 0.85
+    },
+    {
+      "model": "rock_largeA",
+      "x": 6.4,
+      "y": 0,
+      "z": -5.4,
+      "rotY": 235,
+      "scale": 0.95
+    },
+    {
+      "model": "tree_pineRoundA",
+      "x": 7.9,
+      "y": 0,
+      "z": 8.3,
+      "rotY": 138,
+      "scale": 1.2
+    },
+    {
+      "model": "rock_largeB",
+      "x": -12,
+      "y": 0,
+      "z": 6.9,
+      "rotY": 181,
+      "scale": 1.05
+    },
+    {
+      "model": "grass_large",
+      "x": -16.7,
+      "y": 0,
+      "z": -1.1,
+      "rotY": 318,
+      "scale": 1.3
+    },
+    {
+      "model": "tree_pineTallA",
+      "x": 4.4,
+      "y": 0,
+      "z": 10,
+      "rotY": 342,
+      "scale": 0.9
+    },
+    {
+      "model": "plant_bushDetailed",
+      "x": -15.4,
+      "y": 0,
+      "z": -12.2,
+      "rotY": 299,
+      "scale": 1.2
+    },
+    {
+      "model": "tree_pineTallA",
+      "x": -14.8,
+      "y": 0,
+      "z": 9.4,
+      "rotY": 96,
+      "scale": 1.3
+    },
+    {
+      "model": "tree_default",
+      "x": -9.2,
+      "y": 0,
+      "z": -13.2,
+      "rotY": 155,
+      "scale": 0.9
+    },
+    {
+      "model": "tree_autumn",
+      "x": -15.2,
+      "y": 0,
+      "z": -5.8,
+      "rotY": 104,
+      "scale": 0.9
+    },
+    {
+      "model": "tree_pineDefaultB",
+      "x": -13.8,
+      "y": 0,
+      "z": 7.8,
+      "rotY": 9,
+      "scale": 0.95
+    },
+    {
+      "model": "tree_oak",
+      "x": -4,
+      "y": 0,
+      "z": 12.9,
+      "rotY": 0,
+      "scale": 0.95
+    },
+    {
+      "model": "stone_largeB",
+      "x": -0.1,
+      "y": 0,
+      "z": -11.1,
+      "rotY": 76,
+      "scale": 1
+    },
+    {
+      "model": "tree_autumn",
+      "x": 3,
+      "y": 0,
+      "z": 11,
+      "rotY": 279,
+      "scale": 1.25
+    },
+    {
+      "model": "tree_detailed",
+      "x": -12.9,
+      "y": 0,
+      "z": -6.9,
+      "rotY": 348,
+      "scale": 0.9
+    },
+    {
+      "model": "cliff_slope_rock",
+      "x": -17.9,
+      "y": 0,
+      "z": 8.6,
+      "rotY": 36,
+      "scale": 1.15
+    },
+    {
+      "model": "flower_redA",
+      "x": 1.9,
+      "y": 0,
+      "z": -10.7,
+      "rotY": 193,
+      "scale": 1.3
+    },
+    {
+      "model": "tree_pineTallB",
+      "x": -15.1,
+      "y": 0,
+      "z": 5.5,
+      "rotY": 16,
+      "scale": 1.25
+    },
+    {
+      "model": "rock_smallB",
+      "x": 6.4,
+      "y": 0,
+      "z": 11,
+      "rotY": 4,
+      "scale": 1
+    },
+    {
+      "model": "tree_pineDefaultA",
+      "x": -13,
+      "y": 0,
+      "z": -14.3,
+      "rotY": 309,
+      "scale": 1.25
+    },
+    {
+      "model": "rock_smallB",
+      "x": -15.9,
+      "y": 0,
+      "z": -5.1,
+      "rotY": 266,
+      "scale": 1.2
+    },
+    {
+      "model": "plant_bushLarge",
+      "x": 2.9,
+      "y": 0,
+      "z": 8.3,
+      "rotY": 225,
+      "scale": 1.15
+    },
+    {
+      "model": "tree_pineRoundA",
+      "x": -10.5,
+      "y": 0,
+      "z": 11.9,
+      "rotY": 164,
+      "scale": 1.05
+    },
+    {
+      "model": "tree_pineTallB",
+      "x": -10.4,
+      "y": 0,
+      "z": -7.4,
+      "rotY": 23,
+      "scale": 0.9
+    },
+    {
+      "model": "cliff_top_rock",
+      "x": -14.6,
+      "y": 0,
+      "z": -14.1,
+      "rotY": 100,
+      "scale": 1.05
+    },
+    {
+      "model": "tree_pineDefaultB",
+      "x": 4.3,
+      "y": 0,
+      "z": -8.8,
+      "rotY": 114,
+      "scale": 1.05
+    },
+    {
+      "model": "flower_redA",
+      "x": -13.2,
+      "y": 0,
+      "z": -9.4,
+      "rotY": 0,
+      "scale": 1.25
+    },
+    {
+      "model": "rock_largeB",
+      "x": -15.5,
+      "y": 0,
+      "z": -3.5,
+      "rotY": 203,
+      "scale": 1.05
+    },
+    {
+      "model": "stone_largeA",
+      "x": -1.2,
+      "y": 0,
+      "z": -12,
+      "rotY": 113,
+      "scale": 0.85
+    },
+    {
+      "model": "cliff_block_rock",
+      "x": 6.7,
+      "y": 0,
+      "z": -14.4,
+      "rotY": 57,
+      "scale": 0.95
+    },
+    {
+      "model": "plant_bushLarge",
+      "x": -17.5,
+      "y": 0,
+      "z": 8.6,
+      "rotY": 318,
+      "scale": 1.3
+    },
+    {
+      "model": "tree_pineDefaultA",
+      "x": 7.7,
+      "y": 0,
+      "z": -1,
+      "rotY": 112,
+      "scale": 1.25
+    },
+    {
+      "model": "stone_largeA",
+      "x": -2.7,
+      "y": 0,
+      "z": 12.1,
+      "rotY": 16,
+      "scale": 0.85
+    },
+    {
+      "model": "rock_largeC",
+      "x": 7,
+      "y": 0,
+      "z": -8.7,
+      "rotY": 143,
+      "scale": 1
+    },
+    {
+      "model": "grass_large",
+      "x": -0.4,
+      "y": 0,
+      "z": 11.8,
+      "rotY": 338,
+      "scale": 1.1
+    },
+    {
+      "model": "cliff_block_rock",
+      "x": -17.5,
+      "y": 0,
+      "z": 0.5,
+      "rotY": 257,
+      "scale": 1.1
+    },
+    {
+      "model": "stone_largeA",
+      "x": -7,
+      "y": 0,
+      "z": -14.7,
+      "rotY": 100,
+      "scale": 1
+    },
+    {
+      "model": "tree_pineRoundA",
+      "x": -11.8,
+      "y": 0,
+      "z": 8.9,
+      "rotY": 337,
+      "scale": 1.15
+    },
+    {
+      "model": "tree_pineDefaultA",
+      "x": -17.5,
+      "y": 0,
+      "z": -0.3,
+      "rotY": 298,
+      "scale": 1.25
+    },
+    {
+      "model": "tree_pineTallB",
+      "x": -6.9,
+      "y": 0,
+      "z": -14,
+      "rotY": 175,
+      "scale": 0.85
+    },
+    {
+      "model": "tree_autumn",
+      "x": -11.4,
+      "y": 0,
+      "z": -6.8,
+      "rotY": 35,
+      "scale": 1.15
+    },
+    {
+      "model": "flower_yellowA",
+      "x": -12.3,
+      "y": 0,
+      "z": -12.4,
+      "rotY": 105,
+      "scale": 1.15
+    },
+    {
+      "model": "stone_largeB",
+      "x": -2.5,
+      "y": 0,
+      "z": -11.3,
+      "rotY": 283,
+      "scale": 0.85
+    },
+    {
+      "model": "rock_smallA",
+      "x": -7.5,
+      "y": 0,
+      "z": -14.6,
+      "rotY": 182,
+      "scale": 1.15
+    },
+    {
+      "model": "rock_largeB",
+      "x": -12.1,
+      "y": 0,
+      "z": -13.2,
+      "rotY": 310,
+      "scale": 0.95
+    },
+    {
+      "model": "flower_redA",
+      "x": -10.7,
+      "y": 0,
+      "z": -12.9,
+      "rotY": 285,
+      "scale": 1.25
+    },
+    {
+      "model": "tree_detailed",
+      "x": -16.7,
+      "y": 0,
+      "z": -6.4,
+      "rotY": 116,
+      "scale": 1.15
+    },
+    {
+      "model": "tree_autumn",
+      "x": -4.5,
+      "y": 0,
+      "z": -14.5,
+      "rotY": 68,
+      "scale": 1.2
+    },
+    {
+      "model": "rock_smallA",
+      "x": -12.6,
+      "y": 0,
+      "z": -11.3,
+      "rotY": 99,
+      "scale": 0.9
+    },
+    {
+      "model": "tree_plateau",
+      "x": -8.7,
+      "y": 0,
+      "z": -8.8,
+      "rotY": 234,
+      "scale": 1.3
+    },
+    {
+      "model": "rock_largeC",
+      "x": -11.2,
+      "y": 0,
+      "z": -7.5,
+      "rotY": 319,
+      "scale": 1.1
+    },
+    {
+      "model": "tree_pineTallA",
+      "x": 3.1,
+      "y": 0,
+      "z": 3.8,
+      "rotY": 29,
+      "scale": 0.9
+    },
+    {
+      "model": "cliff_block_rock",
+      "x": 7.8,
+      "y": 0,
+      "z": -9,
+      "rotY": 286,
+      "scale": 0.95
+    },
+    {
+      "model": "tree_pineTallA",
+      "x": 2.8,
+      "y": 0,
+      "z": 7.3,
+      "rotY": 333,
+      "scale": 1.25
+    },
+    {
+      "model": "tree_detailed",
+      "x": 5.3,
+      "y": 0,
+      "z": -11.8,
+      "rotY": 89,
+      "scale": 1.05
+    },
+    {
+      "model": "flower_yellowA",
+      "x": -17.4,
+      "y": 0,
+      "z": 12.9,
+      "rotY": 264,
+      "scale": 1
+    },
+    {
+      "model": "rock_largeA",
+      "x": 7,
+      "y": 0,
+      "z": -2.3,
+      "rotY": 342,
+      "scale": 1.2
+    },
+    {
+      "model": "tree_plateau",
+      "x": 2.9,
+      "y": 0,
+      "z": 9.7,
+      "rotY": 186,
+      "scale": 1.1
+    },
+    {
+      "model": "tree_oak",
+      "x": 6.5,
+      "y": 0,
+      "z": 12.3,
+      "rotY": 355,
+      "scale": 1.25
+    },
+    {
+      "model": "plant_bushDetailed",
+      "x": -14.5,
+      "y": 0,
+      "z": -12.6,
+      "rotY": 60,
+      "scale": 0.9
+    },
+    {
+      "model": "plant_bushLarge",
+      "x": -11.2,
+      "y": 0,
+      "z": 9.8,
+      "rotY": 5,
+      "scale": 0.95
+    }
+  ],
+  "roads": [
+    {
+      "gx": -10,
+      "gz": -10,
+      "piece": "bend",
+      "yaw": 90
+    },
+    {
+      "gx": -10,
+      "gz": -9,
+      "piece": "straight",
+      "yaw": 90
+    },
+    {
+      "gx": -10,
+      "gz": -8,
+      "piece": "straight",
+      "yaw": 90
+    },
+    {
+      "gx": -10,
+      "gz": -7,
+      "piece": "straight",
+      "yaw": 90
+    },
+    {
+      "gx": -10,
+      "gz": -6,
+      "piece": "tee",
+      "yaw": 90
+    },
+    {
+      "gx": -10,
+      "gz": -5,
+      "piece": "straight",
+      "yaw": 90
+    },
+    {
+      "gx": -10,
+      "gz": -4,
+      "piece": "straight",
+      "yaw": 90
+    },
+    {
+      "gx": -10,
+      "gz": -3,
+      "piece": "straight",
+      "yaw": 90
+    },
+    {
+      "gx": -10,
+      "gz": -2,
+      "piece": "straight",
+      "yaw": 90
+    },
+    {
+      "gx": -10,
+      "gz": -1,
+      "piece": "straight",
+      "yaw": 90
+    },
+    {
+      "gx": -10,
+      "gz": 0,
+      "piece": "straight",
+      "yaw": 90
+    },
+    {
+      "gx": -10,
+      "gz": 1,
+      "piece": "straight",
+      "yaw": 90
+    },
+    {
+      "gx": -10,
+      "gz": 2,
+      "piece": "straight",
+      "yaw": 90
+    },
+    {
+      "gx": -10,
+      "gz": 3,
+      "piece": "straight",
+      "yaw": 90
+    },
+    {
+      "gx": -10,
+      "gz": 4,
+      "piece": "straight",
+      "yaw": 90
+    },
+    {
+      "gx": -10,
+      "gz": 5,
+      "piece": "straight",
+      "yaw": 90
+    },
+    {
+      "gx": -10,
+      "gz": 6,
+      "piece": "tee",
+      "yaw": 90
+    },
+    {
+      "gx": -10,
+      "gz": 7,
+      "piece": "straight",
+      "yaw": 90
+    },
+    {
+      "gx": -10,
+      "gz": 8,
+      "piece": "straight",
+      "yaw": 90
+    },
+    {
+      "gx": -10,
+      "gz": 9,
+      "piece": "straight",
+      "yaw": 90
+    },
+    {
+      "gx": -10,
+      "gz": 10,
+      "piece": "bend",
+      "yaw": 180
+    },
+    {
+      "gx": -9,
+      "gz": -10,
+      "piece": "straight",
+      "yaw": 0
+    },
+    {
+      "gx": -9,
+      "gz": -6,
+      "piece": "straight",
+      "yaw": 0
+    },
+    {
+      "gx": -9,
+      "gz": 6,
+      "piece": "straight",
+      "yaw": 0
+    },
+    {
+      "gx": -9,
+      "gz": 10,
+      "piece": "straight",
+      "yaw": 0
+    },
+    {
+      "gx": -8,
+      "gz": -10,
+      "piece": "straight",
+      "yaw": 0
+    },
+    {
+      "gx": -8,
+      "gz": -6,
+      "piece": "straight",
+      "yaw": 0
+    },
+    {
+      "gx": -8,
+      "gz": 6,
+      "piece": "straight",
+      "yaw": 0
+    },
+    {
+      "gx": -8,
+      "gz": 10,
+      "piece": "straight",
+      "yaw": 0
+    },
+    {
+      "gx": -7,
+      "gz": -10,
+      "piece": "straight",
+      "yaw": 0
+    },
+    {
+      "gx": -7,
+      "gz": -6,
+      "piece": "straight",
+      "yaw": 0
+    },
+    {
+      "gx": -7,
+      "gz": 6,
+      "piece": "straight",
+      "yaw": 0
+    },
+    {
+      "gx": -7,
+      "gz": 10,
+      "piece": "straight",
+      "yaw": 0
+    },
+    {
+      "gx": -6,
+      "gz": -10,
+      "piece": "tee",
+      "yaw": 0
+    },
+    {
+      "gx": -6,
+      "gz": -9,
+      "piece": "straight",
+      "yaw": 90
+    },
+    {
+      "gx": -6,
+      "gz": -8,
+      "piece": "straight",
+      "yaw": 90
+    },
+    {
+      "gx": -6,
+      "gz": -7,
+      "piece": "straight",
+      "yaw": 90
+    },
+    {
+      "gx": -6,
+      "gz": -6,
+      "piece": "bend",
+      "yaw": 270
+    },
+    {
+      "gx": -6,
+      "gz": 6,
+      "piece": "tee",
+      "yaw": 0
+    },
+    {
+      "gx": -6,
+      "gz": 7,
+      "piece": "straight",
+      "yaw": 90
+    },
+    {
+      "gx": -6,
+      "gz": 8,
+      "piece": "straight",
+      "yaw": 90
+    },
+    {
+      "gx": -6,
+      "gz": 9,
+      "piece": "straight",
+      "yaw": 90
+    },
+    {
+      "gx": -6,
+      "gz": 10,
+      "piece": "tee",
+      "yaw": 180
+    },
+    {
+      "gx": -5,
+      "gz": -10,
+      "piece": "straight",
+      "yaw": 0
+    },
+    {
+      "gx": -5,
+      "gz": 6,
+      "piece": "straight",
+      "yaw": 0
+    },
+    {
+      "gx": -5,
+      "gz": 10,
+      "piece": "straight",
+      "yaw": 0
+    },
+    {
+      "gx": -4,
+      "gz": -10,
+      "piece": "straight",
+      "yaw": 0
+    },
+    {
+      "gx": -4,
+      "gz": 6,
+      "piece": "straight",
+      "yaw": 0
+    },
+    {
+      "gx": -4,
+      "gz": 10,
+      "piece": "straight",
+      "yaw": 0
+    },
+    {
+      "gx": -3,
+      "gz": -10,
+      "piece": "straight",
+      "yaw": 0
+    },
+    {
+      "gx": -3,
+      "gz": 6,
+      "piece": "straight",
+      "yaw": 0
+    },
+    {
+      "gx": -3,
+      "gz": 10,
+      "piece": "straight",
+      "yaw": 0
+    },
+    {
+      "gx": -2,
+      "gz": -10,
+      "piece": "straight",
+      "yaw": 0
+    },
+    {
+      "gx": -2,
+      "gz": 6,
+      "piece": "tee",
+      "yaw": 0
+    },
+    {
+      "gx": -2,
+      "gz": 7,
+      "piece": "straight",
+      "yaw": 90
+    },
+    {
+      "gx": -2,
+      "gz": 8,
+      "piece": "straight",
+      "yaw": 90
+    },
+    {
+      "gx": -2,
+      "gz": 9,
+      "piece": "straight",
+      "yaw": 90
+    },
+    {
+      "gx": -2,
+      "gz": 10,
+      "piece": "tee",
+      "yaw": 180
+    },
+    {
+      "gx": -1,
+      "gz": -10,
+      "piece": "straight",
+      "yaw": 0
+    },
+    {
+      "gx": -1,
+      "gz": 6,
+      "piece": "straight",
+      "yaw": 0
+    },
+    {
+      "gx": -1,
+      "gz": 10,
+      "piece": "straight",
+      "yaw": 0
+    },
+    {
+      "gx": 0,
+      "gz": -10,
+      "piece": "straight",
+      "yaw": 0
+    },
+    {
+      "gx": 0,
+      "gz": 6,
+      "piece": "straight",
+      "yaw": 0
+    },
+    {
+      "gx": 0,
+      "gz": 10,
+      "piece": "straight",
+      "yaw": 0
+    },
+    {
+      "gx": 1,
+      "gz": -10,
+      "piece": "straight",
+      "yaw": 0
+    },
+    {
+      "gx": 1,
+      "gz": 6,
+      "piece": "straight",
+      "yaw": 0
+    },
+    {
+      "gx": 1,
+      "gz": 10,
+      "piece": "straight",
+      "yaw": 0
+    },
+    {
+      "gx": 2,
+      "gz": -10,
+      "piece": "tee",
+      "yaw": 0
+    },
+    {
+      "gx": 2,
+      "gz": -9,
+      "piece": "straight",
+      "yaw": 90
+    },
+    {
+      "gx": 2,
+      "gz": -8,
+      "piece": "straight",
+      "yaw": 90
+    },
+    {
+      "gx": 2,
+      "gz": -7,
+      "piece": "straight",
+      "yaw": 90
+    },
+    {
+      "gx": 2,
+      "gz": -6,
+      "piece": "tee",
+      "yaw": 90
+    },
+    {
+      "gx": 2,
+      "gz": -5,
+      "piece": "straight",
+      "yaw": 90
+    },
+    {
+      "gx": 2,
+      "gz": -4,
+      "piece": "straight",
+      "yaw": 90
+    },
+    {
+      "gx": 2,
+      "gz": -3,
+      "piece": "straight",
+      "yaw": 90
+    },
+    {
+      "gx": 2,
+      "gz": -2,
+      "piece": "tee",
+      "yaw": 90
+    },
+    {
+      "gx": 2,
+      "gz": -1,
+      "piece": "straight",
+      "yaw": 90
+    },
+    {
+      "gx": 2,
+      "gz": 0,
+      "piece": "straight",
+      "yaw": 90
+    },
+    {
+      "gx": 2,
+      "gz": 1,
+      "piece": "straight",
+      "yaw": 90
+    },
+    {
+      "gx": 2,
+      "gz": 2,
+      "piece": "tee",
+      "yaw": 90
+    },
+    {
+      "gx": 2,
+      "gz": 3,
+      "piece": "straight",
+      "yaw": 90
+    },
+    {
+      "gx": 2,
+      "gz": 4,
+      "piece": "straight",
+      "yaw": 90
+    },
+    {
+      "gx": 2,
+      "gz": 5,
+      "piece": "straight",
+      "yaw": 90
+    },
+    {
+      "gx": 2,
+      "gz": 6,
+      "piece": "cross",
+      "yaw": 0
+    },
+    {
+      "gx": 2,
+      "gz": 7,
+      "piece": "straight",
+      "yaw": 90
+    },
+    {
+      "gx": 2,
+      "gz": 8,
+      "piece": "straight",
+      "yaw": 90
+    },
+    {
+      "gx": 2,
+      "gz": 9,
+      "piece": "straight",
+      "yaw": 90
+    },
+    {
+      "gx": 2,
+      "gz": 10,
+      "piece": "tee",
+      "yaw": 180
+    },
+    {
+      "gx": 3,
+      "gz": -10,
+      "piece": "straight",
+      "yaw": 0
+    },
+    {
+      "gx": 3,
+      "gz": -6,
+      "piece": "straight",
+      "yaw": 0
+    },
+    {
+      "gx": 3,
+      "gz": -2,
+      "piece": "straight",
+      "yaw": 0
+    },
+    {
+      "gx": 3,
+      "gz": 2,
+      "piece": "straight",
+      "yaw": 0
+    },
+    {
+      "gx": 3,
+      "gz": 6,
+      "piece": "straight",
+      "yaw": 0
+    },
+    {
+      "gx": 3,
+      "gz": 10,
+      "piece": "straight",
+      "yaw": 0
+    },
+    {
+      "gx": 4,
+      "gz": -10,
+      "piece": "straight",
+      "yaw": 0
+    },
+    {
+      "gx": 4,
+      "gz": -6,
+      "piece": "straight",
+      "yaw": 0
+    },
+    {
+      "gx": 4,
+      "gz": -2,
+      "piece": "straight",
+      "yaw": 0
+    },
+    {
+      "gx": 4,
+      "gz": 2,
+      "piece": "straight",
+      "yaw": 0
+    },
+    {
+      "gx": 4,
+      "gz": 6,
+      "piece": "straight",
+      "yaw": 0
+    },
+    {
+      "gx": 4,
+      "gz": 10,
+      "piece": "straight",
+      "yaw": 0
+    },
+    {
+      "gx": 5,
+      "gz": -10,
+      "piece": "straight",
+      "yaw": 0
+    },
+    {
+      "gx": 5,
+      "gz": -6,
+      "piece": "straight",
+      "yaw": 0
+    },
+    {
+      "gx": 5,
+      "gz": -2,
+      "piece": "straight",
+      "yaw": 0
+    },
+    {
+      "gx": 5,
+      "gz": 2,
+      "piece": "straight",
+      "yaw": 0
+    },
+    {
+      "gx": 5,
+      "gz": 6,
+      "piece": "straight",
+      "yaw": 0
+    },
+    {
+      "gx": 5,
+      "gz": 10,
+      "piece": "straight",
+      "yaw": 0
+    },
+    {
+      "gx": 6,
+      "gz": -10,
+      "piece": "bend",
+      "yaw": 0
+    },
+    {
+      "gx": 6,
+      "gz": -9,
+      "piece": "straight",
+      "yaw": 90
+    },
+    {
+      "gx": 6,
+      "gz": -8,
+      "piece": "straight",
+      "yaw": 90
+    },
+    {
+      "gx": 6,
+      "gz": -7,
+      "piece": "straight",
+      "yaw": 90
+    },
+    {
+      "gx": 6,
+      "gz": -6,
+      "piece": "tee",
+      "yaw": 270
+    },
+    {
+      "gx": 6,
+      "gz": -5,
+      "piece": "straight",
+      "yaw": 90
+    },
+    {
+      "gx": 6,
+      "gz": -4,
+      "piece": "straight",
+      "yaw": 90
+    },
+    {
+      "gx": 6,
+      "gz": -3,
+      "piece": "straight",
+      "yaw": 90
+    },
+    {
+      "gx": 6,
+      "gz": -2,
+      "piece": "tee",
+      "yaw": 270
+    },
+    {
+      "gx": 6,
+      "gz": -1,
+      "piece": "straight",
+      "yaw": 90
+    },
+    {
+      "gx": 6,
+      "gz": 0,
+      "piece": "straight",
+      "yaw": 90
+    },
+    {
+      "gx": 6,
+      "gz": 1,
+      "piece": "straight",
+      "yaw": 90
+    },
+    {
+      "gx": 6,
+      "gz": 2,
+      "piece": "tee",
+      "yaw": 270
+    },
+    {
+      "gx": 6,
+      "gz": 3,
+      "piece": "straight",
+      "yaw": 90
+    },
+    {
+      "gx": 6,
+      "gz": 4,
+      "piece": "straight",
+      "yaw": 90
+    },
+    {
+      "gx": 6,
+      "gz": 5,
+      "piece": "straight",
+      "yaw": 90
+    },
+    {
+      "gx": 6,
+      "gz": 6,
+      "piece": "tee",
+      "yaw": 270
+    },
+    {
+      "gx": 6,
+      "gz": 7,
+      "piece": "straight",
+      "yaw": 90
+    },
+    {
+      "gx": 6,
+      "gz": 8,
+      "piece": "straight",
+      "yaw": 90
+    },
+    {
+      "gx": 6,
+      "gz": 9,
+      "piece": "straight",
+      "yaw": 90
+    },
+    {
+      "gx": 6,
+      "gz": 10,
+      "piece": "bend",
+      "yaw": 270
+    }
+  ],
+  "buildings": [
+    {
+      "x": -24,
+      "z": -22,
+      "model": "CityKit/building-skyscraper-c",
+      "yaw": 180,
+      "foot": 1.88
+    },
+    {
+      "x": -24,
+      "z": -20,
+      "model": "CityKit/building-a",
+      "yaw": 90,
+      "foot": 1.88
+    },
+    {
+      "x": -24,
+      "z": -18,
+      "model": "CityKit/building-h",
+      "yaw": 90,
+      "foot": 1.88
+    },
+    {
+      "x": -24,
+      "z": -16,
+      "model": "CityKit/building-l",
+      "yaw": 270,
+      "foot": 1.88
+    },
+    {
+      "x": -24,
+      "z": -10,
+      "model": "CityKit/building-k",
+      "yaw": 0,
+      "foot": 1.88
+    },
+    {
+      "x": -24,
+      "z": -8,
+      "model": "CityKit/building-k",
+      "yaw": 0,
+      "foot": 1.88
+    },
+    {
+      "x": -24,
+      "z": -6,
+      "model": "CityKit/building-d",
+      "yaw": 270,
+      "foot": 1.88
+    },
+    {
+      "x": -24,
+      "z": -4,
+      "model": "CityKit/building-f",
+      "yaw": 0,
+      "foot": 1.88
+    },
+    {
+      "x": -24,
+      "z": -2,
+      "model": "CityKit/building-d",
+      "yaw": 90,
+      "foot": 1.88
+    },
+    {
+      "x": -24,
+      "z": 0,
+      "model": "CityKit/building-f",
+      "yaw": 270,
+      "foot": 1.88
+    },
+    {
+      "x": -24,
+      "z": 4,
+      "model": "CityKit/building-c",
+      "yaw": 90,
+      "foot": 1.88
+    },
+    {
+      "x": -23,
+      "z": 7,
+      "model": "CityKit/building-skyscraper-b",
+      "yaw": 0,
+      "foot": 3.8
+    },
+    {
+      "x": -24,
+      "z": 10,
+      "model": "CityKit/building-i",
+      "yaw": 180,
+      "foot": 1.88
+    },
+    {
+      "x": -24,
+      "z": 12,
+      "model": "CityKit/building-f",
+      "yaw": 0,
+      "foot": 1.88
+    },
+    {
+      "x": -24,
+      "z": 14,
+      "model": "CityKit/building-d",
+      "yaw": 0,
+      "foot": 1.88
+    },
+    {
+      "x": -24,
+      "z": 16,
+      "model": "CityKit/building-h",
+      "yaw": 90,
+      "foot": 1.88
+    },
+    {
+      "x": -24,
+      "z": 18,
+      "model": "CityKit/building-g",
+      "yaw": 0,
+      "foot": 1.88
+    },
+    {
+      "x": -24,
+      "z": 20,
+      "model": "CityKit/building-g",
+      "yaw": 270,
+      "foot": 1.88
+    },
+    {
+      "x": -22,
+      "z": -22,
+      "model": "CityKit/building-j",
+      "yaw": 270,
+      "foot": 1.88
+    },
+    {
+      "x": -22,
+      "z": -20,
+      "model": "CityKit/building-j",
+      "yaw": 270,
+      "foot": 1.88
+    },
+    {
+      "x": -22,
+      "z": -18,
+      "model": "CityKit/building-k",
+      "yaw": 0,
+      "foot": 1.88
+    },
+    {
+      "x": -22,
+      "z": -16,
+      "model": "CityKit/building-e",
+      "yaw": 180,
+      "foot": 1.88
+    },
+    {
+      "x": -22,
+      "z": -10,
+      "model": "CityKit/building-g",
+      "yaw": 90,
+      "foot": 1.88
+    },
+    {
+      "x": -22,
+      "z": -8,
+      "model": "CityKit/building-c",
+      "yaw": 0,
+      "foot": 1.88
+    },
+    {
+      "x": -22,
+      "z": -6,
+      "model": "CityKit/building-l",
+      "yaw": 90,
+      "foot": 1.88
+    },
+    {
+      "x": -22,
+      "z": -4,
+      "model": "CityKit/building-f",
+      "yaw": 90,
+      "foot": 1.88
+    },
+    {
+      "x": -22,
+      "z": -2,
+      "model": "CityKit/building-l",
+      "yaw": 90,
+      "foot": 1.88
+    },
+    {
+      "x": -22,
+      "z": 4,
+      "model": "CityKit/building-g",
+      "yaw": 270,
+      "foot": 1.88
+    },
+    {
+      "x": -22,
+      "z": 10,
+      "model": "CityKit/building-h",
+      "yaw": 270,
+      "foot": 1.88
+    },
+    {
+      "x": -22,
+      "z": 12,
+      "model": "CityKit/building-a",
+      "yaw": 180,
+      "foot": 1.88
+    },
+    {
+      "x": -22,
+      "z": 14,
+      "model": "CityKit/building-i",
+      "yaw": 0,
+      "foot": 1.88
+    },
+    {
+      "x": -22,
+      "z": 16,
+      "model": "CityKit/building-i",
+      "yaw": 180,
+      "foot": 1.88
+    },
+    {
+      "x": -22,
+      "z": 18,
+      "model": "CityKit/building-skyscraper-b",
+      "yaw": 90,
+      "foot": 1.88
+    },
+    {
+      "x": -22,
+      "z": 20,
+      "model": "CityKit/building-skyscraper-c",
+      "yaw": 180,
+      "foot": 1.88
+    },
+    {
+      "x": -20,
+      "z": -22,
+      "model": "CityKit/building-l",
+      "yaw": 90,
+      "foot": 1.88
+    },
+    {
+      "x": -18,
+      "z": -22,
+      "model": "CityKit/building-j",
+      "yaw": 180,
+      "foot": 1.88
+    },
+    {
+      "x": -18,
+      "z": -18,
+      "model": "CityKit/building-k",
+      "yaw": 0,
+      "foot": 1.88
+    },
+    {
+      "x": -18,
+      "z": -16,
+      "model": "CityKit/building-m",
+      "yaw": 90,
+      "foot": 1.88
+    },
+    {
+      "x": -18,
+      "z": -14,
+      "model": "CityKit/building-l",
+      "yaw": 90,
+      "foot": 1.88
+    },
+    {
+      "x": -18,
+      "z": -10,
+      "model": "CityKit/building-f",
+      "yaw": 0,
+      "foot": 1.88
+    },
+    {
+      "x": -18,
+      "z": -8,
+      "model": "CityKit/building-i",
+      "yaw": 180,
+      "foot": 1.88
+    },
+    {
+      "x": -18,
+      "z": -6,
+      "model": "CityKit/building-c",
+      "yaw": 270,
+      "foot": 1.88
+    },
+    {
+      "x": -18,
+      "z": -4,
+      "model": "CityKit/building-b",
+      "yaw": 270,
+      "foot": 1.88
+    },
+    {
+      "x": -18,
+      "z": 0,
+      "model": "CityKit/building-k",
+      "yaw": 0,
+      "foot": 1.88
+    },
+    {
+      "x": -18,
+      "z": 2,
+      "model": "CityKit/building-k",
+      "yaw": 0,
+      "foot": 1.88
+    },
+    {
+      "x": -18,
+      "z": 4,
+      "model": "CityKit/building-k",
+      "yaw": 0,
+      "foot": 1.88
+    },
+    {
+      "x": -18,
+      "z": 6,
+      "model": "CityKit/building-h",
+      "yaw": 90,
+      "foot": 1.88
+    },
+    {
+      "x": -18,
+      "z": 8,
+      "model": "CityKit/building-n",
+      "yaw": 180,
+      "foot": 1.88
+    },
+    {
+      "x": -18,
+      "z": 10,
+      "model": "CityKit/building-l",
+      "yaw": 90,
+      "foot": 1.88
+    },
+    {
+      "x": -18,
+      "z": 14,
+      "model": "CityKit/building-g",
+      "yaw": 180,
+      "foot": 1.88
+    },
+    {
+      "x": -18,
+      "z": 16,
+      "model": "CityKit/building-b",
+      "yaw": 0,
+      "foot": 1.88
+    },
+    {
+      "x": -18,
+      "z": 18,
+      "model": "CityKit/building-b",
+      "yaw": 270,
+      "foot": 1.88
+    },
+    {
+      "x": -16,
+      "z": -22,
+      "model": "CityKit/building-e",
+      "yaw": 180,
+      "foot": 1.88
+    },
+    {
+      "x": -16,
+      "z": -18,
+      "model": "CityKit/building-k",
+      "yaw": 180,
+      "foot": 1.88
+    },
+    {
+      "x": -16,
+      "z": -16,
+      "model": "CityKit/building-k",
+      "yaw": 270,
+      "foot": 1.88
+    },
+    {
+      "x": -16,
+      "z": -14,
+      "model": "CityKit/building-n",
+      "yaw": 0,
+      "foot": 1.88
+    },
+    {
+      "x": -16,
+      "z": -8,
+      "model": "CityKit/building-g",
+      "yaw": 180,
+      "foot": 1.88
+    },
+    {
+      "x": -16,
+      "z": -6,
+      "model": "CityKit/building-h",
+      "yaw": 90,
+      "foot": 1.88
+    },
+    {
+      "x": -16,
+      "z": -4,
+      "model": "CityKit/building-c",
+      "yaw": 180,
+      "foot": 1.88
+    },
+    {
+      "x": -16,
+      "z": -2,
+      "model": "CityKit/building-l",
+      "yaw": 90,
+      "foot": 1.88
+    },
+    {
+      "x": -16,
+      "z": 0,
+      "model": "CityKit/building-skyscraper-d",
+      "yaw": 0,
+      "foot": 1.88
+    },
+    {
+      "x": -16,
+      "z": 2,
+      "model": "CityKit/building-n",
+      "yaw": 0,
+      "foot": 1.88
+    },
+    {
+      "x": -16,
+      "z": 4,
+      "model": "CityKit/building-h",
+      "yaw": 0,
+      "foot": 1.88
+    },
+    {
+      "x": -16,
+      "z": 6,
+      "model": "CityKit/building-e",
+      "yaw": 180,
+      "foot": 1.88
+    },
+    {
+      "x": -16,
+      "z": 8,
+      "model": "CityKit/building-e",
+      "yaw": 90,
+      "foot": 1.88
+    },
+    {
+      "x": -16,
+      "z": 10,
+      "model": "CityKit/building-f",
+      "yaw": 0,
+      "foot": 1.88
+    },
+    {
+      "x": -16,
+      "z": 14,
+      "model": "CityKit/building-n",
+      "yaw": 0,
+      "foot": 1.88
+    },
+    {
+      "x": -16,
+      "z": 16,
+      "model": "CityKit/building-b",
+      "yaw": 0,
+      "foot": 1.88
+    },
+    {
+      "x": -16,
+      "z": 18,
+      "model": "CityKit/building-j",
+      "yaw": 270,
+      "foot": 1.88
+    },
+    {
+      "x": -14,
+      "z": -22,
+      "model": "CityKit/building-l",
+      "yaw": 180,
+      "foot": 1.88
+    },
+    {
+      "x": -14,
+      "z": -18,
+      "model": "CityKit/building-m",
+      "yaw": 0,
+      "foot": 1.88
+    },
+    {
+      "x": -14,
+      "z": -16,
+      "model": "CityKit/building-j",
+      "yaw": 180,
+      "foot": 1.88
+    },
+    {
+      "x": -14,
+      "z": -10,
+      "model": "CityKit/building-g",
+      "yaw": 180,
+      "foot": 1.88
+    },
+    {
+      "x": -14,
+      "z": -8,
+      "model": "CityKit/building-n",
+      "yaw": 90,
+      "foot": 1.88
+    },
+    {
+      "x": -13,
+      "z": 7,
+      "model": "CityKit/building-c",
+      "yaw": 90,
+      "foot": 3.8
+    },
+    {
+      "x": -14,
+      "z": 10,
+      "model": "CityKit/building-e",
+      "yaw": 270,
+      "foot": 1.88
+    },
+    {
+      "x": -14,
+      "z": 14,
+      "model": "CityKit/building-m",
+      "yaw": 0,
+      "foot": 1.88
+    },
+    {
+      "x": -14,
+      "z": 16,
+      "model": "CityKit/building-b",
+      "yaw": 90,
+      "foot": 1.88
+    },
+    {
+      "x": -14,
+      "z": 18,
+      "model": "CityKit/building-c",
+      "yaw": 90,
+      "foot": 1.88
+    },
+    {
+      "x": -12,
+      "z": -22,
+      "model": "CityKit/building-l",
+      "yaw": 180,
+      "foot": 1.88
+    },
+    {
+      "x": -11,
+      "z": -9,
+      "model": "CityKit/building-f",
+      "yaw": 0,
+      "foot": 3.8
+    },
+    {
+      "x": -12,
+      "z": 10,
+      "model": "CityKit/building-h",
+      "yaw": 270,
+      "foot": 1.88
+    },
+    {
+      "x": -10,
+      "z": -22,
+      "model": "CityKit/building-f",
+      "yaw": 270,
+      "foot": 1.88
+    },
+    {
+      "x": -9,
+      "z": -17,
+      "model": "CityKit/building-n",
+      "yaw": 0,
+      "foot": 3.8
+    },
+    {
+      "x": -10,
+      "z": -14,
+      "model": "CityKit/building-h",
+      "yaw": 180,
+      "foot": 1.88
+    },
+    {
+      "x": -10,
+      "z": -12,
+      "model": "CityKit/building-skyscraper-a",
+      "yaw": 180,
+      "foot": 1.88
+    },
+    {
+      "x": -10,
+      "z": 14,
+      "model": "CityKit/building-l",
+      "yaw": 180,
+      "foot": 1.88
+    },
+    {
+      "x": -10,
+      "z": 16,
+      "model": "CityKit/building-n",
+      "yaw": 180,
+      "foot": 1.88
+    },
+    {
+      "x": -10,
+      "z": 18,
+      "model": "CityKit/building-j",
+      "yaw": 270,
+      "foot": 1.88
+    },
+    {
+      "x": -8,
+      "z": -22,
+      "model": "CityKit/building-a",
+      "yaw": 0,
+      "foot": 1.88
+    },
+    {
+      "x": -8,
+      "z": -14,
+      "model": "CityKit/building-n",
+      "yaw": 90,
+      "foot": 1.88
+    },
+    {
+      "x": -7,
+      "z": 15,
+      "model": "CityKit/building-n",
+      "yaw": 0,
+      "foot": 3.8
+    },
+    {
+      "x": -8,
+      "z": 18,
+      "model": "CityKit/building-skyscraper-d",
+      "yaw": 270,
+      "foot": 1.88
+    },
+    {
+      "x": -6,
+      "z": -22,
+      "model": "CityKit/building-n",
+      "yaw": 0,
+      "foot": 1.88
+    },
+    {
+      "x": -6,
+      "z": -18,
+      "model": "CityKit/building-d",
+      "yaw": 270,
+      "foot": 1.88
+    },
+    {
+      "x": -6,
+      "z": -16,
+      "model": "CityKit/building-skyscraper-a",
+      "yaw": 90,
+      "foot": 1.88
+    },
+    {
+      "x": -6,
+      "z": -14,
+      "model": "CityKit/building-f",
+      "yaw": 270,
+      "foot": 1.88
+    },
+    {
+      "x": -6,
+      "z": 18,
+      "model": "CityKit/building-e",
+      "yaw": 270,
+      "foot": 1.88
+    },
+    {
+      "x": -4,
+      "z": -22,
+      "model": "CityKit/building-n",
+      "yaw": 180,
+      "foot": 1.88
+    },
+    {
+      "x": -4,
+      "z": -18,
+      "model": "CityKit/building-n",
+      "yaw": 0,
+      "foot": 1.88
+    },
+    {
+      "x": -4,
+      "z": -16,
+      "model": "CityKit/building-d",
+      "yaw": 90,
+      "foot": 1.88
+    },
+    {
+      "x": -4,
+      "z": -14,
+      "model": "CityKit/building-d",
+      "yaw": 0,
+      "foot": 1.88
+    },
+    {
+      "x": -2,
+      "z": -22,
+      "model": "CityKit/building-d",
+      "yaw": 270,
+      "foot": 1.88
+    },
+    {
+      "x": -2,
+      "z": -18,
+      "model": "CityKit/building-g",
+      "yaw": 0,
+      "foot": 1.88
+    },
+    {
+      "x": -2,
+      "z": -16,
+      "model": "CityKit/building-k",
+      "yaw": 270,
+      "foot": 1.88
+    },
+    {
+      "x": -2,
+      "z": -14,
+      "model": "CityKit/building-j",
+      "yaw": 0,
+      "foot": 1.88
+    },
+    {
+      "x": -2,
+      "z": -12,
+      "model": "CityKit/building-c",
+      "yaw": 90,
+      "foot": 1.88
+    },
+    {
+      "x": -2,
+      "z": -10,
+      "model": "CityKit/building-d",
+      "yaw": 270,
+      "foot": 1.88
+    },
+    {
+      "x": -2,
+      "z": -8,
+      "model": "CityKit/building-j",
+      "yaw": 90,
+      "foot": 1.88
+    },
+    {
+      "x": -2,
+      "z": 14,
+      "model": "CityKit/building-j",
+      "yaw": 180,
+      "foot": 1.88
+    },
+    {
+      "x": -2,
+      "z": 16,
+      "model": "CityKit/building-n",
+      "yaw": 90,
+      "foot": 1.88
+    },
+    {
+      "x": -2,
+      "z": 18,
+      "model": "CityKit/building-b",
+      "yaw": 270,
+      "foot": 1.88
+    },
+    {
+      "x": 0,
+      "z": -22,
+      "model": "CityKit/building-h",
+      "yaw": 0,
+      "foot": 1.88
+    },
+    {
+      "x": 0,
+      "z": -18,
+      "model": "CityKit/building-d",
+      "yaw": 90,
+      "foot": 1.88
+    },
+    {
+      "x": 0,
+      "z": -16,
+      "model": "CityKit/building-k",
+      "yaw": 270,
+      "foot": 1.88
+    },
+    {
+      "x": 0,
+      "z": -14,
+      "model": "CityKit/building-h",
+      "yaw": 0,
+      "foot": 1.88
+    },
+    {
+      "x": 0,
+      "z": -12,
+      "model": "CityKit/building-n",
+      "yaw": 90,
+      "foot": 1.88
+    },
+    {
+      "x": 1,
+      "z": -9,
+      "model": "CityKit/building-g",
+      "yaw": 270,
+      "foot": 3.8
+    },
+    {
+      "x": 0,
+      "z": 14,
+      "model": "CityKit/building-a",
+      "yaw": 180,
+      "foot": 1.88
+    },
+    {
+      "x": 0,
+      "z": 16,
+      "model": "CityKit/building-j",
+      "yaw": 270,
+      "foot": 1.88
+    },
+    {
+      "x": 0,
+      "z": 18,
+      "model": "CityKit/building-skyscraper-d",
+      "yaw": 90,
+      "foot": 1.88
+    },
+    {
+      "x": 2,
+      "z": -22,
+      "model": "CityKit/building-m",
+      "yaw": 0,
+      "foot": 1.88
+    },
+    {
+      "x": 2,
+      "z": -18,
+      "model": "CityKit/building-a",
+      "yaw": 90,
+      "foot": 1.88
+    },
+    {
+      "x": 2,
+      "z": -16,
+      "model": "CityKit/building-a",
+      "yaw": 270,
+      "foot": 1.88
+    },
+    {
+      "x": 2,
+      "z": -14,
+      "model": "CityKit/building-h",
+      "yaw": 180,
+      "foot": 1.88
+    },
+    {
+      "x": 2,
+      "z": -12,
+      "model": "CityKit/building-h",
+      "yaw": 0,
+      "foot": 1.88
+    },
+    {
+      "x": 2,
+      "z": 14,
+      "model": "CityKit/building-h",
+      "yaw": 0,
+      "foot": 1.88
+    },
+    {
+      "x": 2,
+      "z": 16,
+      "model": "CityKit/building-i",
+      "yaw": 180,
+      "foot": 1.88
+    },
+    {
+      "x": 2,
+      "z": 18,
+      "model": "CityKit/building-a",
+      "yaw": 0,
+      "foot": 1.88
+    },
+    {
+      "x": 4,
+      "z": -22,
+      "model": "CityKit/building-a",
+      "yaw": 90,
+      "foot": 1.88
+    },
+    {
+      "x": 6,
+      "z": -22,
+      "model": "CityKit/building-e",
+      "yaw": 270,
+      "foot": 1.88
+    },
+    {
+      "x": 6,
+      "z": -16,
+      "model": "CityKit/building-d",
+      "yaw": 0,
+      "foot": 1.88
+    },
+    {
+      "x": 6,
+      "z": -14,
+      "model": "CityKit/building-j",
+      "yaw": 90,
+      "foot": 1.88
+    },
+    {
+      "x": 6,
+      "z": -10,
+      "model": "CityKit/building-m",
+      "yaw": 270,
+      "foot": 1.88
+    },
+    {
+      "x": 6,
+      "z": -8,
+      "model": "CityKit/building-e",
+      "yaw": 180,
+      "foot": 1.88
+    },
+    {
+      "x": 6,
+      "z": -6,
+      "model": "CityKit/building-b",
+      "yaw": 90,
+      "foot": 1.88
+    },
+    {
+      "x": 7,
+      "z": -1,
+      "model": "CityKit/building-f",
+      "yaw": 180,
+      "foot": 3.8
+    },
+    {
+      "x": 6,
+      "z": 2,
+      "model": "CityKit/building-m",
+      "yaw": 180,
+      "foot": 1.88
+    },
+    {
+      "x": 6,
+      "z": 6,
+      "model": "CityKit/building-e",
+      "yaw": 270,
+      "foot": 1.88
+    },
+    {
+      "x": 6,
+      "z": 8,
+      "model": "CityKit/building-g",
+      "yaw": 270,
+      "foot": 1.88
+    },
+    {
+      "x": 6,
+      "z": 10,
+      "model": "CityKit/building-d",
+      "yaw": 90,
+      "foot": 1.88
+    },
+    {
+      "x": 6,
+      "z": 14,
+      "model": "CityKit/building-n",
+      "yaw": 270,
+      "foot": 1.88
+    },
+    {
+      "x": 6,
+      "z": 16,
+      "model": "CityKit/building-k",
+      "yaw": 0,
+      "foot": 1.88
+    },
+    {
+      "x": 6,
+      "z": 18,
+      "model": "CityKit/building-g",
+      "yaw": 270,
+      "foot": 1.88
+    },
+    {
+      "x": 8,
+      "z": -22,
+      "model": "CityKit/building-a",
+      "yaw": 0,
+      "foot": 1.88
+    },
+    {
+      "x": 8,
+      "z": -18,
+      "model": "CityKit/building-d",
+      "yaw": 180,
+      "foot": 1.88
+    },
+    {
+      "x": 8,
+      "z": -16,
+      "model": "CityKit/building-j",
+      "yaw": 180,
+      "foot": 1.88
+    },
+    {
+      "x": 8,
+      "z": -14,
+      "model": "CityKit/building-d",
+      "yaw": 0,
+      "foot": 1.88
+    },
+    {
+      "x": 8,
+      "z": -10,
+      "model": "CityKit/building-e",
+      "yaw": 90,
+      "foot": 1.88
+    },
+    {
+      "x": 8,
+      "z": -8,
+      "model": "CityKit/building-b",
+      "yaw": 180,
+      "foot": 1.88
+    },
+    {
+      "x": 8,
+      "z": -6,
+      "model": "CityKit/building-d",
+      "yaw": 0,
+      "foot": 1.88
+    },
+    {
+      "x": 8,
+      "z": 2,
+      "model": "CityKit/building-j",
+      "yaw": 180,
+      "foot": 1.88
+    },
+    {
+      "x": 8,
+      "z": 6,
+      "model": "CityKit/building-a",
+      "yaw": 180,
+      "foot": 1.88
+    },
+    {
+      "x": 8,
+      "z": 8,
+      "model": "CityKit/building-a",
+      "yaw": 270,
+      "foot": 1.88
+    },
+    {
+      "x": 8,
+      "z": 10,
+      "model": "CityKit/building-d",
+      "yaw": 90,
+      "foot": 1.88
+    },
+    {
+      "x": 8,
+      "z": 14,
+      "model": "CityKit/building-f",
+      "yaw": 90,
+      "foot": 1.88
+    },
+    {
+      "x": 8,
+      "z": 16,
+      "model": "CityKit/building-m",
+      "yaw": 180,
+      "foot": 1.88
+    },
+    {
+      "x": 8,
+      "z": 18,
+      "model": "CityKit/building-b",
+      "yaw": 180,
+      "foot": 1.88
+    },
+    {
+      "x": 10,
+      "z": -22,
+      "model": "CityKit/building-k",
+      "yaw": 270,
+      "foot": 1.88
+    },
+    {
+      "x": 10,
+      "z": -18,
+      "model": "CityKit/building-c",
+      "yaw": 90,
+      "foot": 1.88
+    },
+    {
+      "x": 10,
+      "z": -16,
+      "model": "CityKit/building-d",
+      "yaw": 180,
+      "foot": 1.88
+    },
+    {
+      "x": 10,
+      "z": -14,
+      "model": "CityKit/building-b",
+      "yaw": 270,
+      "foot": 1.88
+    },
+    {
+      "x": 10,
+      "z": -10,
+      "model": "CityKit/building-c",
+      "yaw": 270,
+      "foot": 1.88
+    },
+    {
+      "x": 10,
+      "z": -8,
+      "model": "CityKit/building-j",
+      "yaw": 270,
+      "foot": 1.88
+    },
+    {
+      "x": 10,
+      "z": -6,
+      "model": "CityKit/building-m",
+      "yaw": 0,
+      "foot": 1.88
+    },
+    {
+      "x": 10,
+      "z": -2,
+      "model": "CityKit/building-d",
+      "yaw": 90,
+      "foot": 1.88
+    },
+    {
+      "x": 10,
+      "z": 0,
+      "model": "CityKit/building-j",
+      "yaw": 90,
+      "foot": 1.88
+    },
+    {
+      "x": 10,
+      "z": 2,
+      "model": "CityKit/building-e",
+      "yaw": 90,
+      "foot": 1.88
+    },
+    {
+      "x": 10,
+      "z": 6,
+      "model": "CityKit/building-i",
+      "yaw": 0,
+      "foot": 1.88
+    },
+    {
+      "x": 10,
+      "z": 8,
+      "model": "CityKit/building-skyscraper-c",
+      "yaw": 180,
+      "foot": 1.88
+    },
+    {
+      "x": 10,
+      "z": 10,
+      "model": "CityKit/building-f",
+      "yaw": 90,
+      "foot": 1.88
+    },
+    {
+      "x": 10,
+      "z": 14,
+      "model": "CityKit/building-c",
+      "yaw": 180,
+      "foot": 1.88
+    },
+    {
+      "x": 10,
+      "z": 16,
+      "model": "CityKit/building-j",
+      "yaw": 270,
+      "foot": 1.88
+    },
+    {
+      "x": 10,
+      "z": 18,
+      "model": "CityKit/building-g",
+      "yaw": 270,
+      "foot": 1.88
+    }
+  ],
+  "parks": [
+    {
+      "x": -22,
+      "z": 1,
+      "w": 2,
+      "d": 4
+    },
+    {
+      "x": -23,
+      "z": -13,
+      "w": 4,
+      "d": 4
+    }
+  ],
+  "trees": [
+    {
+      "x": -21.514276603786985,
+      "z": 1.2838383276444043,
+      "model": "NatureKit/tree_default",
+      "scale": 0.726140175032043,
+      "yaw": 301
+    },
+    {
+      "x": -22.013687197208213,
+      "z": 1.9973727463985074,
+      "model": "NatureKit/plant_bushLarge",
+      "scale": 0.9435181950372491,
+      "yaw": 15
+    },
+    {
+      "x": -22.061879919239708,
+      "z": 1.597765669093509,
+      "model": "NatureKit/plant_bushLarge",
+      "scale": 1.1117875205576335,
+      "yaw": 91
+    },
+    {
+      "x": -22.01000683899084,
+      "z": 2.1587378180611143,
+      "model": "NatureKit/tree_oak",
+      "scale": 1.195804580983857,
+      "yaw": 222
+    },
+    {
+      "x": -22.96939656626907,
+      "z": -12.10654701747676,
+      "model": "NatureKit/tree_default",
+      "scale": 0.966120458886756,
+      "yaw": 5
+    },
+    {
+      "x": -23.917542071361478,
+      "z": -13.756230856319974,
+      "model": "NatureKit/tree_pineRoundA",
+      "scale": 1.1680358722679733,
+      "yaw": 221
+    },
+    {
+      "x": -23.20935325209711,
+      "z": -11.450351952291912,
+      "model": "NatureKit/tree_oak",
+      "scale": 0.952392409786926,
+      "yaw": 199
+    }
+  ]
+}
