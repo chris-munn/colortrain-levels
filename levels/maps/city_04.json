@@ -270,15 +270,9 @@
       "to": "N"
     },
     {
-      "kind": "straight",
-      "gx": 4,
-      "gz": 4,
-      "dir": "N"
-    },
-    {
       "kind": "station",
       "gx": 4,
-      "gz": 5,
+      "gz": 4,
       "dir": "N",
       "order": 3,
       "colorIndex": 2,
@@ -501,14 +495,8 @@
       "to": "E"
     },
     {
-      "kind": "straight",
-      "gx": -4,
-      "gz": -9,
-      "dir": "E"
-    },
-    {
       "kind": "station",
-      "gx": -3,
+      "gx": -4,
       "gz": -9,
       "dir": "E",
       "order": 7,
@@ -622,44 +610,50 @@
     {
       "kind": "curve",
       "gx": -9,
-      "gz": -4,
+      "gz": -3,
       "from": "N",
       "to": "W"
     },
     {
       "kind": "curve",
       "gx": -10,
-      "gz": -4,
+      "gz": -3,
       "from": "W",
       "to": "N"
     },
     {
       "kind": "curve",
       "gx": -10,
-      "gz": -3,
+      "gz": -2,
       "from": "N",
       "to": "E"
     },
     {
       "kind": "straight",
       "gx": -9,
-      "gz": -3,
+      "gz": -2,
       "dir": "E"
     },
     {
       "kind": "straight",
       "gx": -8,
-      "gz": -3,
+      "gz": -2,
       "dir": "E"
     },
     {
       "kind": "station",
       "gx": -7,
-      "gz": -3,
+      "gz": -2,
       "dir": "E",
       "order": 10,
       "colorIndex": 9,
       "dot": false
+    },
+    {
+      "kind": "straight",
+      "gx": -9,
+      "gz": -4,
+      "dir": "N"
     }
   ],
   "scenery": [
@@ -737,9 +731,9 @@
     },
     {
       "model": "tree_autumn",
-      "x": 10.6,
+      "x": 12.3,
       "y": 0,
-      "z": -6.9,
+      "z": -8,
       "rotY": 316,
       "scale": 1.05
     },
@@ -761,9 +755,9 @@
     },
     {
       "model": "stone_largeA",
-      "x": -12.7,
+      "x": -17.7,
       "y": 0,
-      "z": -3.6,
+      "z": -2,
       "rotY": 84,
       "scale": 1.2
     },
