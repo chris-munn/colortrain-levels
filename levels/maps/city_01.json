@@ -5,7 +5,7 @@
   "stage": "city",
   "mapNumber": 1,
   "name": "Mega City",
-  "theme": "nature",
+  "theme": "city",
   "levels": [
     {
       "trainSpeed": 3,
