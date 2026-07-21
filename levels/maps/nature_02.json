@@ -21,7 +21,7 @@
     },
     {
       "trainSpeed": 2,
-      "spawnIntervalSeconds": 5
+      "spawnIntervalSeconds": 4
     },
     {
       "trainSpeed": 2,
@@ -650,5 +650,9 @@
       "rotY": 228,
       "scale": 1.25
     }
-  ]
+  ],
+  "roads": [],
+  "buildings": [],
+  "parks": [],
+  "trees": []
 }
