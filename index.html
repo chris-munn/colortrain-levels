@@ -87,7 +87,7 @@
   <button id="bCopy">Copy JSON</button>
   <button id="bExport" class="primary">⬇ Export JSON</button>
   <button id="bPublish" class="primary">☁ Publish</button>
-  <span id="ver" style="margin-left:auto;opacity:.55;font-size:12px">v19 · worlds</span>
+  <span id="ver" style="margin-left:auto;opacity:.55;font-size:12px">v20 · worlds</span>
 </div>
 <div id="wrap">
   <div id="tools">
@@ -152,6 +152,17 @@ const CITY_TOWERS = ["building-skyscraper-a","building-skyscraper-b","building-s
 const CITY_TREES = ["tree_oak","tree_default","tree_pineRoundA","tree_detailed","plant_bushLarge"];
 const CITY_BLOCK = 4;
 const cmod = (a,b)=>{ let m=a%b; return m<0?m+b:m; };
+// Theme packs the editor uploads if they're missing from the repo (nature already ships).
+const THEME_FILES = {
+  city: {
+    schemaVersion: 1, id: "city", displayName: "City", groundColor: "#767b82",
+    audio: { ambience: "city.mp3", switchSfx: "switch.mp3", success: "train-succeed.mp3", fail: "train-fail.mp3" },
+    track: { straight: "TrainKit/railroad-straight", curve: "TrainKit/railroad-corner-small" },
+    train: { locomotive: "TrainKit/train-electric-city-a" },
+    spawnPortal: { tunnel: "PlatformerKit/door-large-open" },
+    models: []
+  }
+};
 
 let map = newMap();
 function rndId(){ return Math.random().toString(36).slice(2, 10); }
@@ -1551,11 +1562,18 @@ document.getElementById("bPublish").onclick = async () => {
     const existing = await ghGet(mapPath);
     await ghPut(mapPath, b64e(json), "Publish map " + fname, existing && existing.sha);
 
+    // make sure this world's theme pack is in the repo (nature already is)
+    const themePath = "levels/themes/" + map.theme + "/theme.json";
+    if (THEME_FILES[map.theme] && !(await ghGet(themePath))) {
+      ghStatus("Uploading " + map.theme + " theme…");
+      await ghPut(themePath, b64e(JSON.stringify(THEME_FILES[map.theme], null, 2)), "Add " + map.theme + " theme", null);
+    }
+
     ghStatus("Updating manifest…");
     const { file: manFile, man } = await ghManifest();
     man.stages = man.stages || [];
     let stage = man.stages.find(s => s.id === map.stage);
-    if (!stage) { stage = { id: map.stage, displayName: map.stage, theme: map.theme, maps: [] }; man.stages.push(stage); }
+    if (!stage) { stage = { id: map.stage, displayName: map.stage.charAt(0).toUpperCase() + map.stage.slice(1), theme: map.theme, maps: [] }; man.stages.push(stage); }
     const ref = "maps/" + fname;
     let entry = stage.maps.find(m => m.file === ref);
     if (!entry) { entry = { file: ref, name: map.name }; stage.maps.push(entry); }

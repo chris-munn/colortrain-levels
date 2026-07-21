@@ -1,0 +1,19 @@
+{
+  "schemaVersion": 1,
+  "id": "city",
+  "displayName": "City",
+  "groundColor": "#767b82",
+  "audio": {
+    "ambience": "city.mp3",
+    "switchSfx": "switch.mp3",
+    "success": "train-succeed.mp3",
+    "fail": "train-fail.mp3"
+  },
+  "track": {
+    "straight": "TrainKit/railroad-straight",
+    "curve": "TrainKit/railroad-corner-small"
+  },
+  "train": { "locomotive": "TrainKit/train-electric-city-a" },
+  "spawnPortal": { "tunnel": "PlatformerKit/door-large-open" },
+  "models": []
+}
