@@ -80,6 +80,9 @@
   Floor <input id="mColor" type="color" value="#73A457" style="width:34px;height:26px;padding:1px;border:none;background:none">
   <button id="bNew">New</button>
   <button id="bRandom">🎲 Randomise</button>
+  <select id="rndStations" title="how many stations to generate" style="width:52px;margin-left:-4px">
+    <option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option><option>8</option><option>9</option><option selected>10</option>
+  </select>
   <button id="bCity" hidden>🏙 Re-roll city</button>
   <button id="bImport">Import</button>
   <input type="file" id="fileIn" accept=".json" style="display:none">
@@ -87,7 +90,7 @@
   <button id="bCopy">Copy JSON</button>
   <button id="bExport" class="primary">⬇ Export JSON</button>
   <button id="bPublish" class="primary">☁ Publish</button>
-  <span id="ver" style="margin-left:auto;opacity:.55;font-size:12px">v22 · worlds</span>
+  <span id="ver" style="margin-left:auto;opacity:.55;font-size:12px">v23 · worlds</span>
 </div>
 <div id="wrap">
   <div id="tools">
@@ -1185,14 +1188,15 @@ function generateCity(){
 }
 
 function randomise(){
+  const n = Math.max(1, Math.min(10, +document.getElementById("rndStations").value || 10));
   for (let attempt = 0; attempt < 900; attempt++) {
-    const result = tryGenerate();
+    const result = tryGenerate(n);
     if (result) {
       map.track = result.track;
       map.spawn = result.spawn;
       map.scenery = result.scenery;
       if (isCity()) generateCity();   // city map: regenerate its roads/buildings to match the new track
-      map.levels = Array.from({ length: 10 }, () => ({ trainSpeed: 3, spawnIntervalSeconds: 3 }));
+      map.levels = Array.from({ length: n }, () => ({ trainSpeed: 3, spawnIntervalSeconds: 3 }));
       map.id = rndId(); // a randomised layout is a NEW map — fresh save progress
       map.mapNumber = +document.getElementById("mNum").value || map.mapNumber || 1;   // keep the user's Map #
       const typed = (document.getElementById("mName").value || "").trim();
@@ -1207,7 +1211,8 @@ function randomise(){
   alert("Couldn't find a layout this time — press Randomise again.");
 }
 
-function tryGenerate(){
+function tryGenerate(nStations){
+  nStations = Math.max(1, Math.min(10, nStations || 10));
   const BX = 12, BZ = 9;
   const occ = new Set();
   const K = (x, z) => x + "," + z;
@@ -1407,9 +1412,9 @@ function tryGenerate(){
     return false;
   }
 
-  // runway, then nine junction+branch drops along a serpentine sweep
+  // runway, then (nStations-1) junction+branch drops along a serpentine sweep; the last station is the terminus
   for (let i = 0; i < 3; i++) if (!pushStraight()) return null;
-  for (let j = 0; j < 9; j++) {
+  for (let j = 0; j < nStations - 1; j++) {
     const steps = 2 + ((Math.random() * 3) | 0);
     for (let s = 0; s < steps; s++) if (!advance()) return null;
     let placedJ = false;
@@ -1419,13 +1424,13 @@ function tryGenerate(){
     }
     if (!placedJ) return null;
   }
-  // tail + terminus (station 10)
+  // tail + terminus (the final station)
   const tail = 1 + ((Math.random() * 2) | 0);
   for (let s = 0; s < tail; s++) if (!advance()) return null;
   let placed = false;
   for (let tries = 0; tries < 8 && !placed; tries++) {
     const [x, z] = step(px, pz, d);
-    const cand = { kind: "station", gx: x, gz: z, dir: d, order: 10, colorIndex: colors[9], dot: false };
+    const cand = { kind: "station", gx: x, gz: z, dir: d, order: nStations, colorIndex: colors[nStations - 1], dot: false };
     if (free(x, z) && !out(x, z) && tileClearOfPlatforms(x, z) && stationFits(cand)) {
       track.push(cand);
       occ.add(K(x, z));
@@ -1674,6 +1679,7 @@ async function deleteRepoLevel(stageId, mapRef){
 document.getElementById("bValidate").onclick = validate;
 document.getElementById("bNew").onclick = () => { if (confirm("Start a new map?")) { map = newMap(); sel = null; syncAll(); } };
 document.getElementById("bRandom").onclick = () => { if (confirm("Replace the current map with a random one?")) randomise(); };
+document.getElementById("rndStations").onchange = () => randomise();   // changing the count re-rolls with that many stations
 const WORLD_FLOOR = { nature: "#73A457", city: "#767b82" };
 function setWorld(w){
   map.stage = w;
