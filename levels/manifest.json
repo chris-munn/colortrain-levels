@@ -31,10 +31,6 @@
       "theme": "city",
       "maps": [
         {
-          "file": "maps/city_01.json",
-          "name": "Mega City"
-        },
-        {
           "file": "maps/city_02.json",
           "name": "Crazy City"
         },
