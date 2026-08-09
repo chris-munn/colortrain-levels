@@ -99,7 +99,7 @@
   <button id="bCopy">Copy JSON</button>
   <button id="bExport" class="primary">⬇ Export JSON</button>
   <button id="bPublish" class="primary">☁ Publish</button>
-  <span id="ver" style="margin-left:auto;opacity:.55;font-size:12px">v28 · canvas fix</span>
+  <span id="ver" style="margin-left:auto;opacity:.55;font-size:12px">v29 · no hearts · lv = stations-1</span>
 </div>
 <div id="wrap">
   <div id="tools">
@@ -203,7 +203,7 @@ function tileAt(wx, wz){ return [Math.round(wx / TILE), Math.round(wz / TILE)]; 
 function pieceAt(gx, gz){ return map.track.findIndex(t => t.gx === gx && t.gz === gz); }
 function stations(){ return map.track.filter(t => t.kind === "station"); }
 function syncLevels(){
-  const n = stations().length;
+  const n = Math.max(1, stations().length - 1); // level 1 = two stations → N stations = N-1 levels
   while (map.levels.length < n) map.levels.push({ trainSpeed: 3, spawnIntervalSeconds: 3 });
   map.levels.length = n;
 }
@@ -992,7 +992,7 @@ function renderRules(){
   for (let i = 0; i < n; i++) {
     const r = map.levels[i];
     let chips = "";
-    for (let ci = 0; ci <= Math.min(i, 9); ci++) {
+    for (let ci = 0; ci <= Math.min(i + 1, 9); ci++) { // level i+1 plays colours 1..i+2
       const v = (r.colorCounts && r.colorCounts[ci]) || "";
       chips += '<input class="cc" data-lv="' + i + '" data-ci="' + ci + '" type="number" min="0" max="30" value="' + v +
         '" title="' + COLOR_NAMES[ci] + ' trains" style="background:' + COLORS[ci] + '">';
@@ -1001,7 +1001,6 @@ function renderRules(){
     html += '<details class="lvl" data-lv="' + i + '"' + (openLvls.has(i) ? " open" : "") + '>' +
       '<summary>Level ' + (i+1) + ' <span class="lvsum">' + (sum ? "· " + sum + " trains" : "· random mix") + '</span></summary>' +
       '<div class="ccrow">' + chips + '</div>' +
-      rrow(i, "lives", "Hearts", r.lives, 3) +
       rrow(i, "trainSpeed", "Train speed", r.trainSpeed, "auto") +
       rrow(i, "spawnIntervalSeconds", "Spawn interval (s)", r.spawnIntervalSeconds, "auto") +
       rrow(i, "fastTrains", "Fast trains", r.fastTrains, 0) +
