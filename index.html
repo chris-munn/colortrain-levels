@@ -29,7 +29,8 @@
   button.tool.on { background: #ffd23f; color: #4a3000; border-color: #d98c00; font-weight: 700; }
   #wrap { flex: 1; display: grid; grid-template-columns: 384px 1fr; grid-template-rows: auto 1fr; min-height: 0; }
   #tools { grid-column: 1; grid-row: 1; padding: 10px; background: #141a23; display: flex; flex-direction: column; gap: 6px; }
-  #cv { grid-column: 2; grid-row: 1 / 3; }
+  #cv { grid-column: 2; grid-row: 1 / 3; width: 100%; height: 100%; min-width: 0; min-height: 0; }
+  #wrap { overflow: hidden; }
   #rules .lvl { border: 1px solid #2a3442; border-radius: 6px; margin: 4px 0; padding: 2px 8px 6px; background: #10151d; }
   #rules .lvl summary { cursor: pointer; font-weight: 600; padding: 5px 0; user-select: none; }
   #rules .lvl .lvsum { opacity: .6; font-weight: 400; }
@@ -98,7 +99,7 @@
   <button id="bCopy">Copy JSON</button>
   <button id="bExport" class="primary">⬇ Export JSON</button>
   <button id="bPublish" class="primary">☁ Publish</button>
-  <span id="ver" style="margin-left:auto;opacity:.55;font-size:12px">v26 · left panel</span>
+  <span id="ver" style="margin-left:auto;opacity:.55;font-size:12px">v28 · canvas fix</span>
 </div>
 <div id="wrap">
   <div id="tools">
@@ -131,6 +132,8 @@
     <button id="sheetHandle">▲ Details & Validation</button>
     <h4>Selection</h4>
     <div id="selBox" class="hint">Nothing selected.</div>
+    <h4>Levels in repo <button id="bGhList" style="float:right">↻</button></h4>
+    <div id="ghLevels" class="hint">Connecting…</div>
     <h4>Level rules <span class="hint">(blank = auto)</span></h4>
     <div id="rules"></div>
     <h4>Validation</h4>
@@ -142,8 +145,6 @@
     <div class="row"><label>Branch</label><input id="ghBranch" placeholder="main" style="width:150px"></div>
     <div class="row"><label>Token</label><input id="ghToken" type="password" placeholder="fine-grained PAT" style="width:150px"></div>
     <div id="ghStatus" class="hint">☁ Publish commits this map + manifest to your repo; Pages serves it to the game. Token needs Contents read/write on that repo only — it stays in this browser.</div>
-    <div class="row"><button id="bGhList">↻ Levels in repo</button></div>
-    <div id="ghLevels" class="hint"></div>
   </div>
 </div>
 <script>
@@ -1815,6 +1816,9 @@ NATURE_MODELS.forEach(m => {
 
 const saved = localStorage.getItem("ctMapEditor");
 if (saved) { try { map = Object.assign(newMap(), JSON.parse(saved)); } catch {} }
+// auto-load the repo level list when credentials are already saved
+if (gh.user && gh.repo && gh.token) listRepoLevels();
+else document.getElementById("ghLevels").textContent = "Add your GitHub details in the Publish section below.";
 syncAll();
 updateNextStation();
 resize();
