@@ -8,6 +8,10 @@
       "theme": "nature",
       "maps": [
         {
+          "file": "maps/nature_01.json",
+          "name": "Bluebell Loop"
+        },
+        {
           "file": "maps/nature_02.json",
           "name": "Sheep Meadow"
         },
