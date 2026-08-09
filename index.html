@@ -90,7 +90,7 @@
   <button id="bCopy">Copy JSON</button>
   <button id="bExport" class="primary">⬇ Export JSON</button>
   <button id="bPublish" class="primary">☁ Publish</button>
-  <span id="ver" style="margin-left:auto;opacity:.55;font-size:12px">v23 · worlds</span>
+  <span id="ver" style="margin-left:auto;opacity:.55;font-size:12px">v25 · colour counts</span>
 </div>
 <div id="wrap">
   <div id="tools">
@@ -979,22 +979,41 @@ function pBind(id, fn){
 function renderRules(){
   syncLevels();
   const n = map.levels.length;
-  let html = "<table><tr><th>Lv</th><th>win</th><th>♥</th><th>spd</th><th>int</th><th>fast</th></tr>";
+  let html = "<table><tr><th>Lv</th><th>trains per colour <span style='opacity:.55'>(blank = random)</span></th><th>♥</th><th>spd</th><th>int</th><th>fast</th></tr>";
   for (let i = 0; i < n; i++) {
     const r = map.levels[i];
-    html += "<tr><td>" + (i+1) + "</td>" +
-      ruleCell(i, "trainsToWin", r.trainsToWin, (i+1)*2) +
+    let chips = "";
+    for (let ci = 0; ci <= Math.min(i, 9); ci++) {
+      const v = (r.colorCounts && r.colorCounts[ci]) || "";
+      chips += '<input class="cc" data-lv="' + i + '" data-ci="' + ci + '" type="number" min="0" max="30" value="' + v +
+        '" title="' + COLOR_NAMES[ci] + ' trains" style="width:27px;background:' + COLORS[ci] +
+        ';color:#fff;border:1px solid rgba(0,0,0,.45);border-radius:4px;margin:1px;padding:2px 1px;text-align:center">';
+    }
+    const sum = (r.colorCounts || []).reduce((a,b) => a + (+b || 0), 0);
+    html += "<tr><td>" + (i+1) + "</td><td style='white-space:nowrap'>" + chips +
+      (sum ? " <span style='opacity:.6'>= " + sum + "</span>" : "") + "</td>" +
       ruleCell(i, "lives", r.lives, 3) +
       ruleCell(i, "trainSpeed", r.trainSpeed, "·") +
       ruleCell(i, "spawnIntervalSeconds", r.spawnIntervalSeconds, "·") +
       ruleCell(i, "fastTrains", r.fastTrains, 0) + "</tr>";
   }
   document.getElementById("rules").innerHTML = html + "</table>";
-  document.querySelectorAll("#rules input").forEach(inp => {
+  document.querySelectorAll("#rules input:not(.cc)").forEach(inp => {
     inp.onchange = () => {
       const { lv, field } = inp.dataset;
       map.levels[+lv][field] = inp.value === "" ? 0 : Math.max(0, +inp.value);
       save();
+    };
+  });
+  document.querySelectorAll("#rules input.cc").forEach(inp => {
+    inp.onchange = () => {
+      const lv = +inp.dataset.lv, ci = +inp.dataset.ci;
+      const r = map.levels[lv];
+      if (!r.colorCounts) r.colorCounts = Array(10).fill(0);
+      r.colorCounts[ci] = inp.value === "" ? 0 : Math.max(0, +inp.value);
+      if (r.colorCounts.every(x => !x)) delete r.colorCounts; // all blank → back to random mix
+      save();
+      renderRules(); // refresh the sum
     };
   });
 }
@@ -1489,6 +1508,7 @@ function currentJson(){
     const o = {};
     for (const k of ["trainsToWin","lives","trainSpeed","spawnIntervalSeconds","fastTrains"])
       if (r[k]) o[k] = r[k];
+    if (r.colorCounts && r.colorCounts.some(x => +x > 0)) o.colorCounts = r.colorCounts.map(x => +x || 0);
     return o;
   });
   return JSON.stringify(clean, null, 2);
@@ -1600,6 +1620,8 @@ document.getElementById("bPublish").onclick = async () => {
     else stage.theme = map.theme;   // keep an existing stage's theme in sync (older city stages were saved as "nature")
     const ref = "maps/" + fname;
     let entry = stage.maps.find(m => m.file === ref);
+    if (!entry && (stage.maps || []).length >= 3)
+      throw new Error("sorry — you are at the maximum maps per world (3 of 3). Delete one to add a new one.");
     if (!entry) { entry = { file: ref, name: map.name }; stage.maps.push(entry); }
     entry.name = map.name;
     sortStageMaps(stage);
