@@ -12,6 +12,10 @@
           "name": "Bluebell Loop"
         },
         {
+          "file": "maps/nature_02.json",
+          "name": "Sheep Meadow"
+        },
+        {
           "file": "maps/nature_03.json",
           "name": "Twisty Pines"
         }
