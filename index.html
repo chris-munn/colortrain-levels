@@ -115,7 +115,7 @@
   <button id="bCopy">Copy JSON</button>
   <button id="bExport" class="primary">⬇ Export JSON</button>
   <button id="bPublish" class="primary">☁ Publish</button>
-  <span id="ver" style="margin-left:auto;opacity:.55;font-size:12px">v31 · modal alerts</span>
+  <span id="ver" style="margin-left:auto;opacity:.55;font-size:12px">v33 · pointy only</span>
 </div>
 <div id="wrap">
   <div id="tools">
@@ -173,7 +173,7 @@ const LEFT = { E:"N", N:"W", W:"S", S:"E" };
 const RIGHT = { E:"S", S:"W", W:"N", N:"E" };
 const COLORS = ["#e12929","#2e6bf2","#29b847","#face14","#9e3dd9","#ff8419","#1ad9e6","#ff73bf","#9ee633","#f2f2f2"];
 const COLOR_NAMES = ["red","blue","green","yellow","purple","orange","cyan","pink","lime","white"];
-const NATURE_MODELS = ["tree_pineDefaultA","tree_pineDefaultB","tree_pineTallA","tree_pineTallB","tree_pineRoundA","tree_default","tree_oak","tree_detailed","tree_plateau","tree_autumn","rock_largeA","rock_largeB","rock_largeC","rock_smallA","rock_smallB","stone_largeA","stone_largeB","plant_bushLarge","plant_bushDetailed","flower_redA","flower_yellowA","grass_large","cliff_large_rock","cliff_block_rock","cliff_slope_rock","cliff_top_rock","bridge_wood","lily_large","lily_small","fence_simple","campfire_logs","tent","grass_block","grass_block_tall","grass_slope"];
+const NATURE_MODELS = ["tree_pineDefaultA","tree_pineDefaultB","tree_pineTallA","tree_pineTallB","tree_autumn","rock_largeA","rock_largeB","rock_largeC","rock_smallA","rock_smallB","stone_largeA","stone_largeB","flower_redA","flower_yellowA","grass_large","cliff_large_rock","cliff_block_rock","cliff_slope_rock","cliff_top_rock","bridge_wood","lily_large","lily_small","fence_simple","campfire_logs","tent","grass_block","grass_block_tall","grass_slope"];
 
 const CITY_BUILDINGS = ["building-a","building-b","building-c","building-d","building-e","building-f","building-g","building-h","building-i","building-j","building-k","building-l","building-m","building-n"];
 const CITY_TOWERS = ["building-skyscraper-a","building-skyscraper-b","building-skyscraper-c","building-skyscraper-d","building-skyscraper-e"];
@@ -1126,9 +1126,9 @@ function validate(popup){
 }
 
 // ---------- random map generator ----------
-const GEN_TREES = ["tree_pineDefaultA","tree_pineDefaultB","tree_pineTallA","tree_pineTallB","tree_pineRoundA","tree_default","tree_oak","tree_detailed","tree_plateau","tree_autumn"];
+const GEN_TREES = ["tree_pineDefaultA","tree_pineDefaultB","tree_pineTallA","tree_pineTallB","tree_autumn"]; // pointy family only (loader swaps blob shapes in old maps too)
 const GEN_ROCKS = ["rock_largeA","rock_largeB","rock_largeC","rock_smallA","rock_smallB","stone_largeA","stone_largeB"];
-const GEN_SMALLS = ["plant_bushLarge","plant_bushDetailed","flower_redA","flower_yellowA","grass_large"];
+const GEN_SMALLS = ["flower_redA","flower_yellowA","grass_large","grass_large"]; // blob bushes retired; tufts weighted up
 const GEN_CLIFFS = ["cliff_large_rock","cliff_block_rock","cliff_slope_rock","cliff_top_rock"];
 const GEN_NAMES = {
   nature: ["Green Valley","Twisty Pines","Sheep Meadow","Rolling Hills","Willow Bend","Foxglove Flats","Badger Crossing","Bluebell Loop","Heron Marsh","Tumble Downs"],
