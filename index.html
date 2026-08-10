@@ -78,6 +78,21 @@
     #sheetHandle { display: block; width: 100%; min-height: 40px; margin: 4px 0 6px;
                    background: #202a38; font-weight: 700; }
   }
+
+  /* centre modal — duplicates publish / validation results (they stay in the left column too) */
+  #tpModal { position: fixed; inset: 0; background: rgba(8,11,16,.55); display: none;
+             align-items: center; justify-content: center; z-index: 999; }
+  #tpModal.show { display: flex; }
+  #tpModalCard { background: #26303e; border: 1px solid #3d4a5c; border-radius: 12px;
+                 box-shadow: 0 14px 44px rgba(0,0,0,.5); max-width: min(540px, 88vw);
+                 max-height: 70vh; overflow: auto; padding: 16px 20px 14px; position: relative; }
+  #tpModalCard h3 { margin: 0 26px 8px 0; font-size: 15px; }
+  #tpModalCard.ok h3 { color: #51cf66; }
+  #tpModalCard.bad h3 { color: #ff6b6b; }
+  #tpModalMsg { white-space: pre-wrap; word-break: break-word; font-size: 13px; opacity: .92; }
+  #tpModalX { position: absolute; top: 6px; right: 8px; border: 0; background: none; color: #e8eef5;
+              font-size: 16px; cursor: pointer; opacity: .55; padding: 4px 8px; }
+  #tpModalX:hover { opacity: 1; }
 </style>
 </head>
 <body>
@@ -100,7 +115,7 @@
   <button id="bCopy">Copy JSON</button>
   <button id="bExport" class="primary">⬇ Export JSON</button>
   <button id="bPublish" class="primary">☁ Publish</button>
-  <span id="ver" style="margin-left:auto;opacity:.55;font-size:12px">v30 · ground textures</span>
+  <span id="ver" style="margin-left:auto;opacity:.55;font-size:12px">v31 · modal alerts</span>
 </div>
 <div id="wrap">
   <div id="tools">
@@ -1043,7 +1058,7 @@ function ruleCell(lv, field, val, ph){
 }
 
 // ---------- validation ----------
-function validate(){
+function validate(popup){
   const issues = [];
   const tiles = {};
   const key = (gx, gz) => gx + "," + gz;
@@ -1099,9 +1114,14 @@ function validate(){
 
   const el = document.getElementById("issues");
   el.className = issues.length ? "" : "ok";
-  el.textContent = issues.length ? issues.join("\n") : "✓ Map is valid — " + sts.length + " stations, " +
+  const summary = issues.length ? issues.join("\n") : "✓ Map is valid — " + sts.length + " stations, " +
     map.track.length + " pieces, " + map.scenery.length + " scenery items.";
+  el.textContent = summary;
   document.getElementById("props").classList.add("open");
+  if (popup === true){ // only the Validate button pops the modal (publish/randomise call this too)
+    if (issues.length) showModal("✗ " + issues.length + " validation issue" + (issues.length > 1 ? "s" : ""), summary, "bad");
+    else showModal("✓ Map is valid", summary, "ok");
+  }
   return issues.length === 0;
 }
 
@@ -1555,11 +1575,32 @@ for (const k in ghFields) {
   el.value = gh[k];
   el.oninput = () => { gh[k] = el.value.trim(); localStorage.setItem("ctGhCfg", JSON.stringify(gh)); };
 }
-function ghStatus(msg, cls){
+// ---------- centre modal: mirrors important results (left column keeps them too) ----------
+const tpModal = document.createElement("div");
+tpModal.id = "tpModal";
+tpModal.innerHTML = '<div id="tpModalCard"><button id="tpModalX" title="Close">✕</button>' +
+                    '<h3 id="tpModalTitle"></h3><div id="tpModalMsg"></div></div>';
+document.body.appendChild(tpModal);
+function showModal(title, msg, cls){
+  document.getElementById("tpModalCard").className = cls || "";
+  document.getElementById("tpModalTitle").textContent = title;
+  document.getElementById("tpModalMsg").textContent = msg;
+  tpModal.classList.add("show");
+}
+function hideModal(){ tpModal.classList.remove("show"); }
+tpModal.addEventListener("pointerdown", e => { if (e.target === tpModal) hideModal(); });
+document.getElementById("tpModalX").onclick = hideModal;
+window.addEventListener("keydown", e => { if (e.key === "Escape") hideModal(); });
+
+function ghStatus(msg, cls, quiet){
   const el = document.getElementById("ghStatus");
   el.textContent = msg;
   el.className = cls || "hint";
   document.getElementById("props").classList.add("open");
+  // final outcomes pop the centre modal too; progress lines stay left-only
+  if (quiet) return;
+  if (cls === "ok") showModal("✓ Done", msg, "ok");
+  else if (cls === "bad") showModal("✗ Problem", msg, "bad");
 }
 const b64e = s => btoa(unescape(encodeURIComponent(s)));
 const b64d = s => decodeURIComponent(escape(atob(s.replace(/\n/g, ""))));
@@ -1603,7 +1644,7 @@ function sortStageMaps(stage){
 }
 
 document.getElementById("bPublish").onclick = async () => {
-  if (!validate()) { ghStatus("Fix the validation issues first.", "bad"); return; }
+  if (!validate(true)) { ghStatus("Fix the validation issues first.", "bad", true); return; } // validate's modal shows the issue list
   if (!gh.user || !gh.repo || !gh.token) { ghStatus("Fill in user, repo and token (bottom of the panel).", "bad"); return; }
   const btn = document.getElementById("bPublish");
   btn.disabled = true;
@@ -1721,7 +1762,7 @@ async function deleteRepoLevel(stageId, mapRef){
     listRepoLevels();
   } catch (err) { ghStatus("✗ " + err.message, "bad"); }
 }
-document.getElementById("bValidate").onclick = validate;
+document.getElementById("bValidate").onclick = () => validate(true);
 document.getElementById("bNew").onclick = () => { if (confirm("Start a new map?")) { map = newMap(); sel = null; syncAll(); } };
 document.getElementById("bRandom").onclick = () => { if (confirm("Replace the current map with a random one?")) randomise(); };
 document.getElementById("rndStations").onchange = () => randomise();   // changing the count re-rolls with that many stations
