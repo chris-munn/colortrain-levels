@@ -87,6 +87,7 @@
   World <select id="mWorld" style="width:92px"><option value="nature">Nature</option><option value="city">City</option></select>
   Map # <input id="mNum" type="number" value="1" min="1">
   Floor <input id="mColor" type="color" value="#73A457" style="width:34px;height:26px;padding:1px;border:none;background:none">
+  <select id="mGround" title="ground texture (falls back to colour)"><option value="">flat colour</option><option value="grass_countryside">Countryside grass</option></select>
   <button id="bNew">New</button>
   <button id="bRandom">🎲 Randomise</button>
   <select id="rndStations" title="how many stations to generate" style="width:52px;margin-left:-4px">
@@ -99,7 +100,7 @@
   <button id="bCopy">Copy JSON</button>
   <button id="bExport" class="primary">⬇ Export JSON</button>
   <button id="bPublish" class="primary">☁ Publish</button>
-  <span id="ver" style="margin-left:auto;opacity:.55;font-size:12px">v29 · no hearts · lv = stations-1</span>
+  <span id="ver" style="margin-left:auto;opacity:.55;font-size:12px">v30 · ground textures</span>
 </div>
 <div id="wrap">
   <div id="tools">
@@ -1522,6 +1523,8 @@ function currentJson(){
   map.mapNumber = +document.getElementById("mNum").value;
   map.theme = map.stage;   // world drives both
   map.groundColor = document.getElementById("mColor").value;
+  const gtx = document.getElementById("mGround").value;
+  if (gtx) map.groundTexture = gtx; else delete map.groundTexture;
   syncLevels();
   const clean = JSON.parse(JSON.stringify(map));
   clean.levels = clean.levels.map(r => {
@@ -1754,6 +1757,7 @@ function syncAll(){
   document.getElementById("bCity").hidden = (map.stage !== "city");
   document.getElementById("mNum").value = map.mapNumber || 1;
   document.getElementById("mColor").value = map.groundColor || "#73A457";
+  document.getElementById("mGround").value = map.groundTexture || "";
   renderRules(); showSel(); draw(); save();
 }
 
