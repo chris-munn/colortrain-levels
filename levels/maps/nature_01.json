@@ -1644,5 +1644,6 @@
   "roads": [],
   "buildings": [],
   "parks": [],
-  "trees": []
+  "trees": [],
+  "groundTexture": "grass_countryside"
 }
