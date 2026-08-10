@@ -8,40 +8,148 @@
   "theme": "nature",
   "levels": [
     {
-      "trainSpeed": 3,
-      "spawnIntervalSeconds": 3
+      "trainSpeed": 2,
+      "spawnIntervalSeconds": 4,
+      "colorCounts": [
+        2,
+        2,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
     },
     {
-      "trainSpeed": 3,
-      "spawnIntervalSeconds": 3
+      "trainSpeed": 2,
+      "spawnIntervalSeconds": 4,
+      "colorCounts": [
+        2,
+        2,
+        2,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
     },
     {
-      "trainSpeed": 3,
-      "spawnIntervalSeconds": 3
+      "trainSpeed": 2,
+      "spawnIntervalSeconds": 4,
+      "colorCounts": [
+        2,
+        2,
+        2,
+        2,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
     },
     {
-      "trainSpeed": 3,
-      "spawnIntervalSeconds": 3
+      "trainSpeed": 2,
+      "spawnIntervalSeconds": 4,
+      "colorCounts": [
+        2,
+        2,
+        2,
+        2,
+        2,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
     },
     {
-      "trainSpeed": 3,
-      "spawnIntervalSeconds": 3
+      "trainSpeed": 2,
+      "spawnIntervalSeconds": 4,
+      "colorCounts": [
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        0,
+        0,
+        0,
+        0
+      ]
     },
     {
-      "trainSpeed": 3,
-      "spawnIntervalSeconds": 3
+      "trainSpeed": 2,
+      "spawnIntervalSeconds": 4,
+      "colorCounts": [
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        0,
+        0,
+        0
+      ]
     },
     {
-      "trainSpeed": 3,
-      "spawnIntervalSeconds": 3
+      "trainSpeed": 2,
+      "spawnIntervalSeconds": 4,
+      "colorCounts": [
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        0,
+        0
+      ]
     },
     {
-      "trainSpeed": 3,
-      "spawnIntervalSeconds": 3
+      "trainSpeed": 2,
+      "spawnIntervalSeconds": 4,
+      "colorCounts": [
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        0
+      ]
     },
     {
-      "trainSpeed": 3,
-      "spawnIntervalSeconds": 3
+      "trainSpeed": 2,
+      "spawnIntervalSeconds": 4,
+      "colorCounts": [
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2
+      ]
     }
   ],
   "camera": {
