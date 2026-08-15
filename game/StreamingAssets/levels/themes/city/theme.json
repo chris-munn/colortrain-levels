@@ -13,7 +13,11 @@
     "straight": "TrainKit/railroad-straight",
     "curve": "TrainKit/railroad-corner-small"
   },
-  "train": { "locomotive": "TrainKit/train-electric-city-a" },
-  "spawnPortal": { "tunnel": "PlatformerKit/door-large-open" },
+  "train": {
+    "locomotive": "TrainKit/train-electric-city-a"
+  },
+  "spawnPortal": {
+    "tunnel": ""
+  },
   "models": []
 }

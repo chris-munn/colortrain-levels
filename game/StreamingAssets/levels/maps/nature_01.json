@@ -1,47 +1,1164 @@
 {
   "schemaVersion": 2,
+  "id": "dt4qxx54",
+  "groundColor": "#8fc072",
   "stage": "nature",
   "mapNumber": 1,
-  "name": "Green Valley",
+  "name": "Bluebell Loop",
   "theme": "nature",
-
   "levels": [
-    { "trainsToWin": 2 },
-    { "trainsToWin": 4 }
+    {
+      "trainSpeed": 2,
+      "spawnIntervalSeconds": 4,
+      "colorCounts": [
+        2,
+        2,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "trainSpeed": 2,
+      "spawnIntervalSeconds": 4,
+      "colorCounts": [
+        2,
+        2,
+        2,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "trainSpeed": 2,
+      "spawnIntervalSeconds": 4,
+      "colorCounts": [
+        2,
+        2,
+        2,
+        2,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "trainSpeed": 2,
+      "spawnIntervalSeconds": 4,
+      "colorCounts": [
+        2,
+        2,
+        2,
+        2,
+        2,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "trainSpeed": 2,
+      "spawnIntervalSeconds": 4,
+      "colorCounts": [
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "trainSpeed": 2,
+      "spawnIntervalSeconds": 4,
+      "colorCounts": [
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "trainSpeed": 2,
+      "spawnIntervalSeconds": 4,
+      "colorCounts": [
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        0,
+        0
+      ]
+    },
+    {
+      "trainSpeed": 2,
+      "spawnIntervalSeconds": 4,
+      "colorCounts": [
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        0
+      ]
+    },
+    {
+      "trainSpeed": 2,
+      "spawnIntervalSeconds": 4,
+      "colorCounts": [
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2
+      ]
+    }
   ],
-
-  "camera": { "auto": true },
-  "spawn": { "gx": -6, "gz": 0, "dir": "E" },
-
+  "camera": {
+    "auto": true
+  },
+  "spawn": {
+    "gx": -7,
+    "gz": 6,
+    "dir": "S"
+  },
   "track": [
-    { "kind": "straight", "gx": -5, "gz": 0, "dir": "E" },
-    { "kind": "straight", "gx": -4, "gz": 0, "dir": "E" },
-    { "kind": "straight", "gx": -3, "gz": 0, "dir": "E" },
-    { "kind": "junction", "gx": -2, "gz": 0, "dir": "E",
-      "exits": [ { "dir": "E" }, { "dir": "N" } ], "initialExit": 0 },
-    { "kind": "straight", "gx": -2, "gz": 1, "dir": "N" },
-    { "kind": "station",  "gx": -2, "gz": 2, "dir": "N", "order": 1, "colorIndex": 0, "dot": false },
-    { "kind": "straight", "gx": -1, "gz": 0, "dir": "E" },
-    { "kind": "straight", "gx": 0,  "gz": 0, "dir": "E" },
-    { "kind": "junction", "gx": 1,  "gz": 0, "dir": "E",
-      "exits": [ { "dir": "E" }, { "dir": "S" } ], "initialExit": 0 },
-    { "kind": "straight", "gx": 1,  "gz": -1, "dir": "S" },
-    { "kind": "station",  "gx": 1,  "gz": -2, "dir": "S", "order": 2, "colorIndex": 1, "dot": false },
-    { "kind": "straight", "gx": 2,  "gz": 0, "dir": "E" }
+    {
+      "kind": "straight",
+      "gx": -3,
+      "gz": 1,
+      "dir": "N"
+    },
+    {
+      "kind": "straight",
+      "gx": 5,
+      "gz": 1,
+      "dir": "N"
+    },
+    {
+      "kind": "straight",
+      "gx": 2,
+      "gz": 0,
+      "dir": "E"
+    },
+    {
+      "kind": "straight",
+      "gx": 4,
+      "gz": 0,
+      "dir": "E"
+    },
+    {
+      "kind": "junction",
+      "gx": 1,
+      "gz": 0,
+      "dir": "E",
+      "exits": [
+        {
+          "dir": "E"
+        },
+        {
+          "dir": "N"
+        }
+      ],
+      "initialExit": 0
+    },
+    {
+      "kind": "straight",
+      "gx": 4,
+      "gz": 4,
+      "dir": "E"
+    },
+    {
+      "kind": "station",
+      "gx": -3,
+      "gz": 6,
+      "dir": "N",
+      "order": 1,
+      "colorIndex": 0,
+      "dot": false
+    },
+    {
+      "kind": "straight",
+      "gx": 6,
+      "gz": 4,
+      "dir": "E"
+    },
+    {
+      "kind": "straight",
+      "gx": 3,
+      "gz": 5,
+      "dir": "N"
+    },
+    {
+      "kind": "junction",
+      "gx": 3,
+      "gz": 0,
+      "dir": "E",
+      "exits": [
+        {
+          "dir": "E"
+        },
+        {
+          "dir": "N"
+        }
+      ],
+      "initialExit": 0
+    },
+    {
+      "kind": "straight",
+      "gx": 3,
+      "gz": 1,
+      "dir": "N"
+    },
+    {
+      "kind": "straight",
+      "gx": 3,
+      "gz": 2,
+      "dir": "N"
+    },
+    {
+      "kind": "station",
+      "gx": -5,
+      "gz": -2,
+      "dir": "S",
+      "order": 2,
+      "colorIndex": 1,
+      "dot": false
+    },
+    {
+      "kind": "straight",
+      "gx": 3,
+      "gz": 3,
+      "dir": "N"
+    },
+    {
+      "kind": "straight",
+      "gx": 1,
+      "gz": 1,
+      "dir": "N"
+    },
+    {
+      "kind": "junction",
+      "gx": -3,
+      "gz": 4,
+      "dir": "N",
+      "exits": [
+        {
+          "dir": "N"
+        },
+        {
+          "dir": "E"
+        }
+      ],
+      "initialExit": 1
+    },
+    {
+      "kind": "straight",
+      "gx": 5,
+      "gz": 4,
+      "dir": "E"
+    },
+    {
+      "kind": "straight",
+      "gx": -2,
+      "gz": 4,
+      "dir": "E"
+    },
+    {
+      "kind": "straight",
+      "gx": -1,
+      "gz": 4,
+      "dir": "E"
+    },
+    {
+      "kind": "station",
+      "gx": 0,
+      "gz": 4,
+      "dir": "E",
+      "order": 3,
+      "colorIndex": 2,
+      "dot": false
+    },
+    {
+      "kind": "straight",
+      "gx": -5,
+      "gz": 1,
+      "dir": "S"
+    },
+    {
+      "kind": "curve",
+      "gx": -3,
+      "gz": 3,
+      "from": "E",
+      "to": "N"
+    },
+    {
+      "kind": "straight",
+      "gx": -4,
+      "gz": 0,
+      "dir": "E"
+    },
+    {
+      "kind": "straight",
+      "gx": -4,
+      "gz": 3,
+      "dir": "E"
+    },
+    {
+      "kind": "junction",
+      "gx": -5,
+      "gz": 3,
+      "dir": "E",
+      "exits": [
+        {
+          "dir": "E"
+        },
+        {
+          "dir": "S"
+        }
+      ],
+      "initialExit": 1
+    },
+    {
+      "kind": "straight",
+      "gx": -2,
+      "gz": 0,
+      "dir": "E"
+    },
+    {
+      "kind": "straight",
+      "gx": -3,
+      "gz": 5,
+      "dir": "N"
+    },
+    {
+      "kind": "station",
+      "gx": 3,
+      "gz": 6,
+      "dir": "N",
+      "order": 4,
+      "colorIndex": 3,
+      "dot": false
+    },
+    {
+      "kind": "straight",
+      "gx": -6,
+      "gz": 3,
+      "dir": "E"
+    },
+    {
+      "kind": "curve",
+      "gx": -7,
+      "gz": 3,
+      "from": "S",
+      "to": "E"
+    },
+    {
+      "kind": "straight",
+      "gx": -7,
+      "gz": 4,
+      "dir": "S"
+    },
+    {
+      "kind": "straight",
+      "gx": -7,
+      "gz": 5,
+      "dir": "S"
+    },
+    {
+      "kind": "junction",
+      "gx": -3,
+      "gz": 0,
+      "dir": "E",
+      "exits": [
+        {
+          "dir": "E"
+        },
+        {
+          "dir": "N"
+        }
+      ],
+      "initialExit": 0
+    },
+    {
+      "kind": "straight",
+      "gx": 0,
+      "gz": 0,
+      "dir": "E"
+    },
+    {
+      "kind": "station",
+      "gx": 1,
+      "gz": 2,
+      "dir": "N",
+      "order": 5,
+      "colorIndex": 4,
+      "dot": false
+    },
+    {
+      "kind": "straight",
+      "gx": -5,
+      "gz": 2,
+      "dir": "S"
+    },
+    {
+      "kind": "straight",
+      "gx": -5,
+      "gz": -1,
+      "dir": "S"
+    },
+    {
+      "kind": "junction",
+      "gx": -5,
+      "gz": 0,
+      "dir": "S",
+      "exits": [
+        {
+          "dir": "S"
+        },
+        {
+          "dir": "E"
+        }
+      ],
+      "initialExit": 1
+    },
+    {
+      "kind": "straight",
+      "gx": 6,
+      "gz": 0,
+      "dir": "E"
+    },
+    {
+      "kind": "straight",
+      "gx": 9,
+      "gz": 2,
+      "dir": "E"
+    },
+    {
+      "kind": "station",
+      "gx": -3,
+      "gz": 2,
+      "dir": "N",
+      "order": 6,
+      "colorIndex": 5,
+      "dot": false
+    },
+    {
+      "kind": "straight",
+      "gx": -1,
+      "gz": -1,
+      "dir": "S"
+    },
+    {
+      "kind": "curve",
+      "gx": -1,
+      "gz": -2,
+      "from": "S",
+      "to": "E"
+    },
+    {
+      "kind": "junction",
+      "gx": -1,
+      "gz": 0,
+      "dir": "E",
+      "exits": [
+        {
+          "dir": "E"
+        },
+        {
+          "dir": "S"
+        }
+      ],
+      "initialExit": 1
+    },
+    {
+      "kind": "station",
+      "gx": 0,
+      "gz": -2,
+      "dir": "E",
+      "order": 7,
+      "colorIndex": 6,
+      "dot": false
+    },
+    {
+      "kind": "junction",
+      "gx": 5,
+      "gz": 0,
+      "dir": "E",
+      "exits": [
+        {
+          "dir": "E"
+        },
+        {
+          "dir": "N"
+        }
+      ],
+      "initialExit": 0
+    },
+    {
+      "kind": "station",
+      "gx": 10,
+      "gz": 2,
+      "dir": "E",
+      "order": 8,
+      "colorIndex": 7,
+      "dot": false
+    },
+    {
+      "kind": "junction",
+      "gx": 3,
+      "gz": 4,
+      "dir": "N",
+      "exits": [
+        {
+          "dir": "N"
+        },
+        {
+          "dir": "E"
+        }
+      ],
+      "initialExit": 0
+    },
+    {
+      "kind": "station",
+      "gx": 5,
+      "gz": 2,
+      "dir": "N",
+      "order": 9,
+      "colorIndex": 8,
+      "dot": false
+    },
+    {
+      "kind": "straight",
+      "gx": 7,
+      "gz": 0,
+      "dir": "E"
+    },
+    {
+      "kind": "station",
+      "gx": 7,
+      "gz": 4,
+      "dir": "E",
+      "order": 10,
+      "colorIndex": 9,
+      "dot": false
+    },
+    {
+      "kind": "curve",
+      "gx": 8,
+      "gz": 0,
+      "from": "E",
+      "to": "N"
+    },
+    {
+      "kind": "straight",
+      "gx": 8,
+      "gz": 1,
+      "dir": "N"
+    },
+    {
+      "kind": "curve",
+      "gx": 8,
+      "gz": 2,
+      "from": "N",
+      "to": "E"
+    }
   ],
-
   "scenery": [
-    { "model": "tree_pineDefaultA", "x": -14.5, "y": 0, "z": 3.6,  "rotY": 40,  "scale": 1.1 },
-    { "model": "tree_oak",          "x": -9.0,  "y": 0, "z": -3.6, "rotY": 160, "scale": 1.0 },
-    { "model": "tree_pineTallA",    "x": -1.6,  "y": 0, "z": 6.4,  "rotY": 220, "scale": 1.0 },
-    { "model": "tree_autumn",       "x": 7.2,   "y": 0, "z": 2.6,  "rotY": 75,  "scale": 0.95 },
-    { "model": "tree_pineRoundA",   "x": -13.0, "y": 0, "z": -4.2, "rotY": 300, "scale": 1.05 },
-    { "model": "rock_largeA",       "x": -12.0, "y": 0, "z": 2.4,  "rotY": 15,  "scale": 1.0 },
-    { "model": "rock_smallB",       "x": 5.6,   "y": 0, "z": -2.0, "rotY": 240, "scale": 0.9 },
-    { "model": "plant_bushLarge",   "x": -6.4,  "y": 0, "z": 3.0,  "rotY": 0,   "scale": 1.0 },
-    { "model": "flower_yellowA",    "x": -4.6,  "y": 0, "z": -2.8, "rotY": 90,  "scale": 1.0 },
-    { "model": "fence_simple",      "x": -10.5, "y": 0, "z": -1.4, "rotY": 0,   "scale": 1.0 },
-    { "model": "fence_simple",      "x": -8.9,  "y": 0, "z": -1.4, "rotY": 0,   "scale": 1.0 },
-    { "model": "grass_large",       "x": 4.4,   "y": 0, "z": 4.0,  "rotY": 130, "scale": 1.0 }
-  ]
+    {
+      "model": "pine1",
+      "x": -3.5,
+      "y": 0,
+      "z": 15.3,
+      "scale": 1.85,
+      "flip": false
+    },
+    {
+      "model": "tree-purple1",
+      "x": -10.9,
+      "y": 0,
+      "z": -7.5,
+      "scale": 1.85,
+      "flip": true
+    },
+    {
+      "model": "pine2",
+      "x": 10.4,
+      "y": 0,
+      "z": -4.2,
+      "scale": 1.95,
+      "flip": true
+    },
+    {
+      "model": "pine4",
+      "x": 9.8,
+      "y": 0,
+      "z": 14.9,
+      "scale": 1.75,
+      "flip": true
+    },
+    {
+      "model": "pine5",
+      "x": 0.8,
+      "y": 0,
+      "z": 10.2,
+      "scale": 1.75,
+      "flip": true
+    },
+    {
+      "model": "rock3",
+      "x": 4.6,
+      "y": 0,
+      "z": -4.4,
+      "scale": 1.2,
+      "flip": true
+    },
+    {
+      "model": "pine3",
+      "x": 12.9,
+      "y": 0,
+      "z": 15.7,
+      "scale": 1.05,
+      "flip": true
+    },
+    {
+      "model": "rock3",
+      "x": 13.9,
+      "y": 0,
+      "z": -7.8,
+      "scale": 1.05,
+      "flip": false
+    },
+    {
+      "model": "rock6",
+      "x": 16.8,
+      "y": 0,
+      "z": 15.5,
+      "scale": 0.95,
+      "flip": true
+    },
+    {
+      "model": "rock6",
+      "x": 21.6,
+      "y": 0,
+      "z": 8.5,
+      "scale": 1,
+      "flip": false
+    },
+    {
+      "model": "rock2",
+      "x": 13.9,
+      "y": 0,
+      "z": 12.2,
+      "scale": 0.95,
+      "flip": false
+    },
+    {
+      "model": "pine3",
+      "x": 8.4,
+      "y": 0,
+      "z": -6.7,
+      "scale": 1.6,
+      "flip": false
+    },
+    {
+      "model": "pine6",
+      "x": -0.8,
+      "y": 0,
+      "z": 17,
+      "scale": 2.15,
+      "flip": true
+    },
+    {
+      "model": "pine4",
+      "x": 18,
+      "y": 0,
+      "z": -6.5,
+      "scale": 1.7,
+      "flip": false
+    },
+    {
+      "model": "pine3",
+      "x": 16.2,
+      "y": 0,
+      "z": -4.7,
+      "scale": 1.45,
+      "flip": true
+    },
+    {
+      "model": "pine7",
+      "x": -5.7,
+      "y": 0,
+      "z": -5.3,
+      "scale": 2.35,
+      "flip": true
+    },
+    {
+      "model": "tree-orange",
+      "x": -8.7,
+      "y": 0,
+      "z": -8.1,
+      "scale": 1.8,
+      "flip": true
+    },
+    {
+      "model": "pine2",
+      "x": 1,
+      "y": 0,
+      "z": 17.1,
+      "scale": 1.15,
+      "flip": true
+    },
+    {
+      "model": "pine7",
+      "x": 8.6,
+      "y": 0,
+      "z": -5.1,
+      "scale": 1.6,
+      "flip": false
+    },
+    {
+      "model": "tree-orange",
+      "x": 0.6,
+      "y": 0,
+      "z": 15.7,
+      "scale": 1.2,
+      "flip": true
+    },
+    {
+      "model": "mountain3",
+      "x": 22.4,
+      "y": 0,
+      "z": -1.6,
+      "scale": 1.2,
+      "flip": false
+    },
+    {
+      "model": "mountain4",
+      "x": 22.5,
+      "y": 0,
+      "z": 7.6,
+      "scale": 1.2,
+      "flip": true
+    },
+    {
+      "model": "pine4",
+      "x": -0.6,
+      "y": 0,
+      "z": 3.7,
+      "scale": 0.85,
+      "flip": true
+    },
+    {
+      "model": "tree-orange",
+      "x": 11.6,
+      "y": 0,
+      "z": 13.9,
+      "scale": 2.35,
+      "flip": false
+    },
+    {
+      "model": "rock6",
+      "x": 7.4,
+      "y": 0,
+      "z": 18.2,
+      "scale": 1,
+      "flip": false
+    },
+    {
+      "model": "pine9",
+      "x": 6.5,
+      "y": 0,
+      "z": -4.8,
+      "scale": 1.85,
+      "flip": true
+    },
+    {
+      "model": "bush1",
+      "x": -2.2,
+      "y": 0,
+      "z": 16,
+      "scale": 1.55,
+      "flip": true
+    },
+    {
+      "model": "tree-yellow",
+      "x": -7.8,
+      "y": 0,
+      "z": -4.7,
+      "scale": 1.85,
+      "flip": true
+    },
+    {
+      "model": "pine2",
+      "x": 0.8,
+      "y": 0,
+      "z": 12,
+      "scale": 1.65,
+      "flip": false
+    },
+    {
+      "model": "pine9",
+      "x": 20,
+      "y": 0,
+      "z": -5.9,
+      "scale": 2.25,
+      "flip": true
+    },
+    {
+      "model": "pine2",
+      "x": 2.3,
+      "y": 0,
+      "z": 11.6,
+      "scale": 1.35,
+      "flip": false
+    },
+    {
+      "model": "tree-purple1",
+      "x": -2.8,
+      "y": 0,
+      "z": -7.1,
+      "scale": 1.2,
+      "flip": true
+    },
+    {
+      "model": "pine1",
+      "x": 4.3,
+      "y": 0,
+      "z": 12.8,
+      "scale": 0.9,
+      "flip": false
+    },
+    {
+      "model": "rock5",
+      "x": 15.9,
+      "y": 0,
+      "z": 16.9,
+      "scale": 0.85,
+      "flip": false
+    },
+    {
+      "model": "rock6",
+      "x": 16.6,
+      "y": 0,
+      "z": -6.5,
+      "scale": 0.9,
+      "flip": false
+    },
+    {
+      "model": "rock1",
+      "x": 8.2,
+      "y": 0,
+      "z": -3.4,
+      "scale": 1,
+      "flip": true
+    },
+    {
+      "model": "pine3",
+      "x": -8.8,
+      "y": 0,
+      "z": -6.2,
+      "scale": 1.45,
+      "flip": true
+    },
+    {
+      "model": "pine7",
+      "x": 20.3,
+      "y": 0,
+      "z": -3.6,
+      "scale": 1.4,
+      "flip": true
+    },
+    {
+      "model": "bush3",
+      "x": 13.6,
+      "y": 0,
+      "z": 13.8,
+      "scale": 1.25,
+      "flip": true
+    },
+    {
+      "model": "tree-purple2",
+      "x": 12.1,
+      "y": 0,
+      "z": -5.1,
+      "scale": 1.7,
+      "flip": false
+    },
+    {
+      "model": "pine9",
+      "x": -0.9,
+      "y": 0,
+      "z": 15.3,
+      "scale": 1.2,
+      "flip": false
+    },
+    {
+      "model": "mountain4",
+      "x": -5.4,
+      "y": 0,
+      "z": -9,
+      "scale": 1,
+      "flip": true
+    },
+    {
+      "model": "rock6",
+      "x": -14.8,
+      "y": 0,
+      "z": -6,
+      "scale": 0.95,
+      "flip": false
+    },
+    {
+      "model": "pine2",
+      "x": -2.7,
+      "y": 0,
+      "z": -5.2,
+      "scale": 1,
+      "flip": true
+    },
+    {
+      "model": "pine6",
+      "x": 18.7,
+      "y": 0,
+      "z": 7.6,
+      "scale": 1.05,
+      "flip": false
+    },
+    {
+      "model": "tree-purple2",
+      "x": 18.2,
+      "y": 0,
+      "z": -4.5,
+      "scale": 1.7,
+      "flip": true
+    },
+    {
+      "model": "pine9",
+      "x": 10.4,
+      "y": 0,
+      "z": -6.3,
+      "scale": 1.9,
+      "flip": false
+    },
+    {
+      "model": "rock4",
+      "x": 3.1,
+      "y": 0,
+      "z": 9.7,
+      "scale": 1.25,
+      "flip": false
+    },
+    {
+      "model": "bush2",
+      "x": -2.8,
+      "y": 0,
+      "z": 17.5,
+      "scale": 1.95,
+      "flip": false
+    },
+    {
+      "model": "mountain3",
+      "x": 23.7,
+      "y": 0,
+      "z": 0.1,
+      "scale": 1.25,
+      "flip": false
+    },
+    {
+      "model": "pine3",
+      "x": 2.2,
+      "y": 0,
+      "z": 13.7,
+      "scale": 1.8,
+      "flip": true
+    },
+    {
+      "model": "pine2",
+      "x": -22.7,
+      "y": 0,
+      "z": 11.2,
+      "scale": 2.3,
+      "flip": true
+    },
+    {
+      "model": "pine1",
+      "x": -21.7,
+      "y": 0,
+      "z": 9.4,
+      "scale": 1.3,
+      "flip": false
+    },
+    {
+      "model": "pine1",
+      "x": -23.9,
+      "y": 0,
+      "z": 8.3,
+      "scale": 1.5,
+      "flip": false
+    },
+    {
+      "model": "pine2",
+      "x": -22.6,
+      "y": 0,
+      "z": 5.3,
+      "scale": 1.6,
+      "flip": true
+    },
+    {
+      "model": "pine1",
+      "x": -21,
+      "y": 0,
+      "z": 3.6,
+      "scale": 1,
+      "flip": true
+    },
+    {
+      "model": "pine1",
+      "x": -21.3,
+      "y": 0,
+      "z": 0,
+      "scale": 1.6,
+      "flip": false
+    },
+    {
+      "model": "pine2",
+      "x": -16.2,
+      "y": 0,
+      "z": 2.6,
+      "scale": 1.8,
+      "flip": false
+    },
+    {
+      "model": "pine2",
+      "x": -18.9,
+      "y": 0,
+      "z": -2.6,
+      "scale": 2.3,
+      "flip": true
+    },
+    {
+      "model": "pine2",
+      "x": -16.5,
+      "y": 0,
+      "z": -0.2,
+      "scale": 1.8,
+      "flip": false
+    },
+    {
+      "model": "pine1",
+      "x": -20.8,
+      "y": 0,
+      "z": 6.8,
+      "scale": 1.7,
+      "flip": false
+    },
+    {
+      "model": "pine2",
+      "x": -19.9,
+      "y": 0,
+      "z": 11.6,
+      "scale": 2.2,
+      "flip": false
+    },
+    {
+      "model": "pine2",
+      "x": -18.5,
+      "y": 0,
+      "z": 8.1,
+      "scale": 1.8,
+      "flip": false
+    },
+    {
+      "model": "pine2",
+      "x": -18.4,
+      "y": 0,
+      "z": 5.3,
+      "scale": 1.7,
+      "flip": true
+    },
+    {
+      "model": "pine2",
+      "x": -18.3,
+      "y": 0,
+      "z": 2.6,
+      "scale": 1.8,
+      "flip": false
+    },
+    {
+      "model": "pine1",
+      "x": -18.9,
+      "y": 0,
+      "z": -0.4,
+      "scale": 1,
+      "flip": true
+    },
+    {
+      "model": "pine3",
+      "x": -21.8,
+      "y": 0,
+      "z": 2.3,
+      "scale": 2,
+      "flip": false
+    },
+    {
+      "model": "pine4",
+      "x": -19.7,
+      "y": 0,
+      "z": 1.2,
+      "scale": 1,
+      "flip": false
+    },
+    {
+      "model": "pine4",
+      "x": -23.7,
+      "y": 0,
+      "z": 6.8,
+      "scale": 1,
+      "flip": false
+    }
+  ],
+  "roads": [],
+  "buildings": [],
+  "parks": [],
+  "trees": [],
+  "groundTexture": "grass_countryside"
 }

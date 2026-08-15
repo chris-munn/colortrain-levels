@@ -13,43 +13,278 @@
     "straight": "TrainKit/railroad-straight",
     "curve": "TrainKit/railroad-corner-small"
   },
-  "train": { "locomotive": "TrainKit/train-locomotive-a" },
-  "spawnPortal": { "tunnel": "PlatformerKit/door-large-open" },
+  "train": {
+    "locomotive": "TrainKit/train-locomotive-a"
+  },
+  "spawnPortal": {
+    "tunnel": "mountain1"
+  },
   "models": [
-    { "id": "tree_pineDefaultA",  "source": "NatureKit/tree_pineDefaultA",   "fit": "height",    "size": 2.6 },
-    { "id": "tree_pineDefaultB",  "source": "NatureKit/tree_pineDefaultB",   "fit": "height",    "size": 2.6 },
-    { "id": "tree_pineTallA",     "source": "NatureKit/tree_pineTallA",      "fit": "height",    "size": 3.1 },
-    { "id": "tree_pineTallB",     "source": "NatureKit/tree_pineTallB",      "fit": "height",    "size": 3.1 },
-    { "id": "tree_pineRoundA",    "source": "NatureKit/tree_pineRoundA",     "fit": "height",    "size": 2.8 },
-    { "id": "tree_default",       "source": "NatureKit/tree_default",        "fit": "height",    "size": 2.4 },
-    { "id": "tree_oak",           "source": "NatureKit/tree_oak",            "fit": "height",    "size": 2.7 },
-    { "id": "tree_detailed",      "source": "NatureKit/tree_detailed",       "fit": "height",    "size": 2.7 },
-    { "id": "tree_plateau",       "source": "NatureKit/tree_plateau",        "fit": "height",    "size": 2.3 },
-    { "id": "tree_autumn",        "source": "SurvivalKit/tree-autumn",       "fit": "height",    "size": 2.6 },
-    { "id": "rock_largeA",        "source": "NatureKit/rock_largeA",         "fit": "footprint", "size": 1.0 },
-    { "id": "rock_largeB",        "source": "NatureKit/rock_largeB",         "fit": "footprint", "size": 1.0 },
-    { "id": "rock_largeC",        "source": "NatureKit/rock_largeC",         "fit": "footprint", "size": 1.0 },
-    { "id": "rock_smallA",        "source": "NatureKit/rock_smallA",         "fit": "footprint", "size": 0.7 },
-    { "id": "rock_smallB",        "source": "NatureKit/rock_smallB",         "fit": "footprint", "size": 0.7 },
-    { "id": "stone_largeA",       "source": "NatureKit/stone_largeA",        "fit": "footprint", "size": 1.0 },
-    { "id": "stone_largeB",       "source": "NatureKit/stone_largeB",        "fit": "footprint", "size": 1.0 },
-    { "id": "plant_bushLarge",    "source": "NatureKit/plant_bushLarge",     "fit": "height",    "size": 0.55 },
-    { "id": "plant_bushDetailed", "source": "NatureKit/plant_bushDetailed",  "fit": "height",    "size": 0.55 },
-    { "id": "flower_redA",        "source": "NatureKit/flower_redA",         "fit": "height",    "size": 0.45 },
-    { "id": "flower_yellowA",     "source": "NatureKit/flower_yellowA",      "fit": "height",    "size": 0.45 },
-    { "id": "grass_large",        "source": "NatureKit/grass_large",         "fit": "height",    "size": 0.4 },
-    { "id": "cliff_large_rock",   "source": "NatureKit/cliff_large_rock",    "fit": "footprint", "size": 3.4 },
-    { "id": "cliff_block_rock",   "source": "NatureKit/cliff_block_rock",    "fit": "footprint", "size": 2.6 },
-    { "id": "cliff_slope_rock",   "source": "NatureKit/cliff_blockSlope_rock", "fit": "footprint", "size": 2.4 },
-    { "id": "cliff_top_rock",     "source": "NatureKit/cliff_top_rock",      "fit": "footprint", "size": 2.2 },
-    { "id": "bridge_wood",        "source": "NatureKit/bridge_wood",         "fit": "footprint", "size": 2.6 },
-    { "id": "lily_large",         "source": "NatureKit/lily_large",          "fit": "footprint", "size": 0.9 },
-    { "id": "lily_small",         "source": "NatureKit/lily_small",          "fit": "footprint", "size": 0.5 },
-    { "id": "fence_simple",       "source": "NatureKit/fence_simple",        "fit": "height",    "size": 0.8 },
-    { "id": "campfire_logs",      "source": "NatureKit/campfire_logs",       "fit": "height",    "size": 0.45 },
-    { "id": "tent",               "source": "SurvivalKit/tent",              "fit": "height",    "size": 1.3 },
-    { "id": "grass_block",        "source": "PlatformerKit/block-grass-large", "fit": "footprint", "size": 2.4 },
-    { "id": "grass_block_tall",   "source": "PlatformerKit/block-grass-large-tall", "fit": "footprint", "size": 3.4 },
-    { "id": "grass_slope",        "source": "PlatformerKit/block-grass-large-slope", "fit": "footprint", "size": 2.3 }
+    {
+      "id": "bush-red",
+      "source": "bush-red",
+      "fit": "height",
+      "size": 2.22,
+      "render": "sprite"
+    },
+    {
+      "id": "bush1",
+      "source": "bush1",
+      "fit": "height",
+      "size": 2.7,
+      "render": "sprite"
+    },
+    {
+      "id": "bush2",
+      "source": "bush2",
+      "fit": "height",
+      "size": 2.73,
+      "render": "sprite"
+    },
+    {
+      "id": "bush3",
+      "source": "bush3",
+      "fit": "height",
+      "size": 3.3,
+      "render": "sprite"
+    },
+    {
+      "id": "fence-post",
+      "source": "fence-post",
+      "fit": "height",
+      "size": 1.32,
+      "render": "sprite"
+    },
+    {
+      "id": "fence",
+      "source": "fence",
+      "fit": "height",
+      "size": 1.38,
+      "render": "sprite"
+    },
+    {
+      "id": "mountain1",
+      "source": "mountain1",
+      "fit": "height",
+      "size": 3.43,
+      "render": "sprite"
+    },
+    {
+      "id": "mountain2",
+      "source": "mountain2",
+      "fit": "height",
+      "size": 3.06,
+      "render": "sprite"
+    },
+    {
+      "id": "mountain3",
+      "source": "mountain3",
+      "fit": "height",
+      "size": 3.32,
+      "render": "sprite"
+    },
+    {
+      "id": "mountain4",
+      "source": "mountain4",
+      "fit": "height",
+      "size": 3.18,
+      "render": "sprite"
+    },
+    {
+      "id": "path",
+      "source": "path",
+      "fit": "height",
+      "size": 6.0,
+      "render": "decal"
+    },
+    {
+      "id": "pine1",
+      "source": "pine1",
+      "fit": "height",
+      "size": 3.6,
+      "render": "sprite"
+    },
+    {
+      "id": "pine2",
+      "source": "pine2",
+      "fit": "height",
+      "size": 3.09,
+      "render": "sprite"
+    },
+    {
+      "id": "pine3",
+      "source": "pine3",
+      "fit": "height",
+      "size": 1.95,
+      "render": "sprite"
+    },
+    {
+      "id": "pine4",
+      "source": "pine4",
+      "fit": "height",
+      "size": 2.91,
+      "render": "sprite"
+    },
+    {
+      "id": "pine5",
+      "source": "pine5",
+      "fit": "height",
+      "size": 2.23,
+      "render": "sprite"
+    },
+    {
+      "id": "pine6",
+      "source": "pine6",
+      "fit": "height",
+      "size": 2.12,
+      "render": "sprite"
+    },
+    {
+      "id": "pine7",
+      "source": "pine7",
+      "fit": "height",
+      "size": 2.43,
+      "render": "sprite"
+    },
+    {
+      "id": "pine8",
+      "source": "pine8",
+      "fit": "height",
+      "size": 2.07,
+      "render": "sprite"
+    },
+    {
+      "id": "pine9",
+      "source": "pine9",
+      "fit": "height",
+      "size": 1.84,
+      "render": "sprite"
+    },
+    {
+      "id": "rock1",
+      "source": "rock1",
+      "fit": "height",
+      "size": 3.71,
+      "render": "sprite"
+    },
+    {
+      "id": "rock2",
+      "source": "rock2",
+      "fit": "height",
+      "size": 2.55,
+      "render": "sprite"
+    },
+    {
+      "id": "rock3",
+      "source": "rock3",
+      "fit": "height",
+      "size": 2.91,
+      "render": "sprite"
+    },
+    {
+      "id": "rock4",
+      "source": "rock4",
+      "fit": "height",
+      "size": 1.76,
+      "render": "sprite"
+    },
+    {
+      "id": "rock5",
+      "source": "rock5",
+      "fit": "height",
+      "size": 2.01,
+      "render": "sprite"
+    },
+    {
+      "id": "rock6",
+      "source": "rock6",
+      "fit": "height",
+      "size": 2.01,
+      "render": "sprite"
+    },
+    {
+      "id": "sheep1",
+      "source": "sheep1",
+      "fit": "height",
+      "size": 1.17,
+      "render": "sprite"
+    },
+    {
+      "id": "sheep2",
+      "source": "sheep2",
+      "fit": "height",
+      "size": 1.5,
+      "render": "sprite"
+    },
+    {
+      "id": "sheep3",
+      "source": "sheep3",
+      "fit": "height",
+      "size": 1.61,
+      "render": "sprite"
+    },
+    {
+      "id": "sheep4",
+      "source": "sheep4",
+      "fit": "height",
+      "size": 1.92,
+      "render": "sprite"
+    },
+    {
+      "id": "sheep5",
+      "source": "sheep5",
+      "fit": "height",
+      "size": 1.45,
+      "render": "sprite"
+    },
+    {
+      "id": "sheep6",
+      "source": "sheep6",
+      "fit": "height",
+      "size": 1.41,
+      "render": "sprite"
+    },
+    {
+      "id": "sheep7",
+      "source": "sheep7",
+      "fit": "height",
+      "size": 1.67,
+      "render": "sprite"
+    },
+    {
+      "id": "sheep8",
+      "source": "sheep8",
+      "fit": "height",
+      "size": 1.88,
+      "render": "sprite"
+    },
+    {
+      "id": "tree-orange",
+      "source": "tree-orange",
+      "fit": "height",
+      "size": 3.25,
+      "render": "sprite"
+    },
+    {
+      "id": "tree-purple1",
+      "source": "tree-purple1",
+      "fit": "height",
+      "size": 3.47,
+      "render": "sprite"
+    },
+    {
+      "id": "tree-purple2",
+      "source": "tree-purple2",
+      "fit": "height",
+      "size": 3.22,
+      "render": "sprite"
+    },
+    {
+      "id": "tree-yellow",
+      "source": "tree-yellow",
+      "fit": "height",
+      "size": 3.41,
+      "render": "sprite"
+    }
   ]
 }

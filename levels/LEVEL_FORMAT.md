@@ -46,13 +46,15 @@ levels/
 
 ## theme.json (theme pack)
 
-Unchanged from v1: `groundColor`, `audio` (ambience/switch/success/fail), `track` + `train` + `spawnPortal` model bindings, and `models` — the scenery palette, each entry `{ id, source, fit: height|footprint, size }` where `fit`+`size` define the model's world size at `scale: 1.0`. Theme packs ship inside the app; only map JSON needs to be remote.
+Unchanged from v1: `groundColor`, `audio` (ambience/switch/success/fail), `track` + `train` + `spawnPortal` model bindings, and `models` — the scenery palette, each entry `{ id, source, fit: height|footprint, size, render: mesh|sprite|decal }` where `fit`+`size` define the world size at `scale: 1.0`. Countryside scenery is all `sprite` (a painted card that faces the camera) or `decal` (a flat card lying on the ground, e.g. the path); `source` is then a PNG filename from `Assets/Painted`, not a model id. Theme packs ship inside the app; only map JSON needs to be remote.
 
 ## Map file
 
 ```json
 {
   "schemaVersion": 2,
+  "id": "k3v9x2ab",
+  "groundColor": "#73A457",
   "stage": "nature",
   "mapNumber": 1,
   "name": "Green Valley",
@@ -76,13 +78,15 @@ Unchanged from v1: `groundColor`, `audio` (ambience/switch/success/fail), `track
   ],
 
   "scenery": [
-    { "model": "tree_pineDefaultA", "x": -8.5, "y": 0, "z": 4.2, "rotY": 40, "scale": 1.1 }
+    { "model": "pine1", "x": -8.5, "y": 0, "z": 4.2, "flip": false, "scale": 1.1 }
   ]
 }
 ```
 
+`groundColor` (optional): per-map grass hex. Overrides the theme's ground colour in play and tints this map's card on the map-select screen. Omitted → theme colour.
+
 ### levels[]
-One entry per level, in order; the array length should equal the station count (missing entries fall back to defaults).
+One entry per level, in order; the array length should equal the station count (missing entries fall back to defaults). `trainSpeed`/`spawnIntervalSeconds` left unset run at fixed defaults (3 / 3s) — there is no player-facing settings screen any more.
 
 | field | default | notes |
 |---|---|---|
@@ -111,7 +115,7 @@ At level L of a map:
 - Advancing a level reveals the new station's branch (and any newly needed track) with the cascade pop-in animation.
 
 ### scenery
-`{ model, x, y, z, rotY, scale }` — `model` from the theme palette, world position (`y` raises props, e.g. stacked mound blocks), rotation about the vertical axis in degrees, uniform scale multiplier on the model's normalised size.
+`{ model, x, y, z, flip, scale }` — `model` from the theme palette, world position (`y` raises props off the ground), `flip` mirrors a painted card horizontally, and `scale` multiplies the theme's normalised size. Painted cards cannot yaw, so there is no `rotY`; variety comes from `flip` and `scale`.
 
 ## Validation (editor + loader must enforce)
 
@@ -125,6 +129,7 @@ At level L of a map:
 
 ## Save data (per player)
 
+- Progress is keyed by the map's `id` (a short random string the editor assigns and preserves — randomising generates a fresh one, editing an existing map keeps it). Replacing the map in a manifest slot therefore starts fresh; republishing the *same* map keeps progress. Maps without an `id` fall back to legacy slot-based keys.
 - Per map: highest level reached.
 - Per stage: which maps are unlocked (map k+1 unlocks when map k is completed).
 - Stages unlock in manifest order.
@@ -141,4 +146,4 @@ In the Unity editor with the URL left empty, **Mock Remote From Unity Assets** e
 
 ## Editor (Phase 4)
 
-`unity-assets/editor/map-editor.html` — open in any browser (or host it on the same Pages site). Place track/junctions/stations/scenery on the grid, set per-level rules, hit **Validate**, then **Export JSON** into `maps/`. Keys: R rotate, T flip turn/branch, I flip a junction's starting exit, Delete removes, wheel zooms, right-drag pans. Autosaves to the browser between sessions.
+`unity-assets/editor/map-editor.html` — open in any browser (or host it on the same Pages site). Place track/junctions/stations/scenery on the grid, set per-level rules, hit **Validate**, then **Export JSON** into `maps/`. Keys: R rotate (mirrors a painted scenery card), T flip turn/branch, I flip a junction's starting exit, Delete removes, wheel zooms, right-drag pans. Autosaves to the browser between sessions.

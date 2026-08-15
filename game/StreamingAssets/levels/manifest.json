@@ -1,13 +1,43 @@
 {
   "schemaVersion": 2,
-  "updated": "2026-07-17",
+  "updated": "2026-08-13",
   "stages": [
     {
       "id": "nature",
       "displayName": "Countryside",
       "theme": "nature",
       "maps": [
-        { "file": "maps/nature_01.json", "name": "Green Valley" }
+        {
+          "file": "maps/nature_01.json",
+          "name": "Bluebell Loop"
+        },
+        {
+          "file": "maps/nature_02.json",
+          "name": "Sheep Meadow"
+        },
+        {
+          "file": "maps/nature_03.json",
+          "name": "Twisty Pines"
+        }
+      ]
+    },
+    {
+      "id": "city",
+      "displayName": "city",
+      "theme": "city",
+      "maps": [
+        {
+          "file": "maps/city_01.json",
+          "name": "Mega City"
+        },
+        {
+          "file": "maps/city_02.json",
+          "name": "Crazy City"
+        },
+        {
+          "file": "maps/city_03.json",
+          "name": "Capital City"
+        }
       ]
     }
   ]
