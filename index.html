@@ -141,7 +141,7 @@
   Floor <input id="mColor" type="color" value="#73A457" style="width:34px;height:26px;padding:1px;border:none;background:none">
   <select id="mGround" title="ground texture (falls back to colour)"><option value="">flat colour</option><option value="grass_countryside">Countryside grass</option></select>
   <button id="bCity" hidden>🏙 Re-roll city</button>
-  <button id="showCam" class="on">👁 Camera view</button>
+  <button id="showCam">👁 Camera view</button>
   <button id="camPrev" title="previous level">◀</button>
   <span id="camLvlLbl" style="min-width:34px;text-align:center;opacity:.8;font-size:12px">L1</span>
   <button id="camNext" title="next level">▶</button>
@@ -152,7 +152,7 @@
     <option value="0.5625">9:16</option>
   </select>
   <button id="bUndo" style="margin-left:auto" title="Undo the last change (⌘Z)">↶ Undo</button>
-  <span id="ver" style="opacity:.55;font-size:12px;margin-left:10px">v34 · painted sprites</span>
+  <span id="ver" style="opacity:.55;font-size:12px;margin-left:10px">v35 · multi-select</span>
 </div>
 <div id="wrap">
   <div id="tools">
@@ -226,7 +226,7 @@
     <div class="row"><label>Token</label><input id="ghToken" type="password" placeholder="fine-grained PAT" style="width:150px"></div>
     <div id="ghStatus" class="hint">☁ Publish commits this map + manifest to your repo; Pages serves it to the game. Token needs Contents read/write on that repo only — it stays in this browser.</div>
     </div></details>
-    <div class="hint" id="hint" style="margin:2px 0 0">Tap to place · drag to pan · pinch to zoom. Select anything to edit it.</div>
+    <div class="hint" id="hint" style="margin:2px 0 0">Tap to place · drag to select · hold Space (or right-drag) to pan · pinch to zoom. Shift-click adds to a selection.</div>
   </div>
 </div>
 <div id="lvModal">
@@ -282,6 +282,11 @@ function newMap() {
 
 let tool = "select", curDir = "E", curTurn = "L";
 let sel = null;            // {type:'track'|'scenery'|'spawn', i}
+// Marquee selection holds scenery ARRAY INDICES. That is safe because every
+// mutation except delete only appends to map.scenery — and delete (and undo)
+// clear the selection, so an index can never go stale under us.
+let selMulti = [];         // scenery indices, only populated when 2+ are picked
+let marquee = null;        // {x0,y0,x1,y1} screen px, live while dragging a box
 let view = { x:0, z:2, s:44 };
 let hover = { active:false, sx:0, sy:0, wx:0, wz:0 };
 let spaceHeld = false;
@@ -484,8 +489,10 @@ function nearestScenery(wx, wz, maxD){
   return best;
 }
 
-function hitTest(wx, wz){
-  const si = nearestScenery(wx, wz, 0.8);
+function hitTest(wx, wz, sx, sy){
+  // Select tool picks on the whole drawn graphic. tapHit (placement) deliberately
+  // keeps the small base radius so you can still drop art overlapping art.
+  const si = (sx != null) ? pickSceneryAt(sx, sy) : nearestScenery(wx, wz, 0.8);
   if (si >= 0) return { type:"scenery", i:si };
   const [gx, gz] = tileAt(wx, wz);
   if (map.spawn.gx === gx && map.spawn.gz === gz) return { type:"spawn" };
@@ -507,7 +514,78 @@ function tapHit(wx, wz){
   return ti >= 0 ? { type:"track", i:ti } : null;
 }
 
+// ---------- group operations ----------
+function clearSel(){ sel = null; selMulti = []; }
+
+// Drag now draws a selection box, so the first few times you do it we say where
+// panning went. Once you have actually used Space to pan, we stop nagging.
+let usedSpacePan = false, panHintCount = 0;
+function hintPan(){
+  if (usedSpacePan || panHintCount >= 3) return;
+  panHintCount++;
+  let el = document.getElementById("panHint");
+  if (!el) {
+    el = document.createElement("div");
+    el.id = "panHint";
+    el.textContent = "Drag to select — hold Space to pan the map";
+    el.style.cssText = "position:fixed;z-index:9999;transform:translateX(-50%);" +
+      "padding:8px 14px;border-radius:999px;background:rgba(24,22,20,.92);color:#ffe9a8;" +
+      "font:600 13px system-ui,-apple-system,sans-serif;pointer-events:none;opacity:0;" +
+      "transition:opacity .18s;box-shadow:0 4px 14px rgba(0,0,0,.35)";
+    document.body.appendChild(el);
+  }
+  const r = cv.getBoundingClientRect();
+  el.style.top = (r.top + 14) + "px";
+  el.style.left = (r.left + r.width / 2) + "px";
+  el.style.opacity = "1";
+  clearTimeout(el._t);
+  el._t = setTimeout(() => { el.style.opacity = "0"; }, 2400);
+}
+
+function deleteMulti(){
+  if (selMulti.length < 2) return;
+  // descending, so each splice cannot shift an index we have not used yet
+  selMulti.slice().sort((a, b) => b - a).forEach(i => map.scenery.splice(i, 1));
+  clearSel(); touch(); showSel();
+}
+
+// Scale the whole group by a FACTOR, not to an absolute value, so a mixed bag of
+// sizes keeps its spread. If any member would hit a clamp the factor is eased
+// back for everyone rather than squashing that one item flat against the limit.
+function scaleMulti(factor){
+  if (selMulti.length < 2) return;
+  const LO = 0.4, HI = 2.5;
+  let f = factor;
+  selMulti.forEach(i => {
+    const cur = map.scenery[i].scale || 1;
+    if (cur * f > HI) f = Math.min(f, HI / cur);
+    if (cur * f < LO) f = Math.max(f, LO / cur);
+  });
+  if (Math.abs(f - 1) < 0.001) return;
+  selMulti.forEach(i => {
+    const s = map.scenery[i];
+    s.scale = Math.round((s.scale || 1) * f * 100) / 100;
+  });
+  touch(); showSel();
+}
+
+// All-or-nothing: if any member would land on track, a platform or the spawn,
+// the whole group stays put. Half a clump jumping is worse than nothing moving.
+function moveMultiTo(dx, dz, base){
+  if (!base) return false;
+  for (let k = 0; k < selMulti.length; k++) {
+    const b = base[k];
+    if (canPlaceSceneryAt(b.x + dx, b.z + dz).length) return false;
+  }
+  selMulti.forEach((i, k) => {
+    map.scenery[i].x = +(base[k].x + dx).toFixed(1);
+    map.scenery[i].z = +(base[k].z + dz).toFixed(1);
+  });
+  return true;
+}
+
 function deleteSel(){
+  if (selMulti.length > 1) { deleteMulti(); return; }
   if (!sel) return;
   if (sel.type === "scenery") map.scenery.splice(sel.i, 1);
   else if (sel.type === "track") {
@@ -623,6 +701,65 @@ function spriteBox(s){
   const asp = im && im.naturalHeight ? im.naturalWidth / im.naturalHeight : 1;
   const h = hW * view.s, w = h * asp;
   return { im, x: w2sx(s.x) - w / 2, y: w2sy(s.z) - h, w, h };
+}
+
+// ---------- picking ----------
+// Selection tests the sprite the way you SEE it: the drawn box from spriteBox,
+// then the artwork's own alpha, so a click in the gap between two branches
+// falls through to whatever stands behind it. One alpha map is cached per
+// sprite id on first use (art is a data: URL, so the canvas never taints).
+const SPRITE_ALPHA = {};
+const HIT_ALPHA = 12;
+function spriteAlpha(id){
+  if (id in SPRITE_ALPHA) return SPRITE_ALPHA[id];
+  const im = SPRITE_IMG[id];
+  if (!im || !im.complete || !im.naturalWidth) return null;   // not decoded yet: retry later
+  let out = null;
+  try {
+    const c = document.createElement("canvas");
+    c.width = im.naturalWidth; c.height = im.naturalHeight;
+    const g = c.getContext("2d", { willReadFrequently: true });
+    g.drawImage(im, 0, 0);
+    const d = g.getImageData(0, 0, c.width, c.height).data;
+    const a = new Uint8Array(c.width * c.height);
+    for (let i = 0; i < a.length; i++) a[i] = d[i * 4 + 3];
+    out = { w: c.width, h: c.height, a };
+  } catch (err) { out = null; }
+  SPRITE_ALPHA[id] = out;
+  return out;
+}
+
+function sceneryHit(s, sx, sy){
+  const b = spriteBox(s);
+  if (sx < b.x || sx > b.x + b.w || sy < b.y || sy > b.y + b.h) return false;
+  const al = spriteAlpha(s.model);
+  if (!al) return true;                        // art not ready: box is the fallback
+  let u = (sx - b.x) / b.w;
+  if (s.flip) u = 1 - u;                       // drawn mirrored, so mirror the lookup
+  const px = Math.max(0, Math.min(al.w - 1, Math.floor(u * al.w)));
+  const py = Math.max(0, Math.min(al.h - 1, Math.floor(((sy - b.y) / b.h) * al.h)));
+  return al.a[py * al.w + px] > HIT_ALPHA;
+}
+
+// draw order is far-first, so walking it backwards means the item drawn on TOP
+// is the one you get — the same thing your eye picks.
+function sceneryDrawOrder(){
+  return map.scenery.map((s, i) => [s, i]).sort((a, b) => b[0].z - a[0].z);
+}
+function pickSceneryAt(sx, sy){
+  const order = sceneryDrawOrder();
+  for (let k = order.length - 1; k >= 0; k--)
+    if (sceneryHit(order[k][0], sx, sy)) return order[k][1];
+  return -1;
+}
+function sceneryInRect(x0, y0, x1, y1){
+  const lo = { x: Math.min(x0, x1), y: Math.min(y0, y1) }, hi = { x: Math.max(x0, x1), y: Math.max(y0, y1) };
+  const out = [];
+  map.scenery.forEach((s, i) => {
+    const b = spriteBox(s);
+    if (b.x < hi.x && b.x + b.w > lo.x && b.y < hi.y && b.y + b.h > lo.y) out.push(i);
+  });
+  return out;
 }
 
 function drawSprite(s, alpha){
@@ -804,6 +941,11 @@ function draw(){
      .forEach(([s, i]) => {
     drawSprite(s);
     if (sel && sel.type === "scenery" && sel.i === i) ring(w2sx(s.x), w2sy(s.z), 9);
+    else if (selMulti.includes(i)) {
+      const b = spriteBox(s);
+      ctx.strokeStyle = "rgba(255,210,63,.95)"; ctx.lineWidth = 2;
+      ctx.strokeRect(b.x, b.y, b.w, b.h);
+    }
   });
 
   // reserved zones (red floor areas) — ALWAYS visible, brighter while placing.
@@ -839,6 +981,15 @@ function draw(){
 
   map.track.forEach((t, i) => drawPiece(t, sel && sel.type === "track" && sel.i === i));
   drawSpawn(sel && sel.type === "spawn");
+
+  // marquee box
+  if (marquee) {
+    const x = Math.min(marquee.x0, marquee.x1), y = Math.min(marquee.y0, marquee.y1);
+    const w = Math.abs(marquee.x1 - marquee.x0), h = Math.abs(marquee.y1 - marquee.y0);
+    ctx.fillStyle = "rgba(255,210,63,.13)"; ctx.fillRect(x, y, w, h);
+    ctx.strokeStyle = "#ffd23f"; ctx.lineWidth = 2; ctx.setLineDash([7, 5]);
+    ctx.strokeRect(x, y, w, h); ctx.setLineDash([]);
+  }
 
   // rejected placement flash
   if (rejectFlash) {
@@ -989,6 +1140,7 @@ const pointers = new Map();
 let gesture = null; // 'pending' | 'pan' | 'dragSel' | 'pinch'
 let downPt = null;  // {sx, sy, wx, wz}
 let pinch0 = null;  // {d0, s0, wx, wz}
+let dragBase = null; // group-move anchor: each selected item's position at press
 const TAP_SLOP = 9 * devicePixelRatio;
 
 function evPos(e){
@@ -1031,9 +1183,23 @@ cv.addEventListener("pointerdown", e => {
   if (e.button === 2 || spaceHeld) { gesture = "pan"; return; }
 
   if (tool === "select") {
-    const hit = hitTest(downPt.wx, downPt.wz);
-    if (hit) { sel = hit; gesture = "dragSel"; showSel(); draw(); }
-    else gesture = "pan";
+    const hit = hitTest(downPt.wx, downPt.wz, p.sx, p.sy);
+    if (hit && hit.type === "scenery" && selMulti.includes(hit.i)) {
+      // grabbing any member drags the whole group
+      gesture = "dragMulti";
+      dragBase = selMulti.map(i => ({ x: map.scenery[i].x, z: map.scenery[i].z }));
+      draw();
+    }
+    else if (hit && hit.type === "scenery" && (e.shiftKey || e.metaKey || e.ctrlKey)) {
+      const at = selMulti.indexOf(hit.i);
+      if (at >= 0) selMulti.splice(at, 1);
+      else { if (sel && sel.type === "scenery" && !selMulti.includes(sel.i)) selMulti.push(sel.i); selMulti.push(hit.i); }
+      sel = selMulti.length === 1 ? { type:"scenery", i: selMulti[0] } : null;
+      if (selMulti.length < 2) selMulti = [];
+      gesture = null; showSel(); draw();
+    }
+    else if (hit) { clearSel(); sel = hit; gesture = "dragSel"; showSel(); draw(); }
+    else { gesture = "marquee"; marquee = { x0: p.sx, y0: p.sy, x1: p.sx, y1: p.sy }; hintPan(); }
   } else {
     gesture = "pending"; // tap places on release; drag pans
   }
@@ -1071,7 +1237,14 @@ cv.addEventListener("pointermove", e => {
     gesture = "pan";
   }
 
-  if (gesture === "pan") {
+  if (gesture === "marquee" && marquee) {
+    marquee.x1 = p.sx; marquee.y1 = p.sy;
+  }
+  else if (gesture === "dragMulti" && dragBase) {
+    moveMultiTo(s2wx(p.sx) - downPt.wx, s2wz(p.sy) - downPt.wz, dragBase);
+    save(); showSel();
+  }
+  else if (gesture === "pan") {
     view.x -= (p.sx - prev.sx) / view.s;
     view.z += (p.sy - prev.sy) / view.s;
   }
@@ -1156,9 +1329,19 @@ function endPointer(e){
       placeTrack(gx, gz);
     }
   }
+  else if (gesture === "marquee" && marquee) {
+    const tiny = Math.hypot(marquee.x1 - marquee.x0, marquee.y1 - marquee.y0) <= TAP_SLOP;
+    const got = tiny ? [] : sceneryInRect(marquee.x0, marquee.y0, marquee.x1, marquee.y1);
+    clearSel();                                  // a click on bare ground just deselects
+    if (got.length === 1) sel = { type: "scenery", i: got[0] };
+    else if (got.length > 1) selMulti = got;
+    marquee = null; showSel();
+  }
+  else if (gesture === "dragMulti") { dragBase = null; touch(); showSel(); }
+  else if (gesture === "dragSel") { touch(); showSel(); }   // makes a move undoable
   else if (gesture === "pan" && tool === "select" && downPt &&
            Math.hypot(p.sx - downPt.sx, p.sy - downPt.sy) <= TAP_SLOP) {
-    sel = null; showSel(); // tap on empty space deselects
+    clearSel(); showSel(); // tap on empty space deselects
   }
 
   gesture = pointers.size ? gesture : null;
@@ -1185,11 +1368,12 @@ window.addEventListener("keydown", e => {
   // undo works even with focus parked in a sidebar field
   if ((e.metaKey || e.ctrlKey) && (e.key === "z" || e.key === "Z")) { undo(); e.preventDefault(); return; }
   if (e.target.tagName === "INPUT" || e.target.tagName === "SELECT") return;
-  if (e.code === "Space") { spaceHeld = true; e.preventDefault(); }
+  if (e.code === "Space") { spaceHeld = true; usedSpacePan = true; e.preventDefault(); }
   if (e.key === "r" || e.key === "R") rotate();
   if (e.key === "t" || e.key === "T") flipTurn();
   if (e.key === "i" || e.key === "I") flipInitial();
   if (e.key === "Delete" || e.key === "Backspace") deleteSel();
+  if (e.key === "Escape") { clearSel(); showSel(); draw(); }
   if ((e.key === "d" || e.key === "D") && sel && sel.type === "scenery") {
     const s = map.scenery[sel.i];
     map.scenery.push(Object.assign({}, s, { x: +(s.x + 1).toFixed(1), z: +(s.z - 0.6).toFixed(1) }));
@@ -1215,8 +1399,23 @@ function flipTurn(){
 function showSel(){
   const box = document.getElementById("selBox");
   // the details live under the Select button and only exist while something is picked
-  box.hidden = !sel;
-  if (sel) { const a = document.getElementById("accTools"); if (a) a.open = true; }
+  const many = selMulti.length > 1;
+  box.hidden = !sel && !many;
+  if (sel || many) { const a = document.getElementById("accTools"); if (a) a.open = true; }
+  if (many) {
+    const sc = selMulti.map(i => map.scenery[i].scale || 1);
+    const lo = Math.min.apply(null, sc), hi = Math.max.apply(null, sc);
+    box.innerHTML = "<b>" + selMulti.length + " items selected</b>" +
+      '<div class="hint">drag any one to move them all</div>' +
+      '<div class="row"><label>scale</label><span style="flex:1">' +
+        (lo === hi ? lo.toFixed(2) : lo.toFixed(2) + " – " + hi.toFixed(2)) + '</span>' +
+        '<button id="gDn">−</button><button id="gUp">+</button></div>' +
+      '<div class="row"><button id="gDel" style="flex:1">🗑 Delete ' + selMulti.length + '</button></div>';
+    document.getElementById("gUp").onclick  = () => { scaleMulti(1.1); draw(); };
+    document.getElementById("gDn").onclick  = () => { scaleMulti(1 / 1.1); draw(); };
+    document.getElementById("gDel").onclick = () => { deleteMulti(); draw(); };
+    return;
+  }
   if (!sel) { box.innerHTML = ""; return; }
   const delBtn = '<div class="row"><button id="pDel" style="flex:1">🗑 Delete</button></div>';
   if (sel.type === "spawn") {
@@ -2110,7 +2309,7 @@ function undo(){
   if (!undoStack.length) return;
   map = JSON.parse(undoStack.pop());
   lastState = JSON.stringify(map);
-  sel = null;
+  clearSel();   // indices refer to the array we just replaced
   syncUndoBtn();
   save(); renderRules(); updateNextStation(); syncAll(); showSel(); draw();
 }
