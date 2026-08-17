@@ -2364,14 +2364,6 @@
       "scale": 1
     },
     {
-      "model": "pine4",
-      "x": 0.6,
-      "y": 0,
-      "z": -7.6,
-      "flip": false,
-      "scale": 1.05
-    },
-    {
       "model": "pine6",
       "x": -1.6,
       "y": 0,
@@ -3309,22 +3301,6 @@
     },
     {
       "model": "tree-yellow",
-      "x": 2.7,
-      "y": 0,
-      "z": -7.7,
-      "flip": false,
-      "scale": 1
-    },
-    {
-      "model": "tree-orange",
-      "x": -0.3,
-      "y": 0,
-      "z": -7.1,
-      "flip": true,
-      "scale": 0.95
-    },
-    {
-      "model": "tree-yellow",
       "x": 2.4,
       "y": 0,
       "z": -10.3,
@@ -3333,27 +3309,11 @@
     },
     {
       "model": "tree-purple1",
-      "x": 1,
-      "y": 0,
-      "z": -8,
-      "flip": true,
-      "scale": 1.05
-    },
-    {
-      "model": "tree-purple1",
       "x": -1.1,
       "y": 0,
       "z": -11.3,
       "flip": true,
       "scale": 1.05
-    },
-    {
-      "model": "tree-yellow",
-      "x": -2.9,
-      "y": 0,
-      "z": -8.4,
-      "flip": false,
-      "scale": 1
     },
     {
       "model": "tree-purple1",
@@ -3369,14 +3329,6 @@
       "y": 0,
       "z": -9.6,
       "flip": true,
-      "scale": 0.95
-    },
-    {
-      "model": "tree-purple2",
-      "x": -1.1,
-      "y": 0,
-      "z": -8.4,
-      "flip": false,
       "scale": 0.95
     },
     {
@@ -4541,38 +4493,6 @@
     },
     {
       "model": "bush1",
-      "x": 19.5,
-      "y": 0,
-      "z": -0.1,
-      "flip": true,
-      "scale": 1
-    },
-    {
-      "model": "bush3",
-      "x": 19.5,
-      "y": 0,
-      "z": -0.8,
-      "flip": false,
-      "scale": 1
-    },
-    {
-      "model": "bush3",
-      "x": 18,
-      "y": 0,
-      "z": -0.3,
-      "flip": false,
-      "scale": 1
-    },
-    {
-      "model": "bush2",
-      "x": 18.4,
-      "y": 0,
-      "z": -0.8,
-      "flip": false,
-      "scale": 1
-    },
-    {
-      "model": "bush1",
       "x": -17.2,
       "y": 0,
       "z": -2.4,
@@ -4632,6 +4552,22 @@
       "x": -18.3,
       "y": 0,
       "z": 4.3,
+      "flip": false,
+      "scale": 1
+    },
+    {
+      "model": "bush1",
+      "x": 19.3,
+      "y": 0,
+      "z": -1.5,
+      "flip": false,
+      "scale": 1
+    },
+    {
+      "model": "bush3",
+      "x": 18.6,
+      "y": 0,
+      "z": -2.5,
       "flip": false,
       "scale": 1
     }
