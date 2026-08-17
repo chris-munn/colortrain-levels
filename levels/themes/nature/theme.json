@@ -17,7 +17,7 @@
     "locomotive": "TrainKit/train-locomotive-a"
   },
   "spawnPortal": {
-    "tunnel": "mountain1"
+    "tunnel": "tunnel1"
   },
   "models": [
     {
@@ -88,6 +88,13 @@
       "source": "mountain4",
       "fit": "height",
       "size": 3.18,
+      "render": "sprite"
+    },
+    {
+      "id": "tunnel1",
+      "source": "tunnel1",
+      "fit": "height",
+      "size": 2.2,
       "render": "sprite"
     },
     {
